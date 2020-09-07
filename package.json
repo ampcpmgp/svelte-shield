@@ -1,0 +1,77 @@
+{
+  "name": "parcel-svelte-mocktimes-starter",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel mock/testbed/*.html",
+    "start-dev": "parcel src/index.html --open",
+    "test": "ava",
+    "test:watch": "npm run test -- --watch",
+    "dist": "run-s dist:*",
+    "dist:clean": "rimraf dist",
+    "dist:build": "parcel build src/index.html --public-url ./",
+    "dist-mocktimes": "run-s dist:clean dist-mocktimes:build",
+    "dist-mocktimes:build": "parcel build mock/testbed/*.html --public-url ./",
+    "lint": "eslint --ignore-path .gitignore **/*.{js,svelte}",
+    "format": "prettier --ignore-path .gitignore --write **/*.{js,svelte}",
+    "screenshot": "am-mocktimes--screenshot",
+    "storybook": "start-storybook -p 6006 -s ./node_modules --ci",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@storybook/addon-backgrounds": "^5.3.12",
+    "@storybook/addon-knobs": "^5.3.12",
+    "@storybook/addon-links": "^5.3.12",
+    "@storybook/addon-storysource": "^5.3.12",
+    "@storybook/addon-viewport": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/svelte": "^5.3.12",
+    "am-mocktimes": "^3.1.0",
+    "am-mocktimes-addon-screenshot": "^0.1.2",
+    "am-parts-cli": "^0.3.0",
+    "ava": "^3.2.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "esm": "^3.2.25",
+    "husky": "^4.2.1",
+    "less": "^3.11.0",
+    "lint-staged": "^7.1.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "prettier": "^1.19.1",
+    "prettier-plugin-svelte": "^0.7.0",
+    "rimraf": "^3.0.1",
+    "svelte-loader": "^2.13.6"
+  },
+  "dependencies": {
+    "modern-css-reset": "^1.1.0",
+    "svelte": "^3.18.2",
+    "svelte-spa-router": "^2.0.0"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "ava": {
+    "require": [
+      "esm"
+    ],
+    "files": [
+      "**/*.test.js"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{js,svelte}": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "post-commit": "git update-index --again"
+    }
+  }
+}

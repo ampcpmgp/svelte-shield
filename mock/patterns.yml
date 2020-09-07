@@ -1,0 +1,8 @@
+settings:
+  url: mock.html
+default page:
+  func: [page, /]
+  change greeting name after 1000ms:
+    - [sleep, 1000]
+    - [greetings.name.set, 'changed name']
+404 page: [page, /404]

@@ -1,0 +1,13 @@
+# Node.js
+node_modules/
+
+# am-mocktimes
+.am-mocktimes-img/
+
+# parcel-bundler
+.cache/
+dist/
+dist-no-minified/
+
+# storybook
+storybook-static/
