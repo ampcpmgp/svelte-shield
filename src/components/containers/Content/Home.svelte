@@ -1,5 +1,15 @@
 <script>
   import { word } from '../../../states/morpheme'
+
+  let isPlay = false
+
+  function play() {
+    isPlay = true
+  }
+
+  function stop() {
+    isPlay = false
+  }
 </script>
 
 <style>
@@ -30,7 +40,18 @@
 <div class="wrapper">
   <div class="alert alert-success shadow-soft alert-additional">{$word}</div>
 
-  <button class="btn btn-primary text-secondary" type="button">再生</button>
+  {#if !isPlay}
+    <button
+      on:click={play}
+      class="btn btn-primary text-secondary"
+      type="button">
+      再生
+    </button>
+  {:else}
+    <button on:click={stop} class="btn btn-primary text-danger" type="button">
+      停止
+    </button>
+  {/if}
 
   <textarea class="form-control" placeholder="テキストを入力してください" />
 </div>
