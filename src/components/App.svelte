@@ -15,7 +15,7 @@
 <div class="wrapper">
   <div class="card shadow-soft border-light">
     <div class="card-body">
-      <Header text="Text" />
+      <Header />
       <Router {routes} />
     </div>
   </div>

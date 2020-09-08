@@ -1,5 +1,22 @@
-<script>
-  export let text
-</script>
+<style>
+  header {
+    display: grid;
+    justify-content: right;
+    grid-auto-flow: column;
+    grid-column-gap: 8px;
+  }
 
-<h1 on:click>Header {text}</h1>
+  i {
+    font-size: 34px;
+  }
+</style>
+
+<header>
+  <a href="https://twitter.com/am_nimitz3" target="_blank">
+    <i class="fab fa-twitter-square" />
+  </a>
+
+  <a href="https://github.com/ampcpmgp/riot-shield" target="_blank">
+    <i class="fab fa-github" />
+  </a>
+</header>
