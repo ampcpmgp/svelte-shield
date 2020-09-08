@@ -4,7 +4,6 @@
     justify-content: right;
     grid-auto-flow: column;
     grid-column-gap: 14px;
-    margin-bottom: 12px;
   }
 
   i {

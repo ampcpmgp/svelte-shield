@@ -3,6 +3,13 @@
 </script>
 
 <style>
+  .wrapper {
+    margin: 12px 0;
+    display: grid;
+    grid-row-gap: 16px;
+    grid-template-rows: auto auto 1fr;
+  }
+
   .alert-additional {
     max-width: 640px;
     width: 100%;
@@ -10,6 +17,20 @@
     margin: 0 auto;
     text-align: center;
   }
+
+  button {
+    margin: 0 auto;
+  }
+
+  textarea::placeholder {
+    color: #ccc;
+  }
 </style>
 
-<div class="alert alert-success shadow-soft alert-additional">{$word}</div>
+<div class="wrapper">
+  <div class="alert alert-success shadow-soft alert-additional">{$word}</div>
+
+  <button class="btn btn-primary text-secondary" type="button">再生</button>
+
+  <textarea class="form-control" placeholder="テキストを入力してください" />
+</div>

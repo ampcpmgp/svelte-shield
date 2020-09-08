@@ -7,11 +7,28 @@
 <style>
   :global(body) {
     padding: 10px 12px;
+    box-sizing: border-box;
+    height: 100vh;
+  }
+
+  :global(#app) {
+    height: 100%;
   }
 
   .wrapper {
+    height: 100%;
     margin: 0 auto;
     max-width: 1240px;
+  }
+
+  .card {
+    height: 100%;
+  }
+
+  .card-body {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 </style>
 
