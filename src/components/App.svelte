@@ -4,5 +4,19 @@
   import routes from './routes'
 </script>
 
-<Header text="Text" />
-<Router {routes} />
+<style>
+  .wrapper {
+    margin: 10px auto;
+    padding: 0 15px;
+    max-width: 1240px;
+  }
+</style>
+
+<div class="wrapper">
+  <div class="card shadow-soft border-light">
+    <div class="card-body">
+      <Header text="Text" />
+      <Router {routes} />
+    </div>
+  </div>
+</div>
