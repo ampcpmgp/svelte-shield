@@ -1,11 +1,11 @@
 import mock from 'am-mocktimes'
 import { replace } from 'svelte-spa-router'
 import sleep from '../src/utils/sleep'
-import * as greetings from '../src/states/greetings'
+import * as morpheme from '../src/states/morpheme'
 
 mock({
   sleep,
-  greetings,
+  morpheme,
 
   page(name) {
     replace(name)

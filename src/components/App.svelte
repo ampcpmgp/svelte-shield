@@ -5,9 +5,12 @@
 </script>
 
 <style>
+  :global(body) {
+    padding: 10px 12px;
+  }
+
   .wrapper {
-    margin: 10px auto;
-    padding: 0 15px;
+    margin: 0 auto;
     max-width: 1240px;
   }
 </style>
