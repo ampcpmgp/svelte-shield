@@ -1,8 +1,10 @@
 settings:
   url: mock.html
-default page:
+トップページ:
   func: [page, /]
-  change greeting name after 1000ms:
-    - [sleep, 1000]
-    - [greetings.name.set, 'changed name']
+  読み込み中:
+    - [morpheme.ignoreReading.set, true]
+  辞書取得エラー:
+    - [morpheme.isLoading.set, false]
+    - [morpheme.errorMsg.set, 辞書取得エラー]
 404 page: [page, /404]
