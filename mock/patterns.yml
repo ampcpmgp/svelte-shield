@@ -8,7 +8,6 @@ settings:
     - [morpheme.isLoading.set, false]
     - [morpheme.errorMsg.set, 辞書取得エラー]
   夏目漱石の文を再生:
-    - [sleep, 6000]
     - [morpheme.isPlay.set, true]
     -
       - morpheme.rawText.set

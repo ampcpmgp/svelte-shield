@@ -1,12 +1,7 @@
 <script>
-  import { onMount } from 'svelte'
-  import { init, isLoading, errorMsg } from '../../../states/morpheme'
+  import { isLoading, errorMsg } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import Analizer from './Analizer.svelte'
-
-  onMount(() => {
-    init()
-  })
 </script>
 
 <style>

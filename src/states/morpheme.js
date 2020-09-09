@@ -2,8 +2,6 @@ import kuromoji from 'kuromoji'
 import { get, writable } from 'svelte/store'
 import sleep from '../utils/sleep'
 
-let tokenizer
-
 export const word = writable('　')
 export const isLoading = writable(true)
 export const isPlay = writable(false)
@@ -15,27 +13,35 @@ export const settings = writable({
 // モック用
 export const ignoreReading = writable(false)
 
-export function init() {
-  kuromoji
-    .builder({ dicPath: 'https://unpkg.com/kuromoji@0.1.2/dict/' })
-    .build(function(err, _tokenizer) {
-      if (get(ignoreReading)) {
-        return
-      }
+const initP = init()
 
-      if (err) {
+async function init() {
+  // 初期描画が終わったあとに辞書データを読み込む。
+  await sleep(0)
+
+  return new Promise((resolve, reject) => {
+    kuromoji
+      .builder({ dicPath: 'https://unpkg.com/kuromoji@0.1.2/dict/' })
+      .build(function(err, tokenizer) {
+        if (get(ignoreReading)) {
+          return
+        }
+
+        if (err) {
+          isLoading.set(false)
+          errorMsg.set('辞書取得エラー')
+          reject()
+          return
+        }
+
         isLoading.set(false)
-        errorMsg.set('辞書取得エラー')
-        return
-      }
-
-      tokenizer = _tokenizer
-      isLoading.set(false)
-    })
+        resolve(tokenizer)
+      })
+  })
 }
 
 export async function tokenize() {
-  if (!tokenizer) return
+  const tokenizer = await initP
 
   const path = tokenizer.tokenize(get(rawText))
   console.table(path)
