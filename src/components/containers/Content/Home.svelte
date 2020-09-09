@@ -18,7 +18,7 @@
 <div class="wrapper">
   {#if $isLoading}
     <div>
-      <InsetAlert type="alert-info" message="辞書読み込み中..." />
+      <InsetAlert type="alert-info" message="辞書データ読み込み中..." />
     </div>
   {:else if $errorMsg}
     <div>

@@ -1,15 +1,14 @@
 <script>
-  import { word } from '../../../states/morpheme'
+  import { word, isPlay, tokenize, rawText } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
-  let isPlay = false
-
   function play() {
-    isPlay = true
+    $isPlay = true
+    tokenize()
   }
 
   function stop() {
-    isPlay = false
+    $isPlay = false
   }
 </script>
 
@@ -33,7 +32,7 @@
 <div class="wrapper">
   <InsetAlert type="alert-success" message={$word} />
 
-  {#if !isPlay}
+  {#if !$isPlay}
     <button
       on:click={play}
       class="btn btn-primary text-secondary"
@@ -46,5 +45,8 @@
     </button>
   {/if}
 
-  <textarea class="form-control" placeholder="テキストを入力してください" />
+  <textarea
+    bind:value={$rawText}
+    class="form-control"
+    placeholder="テキストを入力してください" />
 </div>
