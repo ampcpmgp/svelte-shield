@@ -1,5 +1,5 @@
 <script>
-
+  import { default as Icon } from '../../parts/Icon/Icon.svelte'
 </script>
 
 <style>
@@ -11,25 +11,27 @@
   }
 
   i {
-    font-size: 34px;
-  }
-
-  .fa-user-cog {
-    cursor: pointer;
+    font-size: 24px;
   }
 </style>
 
 <header>
-  <i class="fas fa-user-cog" />
+  <Icon isBox={true}>
+    <i class="fas fa-user-cog" />
+  </Icon>
 
   <!-- 隙間を空ける用の空タグ -->
   <div />
 
   <a href="https://twitter.com/am_nimitz3" target="_blank">
-    <i class="fab fa-twitter-square" />
+    <Icon>
+      <i class="fab fa-twitter-square" />
+    </Icon>
   </a>
 
   <a href="https://github.com/ampcpmgp/riot-shield" target="_blank">
-    <i class="fab fa-github" />
+    <Icon>
+      <i class="fab fa-github" />
+    </Icon>
   </a>
 </header>
