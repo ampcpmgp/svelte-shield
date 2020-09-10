@@ -8,7 +8,7 @@
     "start-dev": "parcel src/index.html --open",
     "test": "ava",
     "test:watch": "npm run test -- --watch",
-    "dist": "run-s copy-dict dist:*",
+    "dist": "run-s dist:* copy-dict",
     "dist:clean": "rimraf dist",
     "dist:build": "parcel build src/index.html --public-url ./",
     "dist-mocktimes": "run-s dist:clean dist-mocktimes:build",
