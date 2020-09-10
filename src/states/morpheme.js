@@ -9,6 +9,7 @@ export const errorMsg = writable('')
 export const rawText = writable('')
 export const settings = writable({
   intervalMs: 300,
+  judgeNum: 3,
 })
 // モック用
 export const ignoreReading = writable(false)
@@ -44,15 +45,110 @@ export async function tokenize() {
   const tokenizer = await initP
 
   const path = tokenizer.tokenize(get(rawText))
+  console.log(path)
   console.table(path)
 
-  for (const item of path) {
+  for (const message of composite(path)) {
     if (!get(isPlay)) {
       word.set('　')
       return
     }
 
-    word.set(item.surface_form)
+    word.set(message)
     await sleep(get(settings).intervalMs)
   }
+
+  isPlay.set(false)
+}
+
+export function getWord(composition) {
+  return composition.reduce(
+    (str, path) => (str + path.surface_form).replace(/\n/, ''),
+    ''
+  )
+}
+
+export function initComposition(compositions, index) {
+  if (!compositions[index]) {
+    compositions.push([])
+  }
+}
+
+export function isPunctuation(item) {
+  return item.pos_detail_1 === '句点' || item.pos_detail_1 === '読点'
+}
+
+export function isRelationalNoun(item) {
+  return item.pos === '名詞' || item.pos === '連体詞'
+}
+
+export function isRelationalVerb(item) {
+  return (
+    item.pos === '動詞' ||
+    item.pos === '助動詞' ||
+    item.pos_detail_1 === '形容動詞語幹'
+  )
+}
+
+export function composite(path) {
+  const compositions = []
+  let currentIndex = 0
+
+  path.forEach(item => {
+    // 初期化
+    initComposition(compositions, currentIndex)
+    let composition = compositions[currentIndex]
+
+    // 設定した判定数を超えたら繰り上げ
+    if (getWord(composition).length > get(settings).judgeNum) {
+      ++currentIndex
+      // 句読点が先頭以外にあれば繰り上げ
+    } else if (isPunctuation(item) && composition.length > 0) {
+      ++currentIndex
+    }
+
+    // 事前判定による再初期化
+    initComposition(compositions, currentIndex)
+    composition = compositions[currentIndex]
+    const prevComposition = compositions[currentIndex - 1]
+    const prevCompositionLastItem =
+      prevComposition && prevComposition[prevComposition.length - 1]
+
+    // 句読点・助詞などが先頭ならば、一つ前の composition に格納する。
+    if (
+      composition.length === 0 &&
+      (isPunctuation(item) ||
+        item.pos === '助詞' ||
+        item.pos_detail_1 === '括弧閉' ||
+        item.pos_detail_1 === '接尾') &&
+      prevComposition
+    ) {
+      prevComposition.push(item)
+      // 名詞が先頭で、一つ前が連体詞だった場合、前回の連体詞を取り除き結合させる
+    } else if (
+      composition.length === 0 &&
+      item.pos === '名詞' &&
+      prevCompositionLastItem && prevCompositionLastItem.pos === '連体詞'
+    ) {
+      composition.push(prevComposition.pop(), item)
+      // 助動詞が先頭で、一つ前が動詞関連だった場合、前回のアイテムを取り除き結合させる
+    } else if (
+      composition.length === 0 &&
+      item.pos === '助動詞' &&
+      prevCompositionLastItem && isRelationalVerb(prevCompositionLastItem)
+    ) {
+      composition.push(prevComposition.pop(), item)
+
+      // 二つ前も動詞関連だった場合、さらに結合させる。
+      const lastItem = prevComposition[prevComposition.length - 1]
+      if (lastItem && isRelationalVerb(lastItem)) {
+        composition.unshift(prevComposition.pop())
+      }
+      // それ以外は通常追加する。
+    } else {
+      composition.push(item)
+    }
+  })
+
+  return compositions.map(getWord).filter(item => item)
 }

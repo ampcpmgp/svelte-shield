@@ -1,8 +1,9 @@
 import test from 'ava'
-import { currentWord } from './morphemes'
+import kokoro from './json/kokoro.json'
+import * as morpheme from './morpheme'
 
-test('挨拶が出来る', t => {
-  currentWord.subscribe(value => {
-    t.is(value, 'Hello world!')
-  })
+test('composite - 夏目漱石 こころ', t => {
+  const result = morpheme.composite(kokoro)
+
+  t.deepEqual(result, [])
 })
