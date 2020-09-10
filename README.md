@@ -1,26 +1,21 @@
-# Parcel & Svelte & am-mocktimes Starter kit
+# Riot Shield
+
+様々な日本語文章を、目線移動を無くし読めるようにしたツール。
+
+<https://ampcpmgp.github.io/riot-shield/>
+
+## Origin of the name
+
+見た目が Riot Shield に似ているからだけではなく、こういった少し怖いモノのイメージを、別な怖くないものへとイメージを変えていきたいと思ったため。
 
 ## Setup
 
 ```shell
-npm install -g degit
-npx degit ampcpmgp/parcel-svelte-mocktimes-starter
 npm i
 ```
-
-* edit `package.json` `name` property
-* edit `README.md`
-* edit `src/index.html` title
 
 ## Start
 
 ```shell
 npm start # Open http://localhost:1234/patterns.html
-npm run storybook
-```
-
-### Generate parts template
-
-```shell
-npx am-parts -n __NAME__
 ```
