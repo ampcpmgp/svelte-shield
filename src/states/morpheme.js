@@ -45,8 +45,10 @@ export async function tokenize() {
   const tokenizer = await initP
 
   const path = tokenizer.tokenize(get(rawText))
-  console.log(path)
-  console.table(path)
+
+  // デバッグ用
+  // console.log(path)
+  // console.table(path)
 
   for (const message of composite(path)) {
     if (!get(isPlay)) {
@@ -55,6 +57,7 @@ export async function tokenize() {
     }
 
     word.set(message)
+
     await sleep(get(settings).intervalMs)
   }
 
@@ -62,10 +65,7 @@ export async function tokenize() {
 }
 
 export function getWord(composition) {
-  return composition.reduce(
-    (str, path) => (str + path.surface_form).replace(/\n/, ''),
-    ''
-  )
+  return composition.reduce((str, path) => (str + path.surface_form).trim(), '')
 }
 
 export function initComposition(compositions, index) {
@@ -128,19 +128,25 @@ export function composite(path) {
     } else if (
       composition.length === 0 &&
       item.pos === '名詞' &&
-      prevCompositionLastItem && prevCompositionLastItem.pos === '連体詞'
+      prevCompositionLastItem &&
+      prevCompositionLastItem.pos === '連体詞'
     ) {
       composition.push(prevComposition.pop(), item)
       // 助動詞が先頭で、一つ前が動詞関連だった場合、前回のアイテムを取り除き結合させる
     } else if (
       composition.length === 0 &&
       item.pos === '助動詞' &&
-      prevCompositionLastItem && isRelationalVerb(prevCompositionLastItem)
+      prevCompositionLastItem &&
+      isRelationalVerb(prevCompositionLastItem)
     ) {
       composition.push(prevComposition.pop(), item)
 
-      // 二つ前も動詞関連だった場合、さらに結合させる。
-      const lastItem = prevComposition[prevComposition.length - 1]
+      // 2~3前も動詞関連だった場合、さらに結合させる。
+      let lastItem = prevComposition[prevComposition.length - 1]
+      if (lastItem && isRelationalVerb(lastItem)) {
+        composition.unshift(prevComposition.pop())
+      }
+      lastItem = prevComposition[prevComposition.length - 1]
       if (lastItem && isRelationalVerb(lastItem)) {
         composition.unshift(prevComposition.pop())
       }
