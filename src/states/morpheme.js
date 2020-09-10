@@ -9,6 +9,8 @@ export const errorMsg = writable('')
 export const rawText = writable('')
 export const settings = writable({
   intervalMs: 300,
+})
+export const hiddenSettings = writable({
   judgeNum: 3,
 })
 // モック用
@@ -100,7 +102,7 @@ export function composite(path) {
     let composition = compositions[currentIndex]
 
     // 設定した判定数を超えたら繰り上げ
-    if (getWord(composition).length > get(settings).judgeNum) {
+    if (getWord(composition).length > get(hiddenSettings).judgeNum) {
       ++currentIndex
       // 句読点が先頭以外にあれば繰り上げ
     } else if (isPunctuation(item) && composition.length > 0) {
