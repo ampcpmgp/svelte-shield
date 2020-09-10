@@ -23,23 +23,21 @@ async function init() {
   await sleep(0)
 
   return new Promise((resolve, reject) => {
-    kuromoji
-      .builder({ dicPath: 'https://unpkg.com/kuromoji@0.1.2/dict/' })
-      .build(function(err, tokenizer) {
-        if (get(ignoreReading)) {
-          return
-        }
+    kuromoji.builder({ dicPath: './dict/' }).build(function(err, tokenizer) {
+      if (get(ignoreReading)) {
+        return
+      }
 
-        if (err) {
-          isLoading.set(false)
-          errorMsg.set('辞書取得エラー')
-          reject()
-          return
-        }
-
+      if (err) {
         isLoading.set(false)
-        resolve(tokenizer)
-      })
+        errorMsg.set('辞書取得エラー')
+        reject()
+        return
+      }
+
+      isLoading.set(false)
+      resolve(tokenizer)
+    })
   })
 }
 
