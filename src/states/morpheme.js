@@ -7,9 +7,6 @@ export const isLoading = writable(true)
 export const isPlay = writable(false)
 export const errorMsg = writable('')
 export const rawText = writable('')
-export const settings = writable({
-  intervalMs: 300,
-})
 export const hiddenSettings = writable({
   judgeNum: 3,
 })
@@ -58,7 +55,7 @@ export async function tokenize() {
 
     word.set(message)
 
-    await sleep(get(settings).intervalMs)
+    await sleep(localStorage.intervalMs)
   }
 
   isPlay.set(false)
