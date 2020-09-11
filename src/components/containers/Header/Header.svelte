@@ -17,7 +17,11 @@
 
 <header>
   <Icon isBox={true}>
-    <i class="fas fa-user-cog" />
+    <i
+      class="fas fa-user-cog"
+      data-toggle="modal"
+      data-target="#modal-default"
+      data-mock-open-modal />
   </Icon>
 
   <!-- 隙間を空ける用の空タグ -->

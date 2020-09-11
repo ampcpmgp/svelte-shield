@@ -1,6 +1,7 @@
 <script>
   import { isLoading, errorMsg } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
+  import Settings from '../Modals/Settings.svelte'
   import Analizer from './Analizer.svelte'
 </script>
 
@@ -23,3 +24,5 @@
     <Analizer />
   {/if}
 </div>
+
+<Settings />

@@ -10,4 +10,8 @@ mock({
   page(name) {
     replace(name)
   },
+
+  click(selector) {
+    document.querySelector(selector).click()
+  },
 })
