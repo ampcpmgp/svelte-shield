@@ -2,6 +2,7 @@ import test from 'ava'
 import kokoro from './json/kokoro.json'
 import rustCoc from './json/rustCoc.json'
 import diyParticle from './json/diyParticle.json'
+import asAManThinketh from './json/as-a-man-thinketh.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -486,5 +487,25 @@ test('composite - GIGAZINE の記事', t => {
     '多大な功績を',
     '残して',
     'います。',
+  ])
+})
+
+test('composite - As a man thinketh の一文', t => {
+  const result = morpheme.composite(asAManThinketh)
+  t.deepEqual(result, [
+    'あなたが',
+    '見ている',
+    '世界は万華鏡',
+    'であり、',
+    'その',
+    '様々な色の',
+    '組み合わせは、',
+    'その瞬間ごとの',
+    'あなた自身の',
+    '動き続ける',
+    '思考によって、',
+    '絶妙に調整',
+    'されたもの',
+    'です。',
   ])
 })
