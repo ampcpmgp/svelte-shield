@@ -44,7 +44,7 @@ export async function tokenize() {
   const path = tokenizer.tokenize(get(rawText))
 
   // デバッグ用
-  // console.log(path)
+  // navigator.clipboard.writeText(JSON.stringify(path, null, '  '))
   // console.table(path)
 
   for (const message of composite(path)) {
@@ -117,7 +117,8 @@ export function composite(path) {
       (isPunctuation(item) ||
         item.pos === '助詞' ||
         item.pos_detail_1 === '括弧閉' ||
-        item.pos_detail_1 === '接尾') &&
+        item.pos_detail_1 === '接尾' ||
+        item.surface_form === ')') &&
       prevComposition
     ) {
       prevComposition.push(item)

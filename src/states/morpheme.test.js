@@ -1,6 +1,7 @@
 import test from 'ava'
 import kokoro from './json/kokoro.json'
 import rustCoc from './json/rustCoc.json'
+import diyParticle from './json/diyParticle.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -454,5 +455,36 @@ test('composite - Rust 行動規範', t => {
     'されるもの',
     'では',
     'ありません。',
+  ])
+})
+
+test('composite - GIGAZINE の記事', t => {
+  const result = morpheme.composite(diyParticle)
+  t.deepEqual(result, [
+    'スイスと',
+    'フランスを',
+    'またぐ世界',
+    '最大規模の',
+    '素粒子物理学',
+    '研究施設',
+    'である欧州',
+    '原子核研究',
+    '機構(CERN)は、',
+    '質量が発生',
+    'する仕組みを',
+    '説明する',
+    '鍵となる',
+    'ヒッグス',
+    '粒子の発見や、',
+    'インターネットで',
+    '幅広く利用',
+    'されるHTTPの',
+    '開発など、',
+    '物理学のみ',
+    'ならずさまざまな',
+    '領域で',
+    '多大な功績を',
+    '残して',
+    'います。',
   ])
 })
