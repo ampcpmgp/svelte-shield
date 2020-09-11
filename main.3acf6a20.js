@@ -124,4 +124,4 @@ var n,t=arguments[3],r=require("process"),e=require("buffer").Buffer;!function(t
 },{"svelte/internal":"YkLP","svelte-spa-router":"hFZm","./containers/Header/Header":"OmfB","./routes":"MZcJ"}],"epB2":[function(require,module,exports) {
 "use strict";require("modern-css-reset/dist/reset.min.css"),require("./css/neumorphism.css"),require("bootstrap/dist/js/bootstrap.js");var e=s(require("./components/App"));function s(e){return e&&e.__esModule?e:{default:e}}require("./utils/settings"),new e.default({target:document.getElementById("app")});
 },{"modern-css-reset/dist/reset.min.css":"jl9O","./css/neumorphism.css":"jl9O","bootstrap/dist/js/bootstrap.js":"BQpi","./components/App":"HjHG","./utils/settings":"TQQf"}]},{},["epB2"], null)
-//# sourceMappingURL=main.a549ab9c.js.map
+//# sourceMappingURL=main.3acf6a20.js.map
