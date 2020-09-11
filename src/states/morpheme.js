@@ -45,7 +45,7 @@ export async function tokenize() {
 
   // デバッグ用
   // window.temp0 = JSON.stringify(path, null, '  ')
-  // copy(temp0) // input devtool
+  // console.log('copy(temp0)')
   // console.table(path)
 
   for (const message of composite(path)) {
@@ -116,7 +116,7 @@ export function composite(path) {
     if (
       composition.length === 0 &&
       (isPunctuation(item) ||
-        item.pos === '助詞' ||
+        (item.pos === '助詞' && !isPunctuation(prevCompositionLastItem)) ||
         item.pos_detail_1 === '括弧閉' ||
         item.pos_detail_1 === '接尾' ||
         item.surface_form === ')' ||

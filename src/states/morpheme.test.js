@@ -4,6 +4,7 @@ import rustCoc from './json/rustCoc.json'
 import diyParticle from './json/diyParticle.json'
 import asAManThinketh from './json/as-a-man-thinketh.json'
 import withQuestion from './json/withQuestion.json'
+import longWord from './json/longWord.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -511,7 +512,7 @@ test('composite - As a man thinketh の一文', t => {
   ])
 })
 
-test('composite - ', t => {
+test('composite - クエスチョンを含む文', t => {
   const result = morpheme.composite(withQuestion)
   t.deepEqual(result, [
     '「なんで',
@@ -521,5 +522,16 @@ test('composite - ', t => {
     'つもり？」',
     '「早く安心',
     'させてくれ」',
+  ])
+})
+
+test('composite - 単語を奇麗に分解する', t => {
+  const result = morpheme.composite(longWord)
+  t.deepEqual(result, [
+    '最近イライラ',
+    'してしまいがち、',
+    'という人は',
+    '睡眠不足',
+    'なのかも？',
   ])
 })
