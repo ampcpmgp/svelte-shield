@@ -3,6 +3,7 @@ import kokoro from './json/kokoro.json'
 import rustCoc from './json/rustCoc.json'
 import diyParticle from './json/diyParticle.json'
 import asAManThinketh from './json/as-a-man-thinketh.json'
+import withQuestion from './json/withQuestion.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -507,5 +508,18 @@ test('composite - As a man thinketh の一文', t => {
     '絶妙に調整',
     'されたもの',
     'です。',
+  ])
+})
+
+test('composite - ', t => {
+  const result = morpheme.composite(withQuestion)
+  t.deepEqual(result, [
+    '「なんで',
+    '結婚しないの？」',
+    '「ずっと',
+    '独身でいる',
+    'つもり？」',
+    '「早く安心',
+    'させてくれ」',
   ])
 })
