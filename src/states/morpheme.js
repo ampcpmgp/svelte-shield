@@ -120,6 +120,7 @@ export function composite(path) {
         item.pos_detail_1 === '括弧閉' ||
         item.pos_detail_1 === '接尾' ||
         item.surface_form === ')' ||
+        item.surface_form === ']' ||
         item.surface_form === '？') &&
       prevComposition
     ) {

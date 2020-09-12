@@ -5,6 +5,7 @@ import diyParticle from './json/diyParticle.json'
 import asAManThinketh from './json/as-a-man-thinketh.json'
 import withQuestion from './json/withQuestion.json'
 import longWord from './json/longWord.json'
+import 閉じ括弧 from './json/閉じ括弧.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -533,5 +534,18 @@ test('composite - 単語を奇麗に分解する', t => {
     'という人は',
     '睡眠不足',
     'なのかも？',
+  ])
+})
+
+test('composite - 閉じ括弧', t => {
+  const result = morpheme.composite(閉じ括弧)
+  t.deepEqual(result, [
+    '人体の器官の',
+    '分類、',
+    '組成人体の',
+    '組成70',
+    'kgの体重の',
+    'ヒト[7]',
+    '成分重量',
   ])
 })
