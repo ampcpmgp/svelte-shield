@@ -43,9 +43,8 @@ export async function tokenize() {
 
   const path = tokenizer.tokenize(get(rawText))
 
-  // デバッグ用
-  // window.temp0 = JSON.stringify(path, null, '  ')
-  // console.log('copy(temp0)')
+  // テスト作成用
+  // require('clipboard-copy')(JSON.stringify(path, null, '  '))
   // console.table(path)
 
   for (const message of composite(path)) {
