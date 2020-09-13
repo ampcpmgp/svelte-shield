@@ -114,11 +114,13 @@ export function composite(path) {
     const prevCompositionLastItem =
       prevComposition && prevComposition[prevComposition.length - 1]
 
-    // 句読点・助詞などが先頭ならば、一つ前の composition に格納する。
+    // 句読点・助詞など、先頭に来ると表示がおかしく見えるものは、ひとつ前に結合させる。
     if (
       composition.length === 0 &&
       (isPunctuation(item) ||
-        (item.pos === '助詞' && !isPunctuation(prevCompositionLastItem)) ||
+        (item.pos === '助詞' &&
+          prevCompositionLastItem &&
+          !isPunctuation(prevCompositionLastItem)) ||
         item.pos_detail_1 === '括弧閉' ||
         item.pos_detail_1 === '接尾' ||
         item.surface_form === ')' ||
