@@ -12,4 +12,4 @@
   }
 </style>
 
-<small class="wrapper">Updated: {version}</small>
+<small class="wrapper">Version: {version}</small>
