@@ -1,6 +1,7 @@
 <script>
   import Router from 'svelte-spa-router'
   import Header from './containers/Header/Header'
+  import Version from './containers/Version/Version'
   import routes from './routes'
 </script>
 
@@ -37,6 +38,7 @@
     <div class="card-body">
       <Header />
       <Router {routes} />
+      <Version />
     </div>
   </div>
 </div>
