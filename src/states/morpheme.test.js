@@ -6,6 +6,7 @@ import asAManThinketh from './json/as-a-man-thinketh.json'
 import withQuestion from './json/withQuestion.json'
 import longWord from './json/longWord.json'
 import 閉じ括弧 from './json/閉じ括弧.json'
+import 英単語を含む from './json/英単語を含む.json'
 import * as morpheme from './morpheme'
 
 test('composite - 夏目漱石 こころ', t => {
@@ -542,10 +543,22 @@ test('composite - 閉じ括弧', t => {
   t.deepEqual(result, [
     '人体の器官の',
     '分類、',
-    '組成人体の',
-    '組成70',
-    'kgの体重の',
-    'ヒト[7]',
-    '成分重量',
+    '組成',
+    '人体の組成',
+    '70kgの',
+    '体重のヒト',
+    '[7]',
+    '成分 \t重量',
+  ])
+})
+
+test('composite - 英単語を含む', t => {
+  const result = morpheme.composite(英単語を含む)
+  t.deepEqual(result, [
+    'hub threads',
+    'ThreadDBへの',
+    '制限付き',
+    'アクセスを',
+    '提供します。',
   ])
 })

@@ -63,7 +63,7 @@ export async function tokenize() {
 }
 
 export function getWord(composition) {
-  return composition.reduce((str, path) => (str + path.surface_form).trim(), '')
+  return composition.reduce((str, path) => str + path.surface_form, '').trim()
 }
 
 export function initComposition(compositions, index) {
@@ -103,6 +103,9 @@ export function composite(path) {
       // 句読点が先頭以外にあれば繰り上げ
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
+    } else if (item.surface_form === '\n') {
+      ++currentIndex
+      return
     }
 
     // 事前判定による再初期化
