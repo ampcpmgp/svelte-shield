@@ -1,6 +1,6 @@
 import test from 'ava'
-import 長めのカタカナ from './json/長めのカタカナ.json'
-import { composite } from './morpheme'
+import 長めのカタカナ from './長めのカタカナ.json'
+import { composite } from '../morpheme'
 
 test('composite/長めのカタカナ', t => {
   const result = composite(長めのカタカナ)

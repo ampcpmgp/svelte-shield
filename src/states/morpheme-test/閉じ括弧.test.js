@@ -1,6 +1,6 @@
 import test from 'ava'
-import json from './json/閉じ括弧.json'
-import { composite } from './morpheme'
+import json from './閉じ括弧.json'
+import { composite } from '../morpheme'
 
 test('composite/閉じ括弧', t => {
   const result = composite(json)

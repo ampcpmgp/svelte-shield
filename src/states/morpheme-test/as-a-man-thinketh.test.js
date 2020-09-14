@@ -1,6 +1,6 @@
 import test from 'ava'
-import json from './json/as-a-man-thinketh.json'
-import { composite } from './morpheme'
+import json from './as-a-man-thinketh.json'
+import { composite } from '../morpheme'
 
 test('composite/as-a-man-thinketh', t => {
   const result = composite(json)
