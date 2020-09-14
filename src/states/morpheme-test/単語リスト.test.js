@@ -6,8 +6,9 @@ test('composite/単語リスト', t => {
   const result = composite(json)
 
   t.deepEqual(result, [
-    '以下の各',
-    '項目を参照。',
+    '以下の',
+    '各項目を',
+    '参照。',
     '天動説',
     '地動説',
     '蓋天説',
