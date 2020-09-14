@@ -161,20 +161,26 @@ export function composite(path) {
   })
 
   return compositions
-    .reduce((compositions, item) => {
+    .reduce((result, item, index) => {
       const word = getWord(item)
+      const nextComposition = compositions[index + 1]
 
       if (/・/.test(word)) {
         // ・の前に２文字以上の文字があるものを、・を含んで区切る
         const splitted = word.split(/(?<=[^・]{2,}・)/)
 
-        compositions.push(...splitted)
+        result.push(...splitted)
 
-        return compositions
+        return result
+        // １文字になっている単語は次のアイテムの先頭に結合させる。
+      } else if (word.length === 1 && nextComposition) {
+        nextComposition.unshift(...item)
+
+        return result
       } else {
-        compositions.push(word)
+        result.push(word)
 
-        return compositions
+        return result
       }
     }, [])
     .filter(item => item)

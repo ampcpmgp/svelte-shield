@@ -1,10 +1,11 @@
 const kuromoji = require('kuromoji')
 
-const dir = 'src/states/morpheme-test/'
-const fileName = 'Wikipedia宇宙'
+const fileName = 'example'
 const sentence = `
-これに対し、ウィトゲンシュタインをはじめとする不可知論の立場からは、「語りえないものについては、沈黙しなければならない」との論がある。
+これはサンプル用のテスト文章です。
 `
+
+const dir = 'src/states/morpheme-test/'
 
 function js() {
   return `import test from 'ava'
