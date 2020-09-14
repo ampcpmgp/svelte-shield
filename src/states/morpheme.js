@@ -43,10 +43,6 @@ export async function tokenize() {
 
   const path = tokenizer.tokenize(get(rawText))
 
-  // テスト作成用
-  // require('clipboard-copy')(JSON.stringify(path, null, '  '))
-  // console.table(path)
-
   for (const message of composite(path)) {
     if (!get(isPlay)) {
       word.set('　')
