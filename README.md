@@ -22,6 +22,8 @@ npm start # Open http://localhost:1234/patterns.html
 npm test
 # or watch mode
 npm run test:watch
+# or watch spefied test name
+npx ava --match 'composite/example' --watch
 ```
 
 ### Add a test sentence
