@@ -100,7 +100,7 @@ export function composite(path) {
       // 句読点が先頭以外にあれば繰り上げ
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
-    } else if (item.surface_form === '\n') {
+    } else if (/\n/.test(item.surface_form)) {
       ++currentIndex
       return
     }
