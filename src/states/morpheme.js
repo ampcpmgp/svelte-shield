@@ -92,6 +92,7 @@ export function composite(path) {
     initComposition(compositions, currentIndex)
     let composition = compositions[currentIndex]
 
+    // 事前判定
     // 設定した判定数を超えたら繰り上げ
     if (getWord(composition).length > get(hiddenSettings).judgeNum) {
       ++currentIndex
@@ -103,7 +104,7 @@ export function composite(path) {
       return
     }
 
-    // 事前判定による再初期化
+    // 事前判定により再初期化
     initComposition(compositions, currentIndex)
     composition = compositions[currentIndex]
     const prevComposition = compositions[currentIndex - 1]
@@ -157,5 +158,22 @@ export function composite(path) {
     }
   })
 
-  return compositions.map(getWord).filter(item => item)
+  return compositions
+    .reduce((compositions, item) => {
+      const word = getWord(item)
+
+      if (/・/.test(word)) {
+        // ・の前に２文字以上の文字があるものを、・を含んで区切る
+        const splitted = word.split(/(?<=[^・]{2,}・)/)
+
+        compositions.push(...splitted)
+
+        return compositions
+      } else {
+        compositions.push(word)
+
+        return compositions
+      }
+    }, [])
+    .filter(item => item)
 }
