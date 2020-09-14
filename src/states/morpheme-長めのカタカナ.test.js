@@ -2,14 +2,15 @@ import test from 'ava'
 import 長めのカタカナ from './json/長めのカタカナ.json'
 import { composite } from './morpheme'
 
-test('composite - 長めのカタカナ', t => {
+test('composite/長めのカタカナ', t => {
   const result = composite(長めのカタカナ)
 
   t.deepEqual(result, [
     '2世紀ころの',
     'クラウディオス・',
     'プトレマイオスは',
-    '『アルマゲスト』において、',
+    '『アルマゲスト』',
+    'において、',
     '天球上における',
     '天体の動き',
     '（軌道）の',
@@ -22,7 +23,8 @@ test('composite - 長めのカタカナ', t => {
     '従来の地球を',
     '中心とする',
     '説（地球',
-    '中心説）に対して、',
+    '中心説）',
+    'に対して、',
     '太陽中心説を',
     '唱えた。',
     '1927年',

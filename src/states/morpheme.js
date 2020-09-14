@@ -86,6 +86,7 @@ export function isRelationalVerb(item) {
 export function composite(path) {
   const compositions = []
   let currentIndex = 0
+  const { judgeNum } = get(hiddenSettings)
 
   path.forEach(item => {
     // 初期化
@@ -94,7 +95,7 @@ export function composite(path) {
 
     // 事前判定
     // 設定した判定数を超えたら繰り上げ
-    if (getWord(composition).length > get(hiddenSettings).judgeNum) {
+    if (getWord(composition).length > judgeNum) {
       ++currentIndex
       // 句読点が先頭以外にあれば繰り上げ
     } else if (isPunctuation(item) && composition.length > 0) {
@@ -116,6 +117,7 @@ export function composite(path) {
       composition.length === 0 &&
       (isPunctuation(item) ||
         (item.pos === '助詞' &&
+        !(item.surface_form.length > judgeNum) && // 設定文字数を越えている助詞は独立させる
           prevCompositionLastItem &&
           !isPunctuation(prevCompositionLastItem)) ||
         item.pos_detail_1 === '括弧閉' ||
