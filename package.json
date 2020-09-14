@@ -1,6 +1,6 @@
 {
   "name": "parcel-svelte-mocktimes-starter",
-  "version": "2020.09.14.0100",
+  "version": "2020.09.14.2000",
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
     "start:mocktimes": "parcel mock/testbed/*.html",
