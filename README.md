@@ -28,10 +28,10 @@ npx ava --match 'composite/example' --watch
 
 ### Add a test sentence
 
-`test-tools/generate-test.js` の `fileName` にファイル名と `sentence` に文章を入れ、以下を実行してください。
+`test-tools/generate-test.js` の `fileName` 変数にファイル名、 `sentence` 変数に文章を入れ、以下を実行してください。
 
 ```shell
-node test-tools/generate-json.js
+node test-tools/generate-test.js
 ```
 
 そうすると `src/states/morpheme-test/` にテスト対象のファイルが生成されます。
