@@ -118,11 +118,12 @@ export function composite(path) {
   let currentIndex = 0
   const { judgeNum } = get(hiddenSettings)
 
-  path.forEach(item => {
+  path.forEach((item, index) => {
     // 初期化
     initComposition(compositions, currentIndex)
     let composition = compositions[currentIndex]
     const word = getWord(composition)
+    const nextItem = path[index + 1]
 
     // 事前判定
     // 設定した判定数を超えたら繰り上げ
@@ -155,12 +156,24 @@ export function composite(path) {
       isWeirdAtTheFront(item, lastItem)
     ) {
       prevComposition.push(item)
-      // 名詞が先頭で、一つ前が名詞と強く関連のある品詞だった場合、取り除き結合する。
+      // 先頭が１文字の助動詞で、前回が名詞だった場合、ひとつ前に結合させる。
+      // ※「～～なの」、と続くと、「な」は助動詞、「の」は名詞と判定されてしまうため、除外する。
+    } else if (
+      composition.length === 0 &&
+      item.surface_form.length === 1 &&
+      item.pos === '助動詞' &&
+      !(item.surface_form === 'な' && nextItem.surface_form === 'の') &&
+      lastItem &&
+      lastItem.pos === '名詞'
+    ) {
+      prevComposition.push(item)
+      // 名詞が先頭で、一つ前が名詞と強く関連のある品詞でかつ設定数以下の場合、取り除き結合する。
     } else if (
       composition.length === 0 &&
       item.pos === '名詞' &&
       lastItem &&
-      hasStrongConnectionNoun(lastItem)
+      hasStrongConnectionNoun(lastItem) &&
+      lastItem.surface_form.length < judgeNum
     ) {
       composition.push(prevComposition.pop(), item)
       // 助動詞が先頭で、一つ前が動詞関連だった場合、取り除き結合させる
