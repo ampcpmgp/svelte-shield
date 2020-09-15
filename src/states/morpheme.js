@@ -87,6 +87,32 @@ export function isRelationalVerb(item) {
   )
 }
 
+export function isWeirdAtTheFront(item, lastItem) {
+  const { judgeNum } = get(hiddenSettings)
+
+  // 設定文字数を越えていない助詞で、前回の結果が句読点で無ければ結合可能
+  const isConnectableParticle =
+    item.pos === '助詞' &&
+    item.surface_form.length <= judgeNum &&
+    lastItem &&
+    !isPunctuation(lastItem)
+
+  // 今回の結果が数で、前回の結果が小数点だった場合は結合可能
+  const isConnectableNum =
+    item.pos_detail_1 === '数' && lastItem && lastItem.surface_form === '.'
+
+  return (
+    isPunctuation(item) ||
+    item.pos_detail_1 === '括弧閉' ||
+    item.pos_detail_1 === '接尾' ||
+    item.surface_form === ')' ||
+    item.surface_form === ']' ||
+    item.surface_form === '？' ||
+    isConnectableParticle ||
+    isConnectableNum
+  )
+}
+
 export function composite(path) {
   const compositions = []
   let currentIndex = 0
@@ -113,42 +139,30 @@ export function composite(path) {
     initComposition(compositions, currentIndex)
     composition = compositions[currentIndex]
     const prevComposition = compositions[currentIndex - 1]
-    const prevCompositionLastItem =
+    const lastItem =
       prevComposition && prevComposition[prevComposition.length - 1]
 
-    // 句読点・助詞など、先頭に来ると表示がおかしく見えるものは、ひとつ前に結合させる。
+    // 先頭に来ると表示がおかしく見えるもの（句読点・助詞など）は、ひとつ前に結合させる。
     if (
       composition.length === 0 &&
-      (isPunctuation(item) ||
-        (item.pos === '助詞' &&
-        !(item.surface_form.length > judgeNum) && // 設定文字数を越えている助詞は独立させる
-          prevCompositionLastItem &&
-          !isPunctuation(prevCompositionLastItem)) ||
-        item.pos_detail_1 === '括弧閉' ||
-        item.pos_detail_1 === '接尾' ||
-        item.surface_form === ')' ||
-        item.surface_form === ']' ||
-        item.surface_form === '？' ||
-        (item.pos_detail_1 === '数' &&
-          prevCompositionLastItem &&
-          prevCompositionLastItem.pos_detail_1 === 'サ変接続')) &&
-      prevComposition
+      prevComposition &&
+      isWeirdAtTheFront(item, lastItem)
     ) {
       prevComposition.push(item)
       // 名詞が先頭で、一つ前が名詞と強く関連のある品詞だった場合、取り除き結合する。
     } else if (
       composition.length === 0 &&
       item.pos === '名詞' &&
-      prevCompositionLastItem &&
-      hasStrongConnectionNoun(prevCompositionLastItem)
+      lastItem &&
+      hasStrongConnectionNoun(lastItem)
     ) {
       composition.push(prevComposition.pop(), item)
       // 助動詞が先頭で、一つ前が動詞関連だった場合、取り除き結合させる
     } else if (
       composition.length === 0 &&
       item.pos === '助動詞' &&
-      prevCompositionLastItem &&
-      isRelationalVerb(prevCompositionLastItem)
+      lastItem &&
+      isRelationalVerb(lastItem)
     ) {
       composition.push(prevComposition.pop(), item)
 
@@ -161,11 +175,11 @@ export function composite(path) {
       if (lastItem && isRelationalVerb(lastItem)) {
         composition.unshift(prevComposition.pop())
       }
-      // サ変接続でかつ、一つ前が数であった場合、取り除き結合する。
+      // 今回が小数点でかつ、前回が数であった場合、取り除き結合する。
     } else if (
-      item.pos_detail_1 === 'サ変接続' &&
-      prevCompositionLastItem &&
-      prevCompositionLastItem.pos_detail_1 === '数'
+      item.surface_form === '.' &&
+      lastItem &&
+      lastItem.pos_detail_1 === '数'
     ) {
       composition.push(prevComposition.pop(), item)
       // それ以外は通常追加する。
