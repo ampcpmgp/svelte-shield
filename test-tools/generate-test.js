@@ -1,8 +1,8 @@
 const kuromoji = require('kuromoji')
 
-const fileName = 'example'
+const fileName = 'インフレーション理論'
 const sentence = `
-これはサンプル用のテスト文章です。
+この見かけの矛盾はインフレーション理論で解決される。
 `
 
 const dir = 'src/states/morpheme-test/'

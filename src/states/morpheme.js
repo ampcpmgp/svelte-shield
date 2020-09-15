@@ -122,12 +122,18 @@ export function composite(path) {
     // 初期化
     initComposition(compositions, currentIndex)
     let composition = compositions[currentIndex]
+    const word = getWord(composition)
 
     // 事前判定
     // 設定した判定数を超えたら繰り上げ
-    if (getWord(composition).length > judgeNum) {
+    if (word.length > judgeNum) {
       ++currentIndex
-      // 句読点が先頭以外にあれば繰り上げ
+      // 設定した判定数でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
+    } else if (
+      word.length === judgeNum &&
+      item.surface_form.length > judgeNum
+    ) {
+      ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
     } else if (/\n/.test(item.surface_form)) {
@@ -175,6 +181,15 @@ export function composite(path) {
       if (lastItem && isRelationalVerb(lastItem)) {
         composition.unshift(prevComposition.pop())
       }
+      // 動詞始まりで、一つ前が名詞でかつ、先頭に来ても不思議ではない品詞だった場合、取り除き結合する。
+    } else if (
+      composition.length === 0 &&
+      item.pos === '動詞' &&
+      lastItem &&
+      lastItem.pos === '名詞' &&
+      !isWeirdAtTheFront(lastItem)
+    ) {
+      composition.push(prevComposition.pop(), item)
       // 今回が小数点でかつ、前回が数であった場合、取り除き結合する。
     } else if (
       item.surface_form === '.' &&

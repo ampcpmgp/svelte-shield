@@ -5,5 +5,5 @@ import { composite } from '../morpheme'
 test('composite/example', t => {
   const result = composite(json)
 
-  t.deepEqual(result, ['これはサンプル用の', 'テスト文章', 'です。'])
+  t.deepEqual(result, ['これは', 'サンプル用の', 'テスト文章', 'です。'])
 })
