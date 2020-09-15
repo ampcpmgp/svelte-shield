@@ -113,6 +113,12 @@ export function isWeirdAtTheFront(item, lastItem) {
   )
 }
 
+export function isOnlyKanji(surface_form) {
+  return /^([々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])+$/.test(
+    surface_form
+  )
+}
+
 export function composite(path) {
   const compositions = []
   let currentIndex = 0
@@ -139,7 +145,6 @@ export function composite(path) {
       ++currentIndex
     } else if (/\n/.test(item.surface_form)) {
       ++currentIndex
-      return
     }
 
     // 事前判定により再初期化
@@ -167,6 +172,7 @@ export function composite(path) {
       lastItem.pos === '名詞'
     ) {
       prevComposition.push(item)
+
       // 名詞が先頭で、一つ前が名詞と強く関連のある品詞でかつ設定数以下の場合、取り除き結合する。
     } else if (
       composition.length === 0 &&
@@ -176,6 +182,7 @@ export function composite(path) {
       lastItem.surface_form.length < judgeNum
     ) {
       composition.push(prevComposition.pop(), item)
+
       // 助動詞が先頭で、一つ前が動詞関連だった場合、取り除き結合させる
     } else if (
       composition.length === 0 &&
