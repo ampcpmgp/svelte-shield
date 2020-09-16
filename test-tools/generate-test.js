@@ -1,8 +1,8 @@
 const kuromoji = require('kuromoji')
 
-const fileName = 'インフレーション理論'
+const fileName = 'B細胞'
 const sentence = `
-この見かけの矛盾はインフレーション理論で解決される。
+1個のB細胞は表面上の抗体が特定の外来抗原に結合すると病原体を認識することになる。
 `
 
 const dir = 'src/states/morpheme-test/'

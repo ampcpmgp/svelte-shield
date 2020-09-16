@@ -135,11 +135,8 @@ export function composite(path) {
     // 設定した判定数を超えたら繰り上げ
     if (word.length > judgeNum) {
       ++currentIndex
-      // 設定した判定数でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
-    } else if (
-      word.length === judgeNum &&
-      item.surface_form.length > judgeNum
-    ) {
+      // ２文字以上でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
+    } else if (word.length > 1 && item.surface_form.length > judgeNum) {
       ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
