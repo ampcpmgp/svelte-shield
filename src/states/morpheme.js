@@ -13,6 +13,8 @@ export const hiddenSettings = writable({
 // モック用
 export const ignoreReading = writable(false)
 
+const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
+
 const initP = init()
 
 async function init() {
@@ -115,9 +117,7 @@ export function isWeirdAtTheFront(item, lastItem) {
 }
 
 export function isOnlyKanji(surface_form) {
-  return /^([々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])+$/.test(
-    surface_form
-  )
+  return /^[\u30e0-\u9fcf]+$/.test(surface_form)
 }
 
 export function composite(path) {
@@ -255,6 +255,15 @@ export function composite(path) {
         // １文字になっている単語は次のアイテムの先頭に結合させる。
       } else if (word.length === 1 && nextComposition) {
         nextComposition.unshift(...item)
+
+        return result
+        // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
+      } else if (
+        word.match(漢字ひらがな漢字ひらがな) &&
+        RegExp.$1.length + RegExp.$2.length >= judgeNum &&
+        RegExp.$3.length + RegExp.$4.length >= judgeNum
+      ) {
+        result.push(RegExp.$1 + RegExp.$2, RegExp.$3 + RegExp.$4)
 
         return result
       } else {

@@ -1,5 +1,5 @@
 {
-  "name": "parcel-svelte-mocktimes-starter",
+  "name": "riot-shield",
   "version": "2020.09.16.1730",
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
