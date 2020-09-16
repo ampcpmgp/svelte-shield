@@ -1,21 +1,8 @@
 [
   {
-    "word_id": 10,
-    "word_type": "UNKNOWN",
-    "word_position": 1,
-    "surface_form": "\n",
-    "pos": "記号",
-    "pos_detail_1": "空白",
-    "pos_detail_2": "*",
-    "pos_detail_3": "*",
-    "conjugated_type": "*",
-    "conjugated_form": "*",
-    "basic_form": "*"
-  },
-  {
     "word_id": 90,
     "word_type": "UNKNOWN",
-    "word_position": 2,
+    "word_position": 1,
     "surface_form": "1",
     "pos": "名詞",
     "pos_detail_1": "数",
@@ -28,7 +15,7 @@
   {
     "word_id": 86730,
     "word_type": "KNOWN",
-    "word_position": 3,
+    "word_position": 2,
     "surface_form": "個",
     "pos": "名詞",
     "pos_detail_1": "接尾",
@@ -43,7 +30,7 @@
   {
     "word_id": 93100,
     "word_type": "KNOWN",
-    "word_position": 4,
+    "word_position": 3,
     "surface_form": "の",
     "pos": "助詞",
     "pos_detail_1": "連体化",
@@ -58,7 +45,7 @@
   {
     "word_id": 100,
     "word_type": "UNKNOWN",
-    "word_position": 5,
+    "word_position": 4,
     "surface_form": "B",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -71,7 +58,7 @@
   {
     "word_id": 2751890,
     "word_type": "KNOWN",
-    "word_position": 6,
+    "word_position": 5,
     "surface_form": "細胞",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -86,7 +73,7 @@
   {
     "word_id": 93010,
     "word_type": "KNOWN",
-    "word_position": 8,
+    "word_position": 7,
     "surface_form": "は",
     "pos": "助詞",
     "pos_detail_1": "係助詞",
@@ -101,7 +88,7 @@
   {
     "word_id": 253680,
     "word_type": "KNOWN",
-    "word_position": 9,
+    "word_position": 8,
     "surface_form": "表面",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -116,7 +103,7 @@
   {
     "word_id": 84780,
     "word_type": "KNOWN",
-    "word_position": 11,
+    "word_position": 10,
     "surface_form": "上",
     "pos": "名詞",
     "pos_detail_1": "接尾",
@@ -131,7 +118,7 @@
   {
     "word_id": 93100,
     "word_type": "KNOWN",
-    "word_position": 12,
+    "word_position": 11,
     "surface_form": "の",
     "pos": "助詞",
     "pos_detail_1": "連体化",
@@ -146,7 +133,7 @@
   {
     "word_id": 2435860,
     "word_type": "KNOWN",
-    "word_position": 13,
+    "word_position": 12,
     "surface_form": "抗体",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -161,7 +148,7 @@
   {
     "word_id": 92920,
     "word_type": "KNOWN",
-    "word_position": 15,
+    "word_position": 14,
     "surface_form": "が",
     "pos": "助詞",
     "pos_detail_1": "格助詞",
@@ -176,7 +163,7 @@
   {
     "word_id": 646630,
     "word_type": "KNOWN",
-    "word_position": 16,
+    "word_position": 15,
     "surface_form": "特定",
     "pos": "名詞",
     "pos_detail_1": "サ変接続",
@@ -191,7 +178,7 @@
   {
     "word_id": 93100,
     "word_type": "KNOWN",
-    "word_position": 18,
+    "word_position": 17,
     "surface_form": "の",
     "pos": "助詞",
     "pos_detail_1": "連体化",
@@ -206,7 +193,7 @@
   {
     "word_id": 2456730,
     "word_type": "KNOWN",
-    "word_position": 19,
+    "word_position": 18,
     "surface_form": "外来",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -221,7 +208,7 @@
   {
     "word_id": 2374040,
     "word_type": "KNOWN",
-    "word_position": 21,
+    "word_position": 20,
     "surface_form": "抗原",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -236,7 +223,7 @@
   {
     "word_id": 92030,
     "word_type": "KNOWN",
-    "word_position": 23,
+    "word_position": 22,
     "surface_form": "に",
     "pos": "助詞",
     "pos_detail_1": "格助詞",
@@ -251,7 +238,7 @@
   {
     "word_id": 393260,
     "word_type": "KNOWN",
-    "word_position": 24,
+    "word_position": 23,
     "surface_form": "結合",
     "pos": "名詞",
     "pos_detail_1": "サ変接続",
@@ -266,7 +253,7 @@
   {
     "word_id": 3011740,
     "word_type": "KNOWN",
-    "word_position": 26,
+    "word_position": 25,
     "surface_form": "する",
     "pos": "動詞",
     "pos_detail_1": "自立",
@@ -281,7 +268,7 @@
   {
     "word_id": 92550,
     "word_type": "KNOWN",
-    "word_position": 28,
+    "word_position": 27,
     "surface_form": "と",
     "pos": "助詞",
     "pos_detail_1": "接続助詞",
@@ -296,7 +283,7 @@
   {
     "word_id": 818330,
     "word_type": "KNOWN",
-    "word_position": 29,
+    "word_position": 28,
     "surface_form": "病原",
     "pos": "名詞",
     "pos_detail_1": "一般",
@@ -311,7 +298,7 @@
   {
     "word_id": 86290,
     "word_type": "KNOWN",
-    "word_position": 31,
+    "word_position": 30,
     "surface_form": "体",
     "pos": "名詞",
     "pos_detail_1": "接尾",
@@ -326,7 +313,7 @@
   {
     "word_id": 92880,
     "word_type": "KNOWN",
-    "word_position": 32,
+    "word_position": 31,
     "surface_form": "を",
     "pos": "助詞",
     "pos_detail_1": "格助詞",
@@ -341,7 +328,7 @@
   {
     "word_id": 76050,
     "word_type": "KNOWN",
-    "word_position": 33,
+    "word_position": 32,
     "surface_form": "認識",
     "pos": "名詞",
     "pos_detail_1": "サ変接続",
@@ -356,7 +343,7 @@
   {
     "word_id": 3011740,
     "word_type": "KNOWN",
-    "word_position": 35,
+    "word_position": 34,
     "surface_form": "する",
     "pos": "動詞",
     "pos_detail_1": "自立",
@@ -371,7 +358,7 @@
   {
     "word_id": 63910,
     "word_type": "KNOWN",
-    "word_position": 37,
+    "word_position": 36,
     "surface_form": "こと",
     "pos": "名詞",
     "pos_detail_1": "非自立",
@@ -386,7 +373,7 @@
   {
     "word_id": 92030,
     "word_type": "KNOWN",
-    "word_position": 39,
+    "word_position": 38,
     "surface_form": "に",
     "pos": "助詞",
     "pos_detail_1": "格助詞",
@@ -401,7 +388,7 @@
   {
     "word_id": 352790,
     "word_type": "KNOWN",
-    "word_position": 40,
+    "word_position": 39,
     "surface_form": "なる",
     "pos": "動詞",
     "pos_detail_1": "自立",
@@ -416,7 +403,7 @@
   {
     "word_id": 90940,
     "word_type": "KNOWN",
-    "word_position": 42,
+    "word_position": 41,
     "surface_form": "。",
     "pos": "記号",
     "pos_detail_1": "句点",
@@ -427,18 +414,5 @@
     "basic_form": "。",
     "reading": "。",
     "pronunciation": "。"
-  },
-  {
-    "word_id": 10,
-    "word_type": "UNKNOWN",
-    "word_position": 43,
-    "surface_form": "\n",
-    "pos": "記号",
-    "pos_detail_1": "空白",
-    "pos_detail_2": "*",
-    "pos_detail_3": "*",
-    "conjugated_type": "*",
-    "conjugated_form": "*",
-    "basic_form": "*"
   }
 ]

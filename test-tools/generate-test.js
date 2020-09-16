@@ -1,9 +1,9 @@
 const kuromoji = require('kuromoji')
 
-const fileName = 'B細胞'
+const fileName = 'example'
 const sentence = `
-1個のB細胞は表面上の抗体が特定の外来抗原に結合すると病原体を認識することになる。
-`
+これはサンプル用のテスト文章です。
+`.trim()
 
 const dir = 'src/states/morpheme-test/'
 
@@ -12,10 +12,16 @@ function js() {
 import json from './${fileName}.json'
 import { composite } from '../morpheme'
 
+/* 原文
+${sentence}
+*/
+
 test('composite/${fileName}', t => {
   const result = composite(json)
 
-  t.deepEqual(result, [])
+  t.deepEqual(result, [
+
+  ])
 })
 `
 }

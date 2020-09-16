@@ -128,10 +128,14 @@ export function composite(path) {
     // 初期化
     initComposition(compositions, currentIndex)
     let composition = compositions[currentIndex]
+    let prevComposition = compositions[currentIndex - 1]
+    let prevCompositionLastItem =
+      prevComposition && prevComposition[prevComposition.length - 1]
+    let currentCompositionLastItem = composition[composition.length - 1]
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
-    // 事前判定
+    // 事前折り返し判定。
     // 設定した判定数を超えたら繰り上げ
     if (word.length > judgeNum) {
       ++currentIndex
@@ -142,20 +146,29 @@ export function composite(path) {
       ++currentIndex
     } else if (/\n/.test(item.surface_form)) {
       ++currentIndex
+      // 名詞以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
+    } else if (
+      currentCompositionLastItem &&
+      currentCompositionLastItem.pos !== '名詞' &&
+      item.pos === '名詞' &&
+      nextItem &&
+      nextItem.pos === '名詞'
+    ) {
+      ++currentIndex
     }
 
-    // 事前判定により再初期化
+    // 事前折り返し判定により再初期化
     initComposition(compositions, currentIndex)
     composition = compositions[currentIndex]
-    const prevComposition = compositions[currentIndex - 1]
-    const lastItem =
+    prevComposition = compositions[currentIndex - 1]
+    prevCompositionLastItem =
       prevComposition && prevComposition[prevComposition.length - 1]
 
     // 先頭に来ると表示がおかしく見えるもの（句読点・助詞など）は、ひとつ前に結合させる。
     if (
       composition.length === 0 &&
       prevComposition &&
-      isWeirdAtTheFront(item, lastItem)
+      isWeirdAtTheFront(item, prevCompositionLastItem)
     ) {
       prevComposition.push(item)
       // 先頭が１文字の助動詞で、前回が名詞だった場合、ひとつ前に結合させる。
@@ -165,8 +178,8 @@ export function composite(path) {
       item.surface_form.length === 1 &&
       item.pos === '助動詞' &&
       !(item.surface_form === 'な' && nextItem.surface_form === 'の') &&
-      lastItem &&
-      lastItem.pos === '名詞'
+      prevCompositionLastItem &&
+      prevCompositionLastItem.pos === '名詞'
     ) {
       prevComposition.push(item)
 
@@ -174,9 +187,9 @@ export function composite(path) {
     } else if (
       composition.length === 0 &&
       item.pos === '名詞' &&
-      lastItem &&
-      hasStrongConnectionNoun(lastItem) &&
-      lastItem.surface_form.length < judgeNum
+      prevCompositionLastItem &&
+      hasStrongConnectionNoun(prevCompositionLastItem) &&
+      prevCompositionLastItem.surface_form.length < judgeNum
     ) {
       composition.push(prevComposition.pop(), item)
 
@@ -184,34 +197,40 @@ export function composite(path) {
     } else if (
       composition.length === 0 &&
       item.pos === '助動詞' &&
-      lastItem &&
-      isRelationalVerb(lastItem)
+      prevCompositionLastItem &&
+      isRelationalVerb(prevCompositionLastItem)
     ) {
       composition.push(prevComposition.pop(), item)
 
       // 2~3前も動詞関連だった場合、さらに結合させる。
-      let lastItem = prevComposition[prevComposition.length - 1]
-      if (lastItem && isRelationalVerb(lastItem)) {
+      let prevCompositionLastItem = prevComposition[prevComposition.length - 1]
+      if (
+        prevCompositionLastItem &&
+        isRelationalVerb(prevCompositionLastItem)
+      ) {
         composition.unshift(prevComposition.pop())
       }
-      lastItem = prevComposition[prevComposition.length - 1]
-      if (lastItem && isRelationalVerb(lastItem)) {
+      prevCompositionLastItem = prevComposition[prevComposition.length - 1]
+      if (
+        prevCompositionLastItem &&
+        isRelationalVerb(prevCompositionLastItem)
+      ) {
         composition.unshift(prevComposition.pop())
       }
       // 動詞始まりで、一つ前が名詞でかつ、先頭に来ても不思議ではない品詞だった場合、取り除き結合する。
     } else if (
       composition.length === 0 &&
       item.pos === '動詞' &&
-      lastItem &&
-      lastItem.pos === '名詞' &&
-      !isWeirdAtTheFront(lastItem)
+      prevCompositionLastItem &&
+      prevCompositionLastItem.pos === '名詞' &&
+      !isWeirdAtTheFront(prevCompositionLastItem)
     ) {
       composition.push(prevComposition.pop(), item)
       // 今回が小数点でかつ、前回が数であった場合、取り除き結合する。
     } else if (
       item.surface_form === '.' &&
-      lastItem &&
-      lastItem.pos_detail_1 === '数'
+      prevCompositionLastItem &&
+      prevCompositionLastItem.pos_detail_1 === '数'
     ) {
       composition.push(prevComposition.pop(), item)
       // それ以外は通常追加する。
