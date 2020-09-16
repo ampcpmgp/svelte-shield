@@ -108,6 +108,7 @@ export function isWeirdAtTheFront(item, lastItem) {
     item.surface_form === ')' ||
     item.surface_form === ']' ||
     item.surface_form === '？' ||
+    item.surface_form === '・' ||
     isConnectableParticle ||
     isConnectableNum
   )

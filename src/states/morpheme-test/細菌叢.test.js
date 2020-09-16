@@ -2,6 +2,10 @@ import test from 'ava'
 import json from './細菌叢.json'
 import { composite } from '../morpheme'
 
+/*
+生殖尿管や胃腸管では共生している細菌叢が病原菌と養分や繁殖場所をめぐって病原体と競争して生物学的防壁として機能する。
+*/
+
 test('composite/細菌叢', t => {
   const result = composite(json)
 
