@@ -156,6 +156,10 @@ export function composite(path) {
       nextItem.pos === '名詞'
     ) {
       ++currentIndex
+
+      // 動詞ではあるものの、それが漢字のみで構成されていた場合、後ろに結合させる。
+    } else if (item.pos === '動詞' && isOnlyKanji(item.surface_form)) {
+      ++currentIndex
     }
 
     // 事前折り返し判定により再初期化
