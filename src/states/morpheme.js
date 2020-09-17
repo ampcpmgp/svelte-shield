@@ -240,6 +240,16 @@ export function composite(path) {
       !isWeirdAtTheFront(prevCompositionLastItem)
     ) {
       composition.push(prevComposition.pop(), item)
+
+      // さらにその前が名詞に紐づく品詞であった場合、さらに取り除き結合する。
+      let prevCompositionLastItem = prevComposition[prevComposition.length - 1]
+      if (
+        prevCompositionLastItem &&
+        isRelationalNoun(prevCompositionLastItem)
+      ) {
+        composition.unshift(prevComposition.pop())
+      }
+
       // 今回が小数点でかつ、前回が数であった場合、取り除き結合する。
     } else if (
       item.surface_form === '.' &&
