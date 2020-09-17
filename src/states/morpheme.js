@@ -247,7 +247,11 @@ export function composite(path) {
 
       if (/・/.test(word)) {
         // ・の前に２文字以上の文字があるものを、・を含んで区切る
-        const splitted = word.split(/(?<=[^・]{2,}・)/)
+        // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
+        // const splitted = word.split(/(?<=[^・]{2,}・)/)
+        // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
+        // 暫定対応として以下を使う。
+        const splitted = word.split(/((?:[^・]{2,})・)/)
 
         result.push(...splitted)
 
