@@ -7,7 +7,8 @@ test('composite/Wikipediaビッグバン', t => {
 
   t.deepEqual(result, [
     'インフレーション',
-    '理論によれば、',
+    '理論に',
+    'よれば、',
     '時空の',
     '指数関数的',
     '急膨張（',

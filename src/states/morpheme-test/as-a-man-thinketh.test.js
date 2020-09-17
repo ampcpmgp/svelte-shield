@@ -8,7 +8,8 @@ test('composite/as-a-man-thinketh', t => {
   t.deepEqual(result, [
     'あなたが',
     '見ている',
-    '世界は万華鏡',
+    '世界は',
+    '万華鏡',
     'であり、',
     'その様々な',
     '色の',

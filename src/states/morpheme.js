@@ -143,6 +143,15 @@ export function composite(path) {
       // ２文字以上でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
     } else if (word.length > 1 && item.surface_form.length > judgeNum) {
       ++currentIndex
+      // 現在の compoisition 合計文字数が設定数以上あって、最後が助詞であれば繰り上げる。
+    } else if (
+      composition &&
+      composition.reduce((sum, item) => sum + item.surface_form.length, 0) >=
+        judgeNum &&
+      currentCompositionLastItem &&
+      currentCompositionLastItem.pos === '助詞'
+    ) {
+      ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
     } else if (/\n/.test(item.surface_form)) {
