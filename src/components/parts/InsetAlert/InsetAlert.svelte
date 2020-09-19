@@ -13,4 +13,24 @@
   }
 </style>
 
-<div class="alert {type} shadow-soft inset">{message}</div>
+<!-- 色で分ける -->
+
+<div class="alert {type} shadow-soft inset">
+  {#if message.match(/(咀嚼|蠕動|分節|そしゃく|ぜんどう|運動)/)}
+    <strong style="color: black">{message}</strong>
+  {:else}{message}{/if}
+</div>
+
+<!-- alert の種類で分ける -->
+<!--
+{#if message.match(/(咀嚼|蠕動|分節|そしゃく|ぜんどう|運動)/)}
+  <div class="alert alert-danger shadow-soft inset">
+    <strong>
+      {message}
+    </strong>
+  </div>
+{:else}
+  <div class="alert {type} shadow-soft inset">
+    {message}
+  </div>
+{/if} -->
