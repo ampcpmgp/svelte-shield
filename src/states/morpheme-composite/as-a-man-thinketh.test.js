@@ -5,7 +5,7 @@ import { composite } from '../morpheme'
 // あなたが見ている世界は万華鏡であり、その様々な色の組み合わせは、その瞬間ごとのあなた自身の絶えず動き続ける思考によって、絶妙に調整されたものです。
 
 test('composite/as-a-man-thinketh', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     'あなたが',

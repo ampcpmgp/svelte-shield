@@ -5,7 +5,7 @@ import { composite } from '../morpheme'
 // 参考URL: https://www.rust-lang.org/ja/policies/code-of-conduct
 
 test('composite/rustCoc', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '私たちは、',

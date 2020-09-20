@@ -5,7 +5,7 @@ import { composite } from '../morpheme'
 // これに対し、ウィトゲンシュタインをはじめとする不可知論の立場からは、「語りえないものについては、沈黙しなければならない」との論がある。
 
 test('composite/Wikipedia宇宙', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     'これに対し、',

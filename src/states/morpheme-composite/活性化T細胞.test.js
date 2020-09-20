@@ -7,7 +7,7 @@ import { composite } from '../morpheme'
 */
 
 test('composite/活性化T細胞', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '細胞傷害性の',

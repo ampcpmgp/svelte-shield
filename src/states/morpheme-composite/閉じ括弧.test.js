@@ -3,7 +3,8 @@ import json from './閉じ括弧.json'
 import { composite } from '../morpheme'
 
 test('composite/閉じ括弧', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
+
   t.deepEqual(result, [
     '人体の',
     '器官の',

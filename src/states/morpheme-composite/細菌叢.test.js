@@ -7,7 +7,7 @@ import { composite } from '../morpheme'
 */
 
 test('composite/細菌叢', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '生殖尿管や',

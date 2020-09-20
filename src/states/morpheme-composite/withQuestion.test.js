@@ -3,7 +3,7 @@ import json from './withQuestion.json'
 import { composite } from '../morpheme'
 
 test('composite/withQuestion', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '「なんで',

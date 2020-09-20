@@ -7,7 +7,7 @@ import { composite } from '../morpheme'
 */
 
 test('composite/これは医学から', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     'これは',

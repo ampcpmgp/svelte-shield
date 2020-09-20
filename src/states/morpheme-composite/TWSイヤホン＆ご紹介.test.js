@@ -8,7 +8,7 @@ import { composite } from '../morpheme'
 */
 
 test('composite/TWSイヤホン＆ご紹介', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '一方で',

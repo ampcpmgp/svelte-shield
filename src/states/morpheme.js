@@ -263,41 +263,80 @@ export function composite(path) {
     }
   })
 
-  return compositions
-    .reduce((result, item, index) => {
-      const word = getWord(item)
-      const nextComposition = compositions[index + 1]
+  return (
+    compositions
+      // 段落判定の追加情報
+      .reduce(
+        (blocks, item) => {
+          if (/\n/.test(item.surface_form)) {
+            blocks.push([item])
+          } else {
+            blocks[blocks.length - 1].push(item)
+          }
 
-      if (/・/.test(word)) {
-        // ・の前に２文字以上の文字があるものを、・を含んで区切る
-        // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
-        // const splitted = word.split(/(?<=[^・]{2,}・)/)
-        // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
-        // 暫定対応として以下を使う。
-        const splitted = word.split(/((?:[^・]{2,})・)/)
+          return blocks
+        },
+        [[]]
+      )
+      .map(blocks => {
+        const isHeading = blocks.every(item => !isPunctuation(item))
+        return blocks.map(item => ({
+          item,
+          info: {
+            isHeading,
+          },
+        }))
+      })
+      .flat()
+      .reduce((result, { item, info }, index) => {
+        const word = getWord(item)
+        const nextComposition = compositions[index + 1]
 
-        result.push(...splitted)
-
-        return result
         // １文字になっている単語は次のアイテムの先頭に結合させる。
-      } else if (word.length === 1 && nextComposition) {
-        nextComposition.unshift(...item)
+        if (word.length === 1 && nextComposition) {
+          nextComposition.unshift(...item)
 
-        return result
-        // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
-      } else if (
-        word.match(漢字ひらがな漢字ひらがな) &&
-        RegExp.$1.length + RegExp.$2.length >= judgeNum &&
-        RegExp.$3.length + RegExp.$4.length >= judgeNum
-      ) {
-        result.push(RegExp.$1 + RegExp.$2, RegExp.$3 + RegExp.$4)
+          return result
+          // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
+        } else if (/・/.test(word)) {
+          // ・の前に２文字以上の文字があるものを、・を含んで区切る
+          // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
+          // const splitted = word.split(/(?<=[^・]{2,}・)/)
+          // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
+          // 暫定対応として以下を使う。
+          const splitted = word
+            .split(/((?:[^・]{2,})・)/)
+            .map(splittedWord => ({
+              word: splittedWord,
+              info,
+            }))
 
-        return result
-      } else {
-        result.push(word)
+          result.push(...splitted)
 
-        return result
-      }
-    }, [])
-    .filter(item => item)
+          return result
+        } else if (
+          word.match(漢字ひらがな漢字ひらがな) &&
+          RegExp.$1.length + RegExp.$2.length >= judgeNum &&
+          RegExp.$3.length + RegExp.$4.length >= judgeNum
+        ) {
+          result.push(
+            {
+              word: RegExp.$1 + RegExp.$2,
+              info,
+            },
+            {
+              word: RegExp.$3 + RegExp.$4,
+              info,
+            }
+          )
+
+          return result
+        } else {
+          result.push({ word, info })
+
+          return result
+        }
+      }, [])
+      .filter(item => item.word)
+  )
 }

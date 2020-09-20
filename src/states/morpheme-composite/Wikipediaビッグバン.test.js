@@ -3,7 +3,7 @@ import json from './Wikipediaビッグバン.json'
 import { composite } from '../morpheme'
 
 test('composite/Wikipediaビッグバン', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     'インフレーション',

@@ -5,7 +5,7 @@ import { composite } from '../morpheme'
 // 原文 - https://www.aozora.gr.jp/cards/000148/files/773_14560.html
 
 test('composite/kokoro', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '私は',

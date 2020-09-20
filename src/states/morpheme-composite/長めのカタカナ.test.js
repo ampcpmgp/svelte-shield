@@ -1,9 +1,9 @@
 import test from 'ava'
-import 長めのカタカナ from './長めのカタカナ.json'
+import json from './長めのカタカナ.json'
 import { composite } from '../morpheme'
 
 test('composite/長めのカタカナ', t => {
-  const result = composite(長めのカタカナ)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '2世紀ころの',
