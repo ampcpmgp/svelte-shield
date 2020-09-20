@@ -3,6 +3,9 @@ import { get, writable } from 'svelte/store'
 import sleep from '../utils/sleep'
 
 export const word = writable('　')
+export const info = writable({
+  isHeading: false,
+})
 export const isLoading = writable(true)
 export const isPlay = writable(false)
 export const errorMsg = writable('')
@@ -45,13 +48,14 @@ export async function tokenize() {
 
   const path = tokenizer.tokenize(get(rawText))
 
-  for (const message of composite(path)) {
+  for (const composition of composite(path)) {
     if (!get(isPlay)) {
       word.set('　')
       return
     }
 
-    word.set(message)
+    word.set(composition.word)
+    info.set(composition.info)
 
     await sleep(localStorage.intervalMs)
   }
@@ -265,10 +269,14 @@ export function composite(path) {
 
   return (
     compositions
-      // 段落判定の追加情報
+      // 段落情報
       .reduce(
         (blocks, item) => {
-          if (/\n/.test(item.surface_form)) {
+          const existsNewLine = !item.every(
+            item => !/\n/.test(item.surface_form)
+          )
+
+          if (existsNewLine) {
             blocks.push([item])
           } else {
             blocks[blocks.length - 1].push(item)
@@ -279,7 +287,10 @@ export function composite(path) {
         [[]]
       )
       .map(blocks => {
-        const isHeading = blocks.every(item => !isPunctuation(item))
+        const isHeading = blocks.every(blockItem =>
+          blockItem.every(item => !isPunctuation(item))
+        )
+
         return blocks.map(item => ({
           item,
           info: {

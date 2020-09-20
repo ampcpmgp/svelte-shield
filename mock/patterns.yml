@@ -17,15 +17,7 @@ settings:
     - [morpheme.tokenize]
   段落機能:
     - [morpheme.isPlay.set, true]
-    -
-      - morpheme.rawText.set
-      - |-
-        咀嚼（そしゃく）
-          食物を歯で噛み砕く事によって食物を細かくする。
-        蠕動（ぜんどう）運動
-          筋肉の収縮で波を作り、食物を運ぶ。
-        分節運動
-          筋肉の収縮によって消化液と食物を混ぜる。
+    - [段落機能]
     - [morpheme.tokenize]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]

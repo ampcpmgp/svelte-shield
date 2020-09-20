@@ -1,5 +1,11 @@
 <script>
-  import { word, isPlay, tokenize, rawText } from '../../../states/morpheme'
+  import {
+    word,
+    isPlay,
+    tokenize,
+    rawText,
+    info,
+  } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
   function play() {
@@ -30,7 +36,7 @@
 </style>
 
 <div class="wrapper">
-  <InsetAlert type="alert-success" message={$word} />
+  <InsetAlert type="alert-success" message={$word} isStrong={$info.isHeading} />
 
   {#if !$isPlay}
     <button
