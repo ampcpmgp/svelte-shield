@@ -54,7 +54,7 @@ export async function tokenize() {
       return
     }
 
-    word.set(composition.word)
+    word.set(composition.word.trim() || '　')
     info.set(composition.info)
 
     await sleep(localStorage.intervalMs)
@@ -64,7 +64,7 @@ export async function tokenize() {
 }
 
 export function getWord(composition) {
-  return composition.reduce((str, path) => str + path.surface_form, '').trim()
+  return composition.reduce((str, path) => str + path.surface_form, '')
 }
 
 export function initComposition(compositions, index) {
@@ -140,6 +140,17 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
+    // 改行は段落を落とす
+    if (/\n/.test(item.surface_form)) {
+      ++currentIndex
+      initComposition(compositions, currentIndex)
+      composition = compositions[currentIndex]
+      composition.push(item)
+      ++currentIndex
+
+      return
+    }
+
     // 事前折り返し判定。
     // 設定した判定数を超えたら繰り上げ
     if (word.length > judgeNum) {
@@ -157,8 +168,6 @@ export function composite(path) {
     ) {
       ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
-      ++currentIndex
-    } else if (/\n/.test(item.surface_form)) {
       ++currentIndex
       // 名詞以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
     } else if (
@@ -303,8 +312,13 @@ export function composite(path) {
         const word = getWord(item)
         const nextComposition = compositions[index + 1]
 
-        // １文字になっている単語は次のアイテムの先頭に結合させる。
-        if (word.length === 1 && nextComposition) {
+        // 改行は判定条件に加えず直接格納にする。
+        if (/\n/.test(word)) {
+          result.push({ word, info })
+
+          return result
+          // １文字になっている単語は次のアイテムの先頭に結合させる。
+        } else if (word.length === 1 && nextComposition) {
           nextComposition.unshift(...item)
 
           return result

@@ -3,18 +3,25 @@ import json from './段落機能.json'
 import { composite } from '../morpheme'
 
 /* 原文
+物理的消化
 咀嚼（そしゃく）
-食物を歯で噛み砕く事によって食物を細かくする。
+  食物を歯で噛み砕く事によって食物を細かくする。
 蠕動（ぜんどう）運動
-筋肉の収縮で波を作り、食物を運ぶ。
+  筋肉の収縮で波を作り、食物を運ぶ。
 分節運動
-筋肉の収縮によって消化液と食物を混ぜる。
+  筋肉の収縮によって消化液と食物を混ぜる。
 */
 
 test('composite/段落機能', t => {
   const result = composite(json)
 
   t.deepEqual(result, [
+    {
+      info: {
+        isHeading: true,
+      },
+      word: '物理的消化',
+    },
     {
       info: {
         isHeading: true,
