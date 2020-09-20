@@ -11,7 +11,7 @@
     "dist": "run-s dist:* copy-dict",
     "dist:clean": "rimraf dist",
     "dist:build": "parcel build src/index.html --public-url ./",
-    "dist-mocktimes": "parcel build mock/testbed/*.html --public-url ./ --out-dir dist/mocktimes",
+    "dist-mocktimes": "parcel build mock/testbed/*.html --public-url ./",
     "lint": "eslint --ignore-path .gitignore **/*.{js,svelte}",
     "format": "prettier --ignore-path .gitignore --write **/*.{js,svelte}",
     "screenshot": "am-mocktimes--screenshot",
