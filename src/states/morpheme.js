@@ -178,10 +178,10 @@ export function composite(path) {
       ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
       ++currentIndex
-      // 名詞以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
+      // 名詞関連以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
     } else if (
       currentCompositionLastItem &&
-      currentCompositionLastItem.pos !== '名詞' &&
+      !isRelationalNoun(currentCompositionLastItem) &&
       item.pos === '名詞' &&
       nextItem &&
       nextItem.pos === '名詞'
