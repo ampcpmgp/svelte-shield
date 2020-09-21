@@ -156,8 +156,16 @@ export function composite(path) {
     }
 
     // 事前折り返し判定。
-    // 設定した判定数を超えたら繰り上げ
-    if (word.length > judgeNum) {
+    // 漢字が続けば折り返し判定を行わない
+    if (
+      currentCompositionLastItem &&
+      isOnlyKanji(currentCompositionLastItem.surface_form) &&
+      isOnlyKanji(item.surface_form)
+    ) {
+      void 0
+
+      // 設定した判定数を超えたら繰り上げ
+    } else if (word.length > judgeNum) {
       ++currentIndex
       // ２文字以上でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
     } else if (word.length > 1 && item.surface_form.length > judgeNum) {
