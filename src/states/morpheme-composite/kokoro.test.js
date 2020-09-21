@@ -5,7 +5,7 @@ import { composite } from '../morpheme'
 // 原文 - https://www.aozora.gr.jp/cards/000148/files/773_14560.html
 
 test('composite/kokoro', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '私は',
@@ -44,6 +44,7 @@ test('composite/kokoro', t => {
     'とても使う',
     '気に',
     'ならない。',
+    '',
     '私が',
     '先生と',
     '知り合いに',
@@ -148,6 +149,7 @@ test('composite/kokoro', t => {
     '来た私は',
     '一人',
     '取り残された。',
+    '',
     '学校の',
     '授業が',
     '始まるには',
@@ -190,6 +192,7 @@ test('composite/kokoro', t => {
     '面倒も',
     'もたなかった',
     'のである。',
+    '',
     '宿は',
     '鎌倉でも',
     '辺鄙な',
@@ -223,6 +226,7 @@ test('composite/kokoro', t => {
     '地位を',
     '占めて',
     'いた。',
+    '',
     '私は',
     '毎日海へ',
     'はいりに',
@@ -273,6 +277,7 @@ test('composite/kokoro', t => {
     '跳ね廻る',
     'のは',
     '愉快であった。',
+    '',
     '私は',
     '実に先生を',
     'この雑沓の',

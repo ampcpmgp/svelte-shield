@@ -1,11 +1,12 @@
 import test from 'ava'
-import 長めのカタカナ from './長めのカタカナ.json'
+import json from './長めのカタカナ.json'
 import { composite } from '../morpheme'
 
 test('composite/長めのカタカナ', t => {
-  const result = composite(長めのカタカナ)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
+    '',
     '2世紀ころの',
     'クラウディオス・',
     'プトレマイオスは',
@@ -18,6 +19,7 @@ test('composite/長めのカタカナ', t => {
     '数学的な',
     '分析を',
     '解説した。',
+    '',
     'こうした',
     '状況に対し、',
     'ニコラウス・',
@@ -30,6 +32,7 @@ test('composite/長めのカタカナ', t => {
     'に対して、',
     '太陽中心説を',
     '唱えた。',
+    '',
     '1927年',
     'ベルギーの',
     '司祭',
@@ -47,6 +50,7 @@ test('composite/長めのカタカナ', t => {
     '呼ばれる',
     'ように',
     'なった。',
+    '',
     'レオナルド・',
     'ダ・ヴィンチが、',
     'それまでの',
@@ -58,5 +62,6 @@ test('composite/長めのカタカナ', t => {
     '満ちたものへと',
     '一変',
     'させた。',
+    '',
   ])
 })

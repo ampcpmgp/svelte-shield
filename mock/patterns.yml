@@ -15,13 +15,9 @@ settings:
     - [morpheme.isPlay.set, true]
     - [rustCoc]
     - [morpheme.tokenize]
-  「から」が先頭に入ったときにエラーになる問題に対応:
+  段落機能:
     - [morpheme.isPlay.set, true]
-    -
-      - morpheme.rawText.set
-      - |-
-        【自動更新】
-        からリンク
+    - [段落機能]
     - [morpheme.tokenize]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]

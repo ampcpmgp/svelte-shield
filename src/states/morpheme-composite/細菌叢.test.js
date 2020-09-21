@@ -7,9 +7,10 @@ import { composite } from '../morpheme'
 */
 
 test('composite/細菌叢', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
+    '',
     '生殖尿管や',
     '胃腸管では',
     '共生して',
@@ -24,5 +25,6 @@ test('composite/細菌叢', t => {
     '生物学的',
     '防壁として',
     '機能する。',
+    '',
   ])
 })

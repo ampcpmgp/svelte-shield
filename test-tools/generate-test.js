@@ -5,7 +5,7 @@ const sentence = `
 これはサンプル用のテスト文章です。
 `.trim()
 
-const dir = 'src/states/morpheme-test/'
+const dir = 'src/states/morpheme-composite/'
 
 function js() {
   return `import test from 'ava'
@@ -17,7 +17,7 @@ ${sentence}
 */
 
 test('composite/${fileName}', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
 

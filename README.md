@@ -34,6 +34,6 @@ npx ava --match 'composite/example' --watch
 node test-tools/generate-test.js
 ```
 
-そうすると `src/states/morpheme-test/` にテスト対象のファイルが生成されます。
+そうすると `src/states/morpheme-composite/` にテスト対象のファイルが生成されます。
 
 `test-tools/generate-test.js` をコミット差分には含まないようにしてください。

@@ -3,14 +3,16 @@ import json from './withQuestion.json'
 import { composite } from '../morpheme'
 
 test('composite/withQuestion', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '「なんで',
     '結婚しないの？」',
+    '',
     '「ずっと',
     '独身で',
     'いるつもり？」',
+    '',
     '「早く',
     '安心させて',
     'くれ」',

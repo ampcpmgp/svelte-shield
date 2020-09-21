@@ -7,7 +7,7 @@ import { composite } from '../morpheme'
 */
 
 test('composite/・繋ぎ文', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
     '全国の',

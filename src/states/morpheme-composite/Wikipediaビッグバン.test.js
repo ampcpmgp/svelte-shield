@@ -3,9 +3,10 @@ import json from './Wikipediaビッグバン.json'
 import { composite } from '../morpheme'
 
 test('composite/Wikipediaビッグバン', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
+    '',
     'インフレーション',
     '理論に',
     'よれば、',
@@ -27,9 +28,11 @@ test('composite/Wikipediaビッグバン', t => {
     '138.2',
     '億年（',
     '13.82',
-    '× 109年）',
+    '×',
+    '109年）',
     '前と',
     '計算されて',
     'いる。',
+    '',
   ])
 })

@@ -2,7 +2,10 @@ import kuromoji from 'kuromoji'
 import { get, writable } from 'svelte/store'
 import sleep from '../utils/sleep'
 
-export const word = writable('　')
+export const word = writable('')
+export const info = writable({
+  isHeading: false,
+})
 export const isLoading = writable(true)
 export const isPlay = writable(false)
 export const errorMsg = writable('')
@@ -45,13 +48,14 @@ export async function tokenize() {
 
   const path = tokenizer.tokenize(get(rawText))
 
-  for (const message of composite(path)) {
+  for (const composition of composite(path)) {
     if (!get(isPlay)) {
-      word.set('　')
+      word.set('')
       return
     }
 
-    word.set(message)
+    word.set(composition.word)
+    info.set(composition.info)
 
     await sleep(localStorage.intervalMs)
   }
@@ -60,7 +64,7 @@ export async function tokenize() {
 }
 
 export function getWord(composition) {
-  return composition.reduce((str, path) => str + path.surface_form, '').trim()
+  return composition.reduce((str, path) => str + path.surface_form, '')
 }
 
 export function initComposition(compositions, index) {
@@ -136,6 +140,17 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
+    // 改行は繰り上げて他の判定条件を受けない
+    if (/\n/.test(item.surface_form)) {
+      ++currentIndex
+      initComposition(compositions, currentIndex)
+      composition = compositions[currentIndex]
+      composition.push(item)
+      ++currentIndex
+
+      return
+    }
+
     // 事前折り返し判定。
     // 設定した判定数を超えたら繰り上げ
     if (word.length > judgeNum) {
@@ -153,8 +168,6 @@ export function composite(path) {
     ) {
       ++currentIndex
     } else if (isPunctuation(item) && composition.length > 0) {
-      ++currentIndex
-    } else if (/\n/.test(item.surface_form)) {
       ++currentIndex
       // 名詞以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
     } else if (
@@ -263,41 +276,95 @@ export function composite(path) {
     }
   })
 
-  return compositions
-    .reduce((result, item, index) => {
-      const word = getWord(item)
-      const nextComposition = compositions[index + 1]
+  return (
+    compositions
+      // 段落情報
+      .reduce(
+        (blocks, item) => {
+          const existsNewLine = !item.every(
+            item => !/\n/.test(item.surface_form)
+          )
 
-      if (/・/.test(word)) {
-        // ・の前に２文字以上の文字があるものを、・を含んで区切る
-        // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
-        // const splitted = word.split(/(?<=[^・]{2,}・)/)
-        // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
-        // 暫定対応として以下を使う。
-        const splitted = word.split(/((?:[^・]{2,})・)/)
+          if (existsNewLine) {
+            blocks.push([item])
+          } else {
+            blocks[blocks.length - 1].push(item)
+          }
 
-        result.push(...splitted)
+          return blocks
+        },
+        [[]]
+      )
+      .map(blocks => {
+        const isHeading = blocks.every(blockItem =>
+          blockItem.every(item => !isPunctuation(item))
+        )
 
-        return result
-        // １文字になっている単語は次のアイテムの先頭に結合させる。
-      } else if (word.length === 1 && nextComposition) {
-        nextComposition.unshift(...item)
+        return blocks.map(item => ({
+          item,
+          info: {
+            isHeading,
+          },
+        }))
+      })
+      .flat()
+      .reduce((result, { item, info }, index) => {
+        const word = getWord(item)
+        const nextComposition = compositions[index + 1]
 
-        return result
-        // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
-      } else if (
-        word.match(漢字ひらがな漢字ひらがな) &&
-        RegExp.$1.length + RegExp.$2.length >= judgeNum &&
-        RegExp.$3.length + RegExp.$4.length >= judgeNum
-      ) {
-        result.push(RegExp.$1 + RegExp.$2, RegExp.$3 + RegExp.$4)
+        // 改行は判定条件に加えず直接格納にする。
+        if (/\n/.test(word)) {
+          result.push({ word, info })
 
-        return result
-      } else {
-        result.push(word)
+          return result
+          // １文字になっている単語は次のアイテムの先頭に結合させる。
+        } else if (word.length === 1 && nextComposition) {
+          nextComposition.unshift(...item)
 
-        return result
-      }
-    }, [])
-    .filter(item => item)
+          return result
+          // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
+        } else if (/・/.test(word)) {
+          // ・の前に２文字以上の文字があるものを、・を含んで区切る
+          // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
+          // const splitted = word.split(/(?<=[^・]{2,}・)/)
+          // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
+          // 暫定対応として以下を使う。
+          const splitted = word
+            .split(/((?:[^・]{2,})・)/)
+            .map(splittedWord => ({
+              word: splittedWord,
+              info,
+            }))
+
+          result.push(...splitted)
+
+          return result
+        } else if (
+          word.match(漢字ひらがな漢字ひらがな) &&
+          RegExp.$1.length + RegExp.$2.length >= judgeNum &&
+          RegExp.$3.length + RegExp.$4.length >= judgeNum
+        ) {
+          result.push(
+            {
+              word: RegExp.$1 + RegExp.$2,
+              info,
+            },
+            {
+              word: RegExp.$3 + RegExp.$4,
+              info,
+            }
+          )
+
+          return result
+        } else {
+          result.push({ word, info })
+
+          return result
+        }
+      }, [])
+      // 文字の再配置などで完全に空白になったものを除去
+      .filter(item => item.word)
+      // 前後の空白や改行を trim する。改行は空白として扱う。
+      .map(item => ({ ...item, word: item.word.trim() }))
+  )
 }

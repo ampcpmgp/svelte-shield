@@ -3,7 +3,7 @@ import json from './longWord.json'
 import { composite } from '../morpheme'
 
 test('composite/longWord', t => {
-  const result = composite(json)
+  const result = composite(json).map(item => item.word)
   t.deepEqual(result, [
     '最近',
     'イライラ',
