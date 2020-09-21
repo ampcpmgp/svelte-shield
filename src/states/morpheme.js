@@ -159,8 +159,8 @@ export function composite(path) {
     // 漢字が続けば折り返し判定を行わない
     if (
       currentCompositionLastItem &&
-      isOnlyKanji(currentCompositionLastItem.surface_form) &&
-      isOnlyKanji(item.surface_form)
+      isRelationalNoun(currentCompositionLastItem) &&
+      isRelationalNoun(item)
     ) {
       void 0
 
