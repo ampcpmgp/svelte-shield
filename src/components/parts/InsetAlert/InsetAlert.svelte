@@ -2,6 +2,9 @@
   export let type = ''
   export let message = ''
   export let isStrong = false
+
+  // 空白の場合は全角スペースを入れ 1lh を確保する
+  $: displayMessage = message || '　'
 </script>
 
 <style>
@@ -16,6 +19,6 @@
 
 <div class="alert {type} shadow-soft inset">
   {#if isStrong}
-    <strong>{message}</strong>
-  {:else}{message}{/if}
+    <strong>{displayMessage}</strong>
+  {:else}{displayMessage}{/if}
 </div>

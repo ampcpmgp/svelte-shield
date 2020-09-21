@@ -2,7 +2,7 @@ import kuromoji from 'kuromoji'
 import { get, writable } from 'svelte/store'
 import sleep from '../utils/sleep'
 
-export const word = writable('　')
+export const word = writable('')
 export const info = writable({
   isHeading: false,
 })
@@ -50,11 +50,11 @@ export async function tokenize() {
 
   for (const composition of composite(path)) {
     if (!get(isPlay)) {
-      word.set('　')
+      word.set('')
       return
     }
 
-    word.set(composition.word.trim() || '　')
+    word.set(composition.word.trim())
     info.set(composition.info)
 
     await sleep(localStorage.intervalMs)
