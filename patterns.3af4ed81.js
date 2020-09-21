@@ -59,8 +59,8 @@ module.exports="octocat.a8fb7fc3.svg";
 },{"svelte/internal":"YkLP","svelte-spa-router":"hFZm","./routes":"lhcP"}],"bWBh":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.generateList=n,require("modern-css-reset");var e=u(require("./utils/keyboard")),t=require("./states/mock"),r=u(require("./components/App"));function u(e){return e&&e.__esModule?e:{default:e}}async function n(u){await(0,t.init)(u),(0,e.default)(),new r.default({target:document.getElementById("app")})}
 },{"modern-css-reset":"jl9O","./utils/keyboard":"Kciw","./states/mock":"qirf","./components/App":"rSqo"}],"Vn3X":[function(require,module,exports) {
-module.exports={settings:{url:"mock.html"},"トップページ":{func:["page","/"],"読み込み中":[["morpheme.ignoreReading.set",!0]],"辞書取得エラー":[["morpheme.isLoading.set",!1],["morpheme.errorMsg.set","辞書取得エラー"]],"夏目漱石の文を再生":[["morpheme.isPlay.set",!0],["kokoro"],["morpheme.tokenize"]],"Rust 行動規範を再生":[["morpheme.isPlay.set",!0],["rustCoc"],["morpheme.tokenize"]],"段落機能":[["morpheme.isPlay.set",!0],["段落機能"],["morpheme.tokenize"]],"設定画面を表示":[["morpheme.ignoreReading.set",!0],["sleep",0],["click","[data-mock-open-modal]"]]},"404 page":["page","/404"]};
+module.exports={settings:{url:"mock.html"},"トップページ":{func:["page","/"],"読み込み中":[["morpheme.ignoreReading.set",!0]],"辞書取得エラー":[["morpheme.isLoading.set",!1],["morpheme.errorMsg.set","辞書取得エラー"]],"夏目漱石の文を再生":[["morpheme.isPlay.set",!0],["kokoro"],["morpheme.tokenize"]],"Rust 行動規範を再生":[["morpheme.isPlay.set",!0],["rustCoc"],["morpheme.tokenize"]],"見出し強調機能":[["morpheme.isPlay.set",!0],["見出し強調機能"],["morpheme.tokenize"]],"設定画面を表示":[["morpheme.ignoreReading.set",!0],["sleep",0],["click","[data-mock-open-modal]"]]},"404 page":["page","/404"]};
 },{}],"MwO6":[function(require,module,exports) {
 "use strict";var e=require("am-mocktimes/lib/main"),t=r(require("../patterns.yml"));function r(e){return e&&e.__esModule?e:{default:e}}(0,e.generateList)(t.default);
 },{"am-mocktimes/lib/main":"bWBh","../patterns.yml":"Vn3X"}]},{},["MwO6"], null)
-//# sourceMappingURL=patterns.2204ce66.js.map
+//# sourceMappingURL=patterns.3af4ed81.js.map
