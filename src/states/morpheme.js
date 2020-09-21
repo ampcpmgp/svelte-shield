@@ -317,8 +317,8 @@ export function composite(path) {
           result.push({ word, info })
 
           return result
-          // １文字になっている単語は次のアイテムの先頭に結合させる。
-        } else if (word.length === 1 && nextComposition) {
+          // trim して2文字未満になっている単語は次のアイテムの先頭に結合させる。
+        } else if (word.trim().length < 2 && nextComposition) {
           nextComposition.unshift(...item)
 
           return result
