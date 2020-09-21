@@ -26,6 +26,12 @@ test('composite/段落機能', t => {
       info: {
         isHeading: true,
       },
+      word: '',
+    },
+    {
+      info: {
+        isHeading: true,
+      },
       word: '咀嚼（',
     },
     {
@@ -33,6 +39,12 @@ test('composite/段落機能', t => {
         isHeading: true,
       },
       word: 'そしゃく）',
+    },
+    {
+      info: {
+        isHeading: false,
+      },
+      word: '',
     },
     {
       info: {
@@ -74,6 +86,12 @@ test('composite/段落機能', t => {
       info: {
         isHeading: true,
       },
+      word: '',
+    },
+    {
+      info: {
+        isHeading: true,
+      },
       word: '蠕動（',
     },
     {
@@ -87,6 +105,12 @@ test('composite/段落機能', t => {
         isHeading: true,
       },
       word: '運動',
+    },
+    {
+      info: {
+        isHeading: false,
+      },
+      word: '',
     },
     {
       info: {
@@ -122,7 +146,19 @@ test('composite/段落機能', t => {
       info: {
         isHeading: true,
       },
+      word: '',
+    },
+    {
+      info: {
+        isHeading: true,
+      },
       word: '分節運動',
+    },
+    {
+      info: {
+        isHeading: false,
+      },
+      word: '',
     },
     {
       info: {

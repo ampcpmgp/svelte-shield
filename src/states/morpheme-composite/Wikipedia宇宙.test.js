@@ -8,6 +8,7 @@ test('composite/Wikipedia宇宙', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
+    '',
     'これに対し、',
     'ウィトゲンシュタインを',
     'はじめと',
@@ -20,5 +21,6 @@ test('composite/Wikipedia宇宙', t => {
     '沈黙しなければ',
     'ならない」との',
     '論がある。',
+    '',
   ])
 })

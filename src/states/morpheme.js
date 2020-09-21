@@ -54,7 +54,7 @@ export async function tokenize() {
       return
     }
 
-    word.set(composition.word.trim())
+    word.set(composition.word)
     info.set(composition.info)
 
     await sleep(localStorage.intervalMs)
@@ -140,7 +140,7 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
-    // 改行は段落を落とす
+    // 改行は繰り上げて他の判定条件を受けない
     if (/\n/.test(item.surface_form)) {
       ++currentIndex
       initComposition(compositions, currentIndex)
@@ -362,6 +362,9 @@ export function composite(path) {
           return result
         }
       }, [])
+      // 文字の再配置などで完全に空白になったものを除去
       .filter(item => item.word)
+      // 前後の空白や改行を trim する。改行は空白として扱う。
+      .map(item => ({ ...item, word: item.word.trim() }))
   )
 }

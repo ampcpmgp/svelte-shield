@@ -10,10 +10,12 @@ test('composite/インフレーション理論', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
+    '',
     'この見かけの',
     '矛盾は',
     'インフレーション',
     '理論で',
     '解決される。',
+    '',
   ])
 })
