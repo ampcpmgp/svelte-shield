@@ -48,6 +48,7 @@ export async function tokenize() {
   const tokenizer = await initP
 
   const path = tokenizer.tokenize(get(rawText))
+  const intervalMsPerChar = localStorage.intervalMsPerChar
 
   for (const composition of composite(path)) {
     if (!get(isPlay)) {
@@ -58,7 +59,9 @@ export async function tokenize() {
     word.set(composition.word)
     info.set(composition.info)
 
-    await sleep(localStorage.intervalMs)
+    await sleep(
+      composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
+    )
   }
 
   isPlay.set(false)

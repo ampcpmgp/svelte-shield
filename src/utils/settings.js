@@ -3,11 +3,11 @@ import settingsDefault from '../const/settingsDefault'
 init()
 
 function init() {
-  if (!localStorage.intervalMs) {
-    localStorage.intervalMs = settingsDefault.intervalMs
+  if (!localStorage.intervalMsPerChar) {
+    localStorage.intervalMsPerChar = settingsDefault.intervalMsPerChar
   }
 }
 
-export function saveIntervalMs(ms) {
-  localStorage.intervalMs = ms
+export function saveIntervalMsPerChar(ms) {
+  localStorage.intervalMsPerChar = ms
 }

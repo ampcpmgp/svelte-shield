@@ -1,3 +1,3 @@
 export default {
-  intervalMs: 300,
+  intervalMsPerChar: 100,
 }

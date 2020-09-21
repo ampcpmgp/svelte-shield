@@ -1,12 +1,19 @@
 <script>
-  import { saveIntervalMs } from '../../../utils/settings'
+  import { saveIntervalMsPerChar } from '../../../utils/settings'
 
-  let intervalMs = localStorage.intervalMs
+  let intervalMsPerChar = localStorage.intervalMsPerChar
 
   function save() {
-    saveIntervalMs(intervalMs)
+    saveIntervalMsPerChar(intervalMsPerChar)
   }
 </script>
+
+<style>
+  .default {
+    display: grid;
+    justify-content: right;
+  }
+</style>
 
 <div
   class="modal fade"
@@ -29,13 +36,14 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="validationServer01">表示秒数 - Default 300ms</label>
+          <label for="validationServer01">１文字当たりの表示秒数</label>
           <input
             type="number"
             class="form-control"
             id="validationServer01"
-            bind:value={intervalMs}
-            step="100" />
+            bind:value={intervalMsPerChar}
+            step="25" />
+          <small class="default">初期値 100ms</small>
         </div>
       </div>
       <div class="modal-footer">
