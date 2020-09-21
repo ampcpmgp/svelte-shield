@@ -19,6 +19,10 @@ settings:
     - [morpheme.isPlay.set, true]
     - [見出し強調機能]
     - [morpheme.tokenize]
+  長いカタカナ分離表示出来ない問題:
+    - [morpheme.isPlay.set, true]
+    - [長いカタカナ分離表示]
+    - [morpheme.tokenize]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]

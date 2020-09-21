@@ -16,7 +16,8 @@ export const hiddenSettings = writable({
 // モック用
 export const ignoreReading = writable(false)
 
-const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
+export const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
+export const カタカナ = /([ァ-ヶー]+)/
 
 const initP = init()
 
