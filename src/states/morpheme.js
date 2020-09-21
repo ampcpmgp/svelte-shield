@@ -278,7 +278,7 @@ export function composite(path) {
 
   return (
     compositions
-      // 段落情報
+      // 見出し強調情報
       .reduce(
         (blocks, item) => {
           const existsNewLine = !item.every(

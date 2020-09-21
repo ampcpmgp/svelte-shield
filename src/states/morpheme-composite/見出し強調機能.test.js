@@ -1,5 +1,5 @@
 import test from 'ava'
-import json from './段落機能.json'
+import json from './見出し強調機能.json'
 import { composite } from '../morpheme'
 
 /* 原文
@@ -12,7 +12,7 @@ import { composite } from '../morpheme'
   筋肉の収縮によって消化液と食物を混ぜる。
 */
 
-test('composite/段落機能', t => {
+test('composite/見出し強調機能', t => {
   const result = composite(json)
 
   t.deepEqual(result, [

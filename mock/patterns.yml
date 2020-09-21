@@ -15,9 +15,9 @@ settings:
     - [morpheme.isPlay.set, true]
     - [rustCoc]
     - [morpheme.tokenize]
-  段落機能:
+  見出し強調機能:
     - [morpheme.isPlay.set, true]
-    - [段落機能]
+    - [見出し強調機能]
     - [morpheme.tokenize]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
