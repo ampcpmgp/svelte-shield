@@ -32,13 +32,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '咀嚼（',
-    },
-    {
-      info: {
-        isHeading: true,
-      },
-      word: 'そしゃく）',
+      word: '咀嚼（そしゃく）',
     },
     {
       info: {
@@ -56,13 +50,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '歯で',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '噛み砕く',
+      word: '歯で噛み砕く',
     },
     {
       info: {
@@ -92,13 +80,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '蠕動（',
-    },
-    {
-      info: {
-        isHeading: true,
-      },
-      word: 'ぜんどう）',
+      word: '蠕動（ぜんどう）',
     },
     {
       info: {
@@ -170,13 +152,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '収縮',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: 'によって',
+      word: '収縮によって',
     },
     {
       info: {

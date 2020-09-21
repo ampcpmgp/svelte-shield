@@ -167,9 +167,6 @@ export function composite(path) {
       // 設定した判定数を超えたら繰り上げ
     } else if (word.length > judgeNum) {
       ++currentIndex
-      // ２文字以上でかつ、今回の文字数が設定した判定数を超えていれば繰り上げ
-    } else if (word.length > 1 && item.surface_form.length > judgeNum) {
-      ++currentIndex
       // 現在の compoisition 合計文字数が設定数以上あって、最後が助詞であれば繰り上げる。
     } else if (
       composition &&

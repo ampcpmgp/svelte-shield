@@ -5,8 +5,7 @@ import { composite } from '../morpheme'
 test('composite/longWord', t => {
   const result = composite(json).map(item => item.word)
   t.deepEqual(result, [
-    '最近',
-    'イライラ',
+    '最近イライラ',
     'してしまいがち、',
     'という',
     '人は',
