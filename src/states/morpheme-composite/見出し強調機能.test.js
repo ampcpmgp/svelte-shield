@@ -98,13 +98,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '運ぶ。',
+      word: '食物を運ぶ。',
     },
     {
       info: {
@@ -140,13 +134,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '混ぜる。',
+      word: '食物を混ぜる。',
     },
   ])
 })
