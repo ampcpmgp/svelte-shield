@@ -50,13 +50,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '噛み砕く',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '事によって',
+      word: '噛み砕く事によって',
     },
     {
       info: {
@@ -80,13 +74,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '蠕動（ぜんどう）',
-    },
-    {
-      info: {
-        isHeading: true,
-      },
-      word: '運動',
+      word: '蠕動（ぜんどう）運動',
     },
     {
       info: {
@@ -110,7 +98,13 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を運ぶ。',
+      word: '食物を',
+    },
+    {
+      info: {
+        isHeading: false,
+      },
+      word: '運ぶ。',
     },
     {
       info: {
@@ -146,7 +140,13 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を混ぜる。',
+      word: '食物を',
+    },
+    {
+      info: {
+        isHeading: false,
+      },
+      word: '混ぜる。',
     },
   ])
 })

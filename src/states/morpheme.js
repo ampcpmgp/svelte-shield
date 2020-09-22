@@ -82,7 +82,11 @@ export function isPunctuation(item) {
 }
 
 export function isRelationalNoun(item) {
-  return item.pos === '名詞' || hasStrongConnectionNoun(item)
+  return (
+    item.pos === '名詞' ||
+    hasStrongConnectionNoun(item) ||
+    isOnlyKanji(item.surface_form)
+  )
 }
 
 export function hasStrongConnectionNoun(item) {
@@ -117,8 +121,15 @@ export function isWeirdAtTheFront(item, lastItem) {
   )
 }
 
+// 繰り上げ文字判定
+export function isLastWord(item) {
+  return isPunctuation(item) || /\n/.test(item.surface_form)
+}
+
 export function isOnlyKanji(surface_form) {
-  return /^[\u30e0-\u9fcf]+$/.test(surface_form)
+  return /^[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF]+$/.test(
+    surface_form
+  )
 }
 
 export function composite(path) {
@@ -177,7 +188,7 @@ export function composite(path) {
       currentCompositionLastItem &&
       currentCompositionLastItem.pos === '助動詞' &&
       currentCompositionLastItem.surface_form === 'な' &&
-        item.surface_form === 'の' &&
+      item.surface_form === 'の' &&
       item.pos === '名詞'
     ) {
       void 0
@@ -266,15 +277,45 @@ export function composite(path) {
       .flat()
       .reduce((result, { item, info }, index) => {
         const word = getWord(item)
+        const trimmedWord = word.trim()
+        const currentCompositionFirstItem = item[0]
+        const prevComposition = compositions[index - 1]
+        const prevCompositionLastItem =
+          prevComposition && prevComposition[prevComposition.length - 1]
         const nextComposition = compositions[index + 1]
 
-        // 改行は判定条件に加えず直接格納にする。
+        // 改行は判定条件に加えず直接格納する。
         if (/\n/.test(word)) {
           result.push({ word, info })
 
           return result
-          // trim して2文字未満になっている単語は次のアイテムの先頭に結合させる。
-        } else if (word.trim().length < 2 && nextComposition) {
+          // trim して3文字未満になり、名詞関連であり、次のアイテムが改行文字で無ければ、次のアイテムの先頭に結合させる。
+        } else if (
+          trimmedWord.length < 3 &&
+          currentCompositionFirstItem &&
+          isRelationalNoun(currentCompositionFirstItem) &&
+          nextComposition &&
+          !/\n/.test(getWord(nextComposition))
+        ) {
+          nextComposition.unshift(...item)
+
+          return result
+          // trim して3文字未満になり、前のアイテムが最終文字で無ければ、前の文字に結合させる。
+        } else if (
+          trimmedWord.length < 3 &&
+          prevComposition &&
+          !isLastWord(prevCompositionLastItem)
+        ) {
+          const lastItem = result[result.length - 1]
+          lastItem.word += word
+
+          return result
+          // 上記二つの if 文にマッチしなければ、次が改行でなければ結合させる。
+        } else if (
+          trimmedWord.length < 3 &&
+          nextComposition &&
+          !/\n/.test(getWord(nextComposition))
+        ) {
           nextComposition.unshift(...item)
 
           return result
