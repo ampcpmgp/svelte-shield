@@ -44,13 +44,13 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
+      word: '食物を歯で',
     },
     {
       info: {
         isHeading: false,
       },
-      word: '歯で噛み砕く',
+      word: '噛み砕く',
     },
     {
       info: {
@@ -62,13 +62,13 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
+      word: '食物を細かく',
     },
     {
       info: {
         isHeading: false,
       },
-      word: '細かくする。',
+      word: 'する。',
     },
     {
       info: {
@@ -98,13 +98,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '筋肉の',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '収縮で',
+      word: '筋肉の収縮で',
     },
     {
       info: {
@@ -116,13 +110,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '運ぶ。',
+      word: '食物を運ぶ。',
     },
     {
       info: {
@@ -146,13 +134,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '筋肉の',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '収縮によって',
+      word: '筋肉の収縮によって',
     },
     {
       info: {
@@ -164,13 +146,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '食物を',
-    },
-    {
-      info: {
-        isHeading: false,
-      },
-      word: '混ぜる。',
+      word: '食物を混ぜる。',
     },
   ])
 })

@@ -14,17 +14,14 @@ test('composite/閉じ括弧', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
-    '人体の',
-    '器官の',
+    '人体の器官の',
     '分類、',
     '組成',
     '',
-    '人体の',
-    '組成',
+    '人体の組成',
     '',
     '70kgの',
-    '体重の',
-    'ヒト',
+    '体重のヒト',
     '',
     '[7]',
     '',

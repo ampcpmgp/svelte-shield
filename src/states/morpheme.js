@@ -98,28 +98,21 @@ export function isRelationalVerb(item) {
 }
 
 export function isWeirdAtTheFront(item, lastItem) {
-  const { judgeNum } = get(hiddenSettings)
-
-  // 設定文字数を越えていない助詞で、前回の結果が句読点で無ければ結合可能
-  const isConnectableParticle =
-    item.pos === '助詞' &&
-    item.surface_form.length <= judgeNum &&
-    lastItem &&
-    !isPunctuation(lastItem)
-
-  // 今回の結果が数で、前回の結果が小数点だった場合は結合可能
+  // 今回の結果が数で、前回の結果が小数点だった場合は、先頭に来ないものとして扱う
   const isConnectableNum =
     item.pos_detail_1 === '数' && lastItem && lastItem.surface_form === '.'
 
   return (
     isPunctuation(item) ||
+    item.pos === '助詞' ||
+    item.pos === '助動詞' ||
     item.pos_detail_1 === '括弧閉' ||
     item.pos_detail_1 === '接尾' ||
     item.surface_form === ')' ||
     item.surface_form === ']' ||
     item.surface_form === '？' ||
     item.surface_form === '・' ||
-    isConnectableParticle ||
+    item.surface_form === '：' ||
     isConnectableNum
   )
 }
@@ -137,14 +130,11 @@ export function composite(path) {
     // 初期化
     initComposition(compositions, currentIndex)
     let composition = compositions[currentIndex]
-    let prevComposition = compositions[currentIndex - 1]
-    let prevCompositionLastItem =
-      prevComposition && prevComposition[prevComposition.length - 1]
     let currentCompositionLastItem = composition[composition.length - 1]
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
-    // 改行は繰り上げて他の判定条件を受けない
+    // 改行は前後を繰り上げて、他の判定条件を受けない
     if (/\n/.test(item.surface_form)) {
       ++currentIndex
       initComposition(compositions, currentIndex)
@@ -153,10 +143,21 @@ export function composite(path) {
       ++currentIndex
 
       return
+      // 前回が句読点であれば繰り上げて他の判定条件を受けない
+    } else if (
+      currentCompositionLastItem &&
+      isPunctuation(currentCompositionLastItem)
+    ) {
+      ++currentIndex
+      initComposition(compositions, currentIndex)
+      composition = compositions[currentIndex]
+      composition.push(item)
+
+      return
     }
 
     // 事前折り返し判定。
-    // 漢字が続けば折り返し判定を行わない
+    // 漢字が続けば折り返し判定を行わない。
     if (
       currentCompositionLastItem &&
       isRelationalNoun(currentCompositionLastItem) &&
@@ -164,21 +165,52 @@ export function composite(path) {
     ) {
       void 0
 
-      // 設定した判定数を超えたら繰り上げ
+      // 先頭に来てしまうと表示がおかしく見えるもの（句読点・助詞など）は、折り返し判定を行わない。
+    } else if (
+      currentCompositionLastItem &&
+      isWeirdAtTheFront(item, currentCompositionLastItem)
+    ) {
+      void 0
+
+      // 「～～なの」、と続くものは、「な」は助動詞、「の」は名詞と判定され先頭に回るとおかしく表示されるため、折り返し判定を行わない。
+    } else if (
+      currentCompositionLastItem &&
+      currentCompositionLastItem.pos === '助動詞' &&
+      currentCompositionLastItem.surface_form === 'な' &&
+        item.surface_form === 'の' &&
+      item.pos === '名詞'
+    ) {
+      void 0
+
+      // 今回が名詞で、一つ前が名詞と強く関連のある品詞であれば、折り返し判定を行わない。
+    } else if (
+      item.pos === '名詞' &&
+      currentCompositionLastItem &&
+      hasStrongConnectionNoun(currentCompositionLastItem)
+    ) {
+      void 0
+
+      // 今回が動詞で、一つ前が名詞だった場合、折り返し判定を行わない。
+    } else if (
+      item.pos === '動詞' &&
+      currentCompositionLastItem &&
+      currentCompositionLastItem.pos === '名詞'
+    ) {
+      void 0
+
+      // 今回が小数点でかつ、前回が数であった場合、折り返し判定を行わない。
+    } else if (
+      item.surface_form === '.' &&
+      currentCompositionLastItem &&
+      currentCompositionLastItem.pos_detail_1 === '数'
+    ) {
+      void 0
+
+      // 設定した判定数を超えたら、繰り上げる。
     } else if (word.length > judgeNum) {
       ++currentIndex
-      // 現在の compoisition 合計文字数が設定数以上あって、最後が助詞であれば繰り上げる。
-    } else if (
-      composition &&
-      composition.reduce((sum, item) => sum + item.surface_form.length, 0) >=
-        judgeNum &&
-      currentCompositionLastItem &&
-      currentCompositionLastItem.pos === '助詞'
-    ) {
-      ++currentIndex
-    } else if (isPunctuation(item) && composition.length > 0) {
-      ++currentIndex
-      // 名詞関連以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げ
+
+      // 名詞関連以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げる。
     } else if (
       currentCompositionLastItem &&
       !isRelationalNoun(currentCompositionLastItem) &&
@@ -188,7 +220,7 @@ export function composite(path) {
     ) {
       ++currentIndex
 
-      // 動詞ではあるものの、それが漢字のみで構成されていた場合、後ろに結合させる。
+      // 動詞ではあるものの、それが漢字のみで構成されていた場合、繰り上げる。
     } else if (item.pos === '動詞' && isOnlyKanji(item.surface_form)) {
       ++currentIndex
     }
@@ -196,93 +228,8 @@ export function composite(path) {
     // 事前折り返し判定により再初期化
     initComposition(compositions, currentIndex)
     composition = compositions[currentIndex]
-    prevComposition = compositions[currentIndex - 1]
-    prevCompositionLastItem =
-      prevComposition && prevComposition[prevComposition.length - 1]
 
-    // 先頭に来ると表示がおかしく見えるもの（句読点・助詞など）は、ひとつ前に結合させる。
-    if (
-      composition.length === 0 &&
-      prevComposition &&
-      isWeirdAtTheFront(item, prevCompositionLastItem)
-    ) {
-      prevComposition.push(item)
-      // 先頭が１文字の助動詞で、前回が名詞だった場合、ひとつ前に結合させる。
-      // ※「～～なの」、と続くと、「な」は助動詞、「の」は名詞と判定されてしまうため、除外する。
-    } else if (
-      composition.length === 0 &&
-      item.surface_form.length === 1 &&
-      item.pos === '助動詞' &&
-      !(item.surface_form === 'な' && nextItem.surface_form === 'の') &&
-      prevCompositionLastItem &&
-      prevCompositionLastItem.pos === '名詞'
-    ) {
-      prevComposition.push(item)
-
-      // 名詞が先頭で、一つ前が名詞と強く関連のある品詞でかつ設定数以下の場合、取り除き結合する。
-    } else if (
-      composition.length === 0 &&
-      item.pos === '名詞' &&
-      prevCompositionLastItem &&
-      hasStrongConnectionNoun(prevCompositionLastItem) &&
-      prevCompositionLastItem.surface_form.length < judgeNum
-    ) {
-      composition.push(prevComposition.pop(), item)
-
-      // 助動詞が先頭で、一つ前が動詞関連だった場合、取り除き結合させる
-    } else if (
-      composition.length === 0 &&
-      item.pos === '助動詞' &&
-      prevCompositionLastItem &&
-      isRelationalVerb(prevCompositionLastItem)
-    ) {
-      composition.push(prevComposition.pop(), item)
-
-      // 2~3前も動詞関連だった場合、さらに結合させる。
-      let prevCompositionLastItem = prevComposition[prevComposition.length - 1]
-      if (
-        prevCompositionLastItem &&
-        isRelationalVerb(prevCompositionLastItem)
-      ) {
-        composition.unshift(prevComposition.pop())
-      }
-      prevCompositionLastItem = prevComposition[prevComposition.length - 1]
-      if (
-        prevCompositionLastItem &&
-        isRelationalVerb(prevCompositionLastItem)
-      ) {
-        composition.unshift(prevComposition.pop())
-      }
-      // 動詞始まりで、一つ前が名詞でかつ、先頭に来ても不思議ではない品詞だった場合、取り除き結合する。
-    } else if (
-      composition.length === 0 &&
-      item.pos === '動詞' &&
-      prevCompositionLastItem &&
-      prevCompositionLastItem.pos === '名詞' &&
-      !isWeirdAtTheFront(prevCompositionLastItem)
-    ) {
-      composition.push(prevComposition.pop(), item)
-
-      // さらにその前が名詞に紐づく品詞であった場合、さらに取り除き結合する。
-      let prevCompositionLastItem = prevComposition[prevComposition.length - 1]
-      if (
-        prevCompositionLastItem &&
-        isRelationalNoun(prevCompositionLastItem)
-      ) {
-        composition.unshift(prevComposition.pop())
-      }
-
-      // 今回が小数点でかつ、前回が数であった場合、取り除き結合する。
-    } else if (
-      item.surface_form === '.' &&
-      prevCompositionLastItem &&
-      prevCompositionLastItem.pos_detail_1 === '数'
-    ) {
-      composition.push(prevComposition.pop(), item)
-      // それ以外は通常追加する。
-    } else {
-      composition.push(item)
-    }
+    composition.push(item)
   })
 
   return (
@@ -329,40 +276,6 @@ export function composite(path) {
           // trim して2文字未満になっている単語は次のアイテムの先頭に結合させる。
         } else if (word.trim().length < 2 && nextComposition) {
           nextComposition.unshift(...item)
-
-          return result
-          // 漢字＋ひらがな＋漢字＋ひらがなで、それぞれの漢字＋ひらがなが設定数以上あれば、分離する。
-        } else if (/・/.test(word)) {
-          // ・の前に２文字以上の文字があるものを、・を含んで区切る
-          // 本当は以下の正規表現（先読み）を使いたいが、Safariのみ対応していない。
-          // const splitted = word.split(/(?<=[^・]{2,}・)/)
-          // 参考: https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
-          // 暫定対応として以下を使う。
-          const splitted = word
-            .split(/((?:[^・]{2,})・)/)
-            .map(splittedWord => ({
-              word: splittedWord,
-              info,
-            }))
-
-          result.push(...splitted)
-
-          return result
-        } else if (
-          word.match(漢字ひらがな漢字ひらがな) &&
-          RegExp.$1.length + RegExp.$2.length >= judgeNum &&
-          RegExp.$3.length + RegExp.$4.length >= judgeNum
-        ) {
-          result.push(
-            {
-              word: RegExp.$1 + RegExp.$2,
-              info,
-            },
-            {
-              word: RegExp.$3 + RegExp.$4,
-              info,
-            }
-          )
 
           return result
         } else {
