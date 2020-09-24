@@ -78,7 +78,11 @@ export function initComposition(compositions, index) {
 }
 
 export function isPunctuation(item) {
-  return item.pos_detail_1 === '句点' || item.pos_detail_1 === '読点'
+  return (
+    item.pos_detail_1 === '句点' ||
+    item.pos_detail_1 === '読点' ||
+    /。/.test(item.surface_form)
+  )
 }
 
 export function isRelationalNoun(item) {
