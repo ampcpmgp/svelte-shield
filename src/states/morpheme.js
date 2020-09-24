@@ -78,11 +78,11 @@ export function initComposition(compositions, index) {
 }
 
 export function isPunctuation(item) {
-  return (
-    item.pos_detail_1 === '句点' ||
-    item.pos_detail_1 === '読点' ||
-    /。/.test(item.surface_form)
-  )
+  return isJapanesePeriod(item) || item.pos_detail_1 === '読点'
+}
+
+export function isJapanesePeriod(item) {
+  return item.pos_detail_1 === '句点' || /。/.test(item.surface_form)
 }
 
 export function isRelationalNoun(item) {
@@ -265,7 +265,7 @@ export function composite(path) {
       .map(blocks => {
         // 見出し判定は句点が存在するかどうか。
         const isHeading = blocks.every(blockItem =>
-          blockItem.every(item => item.pos_detail_1 !== '句点')
+          blockItem.every(item => !isJapanesePeriod(item))
         )
 
         return blocks.map(item => ({
