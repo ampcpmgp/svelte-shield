@@ -259,8 +259,9 @@ export function composite(path) {
         [[]]
       )
       .map(blocks => {
+        // 見出し判定は句点が存在するかどうか。
         const isHeading = blocks.every(blockItem =>
-          blockItem.every(item => !isPunctuation(item))
+          blockItem.every(item => item.pos_detail_1 !== '句点')
         )
 
         return blocks.map(item => ({
