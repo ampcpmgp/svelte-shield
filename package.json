@@ -1,6 +1,6 @@
 {
   "name": "riot-shield",
-  "version": "2020.09.25.0000",
+  "version": "2020.09.25.1600",
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
     "start:mocktimes": "parcel mock/testbed/*.html",
