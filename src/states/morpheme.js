@@ -3,6 +3,7 @@ import { get, writable } from 'svelte/store'
 import sleep from '../utils/sleep'
 
 export const word = writable('')
+export const progress = writable(0.0)
 export const info = writable({
   isHeading: false,
 })
@@ -49,8 +50,10 @@ export async function tokenize() {
 
   const path = tokenizer.tokenize(get(rawText))
   const intervalMsPerChar = localStorage.intervalMsPerChar
+  const compositions = composite(path)
+  const length = compositions.length - 1
 
-  for (const composition of composite(path)) {
+  for (const [index, composition] of compositions.entries()) {
     if (!get(isPlay)) {
       word.set('')
       return
@@ -58,6 +61,7 @@ export async function tokenize() {
 
     word.set(composition.word)
     info.set(composition.info)
+    progress.set(index / length)
 
     await sleep(
       composition.word.length * intervalMsPerChar || intervalMsPerChar * 3

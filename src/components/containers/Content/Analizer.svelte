@@ -5,6 +5,7 @@
     tokenize,
     rawText,
     info,
+    progress,
   } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
@@ -36,7 +37,11 @@
 </style>
 
 <div class="wrapper">
-  <InsetAlert type="alert-success" message={$word} isStrong={$info.isHeading} />
+  <InsetAlert
+    type="alert-success"
+    message={$word}
+    isStrong={$info.isHeading}
+    progress={$progress} />
 
   {#if !$isPlay}
     <button
