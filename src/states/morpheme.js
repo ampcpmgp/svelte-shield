@@ -1,16 +1,22 @@
 import kuromoji from 'kuromoji'
-import { get, writable } from 'svelte/store'
+import { get, writable, derived } from 'svelte/store'
 import sleep from '../utils/sleep'
 
 export const word = writable('')
-export const progress = writable(0.0)
 export const info = writable({
   isHeading: false,
 })
 export const isLoading = writable(true)
 export const isPlay = writable(false)
+export const isPause = writable(false)
+export const currentIndex = writable(0)
 export const errorMsg = writable('')
 export const rawText = writable('')
+export const compositions = writable([])
+export const progress = derived(
+  currentIndex,
+  $currentIndex => $currentIndex / (get(compositions).length - 1) || 0
+)
 export const hiddenSettings = writable({
   judgeNum: 3,
 })
@@ -49,19 +55,29 @@ export async function tokenize() {
   const tokenizer = await initP
 
   const path = tokenizer.tokenize(get(rawText))
-  const intervalMsPerChar = localStorage.intervalMsPerChar
-  const compositions = composite(path)
-  const length = compositions.length - 1
+  compositions.set(composite(path))
+}
 
-  for (const [index, composition] of compositions.entries()) {
+export async function play() {
+  isPlay.set(true)
+  isPause.set(false)
+  const intervalMsPerChar = localStorage.intervalMsPerChar
+  const playingCompositions = get(compositions).slice(get(currentIndex))
+
+  for (const composition of playingCompositions) {
     if (!get(isPlay)) {
       word.set('')
+      currentIndex.set(0)
+      return
+    }
+
+    if (get(isPause)) {
       return
     }
 
     word.set(composition.word)
     info.set(composition.info)
-    progress.set(index / length)
+    currentIndex.update(currentIndex => ++currentIndex)
 
     await sleep(
       composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
@@ -69,6 +85,13 @@ export async function tokenize() {
   }
 
   isPlay.set(false)
+}
+
+export function stop() {
+  isPlay.set(false)
+  isPause.set(false)
+  word.set('')
+  currentIndex.set(0)
 }
 
 export function getWord(composition) {

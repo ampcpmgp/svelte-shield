@@ -2,20 +2,24 @@
   import {
     word,
     isPlay,
+    isPause,
     tokenize,
     rawText,
     info,
     progress,
+    play,
+    stop,
   } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
-  function play() {
-    $isPlay = true
+  function handlePlayButtonClick() {
+    stop()
     tokenize()
+    play()
   }
 
-  function stop() {
-    $isPlay = false
+  function pause() {
+    $isPause = true
   }
 </script>
 
@@ -27,8 +31,11 @@
     height: 100%;
   }
 
-  button {
+  .button-groups {
     margin: 0 auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 12px;
   }
 
   textarea::placeholder {
@@ -43,18 +50,36 @@
     isStrong={$info.isHeading}
     progress={$progress} />
 
-  {#if !$isPlay}
-    <button
-      on:click={play}
-      class="btn btn-primary text-secondary"
-      type="button">
-      再生
-    </button>
-  {:else}
-    <button on:click={stop} class="btn btn-primary text-danger" type="button">
-      停止
-    </button>
-  {/if}
+  <div class="button-groups">
+    {#if !$isPlay}
+      <button
+        on:click={handlePlayButtonClick}
+        class="btn btn-primary text-secondary"
+        type="button">
+        再生
+      </button>
+    {:else}
+      <button on:click={stop} class="btn btn-primary text-danger" type="button">
+        終了
+      </button>
+
+      {#if !$isPause}
+        <button
+          on:click={pause}
+          class="btn btn-primary text-success"
+          type="button">
+          一時停止
+        </button>
+      {:else}
+        <button
+          on:click={play}
+          class="btn btn-primary text-secondary"
+          type="button">
+          再開
+        </button>
+      {/if}
+    {/if}
+  </div>
 
   <textarea
     bind:value={$rawText}

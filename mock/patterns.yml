@@ -8,21 +8,21 @@ settings:
     - [morpheme.isLoading.set, false]
     - [morpheme.errorMsg.set, 辞書取得エラー]
   夏目漱石の文を再生:
-    - [morpheme.isPlay.set, true]
     - [kokoro]
     - [morpheme.tokenize]
+    - [morpheme.play]
   Rust 行動規範を再生:
-    - [morpheme.isPlay.set, true]
     - [rustCoc]
     - [morpheme.tokenize]
+    - [morpheme.play]
   見出し強調機能:
-    - [morpheme.isPlay.set, true]
     - [見出し強調機能]
     - [morpheme.tokenize]
+    - [morpheme.play]
   長いカタカナ文:
-    - [morpheme.isPlay.set, true]
     - [長いカタカナ文]
     - [morpheme.tokenize]
+    - [morpheme.play]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
