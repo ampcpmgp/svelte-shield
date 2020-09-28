@@ -33,7 +33,7 @@
     </Icon>
   </a>
 
-  <a href="https://github.com/ampcpmgp/svelte-shield" target="_blank">
+  <a href="https://github.com/ampcpmgp/riot-shield" target="_blank">
     <Icon>
       <i class="fab fa-github" />
     </Icon>
