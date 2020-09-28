@@ -62,9 +62,10 @@ export async function play() {
   isPlay.set(true)
   isPause.set(false)
   const intervalMsPerChar = localStorage.intervalMsPerChar
-  const playingCompositions = get(compositions).slice(get(currentIndex))
+  const startingIndex = get(currentIndex)
+  const playingCompositions = get(compositions).slice(startingIndex)
 
-  for (const composition of playingCompositions) {
+  for (const [index, composition] of playingCompositions.entries()) {
     if (!get(isPlay)) {
       word.set('')
       currentIndex.set(0)
@@ -77,7 +78,7 @@ export async function play() {
 
     word.set(composition.word)
     info.set(composition.info)
-    currentIndex.update(currentIndex => ++currentIndex)
+    currentIndex.set(startingIndex + index)
 
     await sleep(
       composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
@@ -91,6 +92,7 @@ export function stop() {
   isPlay.set(false)
   isPause.set(false)
   word.set('')
+  compositions.set([])
   currentIndex.set(0)
 }
 

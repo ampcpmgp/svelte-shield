@@ -13,9 +13,9 @@
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
-  function handlePlayButtonClick() {
+  async function handlePlayButtonClick() {
     stop()
-    tokenize()
+    await tokenize()
     play()
   }
 
