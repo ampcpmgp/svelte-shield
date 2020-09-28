@@ -1,5 +1,5 @@
 {
-  "name": "riot-shield",
+  "name": "svelte-shield",
   "version": "2020.09.26.1400",
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
