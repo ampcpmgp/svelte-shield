@@ -15,7 +15,7 @@ export const rawText = writable('')
 export const compositions = writable([])
 export const progress = derived(
   currentIndex,
-  $currentIndex => $currentIndex / (get(compositions).length - 1) || 0
+  $currentIndex => $currentIndex / get(compositions).length || 0
 )
 export const hiddenSettings = writable({
   judgeNum: 3,
@@ -62,10 +62,9 @@ export async function play() {
   isPlay.set(true)
   isPause.set(false)
   const intervalMsPerChar = localStorage.intervalMsPerChar
-  const startingIndex = get(currentIndex)
-  const playingCompositions = get(compositions).slice(startingIndex)
+  const playingCompositions = get(compositions).slice(get(currentIndex))
 
-  for (const [index, composition] of playingCompositions.entries()) {
+  for (const composition of playingCompositions) {
     if (!get(isPlay)) {
       word.set('')
       currentIndex.set(0)
@@ -78,7 +77,7 @@ export async function play() {
 
     word.set(composition.word)
     info.set(composition.info)
-    currentIndex.set(startingIndex + index)
+    currentIndex.update($index => ++$index)
 
     await sleep(
       composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
