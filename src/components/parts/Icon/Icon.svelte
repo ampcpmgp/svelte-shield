@@ -1,5 +1,6 @@
 <script>
   export let isBox = false
+  export let isDisabled = false
 </script>
 
 <style>
@@ -19,8 +20,13 @@
   .box {
     border-radius: 20%;
   }
+
+  .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
 </style>
 
-<div class="wrapper" class:box={isBox}>
+<div class="wrapper" class:box={isBox} class:disabled={isDisabled} on:click>
   <slot />
 </div>

@@ -10,6 +10,7 @@
     play,
     stop,
   } from '../../../states/morpheme'
+  import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
 
   function handlePlayButtonClick() {
@@ -41,6 +42,10 @@
   textarea::placeholder {
     color: #ccc;
   }
+
+  i {
+    font-size: 20px;
+  }
 </style>
 
 <div class="wrapper">
@@ -51,33 +56,25 @@
     progress={$progress} />
 
   <div class="button-groups">
-    {#if !$isPlay}
-      <button
-        on:click={handlePlayButtonClick}
-        class="btn btn-primary text-secondary"
-        type="button">
-        再生
-      </button>
-    {:else}
-      <button on:click={stop} class="btn btn-primary text-danger" type="button">
-        終了
-      </button>
+    <Icon isBox={true} on:click={stop} isDisabled={!$isPlay}>
+      <i class="fas fa-stop" />
+    </Icon>
 
-      {#if !$isPause}
-        <button
-          on:click={pause}
-          class="btn btn-primary text-success"
-          type="button">
-          一時停止
-        </button>
-      {:else}
-        <button
-          on:click={play}
-          class="btn btn-primary text-secondary"
-          type="button">
-          再開
-        </button>
-      {/if}
+    {#if !$isPlay}
+      <!-- 再生 -->
+      <Icon isBox={true} on:click={handlePlayButtonClick}>
+        <i class="fas fa-play" />
+      </Icon>
+    {:else if !$isPause}
+      <!-- 一時停止 -->
+      <Icon isBox={true} on:click={pause}>
+        <i class="fas fa-pause" />
+      </Icon>
+    {:else}
+      <!-- 再開 -->
+      <Icon isBox={true} on:click={play}>
+        <i class="fas fa-play" />
+      </Icon>
     {/if}
   </div>
 
