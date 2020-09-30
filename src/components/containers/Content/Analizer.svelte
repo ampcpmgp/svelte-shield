@@ -12,6 +12,7 @@
   } from '../../../states/morpheme'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
+  import ReadingCard from './ReadingCard.svelte'
 
   async function handlePlayButtonClick() {
     stop()
@@ -51,7 +52,7 @@
 <div class="wrapper">
   <InsetAlert
     type="alert-success"
-    message={$word}
+    message={$word.trim() || '　'}
     isStrong={$info.isHeading}
     progress={$progress} />
 
@@ -78,8 +79,12 @@
     {/if}
   </div>
 
-  <textarea
-    bind:value={$rawText}
-    class="form-control"
-    placeholder="テキストを入力してください" />
+  {#if !$isPlay}
+    <textarea
+      bind:value={$rawText}
+      class="form-control"
+      placeholder="テキストを入力してください" />
+  {:else}
+    <ReadingCard />
+  {/if}
 </div>

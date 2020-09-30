@@ -357,7 +357,7 @@ export function composite(path) {
       }, [])
       // 文字の再配置などで完全に空白になったものを除去
       .filter(item => item.word)
-      // 前後の空白や改行を trim する。改行は空白として扱う。
-      .map(item => ({ ...item, word: item.word.trim() }))
+      // 前後の空白や改行を trim する。空白は改行として扱う。
+      .map(item => ({ ...item, word: item.word.trim() || '\n' }))
   )
 }

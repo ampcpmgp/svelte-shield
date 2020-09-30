@@ -26,7 +26,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {
@@ -38,7 +38,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {
@@ -68,7 +68,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {
@@ -80,7 +80,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {
@@ -104,7 +104,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: true,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {
@@ -116,7 +116,7 @@ test('composite/見出し強調機能', t => {
       info: {
         isHeading: false,
       },
-      word: '',
+      word: '\n',
     },
     {
       info: {

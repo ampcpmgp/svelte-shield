@@ -6,7 +6,6 @@
   export let progress = 0.0
 
   // 空白の場合は全角スペースを入れ 1lh を確保する
-  $: displayMessage = message || '　'
   $: progressPercent = `${progress * 100}%`
 </script>
 
@@ -46,8 +45,8 @@
 <div class="wrapper">
   <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
     {#if isStrong}
-      <strong>{displayMessage}</strong>
-    {:else}{displayMessage}{/if}
+      <strong>{message}</strong>
+    {:else}{message}{/if}
   </div>
 
   <div class="meter" style="--width-percent: {progressPercent}" />

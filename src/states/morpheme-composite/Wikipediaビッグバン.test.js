@@ -6,7 +6,7 @@ test('composite/Wikipediaビッグバン', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
-    '',
+    '\n',
     'インフレーション理論に',
     'よれば、',
     '時空の',
@@ -25,6 +25,6 @@ test('composite/Wikipediaビッグバン', t => {
     '109年）',
     '前と計算されて',
     'いる。',
-    '',
+    '\n',
   ])
 })
