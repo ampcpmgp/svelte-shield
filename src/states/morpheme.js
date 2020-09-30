@@ -65,6 +65,13 @@ export async function play() {
   const playingCompositions = get(compositions).slice(get(currentIndex))
 
   for (const composition of playingCompositions) {
+    word.set(composition.word)
+    info.set(composition.info)
+
+    await sleep(
+      composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
+    )
+
     if (!get(isPlay)) {
       word.set('')
       currentIndex.set(0)
@@ -75,12 +82,6 @@ export async function play() {
       return
     }
 
-    word.set(composition.word)
-    info.set(composition.info)
-
-    await sleep(
-      composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
-    )
     currentIndex.update($index => ++$index)
   }
 
