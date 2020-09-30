@@ -79,7 +79,7 @@
     {/if}
   </div>
 
-  {#if !$isPlay}
+  {#if !$isPause}
     <textarea
       bind:value={$rawText}
       class="form-control"

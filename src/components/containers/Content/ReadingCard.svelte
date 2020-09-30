@@ -14,20 +14,6 @@
 
   $: currentItem = $compositions[$currentIndex]
 
-  $: recompoisitions = $compositions.reduce(
-    (result, item) => {
-      if (item.word === '\n') {
-        result.push([])
-      } else {
-        const currentCompotision = result[result.length - 1]
-        currentCompotision.push(item)
-      }
-
-      return result
-    },
-    [[]]
-  )
-
   onMount(() => {
     adjustHeight()
   })
@@ -56,10 +42,14 @@
 
 <style>
   .wrapper {
-    white-space: pre-wrap;
     overflow-y: auto;
     height: 100%;
     display: grid;
+  }
+
+  .new-line {
+    display: block;
+    height: 4px;
   }
 
   .word {
@@ -85,22 +75,17 @@
   bind:this={wrapperElm}
   class="wrapper card bg-primary shadow-soft border-light">
   <div bind:this={cardElm} class="card-body">
-    <ul class="list-unstyled">
-      {#each recompoisitions as items}
-        <li class="list-item">
-          {#each items as item}
-            <span
-              class="word"
-              on:click={() => moveReading(item)}
-              bind:this={elementsToScroll[$compositions.indexOf(item)]}
-              class:inactive={!$isPause}
-              class:highlight={currentItem === item}
-              class:strong={item.info.isHeading}>
-              {item.word}
-            </span>
-          {/each}
-        </li>
-      {/each}
-    </ul>
+    {#each $compositions as item}
+      <span
+        class="word"
+        on:click={() => moveReading(item)}
+        bind:this={elementsToScroll[$compositions.indexOf(item)]}
+        class:new-line={/\n/.test(item.word)}
+        class:inactive={!$isPause}
+        class:highlight={currentItem === item}
+        class:strong={item.info.isHeading}>
+        {item.word}
+      </span>
+    {/each}
   </div>
 </div>

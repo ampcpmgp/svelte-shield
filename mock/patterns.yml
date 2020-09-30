@@ -16,9 +16,17 @@ settings:
     - [morpheme.tokenize]
     - [morpheme.play]
   見出し強調機能:
-    - [見出し強調機能]
-    - [morpheme.tokenize]
-    - [morpheme.play]
+    funcs:
+      - [見出し強調機能]
+      - [morpheme.tokenize]
+      - [morpheme.play]
+  改行位置で一時停止:
+    funcs:
+      - [見出し強調機能]
+      - [morpheme.tokenize]
+      - [morpheme.isPlay.set, true]
+      - [morpheme.isPause.set, true]
+      - [morpheme.currentIndex.set, 3]
   長いカタカナ文:
     - [長いカタカナ文]
     - [morpheme.tokenize]
