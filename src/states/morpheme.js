@@ -134,6 +134,14 @@ export function isRelationalVerb(item) {
   )
 }
 
+export function isWeirdAtTheLast(item) {
+  return (
+    item.pos_detail_1 === '括弧開' ||
+    item.surface_form === '(' ||
+    item.surface_form === '['
+  )
+}
+
 export function isWeirdAtTheFront(item, lastItem) {
   // 今回の結果が数で、前回の結果が小数点だった場合は、先頭に来ないものとして扱う
   const isConnectableNum =
