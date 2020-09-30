@@ -1,7 +1,12 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
   import { default as sleep } from '../../../utils/sleep'
-  import { compositions, currentIndex } from '../../../states/morpheme'
+  import {
+    compositions,
+    currentIndex,
+    isPause,
+    word,
+  } from '../../../states/morpheme'
 
   let wrapperElm, cardElm
 
@@ -45,6 +50,7 @@
 
   async function moveReading(item) {
     $currentIndex = $compositions.indexOf(item)
+    $word = item.word
   }
 </script>
 
@@ -67,6 +73,10 @@
   .strong {
     font-weight: bold;
   }
+
+  .inactive {
+    pointer-events: none;
+  }
 </style>
 
 <svelte:window on:resize={adjustHeight} />
@@ -83,6 +93,7 @@
               class="word"
               on:click={() => moveReading(item)}
               bind:this={elementsToScroll[$compositions.indexOf(item)]}
+              class:inactive={!$isPause}
               class:highlight={currentItem === item}
               class:strong={item.info.isHeading}>
               {item.word}
