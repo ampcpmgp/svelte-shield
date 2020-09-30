@@ -81,6 +81,7 @@
 
   {#if !$isPause}
     <textarea
+      disabled={$isPlay}
       bind:value={$rawText}
       class="form-control"
       placeholder="テキストを入力してください" />
