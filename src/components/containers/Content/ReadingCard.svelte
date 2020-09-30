@@ -7,8 +7,7 @@
 
   const elementsToScroll = []
 
-  $: _currentIndex = $currentIndex - 1
-  $: currentItem = $compositions[_currentIndex]
+  $: currentItem = $compositions[$currentIndex]
 
   $: recompoisitions = $compositions.reduce(
     (result, item) => {
@@ -29,7 +28,7 @@
   })
 
   afterUpdate(() => {
-    const element = elementsToScroll[_currentIndex]
+    const element = elementsToScroll[$currentIndex]
 
     if (element) {
       element.scrollIntoView({ block: 'nearest' })
@@ -43,6 +42,10 @@
     cardElm.style.height = `${height}px`
     await sleep(0)
   }
+
+  async function moveReading(item) {
+    $currentIndex = $compositions.indexOf(item)
+  }
 </script>
 
 <style>
@@ -53,8 +56,16 @@
     display: grid;
   }
 
+  .word {
+    cursor: pointer;
+  }
+
   .highlight {
     background-color: yellow;
+  }
+
+  .strong {
+    font-weight: bold;
   }
 </style>
 
@@ -69,8 +80,11 @@
         <li class="list-item">
           {#each items as item}
             <span
+              class="word"
+              on:click={() => moveReading(item)}
               bind:this={elementsToScroll[$compositions.indexOf(item)]}
-              class:highlight={currentItem === item}>
+              class:highlight={currentItem === item}
+              class:strong={item.info.isHeading}>
               {item.word}
             </span>
           {/each}

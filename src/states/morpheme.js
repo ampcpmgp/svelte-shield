@@ -77,11 +77,11 @@ export async function play() {
 
     word.set(composition.word)
     info.set(composition.info)
-    currentIndex.update($index => ++$index)
 
     await sleep(
       composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
     )
+    currentIndex.update($index => ++$index)
   }
 
   isPlay.set(false)
