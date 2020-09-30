@@ -28,14 +28,10 @@
   <div />
 
   <a href="https://twitter.com/am_nimitz3" target="_blank">
-    <Icon>
-      <i class="fab fa-twitter-square" />
-    </Icon>
+    <Icon><i class="fab fa-twitter-square" /></Icon>
   </a>
 
   <a href="https://github.com/ampcpmgp/svelte-shield" target="_blank">
-    <Icon>
-      <i class="fab fa-github" />
-    </Icon>
+    <Icon><i class="fab fa-github" /></Icon>
   </a>
 </header>

@@ -76,6 +76,7 @@
   class="wrapper card bg-primary shadow-soft border-light">
   <div bind:this={cardElm} class="card-body">
     {#each $compositions as item}
+      <!-- prettier-ignore -->
       <span
         class="word"
         on:click={() => moveReading(item)}
@@ -83,9 +84,7 @@
         class:new-line={/\n/.test(item.word)}
         class:inactive={!$isPause}
         class:highlight={currentItem === item}
-        class:strong={item.info.isHeading}>
-        {item.word}
-      </span>
+        class:strong={item.info.isHeading}>{item.word}</span>
     {/each}
   </div>
 </div>

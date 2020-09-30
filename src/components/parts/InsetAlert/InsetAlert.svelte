@@ -44,9 +44,7 @@
 
 <div class="wrapper">
   <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
-    {#if isStrong}
-      <strong>{message}</strong>
-    {:else}{message}{/if}
+    {#if isStrong}<strong>{message}</strong>{:else}{message}{/if}
   </div>
 
   <div class="meter" style="--width-percent: {progressPercent}" />
