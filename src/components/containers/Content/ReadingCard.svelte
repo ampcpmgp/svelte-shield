@@ -1,11 +1,14 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, afterUpdate } from 'svelte'
   import { default as sleep } from '../../../utils/sleep'
   import { compositions, currentIndex } from '../../../states/morpheme'
 
   let wrapperElm, cardElm
 
-  $: currentItem = $compositions[$currentIndex - 1]
+  const elementsToScroll = []
+
+  $: _currentIndex = $currentIndex - 1
+  $: currentItem = $compositions[_currentIndex]
 
   $: recompoisitions = $compositions.reduce(
     (result, item) => {
@@ -23,6 +26,14 @@
 
   onMount(() => {
     adjustHeight()
+  })
+
+  afterUpdate(() => {
+    const element = elementsToScroll[_currentIndex]
+
+    if (element) {
+      element.scrollIntoView({ block: 'nearest' })
+    }
   })
 
   async function adjustHeight() {
@@ -57,7 +68,11 @@
       {#each recompoisitions as items}
         <li class="list-item">
           {#each items as item}
-            <span class:highlight={currentItem === item}>{item.word}</span>
+            <span
+              bind:this={elementsToScroll[$compositions.indexOf(item)]}
+              class:highlight={currentItem === item}>
+              {item.word}
+            </span>
           {/each}
         </li>
       {/each}
