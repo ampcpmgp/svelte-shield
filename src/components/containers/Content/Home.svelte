@@ -2,7 +2,7 @@
   import { isLoading, errorMsg } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import Settings from '../Modals/Settings.svelte'
-  import Analizer from './Analizer.svelte'
+  import Analyzer from './Analyzer.svelte'
 </script>
 
 <style>
@@ -21,7 +21,7 @@
       <InsetAlert type="alert-danger" message={$errorMsg} />
     </div>
   {:else}
-    <Analizer />
+    <Analyzer />
   {/if}
 </div>
 
