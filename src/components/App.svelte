@@ -30,6 +30,7 @@
     height: 100%;
     display: grid;
     grid-template-rows: auto 1fr;
+    word-break: break-all;
   }
 </style>
 

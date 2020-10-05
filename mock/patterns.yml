@@ -31,6 +31,11 @@ settings:
     - [長いカタカナ文]
     - [morpheme.tokenize]
     - [morpheme.play]
+  自動折り返しされない文:
+    - [自動折り返しされない文]
+    - [morpheme.tokenize]
+    - [morpheme.isPlay.set, true]
+    - [morpheme.isPause.set, true]
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
