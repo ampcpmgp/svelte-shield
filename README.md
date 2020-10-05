@@ -26,6 +26,22 @@ npm run test:watch
 npx ava --match 'composite/example' --watch
 ```
 
+## Lint
+
+```shell
+npm run lint
+```
+
+or vscode extensions <https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint>
+
+## Code Format
+
+```shell
+npm run format
+```
+
+or vscode extensions <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
+
 ### Add a test sentence
 
 `test-tools/generate-test.js` の `fileName` 変数にファイル名、 `sentence` 変数に文章を入れ、以下を実行してください。
