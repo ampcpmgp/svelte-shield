@@ -1,6 +1,6 @@
 {
   "name": "svelte-shield",
-  "version": "2020.10.05.1900",
+  "version": "2020.10.05.1930",
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
     "start:mocktimes": "parcel mock/testbed/*.html",
