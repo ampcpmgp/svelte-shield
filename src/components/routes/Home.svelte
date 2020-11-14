@@ -1,5 +1,5 @@
 <script>
-  import Content from '../containers/Content/Home'
+  import Content from '../containers/Home/Content'
 </script>
 
 <Content />
