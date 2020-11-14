@@ -50,7 +50,7 @@
     "kuromoji": "^0.1.2",
     "modern-css-reset": "^1.1.0",
     "popper.js": "^1.16.1",
-    "svelte": "^3.29.7",
+    "svelte": "^3.18.2",
     "svelte-spa-router": "^2.0.0"
   },
   "browserslist": [
