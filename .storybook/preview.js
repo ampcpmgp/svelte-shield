@@ -1,8 +1,12 @@
-import { addParameters } from '@storybook/svelte'
+import 'modern-css-reset/dist/reset.min.css'
 
-addParameters({
-  backgrounds: [
-    { name: 'grey', value: '#ccc' },
-    { name: 'lightgreen', value: 'lightgreen' },
-  ],
-})
+export const parameters = {
+  actions: { argTypesRegex: '^on[A-Z].*' },
+  backgrounds: {
+    default: 'gray',
+    values: [
+      { name: 'gray', value: 'gray' },
+      { name: 'lightgreen', value: 'lightgreen' },
+    ],
+  },
+}

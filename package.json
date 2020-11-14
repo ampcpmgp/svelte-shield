@@ -15,18 +15,15 @@
     "lint": "eslint --ignore-path .gitignore **/*.{js,svelte}",
     "format": "prettier --ignore-path .gitignore --write **/*.{js,svelte}",
     "screenshot": "am-mocktimes--screenshot",
-    "storybook": "start-storybook -p 6006 -s ./node_modules --ci",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 --no-dll",
+    "build-storybook": "build-storybook --no-dll"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
-    "@storybook/addon-backgrounds": "^5.3.12",
-    "@storybook/addon-knobs": "^5.3.12",
-    "@storybook/addon-links": "^5.3.12",
-    "@storybook/addon-storysource": "^5.3.12",
-    "@storybook/addon-viewport": "^5.3.12",
-    "@storybook/addons": "^5.3.12",
-    "@storybook/svelte": "^5.3.12",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/svelte": "^6.0.28",
     "am-mocktimes": "^3.2.1",
     "am-mocktimes-addon-screenshot": "^0.1.2",
     "am-parts-cli": "^0.3.0",
@@ -53,7 +50,7 @@
     "kuromoji": "^0.1.2",
     "modern-css-reset": "^1.1.0",
     "popper.js": "^1.16.1",
-    "svelte": "^3.18.2",
+    "svelte": "^3.29.7",
     "svelte-spa-router": "^2.0.0"
   },
   "browserslist": [
