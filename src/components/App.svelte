@@ -8,6 +8,7 @@
     padding: 10px 12px;
     box-sizing: border-box;
     height: 100vh;
+    word-break: break-all;
   }
 
   :global(#app) {
@@ -26,9 +27,6 @@
 
   .card-body {
     height: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    word-break: break-all;
   }
 </style>
 

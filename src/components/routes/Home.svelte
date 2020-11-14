@@ -2,8 +2,19 @@
   import Header from '../containers/Header/Header'
   import Content from '../containers/Home/Content'
   import Footer from '../containers/Footer/Footer'
+  import Frame from '../parts/Frame/Main.svelte'
 </script>
 
-<Header />
-<Content />
-<Footer />
+<Frame>
+  <div slot="header">
+    <Header />
+  </div>
+
+  <div slot="content">
+    <Content />
+  </div>
+
+  <div slot="footer">
+    <Footer />
+  </div>
+</Frame>
