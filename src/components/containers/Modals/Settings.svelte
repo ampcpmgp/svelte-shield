@@ -43,8 +43,8 @@
             class="form-control"
             id="validationServer01"
             bind:value={intervalMsPerChar}
-            step="25" />
-          <small class="default">初期値 100ms</small>
+            step="20" />
+          <small class="default">初期値 80ms</small>
         </div>
       </div>
       <div class="modal-footer">

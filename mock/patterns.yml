@@ -40,4 +40,6 @@ settings:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
     - [click, "[data-mock-open-modal]"]
+本ページ:
+  func: [page, /book]
 404 page: [page, /404]
