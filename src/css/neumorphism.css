@@ -67,6 +67,8 @@
     --behance: #0057ff;
     --twitter: #1da1f2;
     --slack: #3aaf85;
+    --darkMode:#28292b;
+    --darkModeAccent:#35d2a0;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -32279,3 +32281,98 @@ article a:hover {
 }
 
 /*# sourceMappingURL=neumorphism.css.map */
+@media(prefers-color-scheme:dark){
+    body {
+        color: var(--gray-500);
+        background-color: var(--darkMode);
+    }
+    .card {
+        background-color: var(--darkMode) !important;
+        border: 0.0625rem solid rgba(43, 47, 50, 0.05);
+    }
+    .border-light {
+        border-color: rgba(255,255,255,0.1) !important;
+    }
+    .shadow-soft {
+        box-shadow: 6px 6px 12px rgba(0,0,0,0.5), -6px -6px 12px rgba(245,245,245,0.075) !important;
+    }
+    a, .text-action {
+        color: var(--gray-500);
+    }
+    a:hover, .text-action:hover {
+        color: var(--gray-400);
+    }
+    .form-control{
+        color: var(--gray-500);
+        background-color: var(--darkMode);
+        border-color: rgba(255,255,255,0.075);
+        box-shadow: inset 4px 4px 8px rgb(217 232 255 / 9%), inset -3px -3px 25px rgba(5,5,5,0.5);
+    }
+    .form-control:focus{
+        color: var(--gray-500);
+        background-color: var(--darkMode);
+        border-color: rgba(115,125,185,0.2);
+        box-shadow: inset 1px 1px 6px rgb(217 232 255 / 29%), inset -3px -3px 15px rgba(5,5,5,0.8);
+    }
+    .alert-success {
+        background: var(--darkMode);
+        color: var(--darkModeAccent);
+    }
+    .alert{
+        border: 0.0625rem solid rgba(245,245,245,0.1);
+    }
+    .alert-info {
+        background: var(--darkMode);
+        color: var(--darkModeAccent);
+    }
+    .form-control:disabled, .form-control[readonly] {
+        background-color: rgba(0,0,0,0.1);
+        opacity: .6;
+        color: var(--gray-800);
+    }
+    .modal-backdrop.show {
+        background-color: rgba(0,0,0,0.75);
+    }
+    .modal-content {
+        background-color: var(--darkMode);
+        box-shadow: inset 3px 3px 4px rgba(155,155,155,0.1), inset -3px -3px 7px rgba(5,5,5,0.33);
+        border: 1px solid rgba(255,255,255,0.25);
+    }
+    .modal-header {
+        border-bottom: 1px solid rgba(255,255,255,0.25);
+    }
+    .modal-footer{
+        border-top: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn{
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.5), -3px -3px 6px rgba(245,245,245,0.075);
+        border-color:rgba(255,255,255,0.05);
+    }
+    .btn-primary {
+        color: var(--gray-500);
+        background-color: var(--darkMode);
+    }
+    .btn-primary:hover {
+        color: var(--gray-500);
+        background-color: var(--darkMode);
+        border-color: rgba(120,120,120,0.21);
+        box-shadow: inset 1px 1px 5px rgba(155,155,155,0.25), inset -2px -2px 5px rgba(5,5,5,0.5);
+    }
+    .text-secondary, .text-secondary:hover {
+        color: var(--darkModeAccent) !important;
+    }
+    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+        color: var(--gray-400);
+        background-color: var(--darkMode);
+        border-color: rgba(255,255,255,0.15);
+    }
+    .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active {
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), inset -3px -3px 7px rgba(255,255,255,0.2);
+    }
+    .close > span:not(.sr-only) {
+        color: rgba(255, 255, 255, 0.26);
+    }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        color: var(--gray-400);
+    }
+}
