@@ -41,7 +41,7 @@
   }
 
   textarea::placeholder {
-    color: #ccc;
+    opacity: 0.6;
   }
 
   i {
@@ -68,14 +68,10 @@
       </Icon>
     {:else if !$isPause}
       <!-- 一時停止 -->
-      <Icon isBox={true} on:click={pause}>
-        <i class="fas fa-pause" />
-      </Icon>
+      <Icon isBox={true} on:click={pause}><i class="fas fa-pause" /></Icon>
     {:else}
       <!-- 再開 -->
-      <Icon isBox={true} on:click={play}>
-        <i class="fas fa-play" />
-      </Icon>
+      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
     {/if}
   </div>
 
