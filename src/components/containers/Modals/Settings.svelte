@@ -36,14 +36,15 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="validationServer01">１文字当たりの表示時間（ミリ秒）</label>
+          <label
+            for="validationServer01">１文字当たりの表示時間（ミリ秒）</label>
           <input
             type="number"
             class="form-control"
             id="validationServer01"
             bind:value={intervalMsPerChar}
-            step="25" />
-          <small class="default">初期値 100ms</small>
+            step="20" />
+          <small class="default">初期値 80ms</small>
         </div>
       </div>
       <div class="modal-footer">
