@@ -39,20 +39,18 @@
     width: var(--width-percent);
     box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
   }
-  @media(prefers-color-scheme:light){
-    .inset{
+  @media (prefers-color-scheme: light) {
+    .inset {
       box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
     }
     .meter::before {
-      background:lime
+      background: lime;
     }
   }
-  @media(prefers-color-scheme:dark){
-    .inset{
-        box-shadow: inset 3px 3px 4px rgba(155,155,155,0.25), inset -3px -3px 7px rgba(5,5,5,0.5) !important;
-    }
-    .meter::before {
-      background:var(--darkModeAccent);
+  @media (prefers-color-scheme: dark) {
+    .inset {
+      box-shadow: inset 3px 3px 4px rgba(155, 155, 155, 0.25),
+        inset -3px -3px 7px rgba(5, 5, 5, 0.5) !important;
     }
   }
 </style>
