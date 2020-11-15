@@ -43,9 +43,6 @@
     .inset {
       box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
     }
-    .meter::before {
-      background: lime;
-    }
   }
   @media (prefers-color-scheme: dark) {
     .inset {
