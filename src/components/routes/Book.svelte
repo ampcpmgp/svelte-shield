@@ -6,12 +6,19 @@
   import Frame from '../parts/Frame/Main.svelte'
 </script>
 
+<style>
+  .content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+</style>
+
 <Frame>
   <div slot="header">
     <Header />
   </div>
 
-  <div slot="content">
+  <div class="content" slot="content">
     <Buttons />
     <Books />
   </div>
