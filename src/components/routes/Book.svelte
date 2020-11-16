@@ -1,10 +1,10 @@
 <script>
-  import Header from '../containers/Header/Header'
+  import Header from '../parts/Header/Header'
+  import Footer from '../parts/Footer/Footer'
+  import Settings from '../parts/Modals/Settings.svelte'
+  import Frame from '../parts/Frame/Main.svelte'
   import Buttons from '../containers/Book/Buttons'
   import Books from '../containers/Book/Books'
-  import Footer from '../containers/Footer/Footer'
-  import Settings from '../containers/Modals/Settings.svelte'
-  import Frame from '../parts/Frame/Main.svelte'
 </script>
 
 <style>

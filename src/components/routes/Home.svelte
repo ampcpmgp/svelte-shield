@@ -1,10 +1,10 @@
 <script>
   import { init } from '../../states/morpheme'
-  import Header from '../containers/Header/Header'
-  import Content from '../containers/Home/Content'
-  import Footer from '../containers/Footer/Footer'
-  import Settings from '../containers/Modals/Settings.svelte'
+  import Header from '../parts/Header/Header'
+  import Footer from '../parts/Footer/Footer'
+  import Settings from '../parts/Modals/Settings.svelte'
   import Frame from '../parts/Frame/Main.svelte'
+  import Content from '../containers/Home/Content'
 
   init()
 </script>
