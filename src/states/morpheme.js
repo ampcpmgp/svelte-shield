@@ -26,11 +26,10 @@ export const ignoreReading = writable(false)
 export const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
 export const カタカナ = /([ァ-ヶー]+)/
 
-const initP = init()
+let tokenizer
 
-async function init() {
-  // 初期描画が終わったあとに辞書データを読み込む。
-  await sleep(0)
+async function getTokenizer() {
+  if (tokenizer) return tokenizer
 
   return new Promise((resolve, reject) => {
     kuromoji.builder({ dicPath: './dict/' }).build(function(err, tokenizer) {
@@ -51,8 +50,12 @@ async function init() {
   })
 }
 
+export async function init() {
+  tokenizer = await getTokenizer()
+}
+
 export async function tokenize() {
-  const tokenizer = await initP
+  const tokenizer = await getTokenizer()
 
   const path = tokenizer.tokenize(get(rawText))
   compositions.set(composite(path))
