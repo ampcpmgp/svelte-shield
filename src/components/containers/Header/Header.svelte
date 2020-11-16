@@ -1,7 +1,6 @@
 <script>
   import { default as Modal } from '../../../const/modal'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
-  import Settings from '../Modals/Settings.svelte'
 </script>
 
 <style>
@@ -36,5 +35,3 @@
     <Icon><i class="fab fa-github" /></Icon>
   </a>
 </header>
-
-<Settings />

@@ -3,6 +3,7 @@
   import Header from '../containers/Header/Header'
   import Content from '../containers/Home/Content'
   import Footer from '../containers/Footer/Footer'
+  import Settings from '../containers/Modals/Settings.svelte'
   import Frame from '../parts/Frame/Main.svelte'
 
   init()
@@ -21,3 +22,6 @@
     <Footer />
   </div>
 </Frame>
+
+<!-- 各モーダル -->
+<Settings />

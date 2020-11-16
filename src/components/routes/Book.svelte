@@ -3,6 +3,7 @@
   import Buttons from '../containers/Book/Buttons'
   import Books from '../containers/Book/Books'
   import Footer from '../containers/Footer/Footer'
+  import Settings from '../containers/Modals/Settings.svelte'
   import Frame from '../parts/Frame/Main.svelte'
 </script>
 
@@ -27,3 +28,6 @@
     <Footer />
   </div>
 </Frame>
+
+<!-- 各モーダル -->
+<Settings />
