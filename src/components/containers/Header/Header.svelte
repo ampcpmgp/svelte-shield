@@ -1,4 +1,5 @@
 <script>
+  import { default as Modal } from '../../../const/modal'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import Settings from '../Modals/Settings.svelte'
 </script>
@@ -17,7 +18,10 @@
 </style>
 
 <header>
-  <div data-toggle="modal" data-target="#modal-default" data-mock-open-modal>
+  <div
+    data-toggle="modal"
+    data-target={'#' + Modal.SETTINGS}
+    data-mock-open-modal>
     <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
   </div>
 

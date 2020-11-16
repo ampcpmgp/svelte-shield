@@ -1,5 +1,6 @@
 <script>
   import { saveIntervalMsPerChar } from '../../../utils/settings'
+  import { default as Modal } from '../../../const/modal'
 
   let intervalMsPerChar = localStorage.intervalMsPerChar
 
@@ -17,10 +18,10 @@
 
 <div
   class="modal fade"
-  id="modal-default"
+  id={Modal.SETTINGS}
   tabindex="-1"
   role="dialog"
-  aria-labelledby="modal-default"
+  aria-labelledby={Modal.SETTINGS}
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
