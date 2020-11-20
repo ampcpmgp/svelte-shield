@@ -1,10 +1,11 @@
 <script>
-  import Header from '../parts/Header/Header'
-  import Footer from '../parts/Footer/Footer'
+  import Header from '../parts/Header/Header.svelte'
+  import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
+  import NewRegister from '../containers/Book/NewRegister.svelte'
   import Frame from '../parts/Frame/Main.svelte'
-  import Buttons from '../containers/Book/Buttons'
-  import Books from '../containers/Book/Books'
+  import Buttons from '../containers/Book/Buttons.svelte'
+  import Books from '../containers/Book/Books.svelte'
 </script>
 
 <style>
@@ -31,3 +32,4 @@
 
 <!-- 各モーダル -->
 <Settings />
+<NewRegister />

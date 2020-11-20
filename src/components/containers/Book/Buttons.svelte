@@ -1,4 +1,5 @@
 <script>
+  import { default as Modal } from '../../../const/modal'
 </script>
 
 <style>
@@ -21,5 +22,10 @@
 
 <div class="wrapper">
   <button class="btn btn-sm btn-primary all-install">一括取込</button>
-  <button class="btn btn-sm btn-primary new-register">新規登録</button>
+  <div
+    data-toggle="modal"
+    data-target={'#' + Modal.NEW_REGISTER_BOOK}
+    data-mock-open-modal>
+    <button class="btn btn-sm btn-primary new-register">新規登録</button>
+  </div>
 </div>
