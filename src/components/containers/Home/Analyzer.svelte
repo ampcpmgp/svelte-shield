@@ -40,10 +40,6 @@
     grid-column-gap: 12px;
   }
 
-  textarea::placeholder {
-    opacity: 0.6;
-  }
-
   i {
     font-size: 20px;
   }
