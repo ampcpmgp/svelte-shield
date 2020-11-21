@@ -2,6 +2,7 @@ import mock from 'am-mocktimes'
 import { replace } from 'svelte-spa-router'
 import sleep from '../src/utils/sleep'
 import * as morpheme from '../src/states/morpheme'
+import { default as Modal } from '../src/const/modal'
 
 mock({
   sleep,
@@ -13,6 +14,10 @@ mock({
 
   click(selector) {
     document.querySelector(selector).click()
+  },
+
+  openModal(name) {
+    document.querySelector(`[data-target="#${Modal[name]}"]`).click()
   },
 
   rustCoc() {

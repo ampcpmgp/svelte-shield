@@ -39,7 +39,13 @@ settings:
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
-    - [click, "[data-mock-open-modal]"]
+    - [openModal, SETTINGS]
 本ページ:
   func: [page, /book]
+  転載して登録:
+    - [sleep, 0]
+    - [openModal, NEW_REGISTER_REPRINT_BOOK]
+  自作分を登録:
+    - [sleep, 0]
+    - [openModal, NEW_REGISTER_SELF_MADE_BOOK]
 404 page: [page, /404]

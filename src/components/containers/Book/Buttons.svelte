@@ -34,14 +34,10 @@
 
   <div
     data-toggle="modal"
-    data-target={'#' + Modal.NEW_REGISTER_SELF_MADE_BOOK}
-    data-mock-open-modal>
+    data-target={'#' + Modal.NEW_REGISTER_SELF_MADE_BOOK}>
     <button class="btn btn-sm btn-primary register">自作文を登録</button>
   </div>
-  <div
-    data-toggle="modal"
-    data-target={'#' + Modal.NEW_REGISTER_REPRINT_BOOK}
-    data-mock-open-modal>
+  <div data-toggle="modal" data-target={'#' + Modal.NEW_REGISTER_REPRINT_BOOK}>
     <button class="btn btn-sm btn-primary register">転載して登録</button>
   </div>
 </div>

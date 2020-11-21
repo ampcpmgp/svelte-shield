@@ -17,10 +17,7 @@
 </style>
 
 <header>
-  <div
-    data-toggle="modal"
-    data-target={'#' + Modal.SETTINGS}
-    data-mock-open-modal>
+  <div data-toggle="modal" data-target={'#' + Modal.SETTINGS}>
     <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
   </div>
 
