@@ -1,14 +1,22 @@
 import { default as IPFS } from 'ipfs'
 
-let node
+let nodeP
 
 async function getNode() {
-  if (node) return node
+  if (nodeP) return await nodeP
 
   const createdNode = await IPFS.create()
+  createdNode.add('')
   return createdNode
 }
 
-export async function init() {
-  node = await getNode()
+export function init() {
+  nodeP = getNode()
+}
+
+export async function add(data) {
+  const node = await getNode()
+  const results = await node.add(data)
+
+  return results
 }

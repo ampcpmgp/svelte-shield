@@ -3,13 +3,22 @@
   import { default as Modal } from '../../../const/modal'
   import { LicenseListData } from '../../../const/licenses'
   import { title, url, license, content } from '../../../states/new-book'
+  import { add } from '../../../databases/ipfs'
 
   const listItems = LicenseListData.licenses.map(item => ({
     value: item.licenseId,
     label: item.licenseId,
   }))
 
-  function save() {}
+  async function save() {
+    const results = await add({
+      title: $title,
+      url: $url,
+      license: $license,
+      content: $content,
+    })
+    console.log(results)
+  }
 </script>
 
 <style>

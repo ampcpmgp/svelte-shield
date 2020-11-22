@@ -6,6 +6,9 @@
   import Frame from '../parts/Frame/Main.svelte'
   import Buttons from '../containers/Book/Buttons.svelte'
   import Books from '../containers/Book/Books.svelte'
+  import { init } from '../../databases/ipfs'
+
+  init()
 </script>
 
 <style>

@@ -30,7 +30,6 @@ let tokenizer
 
 async function getTokenizer() {
   if (tokenizer) return tokenizer
-
   return new Promise((resolve, reject) => {
     kuromoji.builder({ dicPath: './dict/' }).build(function(err, tokenizer) {
       if (get(ignoreReading)) {
