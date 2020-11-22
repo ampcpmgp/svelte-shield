@@ -50,9 +50,10 @@ settings:
       - [sleep, 0]
       - [newBook.title.set, dummy title]
       - [newBook.url.set, dummy-url]
-      - [newBook.content.set, dummy content]
-      - [sleep, 500]
       - [newBook.license.set, { value: "CC0-1.0", label: "CC0-1.0" }]
+      - [newBook.content.set, dummy content]
+      - [sleep, 1500]
+      - [click, "[data-mock-save]"]
   自作分を登録:
     - [sleep, 0]
     - [openModal, NEW_REGISTER_SELF_MADE_BOOK]

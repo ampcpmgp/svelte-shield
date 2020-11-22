@@ -2,23 +2,20 @@
   import { default as Select } from 'svelte-select'
   import { default as Modal } from '../../../const/modal'
   import { LicenseListData } from '../../../const/licenses'
-  import { title, url, license, content } from '../../../states/new-book'
-  import { add } from '../../../databases/ipfs'
+  import {
+    title,
+    url,
+    license,
+    content,
+    saveByReprint,
+  } from '../../../states/new-book'
 
   const listItems = LicenseListData.licenses.map(item => ({
     value: item.licenseId,
     label: item.licenseId,
   }))
 
-  async function save() {
-    const results = await add({
-      title: $title,
-      url: $url,
-      license: $license,
-      content: $content,
-    })
-    console.log(results)
-  }
+  $: isSaveable = $title && $url && $license && $content
 </script>
 
 <style>
@@ -130,10 +127,12 @@
           キャンセル
         </button>
         <button
+          disabled={!isSaveable}
           type="button"
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
-          on:click={save}>
+          data-mock-save
+          on:click={saveByReprint}>
           保存
         </button>
       </div>
