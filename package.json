@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "ipfs": "^0.52.1",
     "jquery": "^3.5.1",
     "kuromoji": "^0.1.2",
     "modern-css-reset": "^1.1.0",
