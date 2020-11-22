@@ -5,8 +5,20 @@
   import Settings from '../parts/Modals/Settings.svelte'
   import Frame from '../parts/Frame/Main.svelte'
   import Content from '../containers/Home/Content.svelte'
+  import { onDestroy } from 'svelte'
 
-  init()
+  // 開発時はモックがURLを変更するタイミングを待たせて、辞書データの初期化を止める
+  if (process.env.NODE_ENV === 'development') {
+    const id = setTimeout(() => {
+      init()
+    }, 0)
+
+    onDestroy(() => {
+      clearTimeout(id)
+    })
+  } else {
+    init()
+  }
 </script>
 
 <Frame>
