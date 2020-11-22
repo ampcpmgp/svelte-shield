@@ -1,7 +1,13 @@
 <script>
   import { default as Select } from 'svelte-select'
   import { default as Modal } from '../../../const/modal'
+  import { LicenseListData } from '../../../const/licenses'
   import { title, url, license, content } from '../../../states/new-book'
+
+  const listItems = LicenseListData.licenses.map(item => ({
+    value: item.licenseId,
+    label: item.licenseId,
+  }))
 
   function save() {}
 </script>
@@ -12,14 +18,42 @@
     max-width: 800px;
   }
 
+  .modal-body {
+    display: grid;
+    grid-template-areas:
+      'title title'
+      'url license'
+      'content content';
+    grid-column-gap: 8px;
+    grid-template-columns: 1fr 1fr;
+  }
+
   textarea {
-    min-height: 400px;
+    min-height: 240px;
+  }
+
+  .title-wrapper {
+    grid-area: title;
+  }
+  .url-wrapper {
+    grid-area: url;
+  }
+  .license-wrapper {
+    grid-area: license;
+  }
+  .content-wrapper {
+    grid-area: content;
   }
 
   .themed {
-    --border: 3px solid blue;
-    --borderRadius: 10px;
-    --placeholderColor: blue;
+    --background: --primary;
+    --clearSelectTop: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .themed {
+      --background: --darkMode;
+    }
   }
 </style>
 
@@ -33,7 +67,9 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="h6 modal-title mb-0" id="modal-title-default">新規登録</h2>
+        <h2 class="h6 modal-title mb-0" id="modal-title-default">
+          転載して登録
+        </h2>
         <button
           type="button"
           class="close"
@@ -44,7 +80,7 @@
       </div>
 
       <div class="modal-body">
-        <div class="form-group">
+        <div class="form-group title-wrapper">
           <label for="title">タイトル</label>
           <input
             type="text"
@@ -53,17 +89,21 @@
             bind:value={$title} />
         </div>
 
-        <div class="form-group">
+        <div class="form-group url-wrapper">
           <label for="url">URL</label>
           <input type="text" class="form-control" id="url" bind:value={$url} />
         </div>
 
-        <div class="form-group themed">
+        <div class="form-group themed license-wrapper">
           <label for="license">ライセンス</label>
-          <Select id="license" bind:value={$license} />
+          <Select
+            id="license"
+            placeholder="テキスト入力で絞り込めます"
+            bind:selectedValue={$license}
+            items={listItems} />
         </div>
 
-        <div class="form-group">
+        <div class="form-group content-wrapper">
           <label for="content">本文</label>
           <textarea
             id="content"
