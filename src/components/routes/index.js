@@ -1,9 +1,9 @@
 import Home from './Home'
-import Book from './Book'
+import Books from './Books'
 import NotFound from './NotFound'
 
 export default {
   '/': Home,
-  '/book': Book,
+  '/books': Books,
   '*': NotFound,
 }

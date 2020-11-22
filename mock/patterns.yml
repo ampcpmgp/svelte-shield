@@ -40,8 +40,8 @@ settings:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
     - [openModal, SETTINGS]
-本ページ:
-  func: [page, /book]
+IPFS本ページ:
+  func: [page, /books]
   転載して登録:
     funcs:
       - [sleep, 0]
