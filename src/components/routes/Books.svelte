@@ -2,10 +2,10 @@
   import Header from '../parts/Header/Header.svelte'
   import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
-  import NewReprint from '../containers/Book/NewReprint.svelte'
+  import NewReprint from '../containers/Books/NewReprint.svelte'
   import Frame from '../parts/Frame/Main.svelte'
-  import Buttons from '../containers/Book/Buttons.svelte'
-  import Books from '../containers/Book/Books.svelte'
+  import Buttons from '../containers/Books/Buttons.svelte'
+  import Books from '../containers/Books/Books.svelte'
   import { init } from '../../databases/ipfs'
 
   init()
