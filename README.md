@@ -1,6 +1,6 @@
 # Svelte Shield
 
-様々な日本語文章を、目線移動無く早く読めるようにしたツール。
+様々な日本語文章を、目線移動無くサクサク読めるようにしたツール。
 
 <https://ampcpmgp.github.io/svelte-shield/>
 
