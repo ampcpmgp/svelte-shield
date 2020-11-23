@@ -7,8 +7,8 @@
     url,
     license,
     content,
-    saveByReprint,
-  } from '../../../states/new-book'
+    save,
+  } from '../../../states/newBook/reprint'
 
   const listItems = LicenseListData.licenses.map(item => ({
     value: item.licenseId,
@@ -73,9 +73,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="h6 modal-title mb-0" id="modal-title-default">
-          転載して登録
-        </h2>
+        <h2 class="h6 modal-title mb-0">転載して登録</h2>
         <button
           type="button"
           class="close"
@@ -132,7 +130,7 @@
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
           data-mock-save
-          on:click={saveByReprint}>
+          on:click={save}>
           保存
         </button>
       </div>

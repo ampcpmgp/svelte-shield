@@ -1,32 +1,37 @@
 <script>
-  import { saveIntervalMsPerChar } from '../../../utils/settings'
   import { default as Modal } from '../../../const/modal'
+  import { title, content, save } from '../../../states/newBook/selfMade'
 
-  let intervalMsPerChar = localStorage.intervalMsPerChar
-
-  function save() {
-    saveIntervalMsPerChar(intervalMsPerChar)
-  }
+  $: isSaveable = $title && $content
 </script>
 
 <style>
-  .default {
+  /* overwrite neumorphism ui */
+  .modal-dialog {
+    max-width: 800px;
+  }
+
+  .modal-body {
     display: grid;
-    justify-content: right;
+    grid-column-gap: 8px;
+  }
+
+  textarea {
+    min-height: 240px;
   }
 </style>
 
 <div
   class="modal fade"
-  id={Modal.SETTINGS}
+  id={Modal.NEW_REGISTER_SELF_MADE_BOOK}
   tabindex="-1"
   role="dialog"
-  aria-labelledby={Modal.SETTINGS}
+  aria-labelledby={Modal.NEW_REGISTER_SELF_MADE_BOOK}
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="h6 modal-title mb-0">設定</h2>
+        <h2 class="h6 modal-title mb-0">自作文を登録</h2>
         <button
           type="button"
           class="close"
@@ -35,19 +40,27 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
+
       <div class="modal-body">
         <div class="form-group">
-          <label
-            for="validationServer01">１文字当たりの表示時間（ミリ秒）</label>
+          <label for="title">タイトル</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
-            id="validationServer01"
-            bind:value={intervalMsPerChar}
-            step="20" />
-          <small class="default">初期値 80ms</small>
+            id="title"
+            bind:value={$title} />
+        </div>
+
+        <div class="form-group">
+          <label for="content">本文</label>
+          <textarea
+            id="content"
+            bind:value={$content}
+            class="form-control"
+            placeholder="テキストを入力してください" />
         </div>
       </div>
+
       <div class="modal-footer">
         <button
           type="button"
@@ -56,9 +69,11 @@
           キャンセル
         </button>
         <button
+          disabled={!isSaveable}
           type="button"
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
+          data-mock-save
           on:click={save}>
           保存
         </button>
