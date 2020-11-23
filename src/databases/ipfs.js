@@ -1,17 +1,23 @@
 import { default as IPFS } from 'ipfs'
 
-let nodeP
+/**
+ * ファイル読み込み時に getNode を読んでもパフォーマンスに大きな影響は出ないが、 IPFS は現状問題の無い
+ * websocket のエラーが多発しているため、不要なログを出さないためにも、必要なページだけ
+ * node を create するようにする。
+ * 参考記事: https://stackoverflow.com/questions/63563162/ipfs-js-cant-connect-to-ws-127-0-0-18081-p2p
+ */
+let _nodeP
 
 async function getNode() {
-  if (nodeP) return await nodeP
+  if (_nodeP) return await _nodeP
 
   const createdNode = await IPFS.create()
-  createdNode.add('')
+
   return createdNode
 }
 
 export function init() {
-  nodeP = getNode()
+  _nodeP = getNode()
 }
 
 export async function add(data) {
