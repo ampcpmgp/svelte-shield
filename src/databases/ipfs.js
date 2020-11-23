@@ -1,5 +1,4 @@
 import { default as IPFS } from 'ipfs'
-import { decode } from '@msgpack/msgpack'
 
 /**
  * ファイル読み込み時に getNode を読んでもパフォーマンスに大きな影響は出ないが、 IPFS は現状問題の無い

@@ -1,5 +1,7 @@
 import { get, writable } from 'svelte/store'
-import { add } from '../../databases/ipfs'
+import { encode } from '@msgpack/msgpack'
+import * as ipfs from '../../databases/ipfs'
+import * as db from '../../databases/dexie'
 
 export const title = writable('')
 export const content = writable('')
@@ -16,7 +18,19 @@ export async function save() {
   }
 
   try {
-    const results = await add(JSON.stringify(data))
+    const encodedData = encode(data)
+    const results = await ipfs.add(encodedData)
+
+    const { path } = results
+
+    const isExistsDb = await db.existsbook(path)
+
+    if (!isExistsDb)
+      await db.setbook({
+        hash: path,
+        ...data,
+      })
+
     reset()
 
     return results
