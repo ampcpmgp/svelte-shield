@@ -1,4 +1,5 @@
 import { default as IPFS } from 'ipfs'
+import { decode } from '@msgpack/msgpack'
 
 /**
  * ファイル読み込み時に getNode を読んでもパフォーマンスに大きな影響は出ないが、 IPFS は現状問題の無い
@@ -22,7 +23,25 @@ export function init() {
 
 export async function add(data) {
   const node = await getNode()
+
+  // https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsadddata-options
   const results = await node.add(data)
 
   return results
+}
+
+export async function get(hash) {
+  const node = await getNode()
+  const content = []
+
+  // https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsgetipfspath-options
+  for await (const file of node.get(hash)) {
+    if (!file.content) throw new Error('No content')
+
+    for await (const chunk of file.content) {
+      content.push(...chunk)
+    }
+
+    return content
+  }
 }

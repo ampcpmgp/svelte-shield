@@ -45,7 +45,9 @@
     "svelte-loader": "^2.13.6"
   },
   "dependencies": {
+    "@msgpack/msgpack": "^2.3.0",
     "bootstrap": "^4.5.2",
+    "dexie": "^3.0.3",
     "ipfs": "^0.52.1",
     "jquery": "^3.5.1",
     "kuromoji": "^0.1.2",
