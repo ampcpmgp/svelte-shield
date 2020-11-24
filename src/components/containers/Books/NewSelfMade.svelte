@@ -1,4 +1,5 @@
 <script>
+  import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import { default as Modal } from '../../../const/modal'
   import { title, content, save } from '../../../states/newBook/selfMade'
 
@@ -18,6 +19,13 @@
 
   textarea {
     min-height: 240px;
+  }
+
+  .add-source {
+    display: grid;
+    justify-content: start;
+    align-items: center;
+    justify-items: start;
   }
 </style>
 
@@ -49,6 +57,11 @@
             class="form-control"
             id="title"
             bind:value={$title} />
+        </div>
+
+        <div class="form-group add-source">
+          <label>引用元</label>
+          <Icon on:click={console.log}><i class="fas fa-plus" /></Icon>
         </div>
 
         <div class="form-group">
