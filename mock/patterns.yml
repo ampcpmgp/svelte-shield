@@ -55,6 +55,13 @@ IPFS本ページ:
       - [sleep, 1500]
       - [click, "[data-mock-save]"]
   自作分を登録:
-    - [sleep, 0]
-    - [openModal, NEW_REGISTER_SELF_MADE_BOOK]
+    funcs:
+      - [sleep, 0]
+      - [openModal, NEW_REGISTER_SELF_MADE_BOOK]
+    引用元を追加して入力:
+      - [sleep, 0]
+      - [newBook.selfMade.sources.set, [
+        { value: "" },
+        { value: "//example.com" }
+      ]]
 404 page: [page, /404]

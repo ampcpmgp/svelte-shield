@@ -5,16 +5,32 @@ import * as db from '../../databases/dexie'
 
 export const title = writable('')
 export const content = writable('')
+// { value: URL }
+export const sources = writable([])
+
+export function addSource() {
+  const $sources = get(sources)
+  $sources.push({ value: '' })
+  sources.set($sources)
+}
+
+export function removeSource(i) {
+  const $sources = get(sources)
+  $sources.splice(i, 1)
+  sources.set($sources)
+}
 
 export function reset() {
   title.set('')
   content.set('')
+  sources.set([])
 }
 
 export async function save() {
   const data = {
     title: get(title),
     content: get(content),
+    sources: get(sources),
   }
 
   try {

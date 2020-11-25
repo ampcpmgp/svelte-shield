@@ -1,9 +1,16 @@
 <script>
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import { default as Modal } from '../../../const/modal'
-  import { title, content, save } from '../../../states/newBook/selfMade'
+  import {
+    title,
+    content,
+    sources,
+    save,
+    removeSource,
+    addSource,
+  } from '../../../states/newBook/selfMade'
 
-  $: isSaveable = $title && $content
+  $: isSaveable = $title && $content && $sources.every(item => item.value)
 </script>
 
 <style>
@@ -26,6 +33,18 @@
     justify-content: start;
     align-items: center;
     justify-items: start;
+  }
+
+  .sources {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-column-gap: 8px;
+  }
+
+  .sources label {
+    /* overwrite neumorphism ui */
+    margin-bottom: 0;
   }
 </style>
 
@@ -61,7 +80,21 @@
 
         <div class="form-group add-source">
           <label>引用元</label>
-          <Icon on:click={console.log}><i class="fas fa-plus" /></Icon>
+
+          {#each $sources as source, i}
+            <div class="form-group sources">
+              <label for={`sourceId-${i}`}>{i}.</label>
+              <input
+                type="text"
+                class="form-control"
+                id={`sourceId-${i}`}
+                bind:value={source.value} />
+              <Icon on:click={() => removeSource(i)}>
+                <i class="fas fa-minus" />
+              </Icon>
+            </div>
+          {/each}
+          <Icon on:click={addSource}><i class="fas fa-plus" /></Icon>
         </div>
 
         <div class="form-group">
