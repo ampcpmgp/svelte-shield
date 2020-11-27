@@ -53,7 +53,7 @@ IPFS本ページ:
       - [newBook.reprint.license.set, { value: "CC0-1.0", label: "CC0-1.0" }]
       - [newBook.reprint.content.set, dummy content]
       - [sleep, 1500]
-      - [click, "[data-mock-save]"]
+      - [click, "[data-mock=\"save-new-reprint\"]"]
   自作分を登録:
     funcs:
       - [sleep, 0]
@@ -64,4 +64,14 @@ IPFS本ページ:
         { value: "" },
         { value: "//example.com" }
       ]]
+    入力して保存:
+      - [sleep, 0]
+      - [newBook.selfMade.title.set, dummy title]
+      - [newBook.selfMade.sources.set, [
+        { value: "//example.com/sample-page-1" },
+        { value: "//example.com/sample-page-2" }
+      ]]
+      - [newBook.selfMade.content.set, dummy content]
+      - [sleep, 1500]
+      - [click, "[data-mock=\"save-new-self-made\"]"]
 404 page: [page, /404]

@@ -2,6 +2,7 @@ import { get, writable } from 'svelte/store'
 import { encode } from '@msgpack/msgpack'
 import * as ipfs from '../../databases/ipfs'
 import * as db from '../../databases/dexie'
+import { default as BookType } from '../../const/BookType'
 
 export const title = writable('')
 export const content = writable('')
@@ -28,6 +29,7 @@ export function reset() {
 
 export async function save() {
   const data = {
+    bookType: BookType.SELF_MADE,
     title: get(title),
     content: get(content),
     sources: get(sources),

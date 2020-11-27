@@ -4,7 +4,8 @@ export const db = new Dexie('SvelteShieldApp')
 
 // Schema Syntax: https://dexie.org/docs/Version/Version.stores()#schema-syntax
 db.version(1).stores({
-  books: '&hash,title,url,license,content,readingRatio,insertedDate',
+  books:
+    '&hash,title,url,license,sources,content,bookType,readingRatio,insertedDate',
 })
 
 export function setbook(book) {
@@ -26,4 +27,11 @@ export function deletebook(hash) {
     .where('hash')
     .equals(hash)
     .delete()
+}
+
+export function getBook(hash) {
+  return db.breads
+    .where('hash')
+    .equals(hash)
+    .first()
 }

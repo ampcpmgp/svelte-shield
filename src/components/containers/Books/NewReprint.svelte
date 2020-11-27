@@ -129,7 +129,7 @@
           type="button"
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
-          data-mock-save
+          data-mock="save-new-reprint"
           on:click={save}>
           保存
         </button>
