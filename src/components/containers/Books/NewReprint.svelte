@@ -1,5 +1,6 @@
 <script>
   import { default as Select } from 'svelte-select'
+  import { push } from 'svelte-spa-router'
   import { default as Modal } from '../../../const/modal'
   import { LicenseListData } from '../../../const/licenses'
   import {
@@ -16,6 +17,17 @@
   }))
 
   $: isSaveable = $title && $url && $license && $content
+
+  async function handleSave() {
+    try {
+      const results = await save()
+
+      push(`/books/${results.path}`)
+    } catch (error) {
+      console.error(error)
+      alert(error)
+    }
+  }
 </script>
 
 <style>
@@ -130,7 +142,7 @@
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
           data-mock="save-new-reprint"
-          on:click={save}>
+          on:click={handleSave}>
           保存
         </button>
       </div>

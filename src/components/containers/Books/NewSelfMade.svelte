@@ -1,4 +1,5 @@
 <script>
+  import { push } from 'svelte-spa-router'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import { default as Modal } from '../../../const/modal'
   import {
@@ -11,6 +12,17 @@
   } from '../../../states/newBook/selfMade'
 
   $: isSaveable = $title && $content && $sources.every(item => item.value)
+
+  async function handleSave() {
+    try {
+      const results = await save()
+
+      push(`/books/${results.path}`)
+    } catch (error) {
+      console.error(error)
+      alert(error)
+    }
+  }
 </script>
 
 <style>
@@ -120,7 +132,7 @@
           class="btn btn-sm btn-primary text-secondary"
           data-dismiss="modal"
           data-mock="save-new-self-made"
-          on:click={save}>
+          on:click={handleSave}>
           保存
         </button>
       </div>

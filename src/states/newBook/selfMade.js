@@ -35,27 +35,22 @@ export async function save() {
     sources: get(sources),
   }
 
-  try {
-    const encodedData = encode(data)
-    const results = await ipfs.add(encodedData)
+  const encodedData = encode(data)
+  const results = await ipfs.add(encodedData)
 
-    const { path } = results
+  const { path } = results
 
-    const isExistsDb = await db.existsbook(path)
+  const isExistsDb = await db.existsbook(path)
 
-    if (!isExistsDb)
-      await db.setbook({
-        hash: path,
-        readingRatio: 0,
-        insertedDate: new Date(),
-        ...data,
-      })
+  if (!isExistsDb)
+    await db.setbook({
+      hash: path,
+      readingRatio: 0,
+      insertedDate: new Date(),
+      ...data,
+    })
 
-    reset()
+  reset()
 
-    return results
-  } catch (error) {
-    alert(error)
-    console.error(error)
-  }
+  return results
 }
