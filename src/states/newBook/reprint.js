@@ -34,6 +34,8 @@ export async function save() {
     if (!isExistsDb)
       await db.setbook({
         hash: path,
+        readingRatio: 0,
+        insertedDate: new Date(),
         ...data,
       })
 

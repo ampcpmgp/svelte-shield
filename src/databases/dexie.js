@@ -4,7 +4,7 @@ export const db = new Dexie('SvelteShieldApp')
 
 // Schema Syntax: https://dexie.org/docs/Version/Version.stores()#schema-syntax
 db.version(1).stores({
-  books: '&hash,title,url,license,content',
+  books: '&hash,title,url,license,content,readingRatio,insertedDate',
 })
 
 export function setbook(book) {
