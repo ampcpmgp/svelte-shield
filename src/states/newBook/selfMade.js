@@ -47,7 +47,6 @@ export async function save() {
       hash: path,
       readingRatio: 0,
       insertedDate: new Date(),
-      ...data,
     })
 
   reset()
