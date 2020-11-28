@@ -7,7 +7,10 @@
   import Content from '../containers/Home/Content.svelte'
   import { onDestroy } from 'svelte'
 
-  // 開発時はモックがURLを変更するタイミングを待たせて、辞書データの初期化を止める
+  /**
+   * 開発時はモックがURLを変更するタイミングを待たせて、辞書データの初期化を止める。
+   * メインページのこのページだけ必要。
+   */
   if (process.env.NODE_ENV === 'development') {
     const id = setTimeout(() => {
       init()

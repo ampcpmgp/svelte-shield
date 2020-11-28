@@ -74,4 +74,10 @@ IPFS本ページ:
       - [newBook.selfMade.content.set, dummy content]
       - [sleep, 1500]
       - [click, "[data-mock=\"save-new-self-made\"]"]
+IPFS本詳細ページ:
+  noLink: true
+  転載文:
+    func: [page, /books/QmdVwncaa55bMTqYxyBzeY8sENhJxEYTXJJNt4d29rpQ3B]
+  自作分:
+    func: [page, /books/QmdVwncaa55bMTqYxyBzeY8sENhJxEYTXJJNt4d29rpQ3B]
 404 page: [page, /404]
