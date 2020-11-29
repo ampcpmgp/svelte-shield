@@ -12,21 +12,24 @@
   }
 
   :global(#app) {
-    height: 100%;
+    min-height: 100%;
+    display: grid;
   }
 
   .wrapper {
-    height: 100%;
+    min-height: 100%;
     margin: 0 auto;
     max-width: 1240px;
+    width: 100%;
   }
 
   .card {
-    height: 100%;
+    min-height: 100%;
   }
 
   .card-body {
-    height: 100%;
+    min-height: 100%;
+    display: grid;
   }
 </style>
 

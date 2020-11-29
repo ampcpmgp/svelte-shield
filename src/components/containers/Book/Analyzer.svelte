@@ -64,6 +64,7 @@
 
   {#if !$isPause}
     <textarea
+      rows="6"
       disabled={$isPlay}
       bind:value={$rawText}
       class="form-control"
