@@ -61,6 +61,12 @@ export async function tokenize() {
 }
 
 export async function play() {
+  stop()
+  await tokenize()
+  resume()
+}
+
+export async function resume() {
   isPlay.set(true)
   isPause.set(false)
   const intervalMsPerChar = localStorage.intervalMsPerChar

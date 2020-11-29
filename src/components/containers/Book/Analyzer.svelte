@@ -3,11 +3,11 @@
     word,
     isPlay,
     isPause,
-    tokenize,
     rawText,
     info,
     progress,
     play,
+    resume,
     stop,
     pause,
   } from '../../../states/morpheme'
@@ -16,12 +16,6 @@
   import ReadingCard from '../!Common/ReadingCard.svelte'
   import Reprint from './Reprint.svelte'
   import Quotes from './Quotes.svelte'
-
-  async function handlePlayButtonClick() {
-    stop()
-    await tokenize()
-    play()
-  }
 </script>
 
 <style>
@@ -58,15 +52,13 @@
 
     {#if !$isPlay}
       <!-- 再生 -->
-      <Icon isBox={true} on:click={handlePlayButtonClick}>
-        <i class="fas fa-play" />
-      </Icon>
+      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
     {:else if !$isPause}
       <!-- 一時停止 -->
       <Icon isBox={true} on:click={pause}><i class="fas fa-pause" /></Icon>
     {:else}
       <!-- 再開 -->
-      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
+      <Icon isBox={true} on:click={resume}><i class="fas fa-play" /></Icon>
     {/if}
   </div>
 
