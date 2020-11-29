@@ -1,6 +1,6 @@
 <script>
-  import { fetch } from '../../states/book'
-  import { init } from '../../states/morpheme'
+  import { fetch, init as initBook } from '../../states/book'
+  import { init as initMorpheme } from '../../states/morpheme'
   import Header from '../parts/Header/Header.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
   import Frame from '../parts/Frame/Main.svelte'
@@ -9,8 +9,9 @@
   export let params = { hash: '' }
   const { hash } = params
 
+  initBook()
   fetch(hash)
-  init()
+  initMorpheme()
 </script>
 
 <Frame>
