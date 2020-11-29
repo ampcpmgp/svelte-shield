@@ -40,9 +40,9 @@ export async function save() {
 
   const { path } = results
 
-  const isExistsDb = await db.existsbook(path)
+  const isExistsInDb = await db.existsbook(path)
 
-  if (!isExistsDb)
+  if (!isExistsInDb)
     await db.setbook({
       hash: path,
       readingRatio: 0,
