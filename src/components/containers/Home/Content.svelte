@@ -1,7 +1,7 @@
 <script>
   import { isLoading, errorMsg } from '../../../states/morpheme'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
-  import Analyzer from './Analyzer.svelte'
+  import Playable from './Playable.svelte'
 </script>
 
 <style>
@@ -17,6 +17,6 @@
   {:else if $errorMsg}
     <InsetAlert type="alert-danger" message={$errorMsg} />
   {:else}
-    <Analyzer />
+    <Playable />
   {/if}
 </div>
