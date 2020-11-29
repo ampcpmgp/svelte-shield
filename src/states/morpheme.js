@@ -98,6 +98,10 @@ export function stop() {
   currentIndex.set(0)
 }
 
+export function pause() {
+  isPause.set(true)
+}
+
 export function getWord(composition) {
   return composition.reduce((str, path) => str + path.surface_form, '')
 }

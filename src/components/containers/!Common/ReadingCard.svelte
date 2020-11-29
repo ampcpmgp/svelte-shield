@@ -76,7 +76,6 @@
   class="wrapper card bg-primary shadow-soft border-light">
   <div bind:this={cardElm} class="card-body">
     {#each $compositions as item}
-      <!-- prettier-ignore -->
       <span
         class="word"
         on:click={() => moveReading(item)}

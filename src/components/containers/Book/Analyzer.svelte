@@ -14,6 +14,8 @@
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import ReadingCard from '../!Common/ReadingCard.svelte'
+  import Reprint from './Reprint.svelte'
+  import Quotes from './Quotes.svelte'
 
   async function handlePlayButtonClick() {
     stop()
@@ -26,7 +28,7 @@
   .wrapper {
     display: grid;
     grid-row-gap: 16px;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     height: 100%;
   }
 
@@ -77,4 +79,7 @@
   {:else}
     <ReadingCard />
   {/if}
+
+  <Reprint />
+  <Quotes />
 </div>
