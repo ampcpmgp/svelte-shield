@@ -37,6 +37,8 @@
   async function moveReading(item) {
     $currentIndex = $compositions.indexOf(item)
     $word = item.word
+
+    void $word
   }
 </script>
 

@@ -16,14 +16,14 @@
 </style>
 
 <div class="wrapper">
-  {#if $isFetching}
-    <InsetAlert type="alert-info" message="Peer 探索中..." />
-  {:else if $errorMsgBook}
-    <InsetAlert type="alert-danger" message={errorMsgBook} />
-  {:else if $isLoading}
+  {#if $isLoading}
     <InsetAlert type="alert-info" message="辞書データ読み込み中..." />
   {:else if $errorMsgMorpheme}
     <InsetAlert type="alert-danger" message={$errorMsgMorpheme} />
+  {:else if !isFetching}
+    <InsetAlert type="alert-info" message="Peer 探索中..." />
+  {:else if $errorMsgBook}
+    <InsetAlert type="alert-danger" message={errorMsgBook} />
   {:else}
     <Playable />
   {/if}

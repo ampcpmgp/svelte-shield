@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte'
   import {
     word,
     isPlay,
@@ -11,11 +12,17 @@
     stop,
     pause,
   } from '../../../states/morpheme'
+  import { content, bookType } from '../../../states/book'
+  import { default as BookType } from '../../../const/BookType'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import ReadingCard from '../!Common/ReadingCard.svelte'
   import Reprint from './Reprint.svelte'
   import Quotes from './Quotes.svelte'
+
+  onMount(() => {
+    $rawText = $content
+  })
 </script>
 
 <style>
@@ -65,14 +72,18 @@
   {#if !$isPause}
     <textarea
       rows="6"
-      disabled={$isPlay}
+      disabled={true}
       bind:value={$rawText}
-      class="form-control"
-      placeholder="テキストを入力してください" />
+      class="form-control" />
   {:else}
     <ReadingCard />
   {/if}
 
-  <Reprint />
-  <Quotes />
+  {#if $bookType === BookType.SELF_MADE}
+    <Quotes />
+  {/if}
+
+  {#if $bookType === BookType.REPRINT}
+    <Reprint />
+  {/if}
 </div>
