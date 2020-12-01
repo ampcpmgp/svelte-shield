@@ -10,8 +10,8 @@
   const { hash } = params
 
   initBook()
-  fetch(hash)
   initMorpheme()
+  fetch(hash)
 </script>
 
 <Frame>

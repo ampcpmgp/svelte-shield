@@ -2,10 +2,10 @@ import { writable } from 'svelte/store'
 import { decode } from '@msgpack/msgpack'
 import * as ipfs from '../databases/ipfs'
 import * as db from '../databases/dexie'
+import * as morpheme from './morpheme'
 
 export const bookType = writable()
 export const title = writable('')
-export const content = writable('')
 export const url = writable('')
 export const license = writable()
 export const sources = writable([])
@@ -15,10 +15,10 @@ export const errMessage = writable('')
 export function init() {
   bookType.set()
   title.set('')
-  content.set('')
   url.set('')
   license.set()
   sources.set([])
+  morpheme.rawText.set('')
 
   isFetching.set(false)
   errMessage.set('')
@@ -52,8 +52,8 @@ export async function fetch(hash) {
   title.set(book.title)
   url.set(book.url)
   license.set(book.license)
-  content.set(book.content)
   sources.set(book.sources)
+  morpheme.rawText.set(book.content)
 
   isFetching.set(false)
 }

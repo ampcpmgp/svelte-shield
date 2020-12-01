@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   import {
     word,
     isPlay,
@@ -12,17 +11,13 @@
     stop,
     pause,
   } from '../../../states/morpheme'
-  import { content, bookType } from '../../../states/book'
+  import { bookType } from '../../../states/book'
   import { default as BookType } from '../../../const/BookType'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import ReadingCard from '../!Common/ReadingCard.svelte'
   import Reprint from './Reprint.svelte'
   import Quotes from './Quotes.svelte'
-
-  onMount(() => {
-    $rawText = $content
-  })
 </script>
 
 <style>
