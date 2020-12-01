@@ -8,6 +8,7 @@ export const bookType = writable()
 export const title = writable('')
 export const url = writable('')
 export const license = writable()
+// { value: URL }
 export const sources = writable([])
 export const isFetching = writable(false)
 export const errMessage = writable('')
