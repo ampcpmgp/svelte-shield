@@ -11,12 +11,35 @@
     grid-template-columns: auto 1fr auto auto;
   }
 
+  .user-cog-wrapper {
+    margin-right: auto;
+  }
+
+  @media (max-width: 575px) {
+    header {
+      grid-row-gap: 12px;
+      grid-template-columns: 1fr auto auto;
+      grid-template-areas:
+        'a a a'
+        'b b b';
+    }
+  }
+
   .title-wrapper {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
     grid-column-gap: 8px;
     padding: 0px 4px;
+  }
+
+  @media (max-width: 575px) {
+    .title-wrapper {
+      grid-area: b;
+      padding: 8px 0;
+      border-top: solid 2px #666;
+      border-bottom: solid 2px #666;
+    }
   }
 
   i {
@@ -30,17 +53,23 @@
 
   .title {
     justify-self: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 </style>
 
 <header>
-  <div data-toggle="modal" data-target={'#' + Modal.SETTINGS}>
+  <div
+    class="user-cog-wrapper"
+    data-toggle="modal"
+    data-target={'#' + Modal.SETTINGS}>
     <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
   </div>
 
   <div class="title-wrapper">
     <Icon><i class="fas fa-angle-left" /></Icon>
-    <div class="title">{$title}</div>
+    <div class="title" title={$title}>{$title}</div>
   </div>
 
   <a href="https://twitter.com/am_nimitz3" target="_blank">
