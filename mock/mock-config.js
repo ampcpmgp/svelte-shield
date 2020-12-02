@@ -2,6 +2,7 @@ import mock from 'am-mocktimes'
 import { replace } from 'svelte-spa-router'
 import sleep from '../src/utils/sleep'
 import * as morpheme from '../src/states/morpheme'
+import * as book from '../src/states/book'
 import * as newBook from '../src/states/newBook'
 import { default as Modal } from '../src/const/modal'
 
@@ -9,6 +10,7 @@ mock({
   sleep,
   morpheme,
   newBook,
+  book,
 
   page(name) {
     replace(name)

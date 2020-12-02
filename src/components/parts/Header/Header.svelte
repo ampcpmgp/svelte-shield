@@ -6,7 +6,6 @@
 <style>
   header {
     display: grid;
-    justify-content: right;
     grid-column-gap: 14px;
     grid-template-columns: auto 1fr auto auto;
   }
