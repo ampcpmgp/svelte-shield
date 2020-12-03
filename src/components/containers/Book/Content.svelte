@@ -17,7 +17,9 @@
 
 <div class="wrapper">
   {#if $isLoading}
-    <InsetAlert type="alert-info" message="辞書データ読み込み中..." />
+    <InsetAlert
+      type="alert-info"
+      message="辞書データ読み込み中...。初回起動時は、約20秒かかります。" />
   {:else if $errorMsgMorpheme}
     <InsetAlert type="alert-danger" message={$errorMsgMorpheme} />
   {:else if !isFetching}
