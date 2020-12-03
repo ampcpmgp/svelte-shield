@@ -80,4 +80,6 @@ IPFS本詳細ページ:
     func: [page, /books/QmYioEjAL3rWYyQMewypZqh7XqKq3QzAZ6QyrYkQ4nq6HS]
   自作分:
     func: [page, /books/QmdVwncaa55bMTqYxyBzeY8sENhJxEYTXJJNt4d29rpQ3B]
+  睡眠 - Wikipedia:
+    func: [page, /books/QmSFzyeW58N9PuzpaaGBUc1RRxgZqPMBDG5MLoQ1RE25Lt]
 404 page: [page, /404]
