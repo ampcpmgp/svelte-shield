@@ -9,9 +9,13 @@
   export let params = { hash: '' }
   const { hash } = params
 
-  initBook()
-  initMorpheme()
-  fetch(hash)
+  async function init() {
+    initBook()
+    await initMorpheme()
+    await fetch(hash)
+  }
+
+  init()
 </script>
 
 <Frame>
