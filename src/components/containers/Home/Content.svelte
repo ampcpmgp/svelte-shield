@@ -15,7 +15,8 @@
   {#if $isLoading}
     <InsetAlert
       type="alert-info"
-      message="辞書データ読み込み中...。初回起動時は、約20秒かかります。" />
+      message="辞書データ読み込み中..."
+      subMessage="初回起動時は、読み込みに約20秒～かかります。" />
   {:else if $errorMsg}
     <InsetAlert type="alert-danger" message={$errorMsg} />
   {:else}

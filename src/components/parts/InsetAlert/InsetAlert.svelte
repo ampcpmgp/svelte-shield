@@ -4,6 +4,7 @@
   export let isStrong = false
   export let isOneLine = false
   export let progress = 0.0
+  export let subMessage = ''
 
   // 空白の場合は全角スペースを入れ 1lh を確保する
   $: progressPercent = `${progress * 100}%`
@@ -14,6 +15,7 @@
     margin: 0 auto;
     width: 100%;
     max-width: 640px;
+    position: relative;
   }
 
   .inset {
@@ -50,6 +52,12 @@
         inset -3px -3px 7px rgba(5, 5, 5, 0.5) !important;
     }
   }
+
+  .sub-message {
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
 </style>
 
 <div class="wrapper">
@@ -58,4 +66,8 @@
   </div>
 
   <div class="meter" style="--width-percent: {progressPercent}" />
+
+  {#if subMessage}
+    <div class="sub-message badge badge-md badge-secondary">{subMessage}</div>
+  {/if}
 </div>
