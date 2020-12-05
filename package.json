@@ -49,7 +49,7 @@
     "bootstrap": "^4.5.2",
     "dayjs": "^1.9.6",
     "dexie": "^3.0.3",
-    "ipfs": "^0.52.1",
+    "ipfs": "^0.52.2",
     "jquery": "^3.5.1",
     "kuromoji": "^0.1.2",
     "modern-css-reset": "^1.1.0",
