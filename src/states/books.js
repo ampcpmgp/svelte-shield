@@ -6,13 +6,15 @@ import * as dexie from '../databases/dexie'
 // { hash, title, insertedDate }
 export const loadedBooks = writable([])
 
-const limit = 30
+// どこかで paging 対応をする
+const limit = 999
 
 export function init() {
   loadedBooks.set([])
 }
 
 export async function loadBooks(offset) {
+  console.time()
   const books = await dexie.getBooks(offset, limit)
 
   // ipfs.get 時に Peer が見つからない可能性があるため、ひとまず並列化しない
@@ -29,4 +31,5 @@ export async function loadBooks(offset) {
       },
     ])
   })
+  console.timeEnd()
 }
