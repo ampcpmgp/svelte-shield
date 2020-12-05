@@ -340,9 +340,14 @@ export function composite(path) {
           result.push({ word, info })
 
           return result
-          // trim して3文字未満になり、名詞関連であり、次のアイテムが改行文字で無ければ、次のアイテムの先頭に結合させる。
+          // trim して3文字以上であれば格納する。
+        } else if (trimmedWord.length >= 3) {
+          result.push({ word, info })
+
+          return result
+
+          // 名詞関連であり、次のアイテムが改行文字で無ければ、次のアイテムの先頭に結合させる。
         } else if (
-          trimmedWord.length < 3 &&
           currentCompositionFirstItem &&
           isRelationalNoun(currentCompositionFirstItem) &&
           nextComposition &&
@@ -351,22 +356,14 @@ export function composite(path) {
           nextComposition.unshift(...item)
 
           return result
-          // trim して3文字未満になり、前のアイテムが最終文字で無ければ、前の文字に結合させる。
-        } else if (
-          trimmedWord.length < 3 &&
-          prevComposition &&
-          !isLastWord(prevCompositionLastItem)
-        ) {
+          // 前のアイテムが最終文字で無ければ、前の文字に結合させる。
+        } else if (prevComposition && !isLastWord(prevCompositionLastItem)) {
           const lastItem = result[result.length - 1]
           lastItem.word += word
 
           return result
-          // 上記二つの if 文にマッチしなければ、次が改行でなければ結合させる。
-        } else if (
-          trimmedWord.length < 3 &&
-          nextComposition &&
-          !/\n/.test(getWord(nextComposition))
-        ) {
+          // 次が改行でなければ結合させる。
+        } else if (nextComposition && !/\n/.test(getWord(nextComposition))) {
           nextComposition.unshift(...item)
 
           return result
