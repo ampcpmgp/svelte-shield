@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-
-    # - uses: actions/cache@v2
-    #   with:
-    #     path: |
-    #       ~/cache
-    #       !~/cache/exclude
-    #       **/node_modules
-    #     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-    - run: npm ci
     - name: "Versions"
       run: |
         cat /etc/os-release
         node --version
         npm --version
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - run: npm ci
     - run: npm run lint
     - run: npm test
 
