@@ -62,6 +62,7 @@
     /* neumorphism の style を上書き */
     white-space: initial;
     text-align: initial;
+    line-height: 1.2;
   }
 </style>
 

@@ -9,11 +9,11 @@
 <style>
   .wrapper {
     display: grid;
-    align-content: center;
     grid-template-columns: repeat(auto-fill, 160px);
-    gap: 12px;
-    padding: 16px 0;
+    align-content: start;
     justify-content: center;
+    gap: 16px;
+    padding: 32px 0;
   }
   @media (max-width: 575px) {
     .wrapper {
