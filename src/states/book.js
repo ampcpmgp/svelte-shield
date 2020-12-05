@@ -11,7 +11,7 @@ export const license = writable()
 // { value: URL }
 export const sources = writable([])
 export const isFetching = writable(false)
-export const errMessage = writable('')
+export const errorMsg = writable('')
 
 export function init() {
   bookType.set()
@@ -22,7 +22,7 @@ export function init() {
   morpheme.rawText.set('')
 
   isFetching.set(false)
-  errMessage.set('')
+  errorMsg.set('')
 }
 
 export async function fetch(hash) {
@@ -34,7 +34,14 @@ export async function fetch(hash) {
     encodedBook = await ipfs.get(hash)
   } catch (error) {
     isFetching.set(false)
-    errMessage.set('Peer 検索時、タイムアウトエラー')
+
+    if (error.message === 'multihash unknown function code: 0x3e') {
+      errorMsg.set('不明なハッシュです')
+    } else if (error.message === 'request timed out') {
+      errorMsg.set('Peer 探索タイムアウト')
+    } else {
+      errorMsg.set('不明なエラーです')
+    }
 
     throw new Error(error)
   }

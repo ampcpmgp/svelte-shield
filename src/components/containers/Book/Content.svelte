@@ -23,11 +23,12 @@
       subMessage="初回読み込み時は約20秒、キャッシュ読み込み時は約10秒かかります。" />
   {:else if $errorMsgMorpheme}
     <InsetAlert type="alert-danger" message={$errorMsgMorpheme} />
-  {:else if !isFetching}
+  {:else if $isFetching}
     <InsetAlert type="alert-info" message="Peer 探索中..." />
   {:else if $errorMsgBook}
-    <InsetAlert type="alert-danger" message={errorMsgBook} />
+    <InsetAlert type="alert-danger" message={$errorMsgBook} />
   {:else}
+    {$errorMsgBook}
     <Playable />
   {/if}
 </div>
