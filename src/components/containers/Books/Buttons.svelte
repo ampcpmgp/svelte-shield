@@ -28,7 +28,9 @@
 </style>
 
 <div class="wrapper">
-  <button class="btn btn-sm btn-primary all-install">一括取込</button>
+  <button
+    class="btn btn-sm btn-primary all-install"
+    disabled>一括取込(実装予定)</button>
 
   <div class="devider" />
 

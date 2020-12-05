@@ -42,12 +42,13 @@ export async function fetch(hash) {
   const book = decode(encodedBook)
   const isExistsInDb = await db.existsbook(hash)
 
-  if (!isExistsInDb)
+  if (!isExistsInDb) {
     await db.setbook({
       hash,
       readingRatio: 0,
       insertedDate: new Date(),
     })
+  }
 
   bookType.set(book.bookType)
   title.set(book.title)

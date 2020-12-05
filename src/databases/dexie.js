@@ -34,3 +34,12 @@ export function getBook(hash) {
     .equals(hash)
     .first()
 }
+
+export function getBooks(offset = 0, limit = 10) {
+  return db.books
+    .orderBy('insertedDate')
+    .reverse()
+    .offset(offset)
+    .limit(limit)
+    .toArray()
+}

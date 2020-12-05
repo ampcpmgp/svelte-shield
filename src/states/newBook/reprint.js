@@ -32,12 +32,13 @@ export async function save() {
 
   const isExistsInDb = await db.existsbook(path)
 
-  if (!isExistsInDb)
+  if (!isExistsInDb) {
     await db.setbook({
       hash: path,
       readingRatio: 0,
       insertedDate: new Date(),
     })
+  }
 
   reset()
 
