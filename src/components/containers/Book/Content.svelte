@@ -20,7 +20,7 @@
     <InsetAlert
       type="alert-info"
       message="辞書データ読み込み中..."
-      subMessage="初回起動時は、読み込みに約20秒～かかります。" />
+      subMessage="初回読み込み時は約20秒～かかります。" />
   {:else if $errorMsgMorpheme}
     <InsetAlert type="alert-danger" message={$errorMsgMorpheme} />
   {:else if !isFetching}
