@@ -10,29 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-
-    # - uses: actions/cache@v2
-    #   with:
-    #     path: |
-    #       ~/cache
-    #       !~/cache/exclude
-    #       **/node_modules
-    #     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-    - run: rm -rf node_modules
-    - run: npm install -f
-    - run: rm -rf package-lock.json npm-shrinkwrap.json node_modules
-    - run: npm cache clean --force
-    - run: npm cache verify
-    - run: npm install
     - name: "Versions"
       run: |
         cat /etc/os-release
         node --version
         npm --version
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - run: npm ci
     - run: npm run lint
     - run: npm test
 
