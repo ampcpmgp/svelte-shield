@@ -12,7 +12,7 @@ export function setbook(book) {
   return db.books.put(book)
 }
 
-export async function existsbook(hash) {
+export async function existsBook(hash) {
   const count = await db.books
     .where('hash')
     .equals(hash)
@@ -21,7 +21,7 @@ export async function existsbook(hash) {
   return count === 1
 }
 
-export function deletebook(hash) {
+export function deleteBook(hash) {
   return db.books
     .where('hash')
     .equals(hash)

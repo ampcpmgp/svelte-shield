@@ -30,7 +30,7 @@ export async function save() {
 
   const { path } = results
 
-  const isExistsInDb = await dexie.existsbook(path)
+  const isExistsInDb = await dexie.existsBook(path)
 
   if (!isExistsInDb) {
     await dexie.setbook({

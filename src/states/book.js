@@ -40,7 +40,7 @@ export async function fetch(hash) {
   }
 
   const book = decode(encodedBook)
-  const isExistsInDb = await dexie.existsbook(hash)
+  const isExistsInDb = await dexie.existsBook(hash)
 
   if (!isExistsInDb) {
     await dexie.setbook({
