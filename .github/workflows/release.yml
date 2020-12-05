@@ -24,7 +24,7 @@ jobs:
     #     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - run: rm -rf node_modules
     - run: npm install -f
-    - run: rm -rf node_modules
+    - run: rm -rf package-lock.json npm-shrinkwrap.json node_modules
     - run: npm cache clean --force
     - run: npm cache verify
     - run: npm install
