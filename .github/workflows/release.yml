@@ -25,6 +25,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - run: rm -rf node_modules package-lock.json
     - run: npm cache clean --force
     - run: npm ci
     - name: "Versions"
