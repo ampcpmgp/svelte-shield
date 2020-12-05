@@ -6,7 +6,7 @@
   import NewSelfMade from '../containers/Books/NewSelfMade.svelte'
   import Frame from '../parts/Frame/Main.svelte'
   import Buttons from '../containers/Books/Buttons.svelte'
-  import Books from '../containers/Books/Books.svelte'
+  import LoadedBooks from '../containers/Books/LoadedBooks.svelte'
   import { init } from '../../databases/ipfs'
 
   init()
@@ -26,7 +26,7 @@
 
   <div class="content" slot="content">
     <Buttons />
-    <Books />
+    <LoadedBooks />
   </div>
 
   <div slot="footer">

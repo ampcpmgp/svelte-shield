@@ -42,6 +42,21 @@ settings:
     - [openModal, SETTINGS]
 IPFS本ページ:
   func: [page, /books]
+  本レイアウト:
+    noLink: true
+    タイトル文字数が大きいもの:
+      - [sleep, 1000]
+      - [
+          books.loadedBooks.set,
+          [
+            {
+              title: ０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz
+            },
+            {
+              title: １
+            }
+          ]
+        ]
   転載して登録:
     funcs:
       - [sleep, 0]
