@@ -51,6 +51,7 @@ export async function save() {
   }
 
   reset()
+  ipfs.addPin(path)
 
   return results
 }

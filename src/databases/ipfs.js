@@ -1,4 +1,4 @@
-import { default as IPFS } from 'ipfs'
+import { default as IPFS, CID } from 'ipfs'
 
 /**
  * ファイル読み込み時に getNode を読んでもパフォーマンスに大きな影響は出ないが、 IPFS は現状問題の無い
@@ -43,4 +43,18 @@ export async function get(hash) {
 
     return content
   }
+}
+
+export async function addPin(hash) {
+  const node = await getNode()
+  const cid = await node.pin.add(new CID(hash))
+
+  void cid
+}
+
+export async function removePin(hash) {
+  const node = await getNode()
+  const cid = await node.pin.rm(new CID(hash))
+
+  void cid
 }

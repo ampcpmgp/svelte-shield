@@ -37,8 +37,8 @@ kuromoji
     const testPath = require('path').join(dir, `${fileName}.test.js`)
 
     require('fs').writeFileSync(jsonPath, json)
-    console.log(`Created ${jsonPath}`)
+    console.info(`Created ${jsonPath}`)
 
     require('fs').writeFileSync(testPath, js())
-    console.log(`Created ${testPath}`)
+    console.info(`Created ${testPath}`)
   })

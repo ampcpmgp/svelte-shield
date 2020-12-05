@@ -39,6 +39,8 @@ export async function fetch(hash) {
     throw new Error(error)
   }
 
+  ipfs.addPin(hash)
+
   const book = decode(encodedBook)
   const isExistsInDb = await dexie.existsBook(hash)
 

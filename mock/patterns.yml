@@ -93,7 +93,6 @@ IPFS本詳細ページ:
   noLink: true
   転載文:
     funcs:
-      - [dexie.deleteBook, QmYioEjAL3rWYyQMewypZqh7XqKq3QzAZ6QyrYkQ4nq6HS]
       - [page, /books/QmYioEjAL3rWYyQMewypZqh7XqKq3QzAZ6QyrYkQ4nq6HS]
   自作分:
     func: [page, /books/QmdVwncaa55bMTqYxyBzeY8sENhJxEYTXJJNt4d29rpQ3B]
