@@ -3,33 +3,28 @@
     word,
     isPlay,
     isPause,
-    tokenize,
     rawText,
     info,
     progress,
     play,
+    resume,
     stop,
+    pause,
   } from '../../../states/morpheme'
+  import { bookType } from '../../../states/book'
+  import { default as BookType } from '../../../const/BookType'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
-  import ReadingCard from './ReadingCard.svelte'
-
-  async function handlePlayButtonClick() {
-    stop()
-    await tokenize()
-    play()
-  }
-
-  function pause() {
-    $isPause = true
-  }
+  import ReadingCard from '../!Common/ReadingCard.svelte'
+  import Reprint from './Reprint.svelte'
+  import Quotes from './Quotes.svelte'
 </script>
 
 <style>
   .wrapper {
     display: grid;
     grid-row-gap: 16px;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     height: 100%;
   }
 
@@ -38,10 +33,6 @@
     display: grid;
     grid-auto-flow: column;
     grid-column-gap: 12px;
-  }
-
-  textarea::placeholder {
-    opacity: 0.6;
   }
 
   i {
@@ -63,25 +54,31 @@
 
     {#if !$isPlay}
       <!-- 再生 -->
-      <Icon isBox={true} on:click={handlePlayButtonClick}>
-        <i class="fas fa-play" />
-      </Icon>
+      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
     {:else if !$isPause}
       <!-- 一時停止 -->
       <Icon isBox={true} on:click={pause}><i class="fas fa-pause" /></Icon>
     {:else}
       <!-- 再開 -->
-      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
+      <Icon isBox={true} on:click={resume}><i class="fas fa-play" /></Icon>
     {/if}
   </div>
 
   {#if !$isPause}
     <textarea
-      disabled={$isPlay}
+      rows="6"
+      disabled={true}
       bind:value={$rawText}
-      class="form-control"
-      placeholder="テキストを入力してください" />
+      class="form-control" />
   {:else}
     <ReadingCard />
+  {/if}
+
+  {#if $bookType === BookType.SELF_MADE}
+    <Quotes />
+  {/if}
+
+  {#if $bookType === BookType.REPRINT}
+    <Reprint />
   {/if}
 </div>

@@ -26,12 +26,10 @@ export const ignoreReading = writable(false)
 export const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
 export const カタカナ = /([ァ-ヶー]+)/
 
-const initP = init()
+let tokenizer
 
-async function init() {
-  // 初期描画が終わったあとに辞書データを読み込む。
-  await sleep(0)
-
+async function getTokenizer() {
+  if (tokenizer) return tokenizer
   return new Promise((resolve, reject) => {
     kuromoji.builder({ dicPath: './dict/' }).build(function(err, tokenizer) {
       if (get(ignoreReading)) {
@@ -51,14 +49,24 @@ async function init() {
   })
 }
 
+export async function init() {
+  tokenizer = await getTokenizer()
+}
+
 export async function tokenize() {
-  const tokenizer = await initP
+  const tokenizer = await getTokenizer()
 
   const path = tokenizer.tokenize(get(rawText))
   compositions.set(composite(path))
 }
 
 export async function play() {
+  stop()
+  await tokenize()
+  resume()
+}
+
+export async function resume() {
   isPlay.set(true)
   isPause.set(false)
   const intervalMsPerChar = localStorage.intervalMsPerChar
@@ -94,6 +102,10 @@ export function stop() {
   word.set('')
   compositions.set([])
   currentIndex.set(0)
+}
+
+export function pause() {
+  isPause.set(true)
 }
 
 export function getWord(composition) {

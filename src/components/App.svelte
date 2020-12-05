@@ -1,7 +1,5 @@
 <script>
   import Router from 'svelte-spa-router'
-  import Header from './containers/Header/Header'
-  import Footer from './containers/Footer/Footer'
   import routes from './routes'
 </script>
 
@@ -10,36 +8,36 @@
     padding: 10px 12px;
     box-sizing: border-box;
     height: 100vh;
+    word-break: break-all;
   }
 
   :global(#app) {
-    height: 100%;
+    min-height: 100%;
+    display: grid;
   }
 
   .wrapper {
-    height: 100%;
+    display: grid;
+    min-height: 100%;
     margin: 0 auto;
     max-width: 1240px;
+    width: 100%;
   }
 
   .card {
-    height: 100%;
+    min-height: 100%;
   }
 
   .card-body {
-    height: 100%;
+    min-height: 100%;
     display: grid;
-    grid-template-rows: auto 1fr;
-    word-break: break-all;
   }
 </style>
 
 <div class="wrapper">
   <div class="card shadow-soft border-light">
     <div class="card-body">
-      <Header />
       <Router {routes} />
-      <Footer />
     </div>
   </div>
 </div>

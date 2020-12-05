@@ -2,10 +2,21 @@ import mock from 'am-mocktimes'
 import { replace } from 'svelte-spa-router'
 import sleep from '../src/utils/sleep'
 import * as morpheme from '../src/states/morpheme'
+import * as books from '../src/states/books'
+import * as book from '../src/states/book'
+import * as newBook from '../src/states/newBook'
+import * as ipfs from '../src/databases/ipfs'
+import * as dexie from '../src/databases/dexie'
+import { default as Modal } from '../src/const/modal'
 
 mock({
   sleep,
   morpheme,
+  books,
+  book,
+  newBook,
+  ipfs,
+  dexie,
 
   page(name) {
     replace(name)
@@ -13,6 +24,10 @@ mock({
 
   click(selector) {
     document.querySelector(selector).click()
+  },
+
+  openModal(name) {
+    document.querySelector(`[data-target="#${Modal[name]}"]`).click()
   },
 
   rustCoc() {

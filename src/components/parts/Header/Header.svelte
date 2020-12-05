@@ -1,11 +1,11 @@
 <script>
+  import { default as Modal } from '../../../const/modal'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
 </script>
 
 <style>
   header {
     display: grid;
-    justify-content: right;
     grid-column-gap: 14px;
     grid-template-columns: auto 1fr auto auto;
   }
@@ -16,7 +16,7 @@
 </style>
 
 <header>
-  <div data-toggle="modal" data-target="#modal-default" data-mock-open-modal>
+  <div data-toggle="modal" data-target={'#' + Modal.SETTINGS}>
     <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
   </div>
 

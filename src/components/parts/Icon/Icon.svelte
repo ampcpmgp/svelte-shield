@@ -25,13 +25,15 @@
     opacity: 0.3;
     pointer-events: none;
   }
-  @media(prefers-color-scheme:dark){
+  @media (prefers-color-scheme: dark) {
     .wrapper {
       background-color: var(--darkMode);
-      box-shadow: 3px 3px 4px rgba(0,0,0,0.3), -3px -3px 7px rgba(245,245,245,0.1);
+      box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3),
+        -3px -3px 7px rgba(245, 245, 245, 0.1);
     }
     .wrapper:hover {
-      box-shadow: inset 3px 3px 4px rgba(5,5,5,0.51), inset -1px -1px 2px rgba(255,255,255,0.1);
+      box-shadow: inset 3px 3px 4px rgba(5, 5, 5, 0.51),
+        inset -1px -1px 2px rgba(255, 255, 255, 0.1);
     }
   }
 </style>

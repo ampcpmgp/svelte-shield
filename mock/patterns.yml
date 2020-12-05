@@ -39,5 +39,63 @@ settings:
   設定画面を表示:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
-    - [click, "[data-mock-open-modal]"]
+    - [openModal, SETTINGS]
+IPFS本ページ:
+  func: [page, /books]
+  本レイアウト:
+    noLink: true
+    タイトル文字数が大きいもの:
+      - [sleep, 1000]
+      - [
+          books.loadedBooks.set,
+          [
+            {
+              title: ０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９
+            },
+            {
+              title: abcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyz
+            }
+          ]
+        ]
+  転載して登録:
+    funcs:
+      - [sleep, 0]
+      - [openModal, NEW_REGISTER_REPRINT_BOOK]
+    入力して保存:
+      - [sleep, 0]
+      - [newBook.reprint.title.set, dummy title]
+      - [newBook.reprint.url.set, dummy-url]
+      - [newBook.reprint.license.set, { value: "CC0-1.0", label: "CC0-1.0" }]
+      - [newBook.reprint.content.set, dummy content]
+      - [sleep, 1500]
+      - [click, "[data-mock=\"save-new-reprint\"]"]
+  自作分を登録:
+    funcs:
+      - [sleep, 0]
+      - [openModal, NEW_REGISTER_SELF_MADE_BOOK]
+    引用元を追加して入力:
+      - [sleep, 0]
+      - [newBook.selfMade.sources.set, [
+        { value: "" },
+        { value: "//example.com" }
+      ]]
+    入力して保存:
+      - [sleep, 0]
+      - [newBook.selfMade.title.set, dummy title]
+      - [newBook.selfMade.sources.set, [
+        { value: "//example.com/sample-page-1" },
+        { value: "//example.com/sample-page-2" }
+      ]]
+      - [newBook.selfMade.content.set, dummy content]
+      - [sleep, 1500]
+      - [click, "[data-mock=\"save-new-self-made\"]"]
+IPFS本詳細ページ:
+  noLink: true
+  転載文:
+    funcs:
+      - [page, /books/QmYioEjAL3rWYyQMewypZqh7XqKq3QzAZ6QyrYkQ4nq6HS]
+  自作分:
+    func: [page, /books/QmdVwncaa55bMTqYxyBzeY8sENhJxEYTXJJNt4d29rpQ3B]
+  睡眠 - Wikipedia:
+    func: [page, /books/QmULjPTtPNk1hoQFnV27eh3Nz2B7dr1BBNxY49LBEHdpcU]
 404 page: [page, /404]
