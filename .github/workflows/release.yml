@@ -25,6 +25,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - run: npm cache verify
     - run: npm ci
     - name: "Versions"
       run: |
@@ -54,6 +55,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - run: npm cache verify
       - run: npm ci
       - run: npm run dist
       - run: npm run dist-mocktimes
