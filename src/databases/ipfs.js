@@ -9,8 +9,6 @@ const nodeP = getNode()
 async function getNode() {
   const createdNode = await IPFS.create()
 
-  console.log(23)
-
   return createdNode
 }
 
@@ -55,6 +53,6 @@ export async function lsPin() {
   const node = await nodeP
 
   for await (const result of node.pin.ls()) {
-    console.log(result)
+    console.info(result)
   }
 }

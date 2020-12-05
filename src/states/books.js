@@ -14,7 +14,6 @@ export function init() {
 }
 
 export async function loadBooks(offset) {
-  console.time()
   const books = await dexie.getBooks(offset, limit)
 
   // ipfs.get 時に Peer が見つからない可能性があるため、ひとまず並列化しない
@@ -31,5 +30,4 @@ export async function loadBooks(offset) {
       },
     ])
   })
-  console.timeEnd()
 }
