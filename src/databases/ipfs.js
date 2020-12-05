@@ -1,27 +1,21 @@
-import { default as IPFS, CID } from 'ipfs'
+import { default as IPFS } from 'ipfs'
 
 /**
- * ファイル読み込み時に getNode を読んでもパフォーマンスに大きな影響は出ないが、 IPFS は現状問題の無い
- * websocket のエラーが多発しているため、不要なログを出さないためにも、必要なページだけ
- * node を create するようにする。
+ * IPFS は現状問題の無い websocket のエラーが多発している。
  * 参考記事: https://stackoverflow.com/questions/63563162/ipfs-js-cant-connect-to-ws-127-0-0-18081-p2p
  */
-let _nodeP
+const nodeP = getNode()
 
 async function getNode() {
-  if (_nodeP) return await _nodeP
-
   const createdNode = await IPFS.create()
+
+  console.log(23)
 
   return createdNode
 }
 
-export function init() {
-  _nodeP = getNode()
-}
-
 export async function add(data) {
-  const node = await getNode()
+  const node = await nodeP
 
   // https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsadddata-options
   const results = await node.add(data)
@@ -30,7 +24,7 @@ export async function add(data) {
 }
 
 export async function get(hash) {
-  const node = await getNode()
+  const node = await nodeP
   const content = []
 
   // https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsgetipfspath-options
@@ -46,15 +40,21 @@ export async function get(hash) {
 }
 
 export async function addPin(hash) {
-  const node = await getNode()
-  const cid = await node.pin.add(new CID(hash))
+  const node = await nodeP
 
-  void cid
+  await node.pin.add(hash)
 }
 
 export async function removePin(hash) {
-  const node = await getNode()
-  const cid = await node.pin.rm(new CID(hash))
+  const node = await nodeP
 
-  void cid
+  await node.pin.rm(hash)
+}
+
+export async function lsPin() {
+  const node = await nodeP
+
+  for await (const result of node.pin.ls()) {
+    console.log(result)
+  }
 }

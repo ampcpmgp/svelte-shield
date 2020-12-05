@@ -7,9 +7,7 @@
   import Frame from '../parts/Frame/Main.svelte'
   import Buttons from '../containers/Books/Buttons.svelte'
   import LoadedBooks from '../containers/Books/LoadedBooks.svelte'
-  import { init } from '../../databases/ipfs'
-
-  init()
+  import '../../databases/ipfs'
 </script>
 
 <style>
