@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 import { decode } from '@msgpack/msgpack'
 import * as ipfs from '../databases/ipfs'
-import * as db from '../databases/dexie'
+import * as dexie from '../databases/dexie'
 
 // { hash, title, insertedDate }
 export const loadedBooks = writable([])
@@ -13,7 +13,7 @@ export function init() {
 }
 
 export async function loadBooks(offset) {
-  const books = await db.getBooks(offset, limit)
+  const books = await dexie.getBooks(offset, limit)
 
   // ipfs.get 時に Peer が見つからない可能性があるため、ひとまず並列化しない
   books.forEach(async bookOnDb => {

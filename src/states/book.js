@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 import { decode } from '@msgpack/msgpack'
 import * as ipfs from '../databases/ipfs'
-import * as db from '../databases/dexie'
+import * as dexie from '../databases/dexie'
 import * as morpheme from './morpheme'
 
 export const bookType = writable()
@@ -40,10 +40,10 @@ export async function fetch(hash) {
   }
 
   const book = decode(encodedBook)
-  const isExistsInDb = await db.existsbook(hash)
+  const isExistsInDb = await dexie.existsbook(hash)
 
   if (!isExistsInDb) {
-    await db.setbook({
+    await dexie.setbook({
       hash,
       readingRatio: 0,
       insertedDate: new Date(),
