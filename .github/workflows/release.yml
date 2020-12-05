@@ -22,7 +22,12 @@ jobs:
           !~/cache/exclude
           **/node_modules
         key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-    - run: npm ci
+    - run: rm -rf node_modules
+    - run: npm install -f
+    - run: rm -rf node_modules
+    - run: npm cache clean --force
+    - run: npm cache verify
+    - run: npm install
     - name: "Versions"
       run: |
         cat /etc/os-release
