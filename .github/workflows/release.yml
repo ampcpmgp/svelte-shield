@@ -25,7 +25,8 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - run: npm ci
+    - run: rm -rf node_modules
+    - run: npm install -f
     - name: "Versions"
       run: |
         cat /etc/os-release
