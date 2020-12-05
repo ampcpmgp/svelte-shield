@@ -1,4 +1,5 @@
 <script>
+  import { link } from 'svelte-spa-router'
   import { default as Modal } from '../../../const/modal'
   import { title } from '../../../states/book'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
@@ -68,7 +69,10 @@
   </div>
 
   <div class="title-wrapper">
-    <Icon><i class="fas fa-angle-left" /></Icon>
+    <a href="/books" use:link>
+      <Icon><i class="fas fa-angle-left" /></Icon>
+    </a>
+
     <div class="title" title={$title}>{$title}</div>
   </div>
 
