@@ -57,6 +57,11 @@
     position: absolute;
     top: 100%;
     right: 0;
+    max-width: 80%;
+    word-break: break-all;
+    /* neumorphism の style を上書き */
+    white-space: initial;
+    text-align: initial;
   }
 </style>
 

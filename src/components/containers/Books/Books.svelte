@@ -10,15 +10,25 @@
   .wrapper {
     display: grid;
     align-content: center;
-    grid-template-columns: repeat(auto-fill, 140px);
-    grid-template-rows: repeat(auto-fill, 160px);
+    grid-template-columns: repeat(auto-fill, 160px);
     gap: 12px;
-    padding: 16px;
+    padding: 16px 0;
     justify-content: center;
+  }
+  @media (max-width: 575px) {
+    .wrapper {
+      grid-template-columns: repeat(auto-fill, 100px);
+    }
   }
 
   .book {
     padding: 6px;
+    height: 180px;
+  }
+  @media (max-width: 575px) {
+    .book {
+      height: 110px;
+    }
   }
 </style>
 
