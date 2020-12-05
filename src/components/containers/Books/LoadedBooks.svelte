@@ -40,9 +40,17 @@
     font-size: 14px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    line-clamp: 3;
-    -webkit-line-clamp: 3;
+    line-clamp: 6;
+    -webkit-line-clamp: 6;
     overflow: hidden;
+    line-height: 1.4;
+  }
+  @media (max-width: 575px) {
+    .title {
+      line-clamp: 3;
+      -webkit-line-clamp: 3;
+      line-height: 1.3;
+    }
   }
 
   .date {
@@ -60,6 +68,7 @@
     <a
       href={`/books/${book.hash}`}
       class="card bg-primary border-light shadow-soft book"
+      title={book.title}
       use:link>
       <h3 class="title">{book.title}</h3>
       <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>

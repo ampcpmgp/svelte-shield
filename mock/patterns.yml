@@ -50,10 +50,10 @@ IPFS本ページ:
           books.loadedBooks.set,
           [
             {
-              title: ０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz０１２３４５６７８９abcdefghijkmlnopqrstuvwxyz
+              title: ０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９
             },
             {
-              title: １
+              title: abcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyzabcdefghijkmlnopqrstuvwxyz
             }
           ]
         ]
