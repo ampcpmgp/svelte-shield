@@ -15,6 +15,13 @@ jobs:
       with:
         node-version: '14.x'
 
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+          **/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - run: npm ci
     - name: "Versions"
       run: |
@@ -34,16 +41,13 @@ jobs:
         with:
           node-version: '14.x'
 
-      - uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
+      - uses: actions/cache@v2
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          path: |
+            ~/cache
+            !~/cache/exclude
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
       - run: npm ci
       - run: npm run dist
       - run: npm run dist-mocktimes
