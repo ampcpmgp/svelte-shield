@@ -7,6 +7,10 @@ settings:
   辞書取得エラー:
     - [morpheme.isLoading.set, false]
     - [morpheme.errorMsg.set, 辞書取得エラー]
+  設定画面を表示:
+    - [morpheme.ignoreReading.set, true]
+    - [sleep, 0]
+    - [openModal, SETTINGS]
   夏目漱石の文を再生:
     - [kokoro]
     - [morpheme.tokenize]
@@ -36,10 +40,6 @@ settings:
     - [morpheme.tokenize]
     - [morpheme.isPlay.set, true]
     - [morpheme.isPause.set, true]
-  設定画面を表示:
-    - [morpheme.ignoreReading.set, true]
-    - [sleep, 0]
-    - [openModal, SETTINGS]
 IPFS本ページ:
   func: [page, /books]
   本レイアウト:
