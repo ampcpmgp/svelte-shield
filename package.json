@@ -4,6 +4,7 @@
   "scripts": {
     "start": "run-s copy-dict start:mocktimes",
     "start:mocktimes": "parcel mock/testbed/*.html",
+    "start:mocktimes-https": "parcel mock/testbed/*.html --https",
     "copy-dict": "cpy node_modules/kuromoji/dict/*.dat.gz dist/dict/",
     "start-dev": "parcel src/index.html --open",
     "test": "ava",
@@ -50,6 +51,7 @@
     "dayjs": "^1.9.6",
     "dexie": "^3.0.3",
     "ipfs": "^0.52.2",
+    "is_js": "^0.9.0",
     "jquery": "^3.5.1",
     "kuromoji": "^0.1.2",
     "modern-css-reset": "^1.1.0",
