@@ -149,8 +149,15 @@ export function isRelationalVerb(item) {
 export function isWeirdAtTheLast(item) {
   return (
     item.pos_detail_1 === '括弧開' ||
+    item.pos_detail_1 === '数' ||
     item.surface_form === '(' ||
-    item.surface_form === '['
+    item.surface_form === '[' ||
+    item.surface_form === '~' ||
+    item.surface_form === '～' ||
+    item.surface_form === '〜' ||
+    item.surface_form === '-' ||
+    item.surface_form === ' ' ||
+    item.surface_form === '　'
   )
 }
 
@@ -271,6 +278,13 @@ export function composite(path) {
     ) {
       void 0
 
+      // 前回の文字が、折り返すと不自然であるものは文字は折り返さない
+    } else if (
+      currentCompositionLastItem &&
+      isWeirdAtTheLast(currentCompositionLastItem)
+    ) {
+      void 0
+
       // 設定した判定数を超えたら、繰り上げる。
     } else if (word.length > judgeNum) {
       ++currentIndex
@@ -292,6 +306,9 @@ export function composite(path) {
 
     composition.push(item)
   })
+
+  // test 時にハマれば中間確認。
+  // console.log(compositions.map(item => item.map(i2 => i2.surface_form)))
 
   return (
     compositions

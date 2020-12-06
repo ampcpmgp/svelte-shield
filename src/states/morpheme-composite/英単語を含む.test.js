@@ -5,8 +5,7 @@ import { composite } from '../morpheme'
 test('composite/英単語を含む', t => {
   const result = composite(json).map(item => item.word)
   t.deepEqual(result, [
-    'hub',
-    'threads',
+    'hub threads',
     'ThreadDBへの',
     '制限付きアクセスを',
     '提供します。',
