@@ -13,6 +13,12 @@
     color: blue;
     text-decoration: underline;
   }
+
+  @media (prefers-color-scheme: dark) {
+    a {
+      color: var(--gray-500);
+    }
+  }
 </style>
 
 <div>引用元</div>

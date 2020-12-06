@@ -64,6 +64,14 @@
     text-align: initial;
     line-height: 1.2;
   }
+  @media (prefers-color-scheme: dark) {
+    .sub-message {
+      color: var(--darkModeAccent);
+      box-shadow: inset 3px 3px 4px rgba(155, 155, 155, 0.25),
+        inset -3px -3px 7px rgba(5, 5, 5, 0.5) !important;
+      border: none;
+    }
+  }
 </style>
 
 <div class="wrapper">

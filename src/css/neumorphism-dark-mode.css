@@ -67,9 +67,13 @@
       border-top: 1px solid rgba(255,255,255,0.25);
   }
   .btn{
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.5), -3px -3px 6px rgba(245,245,245,0.075);
-      border-color:rgba(255,255,255,0.05);
-  }
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.5), -3px -3px 6px rgba(245,245,245,0.075);
+    border-color:rgba(255,255,255,0.05);
+}
+  .btn:disabled{
+    background-color: var(--darkMode);
+    border-color: var(--darkMode);
+}
   .btn-primary {
       color: var(--gray-500);
       background-color: var(--darkMode);
