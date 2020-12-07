@@ -1,6 +1,7 @@
 <script>
   export let isBox = false
   export let isDisabled = false
+  export let colorType = ''
 </script>
 
 <style>
@@ -15,6 +16,14 @@
   }
   .wrapper:hover {
     box-shadow: inset 3px 3px 4px #b8b9be, inset -3px -3px 7px #ffffff;
+  }
+
+  .wrapper.light-yellow {
+    background-color: #f4fb93;
+    box-shadow: 3px 3px 4px #cfd57d, -3px -3px 7px #ffffa9;
+  }
+  .wrapper:hover.light-yellow {
+    box-shadow: inset 3px 3px 4px #cfd57d, inset -3px -3px 7px #ffffa9;
   }
 
   .box {
@@ -38,6 +47,11 @@
   }
 </style>
 
-<div class="wrapper" class:box={isBox} class:disabled={isDisabled} on:click>
+<div
+  class="wrapper"
+  class:light-yellow={colorType === 'light-yellow'}
+  class:box={isBox}
+  class:disabled={isDisabled}
+  on:click>
   <slot />
 </div>

@@ -7,11 +7,28 @@
   header {
     display: grid;
     grid-column-gap: 14px;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: 46px 34px 1fr 40px 40px;
+    place-items: center;
+  }
+  @media (max-width: 575px) {
+    header {
+      grid-column-gap: 8px;
+    }
   }
 
   i {
     font-size: 24px;
+  }
+
+  .fa-shield-alt {
+    font-size: 28px;
+    color: #0010ff;
+    cursor: pointer;
+  }
+  @media (prefers-color-scheme: dark) {
+    .fa-shield-alt {
+      color: #ffd700b5;
+    }
   }
 </style>
 
@@ -21,6 +38,9 @@
   </div>
 
   <!-- 隙間を空ける用の空タグ -->
+  <div />
+
+  <!-- <i class="fas fa-shield-alt" /> -->
   <div />
 
   <a href="https://twitter.com/am_nimitz3" target="_blank">
