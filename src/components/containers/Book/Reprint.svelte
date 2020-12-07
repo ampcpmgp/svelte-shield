@@ -1,15 +1,9 @@
 <script>
   import { url, license } from '../../../states/book'
   import { getUrl } from '../../../utils/licenses'
-  import * as is from '../../../utils/is'
 </script>
 
 <style>
-  .ios {
-    /* ios safari は .card-body の padding を突き抜けて置かれるため、上下に設定する */
-    padding-bottom: 3rem;
-  }
-
   a {
     color: blue;
     text-decoration: underline;
@@ -21,7 +15,7 @@
   }
 </style>
 
-<div class:ios={is.iOS()}>
+<div>
   この記事は、
   <a
     href={getUrl($license)}

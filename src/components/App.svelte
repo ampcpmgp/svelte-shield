@@ -1,6 +1,7 @@
 <script>
   import Router from 'svelte-spa-router'
   import routes from './routes'
+  import * as is from '../utils/is'
 </script>
 
 <style>
@@ -32,12 +33,23 @@
     min-height: 100%;
     display: grid;
   }
+
+  .ios-wrapper {
+    /* ios safari は .card-body の padding を突き抜けて置かれるため、上下に設定する */
+    padding-bottom: 3rem;
+  }
 </style>
 
 <div class="wrapper">
   <div class="card shadow-soft border-light">
     <div class="card-body">
-      <Router {routes} />
+      {#if is.iOS()}
+        <div class="ios-wrapper">
+          <Router {routes} />
+        </div>
+      {:else}
+        <Router {routes} />
+      {/if}
     </div>
   </div>
 </div>
