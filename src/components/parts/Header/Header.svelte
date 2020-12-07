@@ -21,17 +21,12 @@
   }
 
   .fa-shield-alt {
-    font-size: 28px;
-    color: #0010ff;
+    font-size: 30px;
     cursor: pointer;
+    text-shadow: 2px 2px 4px gray;
   }
   .fa-shield-alt:hover {
     opacity: 0.7;
-  }
-  @media (prefers-color-scheme: dark) {
-    .fa-shield-alt {
-      color: #ffd700b5;
-    }
   }
 </style>
 
