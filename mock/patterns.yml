@@ -11,6 +11,10 @@ settings:
     - [morpheme.ignoreReading.set, true]
     - [sleep, 0]
     - [openModal, SETTINGS]
+  モード切替を表示:
+    - [morpheme.ignoreReading.set, true]
+    - [sleep, 0]
+    - [openModal, MODE_CHANGE]
   夏目漱石の文を再生:
     - [kokoro]
     - [morpheme.tokenize]

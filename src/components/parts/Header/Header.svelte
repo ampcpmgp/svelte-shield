@@ -25,6 +25,9 @@
     color: #0010ff;
     cursor: pointer;
   }
+  .fa-shield-alt:hover {
+    opacity: 0.7;
+  }
   @media (prefers-color-scheme: dark) {
     .fa-shield-alt {
       color: #ffd700b5;
@@ -40,8 +43,10 @@
   <!-- 隙間を空ける用の空タグ -->
   <div />
 
-  <!-- <i class="fas fa-shield-alt" /> -->
-  <div />
+  <i
+    class="fas fa-shield-alt"
+    data-toggle="modal"
+    data-target={'#' + Modal.MODE_CHANGE} />
 
   <a href="https://twitter.com/am_nimitz3" target="_blank">
     <Icon><i class="fab fa-twitter-square" /></Icon>

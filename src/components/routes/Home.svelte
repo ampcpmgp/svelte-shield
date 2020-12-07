@@ -3,6 +3,7 @@
   import Header from '../parts/Header/Header.svelte'
   import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
+  import Mode from '../parts/Modals/Mode.svelte'
   import Frame from '../parts/Frame/Main.svelte'
   import Content from '../containers/Home/Content.svelte'
   import { onDestroy } from 'svelte'
@@ -40,3 +41,4 @@
 
 <!-- 各モーダル -->
 <Settings />
+<Mode />

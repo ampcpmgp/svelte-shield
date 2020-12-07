@@ -3,6 +3,7 @@
   import { init as initMorpheme } from '../../states/morpheme'
   import Header from '../containers/Book/Header.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
+  import Mode from '../parts/Modals/Mode.svelte'
   import Frame from '../parts/Frame/Main.svelte'
   import Content from '../containers/Book/Content.svelte'
 
@@ -30,3 +31,4 @@
 
 <!-- 各モーダル -->
 <Settings />
+<Mode />
