@@ -26,7 +26,7 @@
     text-shadow: 2px 2px 4px gray;
   }
   .fa-shield-alt:hover {
-    opacity: 0.7;
+    opacity: 0.5;
   }
 </style>
 
