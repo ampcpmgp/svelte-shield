@@ -13,7 +13,6 @@ jobs:
     steps:
     - name: "Versions"
       run: |
-        cat /etc/os-release
         node --version
         npm --version
     - uses: actions/checkout@v2
