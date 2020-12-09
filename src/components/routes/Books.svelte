@@ -2,6 +2,7 @@
   import Header from '../parts/Header/Header.svelte'
   import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
+  import Mode from '../parts/Modals/Mode.svelte'
   import NewReprint from '../containers/Books/NewReprint.svelte'
   import NewSelfMade from '../containers/Books/NewSelfMade.svelte'
   import Frame from '../parts/Frame/Main.svelte'
@@ -34,5 +35,6 @@
 
 <!-- 各モーダル -->
 <Settings />
+<Mode />
 <NewReprint />
 <NewSelfMade />
