@@ -27,7 +27,7 @@ jobs:
     #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     #     restore-keys: |
     #       ${{ runner.os }}-node-
-    - run: npm cache clean
+    - run: npm cache clean -f
     - run: npm ci
     - run: npm run lint
     - run: npm test
