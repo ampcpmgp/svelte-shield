@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - fix-cache-error
 
 jobs:
   test:
@@ -28,7 +27,7 @@ jobs:
           ${{ runner.os }}-node-
     # node-forge@0.9.2 の install 時に `EINTEGRITY` が出る。 version update までこれで対応する。
     - run: rm package-lock.json
-    - run: npm i # 上記を消せば npm ci に戻す
+    - run: npm i # 上記を消したとき npm ci に戻す
     - run: npm run lint
     - run: npm test
 
