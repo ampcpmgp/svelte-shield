@@ -26,8 +26,11 @@ jobs:
     #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     #     restore-keys: |
     #       ${{ runner.os }}-node-
-    - run: rm -rf ~/.npm
-    - run: npm ci
+    - run: rm -rf package-lock.json
+    - run: npm i
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+    - run: git
     - run: npm run lint
     - run: npm test
 
