@@ -10,23 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
     - name: "Versions"
       run: |
         cat /etc/os-release
         node --version
         npm --version
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
-
     - uses: actions/cache@v2
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm ci
+    # node-forge@0.9.2 の install 時に `EINTEGRITY` が出る。 version update までこれで対応する。
+    - run: rm package-lock.json
+    - run: npm i # 上記を消したとき npm ci に戻す
     - run: npm run lint
     - run: npm test
 
