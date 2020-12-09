@@ -28,6 +28,7 @@ jobs:
     #     restore-keys: |
     #       ${{ runner.os }}-node-
     - run: npm cache clean -f
+    - run: npm cache verify
     - run: npm ci
     - run: npm run lint
     - run: npm test
