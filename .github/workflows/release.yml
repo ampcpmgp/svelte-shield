@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: "Versions"
@@ -21,21 +21,18 @@ jobs:
       with:
         node-version: '14.x'
 
-    # - uses: actions/cache@v2
-    #   with:
-    #     path: ~/.npm
-    #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-node-
-    - run: npm cache clean -f
-    - run: npm cache verify
-    - run: npm install -f
+    - uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - run: npm ci
     - run: npm run lint
     - run: npm test
 
   # gh-pages:
-  #   runs-on: ubuntu-latest
+  #   runs-on: windows-latest
   #   needs: test
 
   #   steps:
