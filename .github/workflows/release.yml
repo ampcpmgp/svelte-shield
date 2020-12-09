@@ -11,15 +11,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: "Versions"
-      run: |
-        node --version
-        npm --version
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: '14.x'
-
+    - name: "Versions"
+      run: |
+        node --version
+        npm --version
     - uses: actions/cache@v2
       with:
         path: ~/.npm
