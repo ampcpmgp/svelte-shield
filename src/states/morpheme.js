@@ -104,6 +104,20 @@ export function stop() {
   currentIndex.set(0)
 }
 
+export function stepBackward() {
+  currentIndex.set(0)
+  setWordInfo()
+}
+
+export function setWordInfo() {
+  const composition = get(compositions)[get(currentIndex)]
+
+  if (composition) {
+    word.set(composition.word)
+    info.set(composition.info)
+  }
+}
+
 export function pause() {
   isPause.set(true)
 }

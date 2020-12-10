@@ -3,12 +3,12 @@
     word,
     isPlay,
     isPause,
-    rawText,
     info,
+    currentIndex,
+    tokenize,
     progress,
-    play,
     resume,
-    stop,
+    stepBackward,
     pause,
   } from '../../../states/morpheme'
   import { bookType } from '../../../states/book'
@@ -18,6 +18,18 @@
   import ReadingCard from '../!Common/ReadingCard.svelte'
   import Reprint from './Reprint.svelte'
   import Quotes from './Quotes.svelte'
+  import { onMount } from 'svelte'
+
+  function ready() {
+    $isPlay = true
+    $isPause = true
+    stepBackward()
+  }
+
+  onMount(async () => {
+    await tokenize()
+    ready()
+  })
 </script>
 
 <style>
@@ -48,31 +60,22 @@
     progress={$progress} />
 
   <div class="button-groups">
-    <Icon isBox={true} on:click={stop} isDisabled={!$isPlay}>
-      <i class="fas fa-stop" />
+    <Icon isBox={true} on:click={ready} isDisabled={$currentIndex === 0}>
+      <i class="fas fa-step-backward" />
     </Icon>
 
-    {#if !$isPlay}
-      <!-- 再生 -->
-      <Icon isBox={true} on:click={play}><i class="fas fa-play" /></Icon>
-    {:else if !$isPause}
-      <!-- 一時停止 -->
-      <Icon isBox={true} on:click={pause}><i class="fas fa-pause" /></Icon>
-    {:else}
+    {#if $isPause}
       <!-- 再開 -->
       <Icon isBox={true} on:click={resume}><i class="fas fa-play" /></Icon>
+    {:else}
+      <!-- 一時停止 -->
+      <Icon isBox={true} on:click={pause} isDisabled={!$isPlay}>
+        <i class="fas fa-pause" />
+      </Icon>
     {/if}
   </div>
 
-  {#if !$isPause}
-    <textarea
-      rows="6"
-      disabled={true}
-      bind:value={$rawText}
-      class="form-control" />
-  {:else}
-    <ReadingCard />
-  {/if}
+  <ReadingCard disabled={$isPlay && !$isPause} />
 
   {#if $bookType === BookType.SELF_MADE}
     <Quotes />

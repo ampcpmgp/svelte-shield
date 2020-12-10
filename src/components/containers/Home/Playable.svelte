@@ -60,7 +60,7 @@
     {/if}
   </div>
 
-  {#if !$isPause}
+  {#if !$isPlay}
     <textarea
       rows="6"
       disabled={$isPlay}
@@ -68,6 +68,6 @@
       class="form-control"
       placeholder="テキストを入力してください" />
   {:else}
-    <ReadingCard />
+    <ReadingCard disabled={!$isPause} />
   {/if}
 </div>

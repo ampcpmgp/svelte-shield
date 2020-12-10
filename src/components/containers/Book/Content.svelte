@@ -24,7 +24,7 @@
   {:else if $errorMsgMorpheme}
     <InsetAlert type="alert-danger" message={$errorMsgMorpheme} />
   {:else if $isFetching}
-    <InsetAlert type="alert-info" message="Peer 探索中..." />
+    <InsetAlert type="alert-info" message="IPFS データ探索中..." />
   {:else if $errorMsgBook}
     <InsetAlert type="alert-danger" message={$errorMsgBook} />
   {:else}

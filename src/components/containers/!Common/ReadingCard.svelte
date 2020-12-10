@@ -10,6 +10,8 @@
   } from '../../../states/morpheme'
   import { intervalMsPerChar } from '../../../states/settings'
 
+  export let disabled = false
+
   let wrapperElm, cardElm
 
   const elementsToScroll = []
@@ -63,6 +65,9 @@
   .word {
     cursor: pointer;
   }
+  .word.disabled {
+    pointer-events: none;
+  }
 
   .highlight {
     background-color: yellow;
@@ -78,6 +83,9 @@
 
   .card-body {
     overflow-y: auto;
+  }
+  .card-body.disabled {
+    opacity: 0.3;
   }
 
   .playing-time {
@@ -109,10 +117,11 @@
     再生時間：{msToTime(playingTimeMs)}
   </div>
 
-  <div bind:this={cardElm} class="card-body">
+  <div bind:this={cardElm} class="card-body" class:disabled>
     {#each $compositions as item}
       <span
         class="word"
+        class:disabled
         on:click={() => moveReading(item)}
         bind:this={elementsToScroll[$compositions.indexOf(item)]}
         class:new-line={/\n/.test(item.word)}
