@@ -1,11 +1,20 @@
 <script>
-  import { saveIntervalMsPerChar } from '../../../utils/settings'
+  import {
+    intervalMsPerChar,
+    saveIntervalMsPerChar,
+  } from '../../../states/settings'
   import { default as Modal } from '../../../const/modal'
 
-  let intervalMsPerChar = localStorage.intervalMsPerChar
+  const formData = {
+    intervalMsPerChar: $intervalMsPerChar,
+  }
 
   function save() {
-    saveIntervalMsPerChar(intervalMsPerChar)
+    saveIntervalMsPerChar(formData.intervalMsPerChar)
+  }
+
+  function cancel() {
+    formData.intervalMsPerChar = $intervalMsPerChar
   }
 </script>
 
@@ -43,7 +52,7 @@
             type="number"
             class="form-control"
             id="validationServer01"
-            bind:value={intervalMsPerChar}
+            bind:value={formData.intervalMsPerChar}
             step="20" />
           <small class="default">初期値 80ms</small>
         </div>
@@ -52,7 +61,8 @@
         <button
           type="button"
           class="btn btn-sm btn-primary"
-          data-dismiss="modal">
+          data-dismiss="modal"
+          on:click={cancel}>
           キャンセル
         </button>
         <button
