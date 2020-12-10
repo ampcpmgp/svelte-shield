@@ -10,6 +10,7 @@
   import { intervalMsPerChar } from '../../../states/settings'
 
   export let disabled = false
+  export let height = 0
 
   const elementsToScroll = []
 
@@ -106,7 +107,7 @@
     <div>{msToTime(playingTimeMs)}</div>
   </div>
 
-  <div class="card-body" class:disabled>
+  <div class="card-body" style="height: {height}px" class:disabled>
     {#each $compositions as item}
       <span
         class="word"

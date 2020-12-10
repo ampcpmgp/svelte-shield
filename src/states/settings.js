@@ -1,8 +1,11 @@
 import { writable } from 'svelte/store'
 import settingsDefault from '../const/settingsDefault'
 
+localStorage.intervalMsPerChar =
+  localStorage.intervalMsPerChar || settingsDefault.intervalMsPerChar
+
 export const intervalMsPerChar = writable(
-  Number(localStorage.intervalMsPerChar) || settingsDefault.intervalMsPerChar
+  Number(localStorage.intervalMsPerChar)
 )
 
 export function saveIntervalMsPerChar(ms) {

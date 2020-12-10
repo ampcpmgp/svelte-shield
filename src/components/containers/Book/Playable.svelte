@@ -20,6 +20,8 @@
   import Quotes from './Quotes.svelte'
   import { onMount } from 'svelte'
 
+  let readingCardHeight = 0
+
   function ready() {
     $isPlay = true
     $isPause = true
@@ -53,7 +55,7 @@
 
   .reading-card-wrapper {
     position: relative;
-    min-height: 30vh;
+    min-height: 40vh;
   }
   .reading-card-inner {
     position: absolute;
@@ -87,8 +89,8 @@
 
   <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
   <div class="reading-card-wrapper">
-    <div class="reading-card-inner">
-      <ReadingCard disabled={$isPlay && !$isPause} />
+    <div class="reading-card-inner" bind:clientHeight={readingCardHeight}>
+      <ReadingCard disabled={$isPlay && !$isPause} height={readingCardHeight} />
     </div>
   </div>
 

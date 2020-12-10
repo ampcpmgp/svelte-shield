@@ -14,6 +14,8 @@
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
   import ReadingCard from '../!Common/ReadingCard.svelte'
+
+  let readingCardHeight = 0
 </script>
 
 <style>
@@ -37,10 +39,11 @@
 
   .reading-card-wrapper {
     position: relative;
-    min-height: 30vh;
+    min-height: 40vh;
   }
   .reading-card-inner {
     position: absolute;
+    width: 100%;
     height: 100%;
   }
 </style>
@@ -79,8 +82,8 @@
   {:else}
     <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
     <div class="reading-card-wrapper">
-      <div class="reading-card-inner">
-        <ReadingCard disabled={!$isPause} />
+      <div class="reading-card-inner" bind:clientHeight={readingCardHeight}>
+        <ReadingCard disabled={!$isPause} height={readingCardHeight} />
       </div>
     </div>
   {/if}
