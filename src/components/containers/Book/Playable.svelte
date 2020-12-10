@@ -50,6 +50,16 @@
   i {
     font-size: 20px;
   }
+
+  .reading-card-wrapper {
+    position: relative;
+    min-height: 30vh;
+  }
+  .reading-card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 </style>
 
 <div class="wrapper">
@@ -75,7 +85,12 @@
     {/if}
   </div>
 
-  <ReadingCard disabled={$isPlay && !$isPause} />
+  <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
+  <div class="reading-card-wrapper">
+    <div class="reading-card-inner">
+      <ReadingCard disabled={$isPlay && !$isPause} />
+    </div>
+  </div>
 
   {#if $bookType === BookType.SELF_MADE}
     <Quotes />

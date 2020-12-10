@@ -1,6 +1,5 @@
 <script>
-  import { onMount, afterUpdate } from 'svelte'
-  import { default as sleep } from '../../../utils/sleep'
+  import { afterUpdate } from 'svelte'
   import { msToTime } from '../../../utils/time'
   import {
     compositions,
@@ -12,8 +11,6 @@
 
   export let disabled = false
 
-  let wrapperElm, cardElm
-
   const elementsToScroll = []
 
   $: currentItem = $compositions[$currentIndex]
@@ -22,10 +19,6 @@
     0
   )
 
-  onMount(() => {
-    adjustHeight()
-  })
-
   afterUpdate(() => {
     const element = elementsToScroll[$currentIndex]
 
@@ -33,14 +26,6 @@
       element.scrollIntoView({ block: 'nearest' })
     }
   })
-
-  async function adjustHeight() {
-    cardElm.style.height = `0px`
-    await sleep(0)
-    const height = wrapperElm.offsetHeight
-    cardElm.style.height = `${height}px`
-    await sleep(0)
-  }
 
   async function moveReading(item) {
     $currentIndex = $compositions.indexOf(item)
@@ -54,7 +39,6 @@
   .wrapper {
     height: 100%;
     display: grid;
-    position: relative;
   }
 
   .new-line {
@@ -97,6 +81,8 @@
     white-space: initial;
     text-align: initial;
     line-height: 1.2;
+    display: inline-grid;
+    grid-auto-flow: column;
   }
   @media (prefers-color-scheme: dark) {
     .playing-time {
@@ -106,18 +92,21 @@
       border: none;
     }
   }
+
+  @media (max-width: 575px) {
+    .hide-sp {
+      display: none;
+    }
+  }
 </style>
 
-<svelte:window on:resize={adjustHeight} />
-
-<div
-  bind:this={wrapperElm}
-  class="wrapper card bg-primary shadow-soft border-light">
+<div class="wrapper card bg-primary shadow-soft border-light">
   <div class="playing-time badge badge-md badge-info">
-    再生時間：{msToTime(playingTimeMs)}
+    <div class="hide-sp">再生時間：</div>
+    <div>{msToTime(playingTimeMs)}</div>
   </div>
 
-  <div bind:this={cardElm} class="card-body" class:disabled>
+  <div class="card-body" class:disabled>
     {#each $compositions as item}
       <span
         class="word"

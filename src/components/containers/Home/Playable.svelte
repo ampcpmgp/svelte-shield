@@ -34,6 +34,15 @@
   i {
     font-size: 20px;
   }
+
+  .reading-card-wrapper {
+    position: relative;
+    min-height: 30vh;
+  }
+  .reading-card-inner {
+    position: absolute;
+    height: 100%;
+  }
 </style>
 
 <div class="wrapper">
@@ -68,6 +77,11 @@
       class="form-control"
       placeholder="テキストを入力してください" />
   {:else}
-    <ReadingCard disabled={!$isPause} />
+    <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
+    <div class="reading-card-wrapper">
+      <div class="reading-card-inner">
+        <ReadingCard disabled={!$isPause} />
+      </div>
+    </div>
   {/if}
 </div>
