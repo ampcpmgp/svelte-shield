@@ -1,5 +1,5 @@
 <script>
-  import { init } from '../../states/morpheme'
+  import * as morpheme from '../../states/morpheme'
   import Header from '../parts/Header/Header.svelte'
   import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
@@ -22,6 +22,12 @@
     })
   } else {
     init()
+  }
+
+  function init() {
+    morpheme.init()
+    morpheme.stop()
+    morpheme.rawText.set('')
   }
 </script>
 
