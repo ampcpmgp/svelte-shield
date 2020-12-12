@@ -1,4 +1,8 @@
 <script>
+  import { textSize } from '../../../states/settings'
+
+  // alert-secondary, alert-success, alert-info, alert-danger
+  // https://themesberg.com/docs/neumorphism-ui/components/alerts/
   export let type = ''
   export let message = ''
   export let isStrong = false
@@ -16,6 +20,10 @@
     width: 100%;
     max-width: 640px;
     position: relative;
+  }
+
+  .alert {
+    font-size: var(--text-size);
   }
 
   .inset {
@@ -74,7 +82,7 @@
   }
 </style>
 
-<div class="wrapper">
+<div class="wrapper" style="--text-size: {$textSize}px">
   <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
     {#if isStrong}<strong>{message}</strong>{:else}{message}{/if}
   </div>

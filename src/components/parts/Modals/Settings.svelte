@@ -1,20 +1,25 @@
 <script>
   import {
     intervalMsPerChar,
+    textSize,
     saveIntervalMsPerChar,
+    saveTextSize,
   } from '../../../states/settings'
   import { default as Modal } from '../../../const/modal'
 
   const formData = {
     intervalMsPerChar: $intervalMsPerChar,
+    textSize: $textSize,
   }
 
   function save() {
     saveIntervalMsPerChar(formData.intervalMsPerChar)
+    saveTextSize(formData.textSize)
   }
 
   function cancel() {
     formData.intervalMsPerChar = $intervalMsPerChar
+    formData.textSize = $textSize
   }
 </script>
 
@@ -55,6 +60,17 @@
             bind:value={formData.intervalMsPerChar}
             step="20" />
           <small class="default">初期値 80ms</small>
+        </div>
+
+        <div class="form-group">
+          <label for="validationServer01">文字の大きさ（ピクセル）</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationServer01"
+            bind:value={formData.textSize}
+            step="2" />
+          <small class="default">初期値 14px</small>
         </div>
       </div>
       <div class="modal-footer">
