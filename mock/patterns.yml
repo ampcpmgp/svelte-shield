@@ -73,7 +73,7 @@ IPFS本ページ:
       - [newBook.reprint.content.set, dummy content]
       - [sleep, 1500]
       - [click, "[data-mock=\"save-new-reprint\"]"]
-  自作分を登録:
+  自作文を登録:
     funcs:
       - [sleep, 0]
       - [openModal, NEW_REGISTER_SELF_MADE_BOOK]
