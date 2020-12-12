@@ -21,12 +21,14 @@ export async function add(data) {
   return results
 }
 
-export async function get(hash) {
+export async function get(hash, controller) {
   const node = await nodeP
   const content = []
 
+  const files = await node.get(hash, { signal: controller.signal })
+
   // https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsgetipfspath-options
-  for await (const file of node.get(hash, { timeout: 30000 })) {
+  for await (const file of files) {
     if (!file.content) throw new Error('No content')
 
     for await (const chunk of file.content) {
@@ -51,8 +53,18 @@ export async function removePin(hash) {
 
 export async function lsPin() {
   const node = await nodeP
+  const pins = node.pin.ls()
 
-  for await (const result of node.pin.ls()) {
-    console.info(result)
+  return pins
+}
+
+export async function existsPin(hash) {
+  const node = await nodeP
+  const pins = node.pin.ls()
+
+  for await (const pin of pins) {
+    if (hash === pin.cid.toString()) return true
   }
+
+  return false
 }

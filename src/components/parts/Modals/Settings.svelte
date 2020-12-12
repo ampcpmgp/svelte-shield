@@ -70,7 +70,7 @@
             id="validationServer01"
             bind:value={formData.textSize}
             step="2" />
-          <small class="default">初期値 14px</small>
+          <small class="default">初期値 16px</small>
         </div>
       </div>
       <div class="modal-footer">
