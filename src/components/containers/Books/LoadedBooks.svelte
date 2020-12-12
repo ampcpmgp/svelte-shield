@@ -68,7 +68,7 @@
     <a
       href={`/books/${book.hash}`}
       class="card bg-primary border-light shadow-soft book"
-      title={book.title}
+      title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}`}
       use:link>
       <h3 class="title">{book.title}</h3>
       <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>
