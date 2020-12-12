@@ -3,6 +3,7 @@ import { encode } from '@msgpack/msgpack'
 import * as ipfs from '../../databases/ipfs'
 import * as dexie from '../../databases/dexie'
 import { default as BookType } from '../../const/BookType'
+import * as validate from '../../utils/validate'
 
 export const title = writable('')
 export const url = writable('')
@@ -14,6 +15,10 @@ export function reset() {
   url.set('')
   license.set(undefined)
   content.set('')
+}
+
+export async function validateAll() {
+  validate.content(get(content))
 }
 
 export async function save() {

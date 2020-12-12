@@ -65,6 +65,12 @@ IPFS本ページ:
     funcs:
       - [sleep, 0]
       - [openModal, NEW_REGISTER_REPRINT_BOOK]
+    一通り入力:
+      - [sleep, 0]
+      - [newBook.reprint.title.set, dummy title]
+      - [newBook.reprint.url.set, dummy-url]
+      - [newBook.reprint.license.set, { value: "CC0-1.0", label: "CC0-1.0" }]
+      - [newBook.reprint.content.set, dummy content]
     入力して保存:
       - [sleep, 0]
       - [newBook.reprint.title.set, dummy title]
