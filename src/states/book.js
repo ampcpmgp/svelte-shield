@@ -51,6 +51,8 @@ export async function fetch(hash) {
       errorMsg.set('Peer 探索タイムアウト')
     } else if (error.message === `Want for ${hash} aborted`) {
       errorMsg.set('Peer 探索が中断されました')
+    } else if (error.message === `Fize Size too large`) {
+      errorMsg.set('ファイルサイズが大きすぎます')
     } else {
       errorMsg.set('不明なエラーです')
     }

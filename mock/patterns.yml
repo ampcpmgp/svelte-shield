@@ -112,4 +112,6 @@ IPFS本詳細ページ:
     func: [page, /books/illegalHash]
   存在しないが有効なハッシュ:
     func: [page, /books/QmULjPTtPNk1hoQFnV27eh3Nz2B7dr1BBNxY49LBEHdpcc]
+  12MB サイズのファイル:
+    func: [page, /books/QmW9UsCGX6vjgg7C4JQfChvvmekrS4YG5cERK51XqtZCkJ]
 404 page: [page, /404]
