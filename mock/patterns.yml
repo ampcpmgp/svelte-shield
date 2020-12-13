@@ -16,10 +16,12 @@ settings:
     - [sleep, 0]
     - [openModal, MODE_CHANGE]
   夏目漱石の文を再生:
+    - [sleep, 1000]
     - [kokoro]
     - [morpheme.tokenize]
     - [morpheme.play]
   Rust 行動規範を再生:
+    - [sleep, 1000]
     - [rustCoc]
     - [morpheme.tokenize]
     - [morpheme.play]
@@ -30,16 +32,19 @@ settings:
       - [morpheme.play]
   改行位置で一時停止:
     funcs:
+      - [sleep, 1000]
       - [見出し強調機能]
       - [morpheme.tokenize]
       - [morpheme.isPlay.set, true]
       - [morpheme.isPause.set, true]
       - [morpheme.currentIndex.set, 3]
   長いカタカナ文:
+    - [sleep, 1000]
     - [長いカタカナ文]
     - [morpheme.tokenize]
     - [morpheme.play]
   自動折り返しされない文:
+    - [sleep, 1000]
     - [自動折り返しされない文]
     - [morpheme.tokenize]
     - [morpheme.isPlay.set, true]
