@@ -18,7 +18,11 @@ export async function loadBooks(offset) {
 
   // ipfs.get 時に Peer が見つからない可能性があるため、ひとまず並列化しない
   books.forEach(async bookOnDb => {
-    const rawData = await ipfs.get(bookOnDb.hash, new AbortController())
+    const rawData = await ipfs.get(
+      bookOnDb.hash,
+      new AbortController(),
+      () => {}
+    )
     const bookOnIpfs = decode(rawData)
 
     loadedBooks.update($loadedBooks => [

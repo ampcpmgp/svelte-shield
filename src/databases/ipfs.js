@@ -24,7 +24,7 @@ export async function add(data) {
   return results
 }
 
-export async function get(hash, controller) {
+export async function get(hash, controller, onChunk) {
   const node = await nodeP
   const content = []
 
@@ -38,6 +38,7 @@ export async function get(hash, controller) {
       if (content.length > MAX_FILE_SIZE) throw new Error('Fize Size too large')
 
       content.push(...chunk)
+      onChunk(content.length)
     }
 
     return content

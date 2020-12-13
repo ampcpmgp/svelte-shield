@@ -14,6 +14,7 @@ export const isSearchingLocal = writable(false)
 export const isSearchingPeer = writable(false)
 export const errorMsg = writable('')
 export const controller = writable(new AbortController())
+export const downloadedSize = writable(0)
 
 export function init() {
   bookType.set()
@@ -40,7 +41,7 @@ export async function fetch(hash) {
   controller.set(new AbortController())
 
   try {
-    encodedBook = await ipfs.get(hash, get(controller))
+    encodedBook = await ipfs.get(hash, get(controller), downloadedSize.set)
   } catch (error) {
     isSearchingLocal.set(false)
     isSearchingPeer.set(false)
@@ -52,7 +53,7 @@ export async function fetch(hash) {
     } else if (error.message === `Want for ${hash} aborted`) {
       errorMsg.set('Peer 探索が中断されました')
     } else if (error.message === `Fize Size too large`) {
-      errorMsg.set('ファイルサイズが大きすぎます')
+      errorMsg.set('ダウンロードデータが 3MB を超えたため中止しました')
     } else {
       errorMsg.set('不明なエラーです')
     }
