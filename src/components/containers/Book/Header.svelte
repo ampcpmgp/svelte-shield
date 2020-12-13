@@ -99,7 +99,7 @@
 
   <a
     class="btn btn-sm btn-primary twitter-button"
-    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${$title}`}&hashtags={`${hashTags.join(',')}`}"
+    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${$title}`}&hashtags={`${hashTags.join(',')}`}&url={location.href}}"
     target="_blank">
     <span class="fab fa-twitter" />
     ツイートする

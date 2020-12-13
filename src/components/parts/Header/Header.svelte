@@ -64,7 +64,7 @@
 
   <a
     class="btn btn-sm btn-primary twitter-button sp-hidden"
-    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${tweetText}`}&hashtags={`${hashTags.join(',')}`}"
+    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${tweetText}`}&hashtags={`${hashTags.join(',')}`}&url={location.href}}"
     target="_blank">
     <span class="fab fa-twitter" />
     <span class="">ツイートする</span>
