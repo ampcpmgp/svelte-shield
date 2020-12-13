@@ -1,6 +1,7 @@
 <script>
   import { afterUpdate } from 'svelte'
   import { msToTime } from '../../../utils/time'
+  import { getOffsetTop } from '../../../utils/element'
   import {
     compositions,
     currentIndex,
@@ -13,6 +14,7 @@
   export let height = 0
 
   const elementsToScroll = []
+  let elmCardBody
 
   $: currentItem = $compositions[$currentIndex]
   $: playingTimeMs = $compositions.reduce(
@@ -20,10 +22,20 @@
     0
   )
 
+  // 読み込み中カードの位置がウインドウの高さを超えているときは自動スクロール可能とする
+  // ウインドウの高さを超えて自動スクロールをすると、表示がガクガク揺れてしまう。
+  function isScollable() {
+    if (!elmCardBody) return false
+
+    const elementBottom = getOffsetTop(elmCardBody) + elmCardBody.offsetHeight
+
+    return elementBottom < window.innerHeight
+  }
+
   afterUpdate(() => {
     const element = elementsToScroll[$currentIndex]
 
-    if (element) {
+    if (isScollable(element)) {
       element.scrollIntoView({ block: 'nearest' })
     }
   })
@@ -107,7 +119,11 @@
     <div>{msToTime(playingTimeMs)}</div>
   </div>
 
-  <div class="card-body" style="height: {height}px" class:disabled>
+  <div
+    bind:this={elmCardBody}
+    class="card-body"
+    style="height: {height}px"
+    class:disabled>
     {#each $compositions as item}
       <span
         class="word"
