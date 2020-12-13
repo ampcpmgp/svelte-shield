@@ -1,5 +1,5 @@
 <script>
-  import { fetch, init as initBook } from '../../states/book'
+  import { fetch, init as initBook, title } from '../../states/book'
   import { init as initMorpheme } from '../../states/morpheme'
   import Header from '../containers/Book/Header.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
@@ -21,7 +21,7 @@
 
 <Frame>
   <div slot="header">
-    <Header />
+    <Header tweetText={$title} additionalHashTags={['IPFS本']} />
   </div>
 
   <div slot="content">

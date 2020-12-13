@@ -20,7 +20,9 @@
 
 <Frame>
   <div slot="header">
-    <Header />
+    <Header
+      tweetText="IPFS と連携した他者と共有可能な本アプリ。"
+      additionalHashTags={['IPFS本']} />
   </div>
 
   <div class="content" slot="content">

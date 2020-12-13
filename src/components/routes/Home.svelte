@@ -33,7 +33,8 @@
 
 <Frame>
   <div slot="header">
-    <Header />
+    <Header
+      tweetText="様々な日本語文章を、目線移動無くサクサク読めるようにしたツール。" />
   </div>
 
   <div slot="content">

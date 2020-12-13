@@ -1,5 +1,6 @@
 <script>
-  import Version from '../Version/Version'
+  import Version from '../Version/Version.svelte'
+  import Icon from '../Icon/Icon.svelte'
 </script>
 
 <style>
@@ -7,6 +8,18 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+  }
+
+  .right-size {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 8px;
+    align-items: end;
+  }
+
+  .external-link {
+    margin-top: 4px;
+    margin-bottom: -16px;
   }
 </style>
 
@@ -21,5 +34,23 @@
     <div />
   {/if}
 
-  <Version />
+  <div class="right-size">
+    <a
+      class="external-link"
+      href="https://github.com/ampcpmgp/svelte-shield"
+      target="_blank"
+      rel="noopener">
+      <Icon><i class="fab fa-github" /></Icon>
+    </a>
+
+    <a
+      class="external-link"
+      href="https://twitter.com/am_nimitz3"
+      target="_blank"
+      rel="noopener">
+      <Icon><i class="fab fa-twitter-square" /></Icon>
+    </a>
+
+    <Version />
+  </div>
 </div>
