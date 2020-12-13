@@ -66,8 +66,11 @@
     .title {
       justify-self: center;
       white-space: nowrap;
+      text-align: center;
       text-overflow: ellipsis;
       overflow: hidden;
+      width: 100%;
+      margin: auto;
     }
   }
 
