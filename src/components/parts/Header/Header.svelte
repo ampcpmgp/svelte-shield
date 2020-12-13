@@ -44,6 +44,12 @@
     /* twitter color */
     color: rgb(29, 161, 242);
   }
+
+  @media (max-width: 575px) {
+    .sp-hidden {
+      display: none;
+    }
+  }
 </style>
 
 <header>
@@ -57,11 +63,11 @@
     data-target={'#' + Modal.MODE_CHANGE} />
 
   <a
-    class="btn btn-sm btn-primary twitter-button"
+    class="btn btn-sm btn-primary twitter-button sp-hidden"
     href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${tweetText}`}&hashtags={`${hashTags.join(',')}`}"
     target="_blank">
     <span class="fab fa-twitter" />
-    ツイートする
+    <span class="">ツイートする</span>
   </a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
   </script>

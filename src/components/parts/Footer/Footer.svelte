@@ -8,6 +8,7 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+    align-items: end;
   }
 
   .right-size {
@@ -17,9 +18,17 @@
     align-items: end;
   }
 
-  .external-link {
-    margin-top: 4px;
-    margin-bottom: -16px;
+  @media (min-width: 576px) {
+    .external-link {
+      margin-top: 4px;
+      margin-bottom: -16px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .sp-hidden {
+      display: none;
+    }
   }
 </style>
 
@@ -51,6 +60,8 @@
       <Icon><i class="fab fa-twitter-square" /></Icon>
     </a>
 
-    <Version />
+    <div class="sp-hidden">
+      <Version />
+    </div>
   </div>
 </div>
