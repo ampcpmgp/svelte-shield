@@ -35,7 +35,7 @@
   afterUpdate(() => {
     const element = elementsToScroll[$currentIndex]
 
-    if (isScollable(element)) {
+    if (element && isScollable()) {
       element.scrollIntoView({ block: 'nearest' })
     }
   })
