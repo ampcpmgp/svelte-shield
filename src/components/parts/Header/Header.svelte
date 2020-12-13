@@ -1,5 +1,6 @@
 <script>
   import { default as Modal } from '../../../const/modal'
+  import { getUrlForTweet } from '../../../utils/url'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
 
   export let tweetText = ''
@@ -64,7 +65,7 @@
 
   <a
     class="btn btn-sm btn-primary twitter-button sp-hidden"
-    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${tweetText}`}&hashtags={`${hashTags.join(',')}`}&url={location.href}}"
+    href={getUrlForTweet(tweetText, hashTags)}
     target="_blank">
     <span class="fab fa-twitter" />
     <span class="">ツイートする</span>

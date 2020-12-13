@@ -1,6 +1,7 @@
 <script>
   import { link } from 'svelte-spa-router'
   import { default as Modal } from '../../../const/modal'
+  import { getUrlForTweet } from '../../../utils/url'
   import { title } from '../../../states/book'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
 
@@ -99,7 +100,7 @@
 
   <a
     class="btn btn-sm btn-primary twitter-button"
-    href="https://twitter.com/share?ref_src=twsrc%5Etfw&text={`${$title}`}&hashtags={`${hashTags.join(',')}`}&url={location.href}}"
+    href={getUrlForTweet($title, hashTags)}
     target="_blank">
     <span class="fab fa-twitter" />
     ツイートする
