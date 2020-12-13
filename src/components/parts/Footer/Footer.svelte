@@ -20,7 +20,6 @@
 
   @media (min-width: 576px) {
     .external-link {
-      margin-top: 4px;
       margin-bottom: -16px;
     }
   }

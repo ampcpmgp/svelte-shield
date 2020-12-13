@@ -40,8 +40,8 @@
     .title-wrapper {
       grid-area: b;
       padding: 8px 0;
-      border-top: solid 2px #666;
-      border-bottom: solid 2px #666;
+      border-top: solid 1px #888;
+      border-bottom: solid 1px #888;
     }
   }
 
