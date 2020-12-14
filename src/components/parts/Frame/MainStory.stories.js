@@ -1,7 +1,7 @@
 import MainStory from './MainStory.svelte'
 
 export default {
-  title: 'MainStory',
+  title: 'Main',
   component: MainStory,
   argTypes: {},
 }
