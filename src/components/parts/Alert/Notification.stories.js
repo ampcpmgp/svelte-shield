@@ -14,7 +14,7 @@ const Template = ({ ...args }) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-  isVisible: true,
+  visible: true,
   message: 'ネットワーク環境に問題があります。',
   strongMsg: '通信エラー!',
   type: 'alert-danger',
