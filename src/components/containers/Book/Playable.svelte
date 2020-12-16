@@ -38,7 +38,7 @@
   .wrapper {
     display: grid;
     grid-row-gap: 16px;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto 1fr;
     height: 100%;
   }
 
@@ -61,6 +61,11 @@
     position: absolute;
     width: 100%;
     height: 100%;
+  }
+
+  .additional-info {
+    position: relative;
+    padding: 20px 0;
   }
 </style>
 
@@ -93,12 +98,18 @@
       <ReadingCard disabled={$isPlay && !$isPause} height={readingCardHeight} />
     </div>
   </div>
+</div>
 
-  {#if $bookType === BookType.SELF_MADE}
-    <Quotes />
-  {/if}
+<div class="additional-info">
+  <div class="card bg-primary shadow-soft border-light">
+    <div class="card-body">
+      {#if $bookType === BookType.SELF_MADE}
+        <Quotes />
+      {/if}
 
-  {#if $bookType === BookType.REPRINT}
-    <Reprint />
-  {/if}
+      {#if $bookType === BookType.REPRINT}
+        <Reprint />
+      {/if}
+    </div>
+  </div>
 </div>

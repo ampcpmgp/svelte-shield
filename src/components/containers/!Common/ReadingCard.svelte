@@ -105,18 +105,11 @@
       border: none;
     }
   }
-
-  @media (max-width: 575px) {
-    .hide-sp {
-      display: none;
-    }
-  }
 </style>
 
 <div class="wrapper card bg-primary shadow-soft border-light">
   <div class="playing-time badge badge-md badge-info">
-    <div class="hide-sp">再生時間：</div>
-    <div>{msToTime(playingTimeMs)}</div>
+    <div>約{msToTime(playingTimeMs)}</div>
   </div>
 
   <div

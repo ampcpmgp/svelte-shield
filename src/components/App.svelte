@@ -33,11 +33,6 @@
     min-height: 100%;
     display: grid;
   }
-
-  .ios-wrapper {
-    /* ios safari は .card-body の padding を突き抜けて置かれるため、上下に設定する */
-    padding-bottom: 3rem;
-  }
 </style>
 
 <div class="wrapper">

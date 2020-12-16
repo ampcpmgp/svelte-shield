@@ -12,22 +12,12 @@
   header {
     display: grid;
     grid-column-gap: 14px;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 1fr auto;
     position: relative;
   }
 
   .user-cog-wrapper {
     margin-right: auto;
-  }
-
-  @media (max-width: 575px) {
-    header {
-      grid-row-gap: 12px;
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        'a a'
-        'b b';
-    }
   }
 
   .title-wrapper {
@@ -39,10 +29,6 @@
   }
   @media (max-width: 575px) {
     .title-wrapper {
-      grid-area: b;
-      padding: 8px 0;
-      border-top: solid 1px #888;
-      border-bottom: solid 1px #888;
     }
   }
 
@@ -78,7 +64,12 @@
   .twitter-button {
     /* twitter color */
     color: rgb(29, 161, 242);
-    margin-left: auto;
+  }
+
+  @media (max-width: 575px) {
+    .sp-hidden {
+      display: none;
+    }
   }
 </style>
 
@@ -103,7 +94,7 @@
     href={getUrlForTweet($title, hashTags)}
     target="_blank">
     <span class="fab fa-twitter" />
-    ツイートする
+    <span class="sp-hidden">ツイートする </span>
   </a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
   </script>
