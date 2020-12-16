@@ -6,23 +6,17 @@
 
 <style>
   :global(body) {
-    padding: 10px 12px;
     box-sizing: border-box;
-    height: 100vh;
     word-break: break-all;
-  }
-
-  :global(#app) {
-    min-height: 100%;
-    display: grid;
   }
 
   .wrapper {
     display: grid;
-    min-height: 100%;
-    margin: 0 auto;
-    max-width: 1240px;
     width: 100%;
+    min-height: 100vh;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 10px 12px;
   }
 
   .card {
