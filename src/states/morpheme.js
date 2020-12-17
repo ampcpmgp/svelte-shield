@@ -122,6 +122,14 @@ export function setWordInfo() {
   }
 }
 
+export function setReadingPosition(readingRatio) {
+  const $compositions = get(compositions)
+  const index = Math.round($compositions.length * readingRatio)
+
+  currentIndex.set(index)
+  setWordInfo()
+}
+
 export function getWord(composition) {
   return composition.reduce((str, path) => str + path.surface_form, '')
 }

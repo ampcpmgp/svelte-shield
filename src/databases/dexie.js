@@ -34,10 +34,7 @@ export function deleteBook(hash) {
 }
 
 export function getBook(hash) {
-  return db.breads
-    .where('hash')
-    .equals(hash)
-    .first()
+  return db.books.get(hash)
 }
 
 export function getBooks(offset = 0, limit = 10) {

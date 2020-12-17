@@ -10,6 +10,7 @@
     resume,
     stepBackward,
     pause,
+    setReadingPosition,
   } from '../../../states/morpheme'
   import { hash, bookType } from '../../../states/book'
   import * as dexie from '../../../databases/dexie'
@@ -25,13 +26,20 @@
 
   onMount(async () => {
     await tokenize()
+    const data = await dexie.getBook($hash)
+
+    setReadingPosition(data.readingRatio)
     ready()
   })
 
   function ready() {
     $isPlay = true
     $isPause = true
+  }
+
+  function handleStepBackward() {
     stepBackward()
+    ready()
   }
 
   async function handleResume() {
@@ -85,7 +93,7 @@
     progress={$progress} />
 
   <div class="button-groups">
-    <Icon isBox={true} on:click={ready} isDisabled={$currentIndex === 0}>
+    <Icon isBox={true} on:click={handleStepBackward} isDisabled={$currentIndex === 0}>
       <i class="fas fa-step-backward" />
     </Icon>
 

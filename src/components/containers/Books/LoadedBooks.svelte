@@ -5,6 +5,10 @@
 
   init()
   loadBooks(0)
+
+  function getPercent(ratio) {
+    return Math.floor(ratio * 100)
+  }
 </script>
 
 <style>
@@ -29,6 +33,7 @@
     width: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
+    position: relative;
   }
   @media (max-width: 575px) {
     .book {
@@ -61,17 +66,29 @@
     display: grid;
     justify-content: end;
   }
+
+  .reading-ratio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #00ff0033;
+    height: var(--height);
+  }
 </style>
 
 <div class="wrapper">
   {#each $loadedBooks as book}
     <a
       href={`/books/${book.hash}`}
-      class="card bg-primary border-light shadow-soft book"
-      title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}`}
+      class="book card bg-primary border-light shadow-soft"
+      title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}\n\n進捗割合: ${getPercent(book.readingRatio)}%`}
       use:link>
       <h3 class="title">{book.title}</h3>
       <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>
+      <div
+        class="reading-ratio"
+        style="--height: {getPercent(book.readingRatio)}%" />
     </a>
   {/each}
 </div>

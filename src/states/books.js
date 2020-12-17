@@ -31,6 +31,7 @@ export async function loadBooks(offset) {
         hash: bookOnDb.hash,
         title: bookOnIpfs.title,
         insertedDate: bookOnDb.insertedDate,
+        readingRatio: bookOnDb.readingRatio,
       },
     ])
   })
