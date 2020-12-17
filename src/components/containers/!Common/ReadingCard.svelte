@@ -24,7 +24,8 @@
 
   // 読み込み中カードの位置がウインドウの高さを超えているときは自動スクロール可能とする
   // ウインドウの高さを超えて自動スクロールをすると、表示がガクガク揺れてしまう。
-  function isScollable() {
+  // ReadingCard の枠が確保されるようになったため、現在未使用。
+  export function isScollable() {
     if (!elmCardBody) return false
 
     const elementBottom = getOffsetTop(elmCardBody) + elmCardBody.offsetHeight
@@ -35,7 +36,7 @@
   afterUpdate(() => {
     const element = elementsToScroll[$currentIndex]
 
-    if (element && isScollable()) {
+    if (element) {
       element.scrollIntoView({ block: 'nearest' })
     }
   })
