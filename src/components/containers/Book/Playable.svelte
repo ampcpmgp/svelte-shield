@@ -81,7 +81,25 @@
 
   .additional-info {
     position: relative;
-    padding: 20px 0 60px 0;
+  }
+
+  .additional-info-outer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-bottom: 40px;
+  }
+  .additional-info-inner {
+    display: grid;
+    padding: 30px 0;
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    /* from meter color to twitter color */
+    border-image-source: linear-gradient(
+      to right,
+      lime 0%,
+      rgb(29, 161, 242) 100%
+    );
   }
 </style>
 
@@ -93,7 +111,10 @@
     progress={$progress} />
 
   <div class="button-groups">
-    <Icon isBox={true} on:click={handleStepBackward} isDisabled={$currentIndex === 0}>
+    <Icon
+      isBox={true}
+      on:click={handleStepBackward}
+      isDisabled={$currentIndex === 0}>
       <i class="fas fa-step-backward" />
     </Icon>
 
@@ -119,15 +140,19 @@
 </div>
 
 <div class="additional-info">
-  <div class="card bg-primary shadow-soft border-light">
-    <div class="card-body">
-      {#if $bookType === BookType.SELF_MADE}
-        <Quotes />
-      {/if}
+  <div class="additional-info-outer">
+    <div class="additional-info-inner">
+      <div class="card bg-primary shadow-soft border-light">
+        <div class="card-body">
+          {#if $bookType === BookType.SELF_MADE}
+            <Quotes />
+          {/if}
 
-      {#if $bookType === BookType.REPRINT}
-        <Reprint />
-      {/if}
+          {#if $bookType === BookType.REPRINT}
+            <Reprint />
+          {/if}
+        </div>
+      </div>
     </div>
   </div>
 </div>
