@@ -43,7 +43,7 @@ export async function save() {
   const isExistsInDb = await dexie.existsBook(path)
 
   if (!isExistsInDb) {
-    await dexie.setbook({
+    await dexie.putbook({
       hash: path,
       readingRatio: 0,
       insertedDate: new Date(),

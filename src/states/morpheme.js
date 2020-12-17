@@ -104,6 +104,10 @@ export function stop() {
   currentIndex.set(0)
 }
 
+export function pause() {
+  isPause.set(true)
+}
+
 export function stepBackward() {
   currentIndex.set(0)
   setWordInfo()
@@ -116,10 +120,6 @@ export function setWordInfo() {
     word.set(composition.word)
     info.set(composition.info)
   }
-}
-
-export function pause() {
-  isPause.set(true)
 }
 
 export function getWord(composition) {

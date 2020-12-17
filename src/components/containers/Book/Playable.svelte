@@ -11,7 +11,8 @@
     stepBackward,
     pause,
   } from '../../../states/morpheme'
-  import { bookType } from '../../../states/book'
+  import { hash, bookType } from '../../../states/book'
+  import * as dexie from '../../../databases/dexie'
   import { default as BookType } from '../../../const/BookType'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
   import InsetAlert from '../../parts/InsetAlert/InsetAlert.svelte'
@@ -22,16 +23,23 @@
 
   let readingCardHeight = 0
 
+  onMount(async () => {
+    await tokenize()
+    ready()
+  })
+
   function ready() {
     $isPlay = true
     $isPause = true
     stepBackward()
   }
 
-  onMount(async () => {
-    await tokenize()
-    ready()
-  })
+  async function handleResume() {
+    await resume()
+    await dexie.updateBook($hash, {
+      readingRatio: $progress,
+    })
+  }
 </script>
 
 <style>
@@ -83,7 +91,9 @@
 
     {#if $isPause}
       <!-- 再開 -->
-      <Icon isBox={true} on:click={resume}><i class="fas fa-play" /></Icon>
+      <Icon isBox={true} on:click={handleResume}>
+        <i class="fas fa-play" />
+      </Icon>
     {:else}
       <!-- 一時停止 -->
       <Icon isBox={true} on:click={pause} isDisabled={!$isPlay}>

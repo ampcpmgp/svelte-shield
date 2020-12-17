@@ -7,9 +7,14 @@ db.version(1).stores({
   books: '&hash,readingRatio,insertedDate',
 })
 
-export function setbook(book) {
+export function putbook(book) {
   // https://dexie.org/docs/Table/Table.put()
   return db.books.put(book)
+}
+
+export function updateBook(hash, changes) {
+  // https://dexie.org/docs/Table/Table.update()
+  return db.books.update(hash, changes)
 }
 
 export async function existsBook(hash) {

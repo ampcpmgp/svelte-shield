@@ -4,6 +4,7 @@ import * as ipfs from '../databases/ipfs'
 import * as dexie from '../databases/dexie'
 import * as morpheme from './morpheme'
 
+export const hash = writable()
 export const bookType = writable()
 export const title = writable('')
 export const url = writable('')
@@ -29,10 +30,11 @@ export function init() {
   errorMsg.set('')
 }
 
-export async function fetch(hash) {
+export async function fetch(_hash) {
+  hash.set(_hash)
   isSearchingLocal.set(true)
 
-  const isExists = await ipfs.existsPin(hash)
+  const isExists = await ipfs.existsPin(_hash)
 
   isSearchingLocal.set(isExists)
   isSearchingPeer.set(!isExists)
@@ -41,7 +43,7 @@ export async function fetch(hash) {
   controller.set(new AbortController())
 
   try {
-    encodedBook = await ipfs.get(hash, get(controller), downloadedSize.set)
+    encodedBook = await ipfs.get(_hash, get(controller), downloadedSize.set)
   } catch (error) {
     isSearchingLocal.set(false)
     isSearchingPeer.set(false)
@@ -50,7 +52,7 @@ export async function fetch(hash) {
       errorMsg.set('不明なハッシュです')
     } else if (error.message === 'request timed out') {
       errorMsg.set('Peer 探索タイムアウト')
-    } else if (error.message === `Want for ${hash} aborted`) {
+    } else if (error.message === `Want for ${_hash} aborted`) {
       errorMsg.set('Peer 探索が中断されました')
     } else if (error.message === `Fize Size too large`) {
       errorMsg.set('ダウンロードデータが 3MB を超えたため中止しました')
@@ -61,14 +63,14 @@ export async function fetch(hash) {
     throw new Error(error)
   }
 
-  ipfs.addPin(hash)
+  ipfs.addPin(_hash)
 
   const book = decode(encodedBook)
-  const isExistsInDb = await dexie.existsBook(hash)
+  const isExistsInDb = await dexie.existsBook(_hash)
 
   if (!isExistsInDb) {
-    await dexie.setbook({
-      hash,
+    await dexie.putbook({
+      hash: _hash,
       readingRatio: 0,
       insertedDate: new Date(),
     })
