@@ -1,4 +1,24 @@
+import outdent from 'outdent'
 export { default as LicenseListData } from '../license-list-data/licenses.json'
+
+export const DomainInfo = {
+  'developer.mozilla.org': {
+    default: 'CC-BY-SA-2.5',
+  },
+  'ja.wikipedia.org': {
+    default: 'CC-BY-SA-3.0',
+  },
+  'bsd.neuroinf.jp': {
+    default: 'CC-BY-ND-4.0',
+    phrase(url) {
+      /* eslint-disable no-irregular-whitespace */
+      return outdent`
+        ＿＿著者名＿＿　＿＿タイトル＿＿　脳科学辞典　${url} (＿＿原稿完成日＿＿)
+      `
+      /* eslint-enable no-irregular-whitespace */
+    },
+  },
+}
 
 export const LicenseInfo = {
   'CC-BY-1.0': {
@@ -93,14 +113,5 @@ export const LicenseInfo = {
   },
   'CC0-1.0': {
     SOURCE: 'https://creativecommons.org/publicdomain/zero/1.0/deed.ja',
-  },
-}
-
-export const DomainInfo = {
-  'developer.mozilla.org': {
-    default: 'CC-BY-SA-2.5',
-  },
-  'ja.wikipedia.org': {
-    default: 'CC-BY-SA-3.0',
   },
 }
