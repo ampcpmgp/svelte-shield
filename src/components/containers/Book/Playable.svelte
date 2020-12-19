@@ -92,6 +92,8 @@
   .additional-info-inner {
     display: grid;
     padding: 30px 0;
+    /* ios safari ではこれを入れないと左右上下に border が入る */
+    border-width: 0;
     border-bottom: 1px solid;
     border-image-slice: 1;
     /* from meter color to twitter color */
