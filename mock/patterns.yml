@@ -27,6 +27,7 @@ settings:
     - [morpheme.play]
   見出し強調機能:
     funcs:
+      - [sleep, 1000]
       - [見出し強調機能]
       - [morpheme.tokenize]
       - [morpheme.play]
