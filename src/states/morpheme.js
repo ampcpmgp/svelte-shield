@@ -67,6 +67,13 @@ export async function play() {
   resume()
 }
 
+export function getSleepTime(composition, intervalMsPerChar) {
+  const wordTime = composition.word.length * intervalMsPerChar
+  const newLineTime = composition.info.hasNewLine ? intervalMsPerChar * 3 : 0
+
+  return wordTime + newLineTime
+}
+
 export async function resume() {
   isPlay.set(true)
   isPause.set(false)
@@ -77,9 +84,9 @@ export async function resume() {
     word.set(composition.word)
     info.set(composition.info)
 
-    await sleep(
-      composition.word.length * intervalMsPerChar || intervalMsPerChar * 3
-    )
+    const sleepTime = getSleepTime(composition, intervalMsPerChar)
+
+    await sleep(sleepTime)
 
     if (!get(isPlay)) {
       word.set('')

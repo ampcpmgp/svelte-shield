@@ -51,8 +51,9 @@
 <div class="wrapper">
   <InsetAlert
     type="alert-success"
-    message={$word.trim() || '　'}
+    message={$word.trim()}
     isStrong={$info.isHeading}
+    hasNewLine={$info.hasNewLine}
     progress={$progress} />
 
   <div class="button-groups">

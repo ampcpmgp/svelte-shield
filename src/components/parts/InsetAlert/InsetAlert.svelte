@@ -6,10 +6,12 @@
   export let type = ''
   export let message = ''
   export let isStrong = false
+  export let hasNewLine = false
   export let isOneLine = false
   export let progress = 0.0
   export let subMessage = ''
 
+  $: displayMessage = message || '　'
   // 空白の場合は全角スペースを入れ 1lh を確保する
   $: progressPercent = `${progress * 100}%`
 </script>
@@ -24,6 +26,16 @@
 
   .alert {
     font-size: var(--text-size);
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    place-items: end;
+    grid-column-gap: 8px;
+  }
+
+  .new-line {
+    width: var(--text-size);
+    height: auto;
   }
 
   .inset {
@@ -84,7 +96,9 @@
 
 <div class="wrapper" style="--text-size: {$textSize}px">
   <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
-    {#if isStrong}<strong>{message}</strong>{:else}{message}{/if}
+    {#if isStrong}<strong>{displayMessage}</strong>{:else}{displayMessage}{/if}
+
+    {#if hasNewLine}⏎{/if}
   </div>
 
   <div class="meter" style="--width-percent: {progressPercent}" />

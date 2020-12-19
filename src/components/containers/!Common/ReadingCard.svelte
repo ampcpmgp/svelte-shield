@@ -7,6 +7,7 @@
     currentIndex,
     isPause,
     setWordInfo,
+    getSleepTime,
   } from '../../../states/morpheme'
   import { intervalMsPerChar } from '../../../states/settings'
 
@@ -18,7 +19,7 @@
 
   $: currentItem = $compositions[$currentIndex]
   $: playingTimeMs = $compositions.reduce(
-    (ms, item) => ms + item.word.length * $intervalMsPerChar,
+    (ms, item) => ms + getSleepTime(item, $intervalMsPerChar),
     0
   )
 
@@ -125,7 +126,11 @@
         class:new-line={/\n/.test(item.word)}
         class:inactive={!$isPause}
         class:highlight={currentItem === item}
-        class:strong={item.info.isHeading}>{item.word}</span>
+        class:strong={item.info.isHeading}>
+        {item.word}
+
+        {#if item.info.hasNewLine}<br />{/if}
+      </span>
     {/each}
   </div>
 </div>
