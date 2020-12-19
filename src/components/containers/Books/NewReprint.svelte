@@ -2,7 +2,7 @@
   import { default as Select } from 'svelte-select'
   import { push } from 'svelte-spa-router'
   import { default as Modal } from '../../../const/modal'
-  import { LicenseListData } from '../../../const/licenses'
+  import { LicenseListData, DomainInfo } from '../../../const/licenses'
   import {
     title,
     url,
@@ -26,6 +26,15 @@
     } catch (error) {
       console.error(error)
       alert(error)
+    }
+  }
+
+  function handleUrlChange() {
+    const { hostname } = new URL($url)
+    const domainInfo = DomainInfo[hostname]
+
+    if (domainInfo && !$license) {
+      $license = domainInfo.default
     }
   }
 </script>
@@ -107,7 +116,12 @@
 
         <div class="form-group url-wrapper">
           <label for="url">URL</label>
-          <input type="text" class="form-control" id="url" bind:value={$url} />
+          <input
+            type="text"
+            class="form-control"
+            id="url"
+            bind:value={$url}
+            on:change={handleUrlChange} />
         </div>
 
         <div class="form-group themed license-wrapper">
