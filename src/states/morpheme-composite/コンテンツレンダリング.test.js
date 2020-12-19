@@ -7,11 +7,5 @@ import { composite } from '../morpheme'
 test('composite/コンテンツレンダリング', t => {
   const result = composite(json).map(item => item.word)
 
-  t.deepEqual(result, [
-    '\n',
-    '初回起動の',
-    '場合コンテンツレンダリングが',
-    '遅い。',
-    '\n',
-  ])
+  t.deepEqual(result, ['初回起動の', '場合コンテンツレンダリングが', '遅い。'])
 })

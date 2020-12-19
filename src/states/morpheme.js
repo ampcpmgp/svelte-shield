@@ -5,6 +5,7 @@ import sleep from '../utils/sleep'
 export const word = writable('')
 export const info = writable({
   isHeading: false,
+  hasNewLine: false,
 })
 export const isLoading = writable(true)
 export const isPlay = writable(false)
@@ -361,6 +362,7 @@ export function composite(path) {
           item,
           info: {
             isHeading,
+            hasNewLine: false,
           },
         }))
       })
@@ -414,7 +416,19 @@ export function composite(path) {
       }, [])
       // 文字の再配置などで完全に空白になったものを除去
       .filter(item => item.word)
-      // 前後の空白や改行を trim する。空白は改行として扱う。
-      .map(item => ({ ...item, word: item.word.trim() || '\n' }))
+      // 前後の空白や改行を trim する。空白となったものは空文字にして、ひとつ前を改行表示とする。
+      .map((item, index, results) => {
+        const trimmed = item.word.trim()
+        const isNewLine = !trimmed
+        const prevItem = results[index - 1]
+
+        if (isNewLine && prevItem) {
+          prevItem.info.hasNewLine = true
+        }
+
+        return { ...item, word: trimmed }
+      })
+      // 改行由来の空白文字も除去する
+      .filter(item => item.word)
   )
 }

@@ -18,120 +18,98 @@ test('composite/見出し強調機能', t => {
   t.deepEqual(result, [
     {
       info: {
+        hasNewLine: true,
         isHeading: true,
       },
       word: '物理的消化',
     },
     {
       info: {
-        isHeading: true,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: true,
         isHeading: true,
       },
       word: '咀嚼（そしゃく）',
     },
     {
       info: {
-        isHeading: false,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '食物を歯で',
     },
     {
       info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '噛み砕く事によって',
     },
     {
       info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '食物を細かく',
     },
     {
       info: {
+        hasNewLine: true,
         isHeading: false,
       },
       word: 'する。',
     },
     {
       info: {
-        isHeading: true,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: true,
         isHeading: true,
       },
       word: '蠕動（ぜんどう）運動',
     },
     {
       info: {
-        isHeading: false,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '筋肉の収縮で',
     },
     {
       info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '波を作り、',
     },
     {
       info: {
+        hasNewLine: true,
         isHeading: false,
       },
       word: '食物を運ぶ。',
     },
     {
       info: {
-        isHeading: true,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: true,
         isHeading: true,
       },
       word: '分節運動',
     },
     {
       info: {
-        isHeading: false,
-      },
-      word: '\n',
-    },
-    {
-      info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '筋肉の収縮によって',
     },
     {
       info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '消化液と',
     },
     {
       info: {
+        hasNewLine: false,
         isHeading: false,
       },
       word: '食物を混ぜる。',

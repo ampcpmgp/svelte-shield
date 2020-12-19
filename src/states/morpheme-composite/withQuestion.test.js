@@ -8,11 +8,9 @@ test('composite/withQuestion', t => {
   t.deepEqual(result, [
     '「なんで',
     '結婚しないの？」',
-    '\n',
     '「ずっと',
     '独身でいる',
     'つもり？」',
-    '\n',
     '「早く安心させて',
     'くれ」',
   ])
