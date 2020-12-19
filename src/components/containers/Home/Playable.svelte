@@ -84,7 +84,7 @@
     <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
     <div class="reading-card-wrapper">
       <div class="reading-card-inner" bind:clientHeight={readingCardHeight}>
-        <ReadingCard disabled={!$isPause} height={readingCardHeight} />
+        <ReadingCard height={readingCardHeight} />
       </div>
     </div>
   {/if}

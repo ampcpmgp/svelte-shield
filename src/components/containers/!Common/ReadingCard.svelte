@@ -5,13 +5,11 @@
   import {
     compositions,
     currentIndex,
-    isPause,
     setWordInfo,
     getSleepTime,
   } from '../../../states/morpheme'
   import { intervalMsPerChar } from '../../../states/settings'
 
-  export let disabled = false
   export let height = 0
 
   const elementsToScroll = []
@@ -62,27 +60,16 @@
   .word {
     cursor: pointer;
   }
-  .word.disabled {
-    pointer-events: none;
-  }
-
   .highlight {
-    background-color: yellow;
+    background-color: #ffff00cc;
   }
 
   .strong {
     font-weight: bold;
   }
 
-  .inactive {
-    pointer-events: none;
-  }
-
   .card-body {
     overflow-y: auto;
-  }
-  .card-body.disabled {
-    opacity: 0.2;
   }
 
   .playing-time {
@@ -112,19 +99,13 @@
     <div>約{msToTime(playingTimeMs)}</div>
   </div>
 
-  <div
-    bind:this={elmCardBody}
-    class="card-body"
-    style="height: {height}px"
-    class:disabled>
+  <div bind:this={elmCardBody} class="card-body" style="height: {height}px">
     {#each $compositions as item}
       <span
         class="word"
-        class:disabled
         on:click={() => moveReading(item)}
         bind:this={elementsToScroll[$compositions.indexOf(item)]}
         class:new-line={/\n/.test(item.word)}
-        class:inactive={!$isPause}
         class:highlight={currentItem === item}
         class:strong={item.info.isHeading}>
         {item.word}
