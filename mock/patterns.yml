@@ -31,14 +31,6 @@ settings:
       - [見出し強調機能]
       - [morpheme.tokenize]
       - [morpheme.play]
-  改行位置で一時停止:
-    funcs:
-      - [sleep, 1000]
-      - [見出し強調機能]
-      - [morpheme.tokenize]
-      - [morpheme.isPlay.set, true]
-      - [morpheme.isPause.set, true]
-      - [morpheme.currentIndex.set, 3]
   長いカタカナ文:
     - [sleep, 1000]
     - [長いカタカナ文]
