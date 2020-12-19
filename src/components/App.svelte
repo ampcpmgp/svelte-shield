@@ -1,7 +1,6 @@
 <script>
   import Router from 'svelte-spa-router'
   import routes from './routes'
-  import * as is from '../utils/is'
 </script>
 
 <style>
@@ -32,13 +31,7 @@
 <div class="wrapper">
   <div class="card shadow-soft border-light">
     <div class="card-body">
-      {#if is.iOS()}
-        <div class="ios-wrapper">
-          <Router {routes} />
-        </div>
-      {:else}
-        <Router {routes} />
-      {/if}
+      <Router {routes} />
     </div>
   </div>
 </div>
