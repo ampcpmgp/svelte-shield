@@ -88,6 +88,7 @@
     top: 0;
     left: 0;
     padding-bottom: 40px;
+    width: 100%;
   }
   .additional-info-inner {
     display: grid;
