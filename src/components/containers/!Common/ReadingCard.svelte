@@ -82,7 +82,7 @@
     overflow-y: auto;
   }
   .card-body.disabled {
-    opacity: 0.2;
+    opacity: 0.3;
   }
 
   .playing-time {
