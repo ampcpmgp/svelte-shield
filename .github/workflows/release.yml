@@ -5,9 +5,7 @@ on:
     branches:
       - master
     paths:
-      - package.json
-    paths-ignore:
-      - src/**
+      - version.json
 
 jobs:
   test:
