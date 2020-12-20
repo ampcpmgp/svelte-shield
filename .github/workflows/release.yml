@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - package.json
     paths-ignore:
-      - '!package.json'
+      - src/**
 
 jobs:
   test:
