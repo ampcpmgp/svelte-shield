@@ -1,7 +1,7 @@
 <script>
-  import packageJson from '../../../../package.json'
+  import packageJson from '../../../../version.json'
 
-  const { version } = packageJson
+  const { value } = packageJson
 </script>
 
 <style>
@@ -12,4 +12,4 @@
   }
 </style>
 
-<small class="wrapper">Version: {version}</small>
+<small class="wrapper">Version: {value}</small>
