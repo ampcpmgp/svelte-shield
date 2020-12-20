@@ -3,6 +3,7 @@
   import { default as Modal } from '../../../const/modal'
   import { getUrlForTweet } from '../../../utils/url'
   import { title } from '../../../states/book'
+  import { pause } from '../../../states/morpheme'
   import { default as Icon } from '../../parts/Icon/Icon.svelte'
 
   const hashTags = ['SvelteShield', 'IPFS本']
@@ -26,10 +27,6 @@
     align-items: center;
     grid-column-gap: 8px;
     padding: 0px 4px;
-  }
-  @media (max-width: 575px) {
-    .title-wrapper {
-    }
   }
 
   i {
@@ -82,7 +79,7 @@
   </div>
 
   <div class="title-wrapper">
-    <a href="/books" use:link>
+    <a href="/books" use:link on:click={pause}>
       <Icon><i class="fas fa-angle-left" /></Icon>
     </a>
 
