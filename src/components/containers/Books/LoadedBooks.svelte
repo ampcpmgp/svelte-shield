@@ -84,6 +84,8 @@
     position: absolute;
     bottom: -8px;
     left: -14px;
+    padding-top: 8px;
+    padding-right: 8px;
   }
 
   .square input {
@@ -132,7 +134,7 @@
       </a>
 
       <div class="square">
-        <input type="checkbox" id={`selected-${book.hash}`} />
+        <input type="checkbox" id={`selected-${book.hash}`} value={book.selected} />
         <label for={`selected-${book.hash}`} />
       </div>
     </div>

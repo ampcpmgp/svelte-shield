@@ -3,7 +3,7 @@ import { decode } from '@msgpack/msgpack'
 import * as ipfs from '../databases/ipfs'
 import * as dexie from '../databases/dexie'
 
-// { hash, title, insertedDate }
+// { hash, title, insertedDate, selected }
 export const loadedBooks = writable([])
 
 // どこかで paging 対応をする
@@ -32,6 +32,7 @@ export async function loadBooks(offset) {
         title: bookOnIpfs.title,
         insertedDate: bookOnDb.insertedDate,
         readingRatio: bookOnDb.readingRatio,
+        selected: false,
       },
     ])
   })

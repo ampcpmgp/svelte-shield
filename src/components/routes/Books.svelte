@@ -8,6 +8,7 @@
   import Frame from '../parts/Frame/Main.svelte'
   import Buttons from '../containers/Books/Buttons.svelte'
   import LoadedBooks from '../containers/Books/LoadedBooks.svelte'
+  import Navigator from '../containers/Books/Navigator.svelte'
   import '../../databases/ipfs'
 </script>
 
@@ -34,6 +35,9 @@
     <Footer />
   </div>
 </Frame>
+
+<!-- 固定フッター -->
+<Navigator />
 
 <!-- 各モーダル -->
 <Settings />
