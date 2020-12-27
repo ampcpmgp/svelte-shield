@@ -101,6 +101,9 @@
     /* overwrite nuemorphism ui */
     margin-bottom: 0;
   }
+  .square label:hover {
+    border-color: #999;
+  }
   .square input:checked + label {
     border-color: #999;
   }
@@ -134,7 +137,10 @@
       </a>
 
       <div class="square">
-        <input type="checkbox" id={`selected-${book.hash}`} value={book.selected} />
+        <input
+          type="checkbox"
+          id={`selected-${book.hash}`}
+          bind:checked={book.selected} />
         <label for={`selected-${book.hash}`} />
       </div>
     </div>

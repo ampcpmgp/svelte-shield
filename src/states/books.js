@@ -1,10 +1,17 @@
-import { writable } from 'svelte/store'
+import { derived, writable } from 'svelte/store'
 import { decode } from '@msgpack/msgpack'
 import * as ipfs from '../databases/ipfs'
 import * as dexie from '../databases/dexie'
 
 // { hash, title, insertedDate, selected }
 export const loadedBooks = writable([])
+export const selectedBooks = derived(loadedBooks, $loadedBooks =>
+  $loadedBooks.filter(item => item.selected)
+)
+export const hasSelectedBooks = derived(
+  selectedBooks,
+  $selectedBooks => $selectedBooks.length > 0
+)
 
 // どこかで paging 対応をする
 const limit = 999
