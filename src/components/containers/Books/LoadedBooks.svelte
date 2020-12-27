@@ -27,18 +27,22 @@
     }
   }
 
-  .book {
-    padding: 8px;
+  .book-wrapper {
     height: 160px;
     width: 100%;
-    display: grid;
-    grid-template-rows: 1fr auto;
     position: relative;
   }
   @media (max-width: 575px) {
-    .book {
+    .book-wrapper {
       height: 100px;
     }
+  }
+
+  .book {
+    height: 100%;
+    padding: 8px;
+    display: grid;
+    grid-template-rows: 1fr auto;
   }
 
   .title {
@@ -75,20 +79,62 @@
     background-color: #00ff0033;
     height: var(--height);
   }
+
+  .circle {
+    position: absolute;
+    bottom: -8px;
+    left: -14px;
+  }
+
+  .circle input {
+    display: none;
+  }
+  .circle label {
+    padding: 6px;
+    border-radius: 999px;
+    border: solid 1px #ccc;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    /* overwrite nuemorphism ui */
+    margin-bottom: 0;
+  }
+  .circle input:checked + label {
+    border-color: #999;
+  }
+  .circle label::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: solid 1px #00cc00;
+    border-radius: 999px;
+  }
+  .circle input:checked + label::after {
+    background-color: #00cc00;
+  }
 </style>
 
 <div class="wrapper">
   {#each $loadedBooks as book}
-    <a
-      href={`/books/${book.hash}`}
-      class="book card bg-primary border-light shadow-soft"
-      title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}\n\n進捗割合: ${getPercent(book.readingRatio)}%`}
-      use:link>
-      <h3 class="title">{book.title}</h3>
-      <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>
-      <div
-        class="reading-ratio"
-        style="--height: {getPercent(book.readingRatio)}%" />
-    </a>
+    <div class="book-wrapper">
+      <a
+        href={`/books/${book.hash}`}
+        class="book card bg-primary border-light shadow-soft"
+        title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}\n\n進捗割合: ${getPercent(book.readingRatio)}%`}
+        use:link>
+        <h3 class="title">{book.title}</h3>
+        <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>
+
+        <div
+          class="reading-ratio"
+          style="--height: {getPercent(book.readingRatio)}%" />
+      </a>
+
+      <div class="circle">
+        <input type="checkbox" id={`selected-${book.hash}`} />
+        <label for={`selected-${book.hash}`} />
+      </div>
+    </div>
   {/each}
 </div>
