@@ -80,18 +80,18 @@
     height: var(--height);
   }
 
-  .circle {
+  .square {
     position: absolute;
     bottom: -8px;
     left: -14px;
   }
 
-  .circle input {
+  .square input {
     display: none;
   }
-  .circle label {
+  .square label {
     padding: 6px;
-    border-radius: 999px;
+    border-radius: 4px;
     border: solid 1px #ccc;
     display: grid;
     place-items: center;
@@ -99,18 +99,18 @@
     /* overwrite nuemorphism ui */
     margin-bottom: 0;
   }
-  .circle input:checked + label {
+  .square input:checked + label {
     border-color: #999;
   }
-  .circle label::after {
+  .square label::after {
     content: '';
     width: 20px;
     height: 20px;
     background-color: transparent;
     border: solid 1px #00cc00;
-    border-radius: 999px;
+    border-radius: 2px;
   }
-  .circle input:checked + label::after {
+  .square input:checked + label::after {
     background-color: #00cc00;
   }
 </style>
@@ -131,7 +131,7 @@
           style="--height: {getPercent(book.readingRatio)}%" />
       </a>
 
-      <div class="circle">
+      <div class="square">
         <input type="checkbox" id={`selected-${book.hash}`} />
         <label for={`selected-${book.hash}`} />
       </div>
