@@ -105,4 +105,14 @@
   .fade {
     transition: none;
   }
+
+  a.bg-primary:hover, a.bg-primary:focus,
+  button.bg-primary:hover,
+  button.bg-primary:focus {
+    background-color: #222 !important;
+  }
+
+  .navbar-theme-primary:not(.headroom) {
+    background-color: #222 !important;
+  }
 }
