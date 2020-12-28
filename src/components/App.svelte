@@ -4,12 +4,7 @@
 </script>
 
 <style>
-  :global(body) {
-    box-sizing: border-box;
-    word-break: break-all;
-  }
-
-  .wrapper {
+  #root {
     display: grid;
     width: 100%;
     min-height: 100vh;
@@ -28,7 +23,7 @@
   }
 </style>
 
-<div class="wrapper">
+<div id="root">
   <div class="card shadow-soft border-light">
     <div class="card-body">
       <Router {routes} />

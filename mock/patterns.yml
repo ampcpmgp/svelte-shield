@@ -97,6 +97,8 @@ IPFS本ページ:
       - [newBook.selfMade.content.set, dummy content]
       - [sleep, 1500]
       - [click, "[data-mock=\"save-new-self-made\"]"]
+  100冊登録:
+      - [registerBooks, 100]
 IPFS本詳細ページ:
   noLink: true
   転載文:

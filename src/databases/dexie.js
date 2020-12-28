@@ -45,3 +45,7 @@ export function getBooks(offset = 0, limit = 10) {
     .limit(limit)
     .toArray()
 }
+
+export function getBookCount() {
+  return db.books.count()
+}

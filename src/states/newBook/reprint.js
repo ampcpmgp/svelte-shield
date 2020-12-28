@@ -7,6 +7,7 @@ import * as validate from '../../utils/validate'
 
 export const title = writable('')
 export const url = writable('')
+// { value: string } or undefined
 export const license = writable(undefined)
 export const content = writable('')
 

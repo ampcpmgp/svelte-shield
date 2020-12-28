@@ -1,5 +1,6 @@
 <script>
   import * as morpheme from '../../states/morpheme'
+  import { adjustHeight } from '../../utils/layout'
   import Header from '../parts/Header/Header.svelte'
   import Footer from '../parts/Footer/Footer.svelte'
   import Settings from '../parts/Modals/Settings.svelte'
@@ -23,6 +24,8 @@
   } else {
     init()
   }
+
+  adjustHeight('100vh')
 
   function init() {
     morpheme.init()

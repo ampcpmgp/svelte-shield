@@ -18,6 +18,22 @@ mock({
   ipfs,
   dexie,
 
+  async registerBooks(length) {
+    const bookCount = await dexie.getBookCount()
+
+    if (bookCount > 100) return
+
+    for (const [index] of Array.from({ length }).entries()) {
+      newBook.reprint.title.set(`dummy title ${index}`)
+      newBook.reprint.url.set('//example.com')
+      newBook.reprint.license.set({ value: 'CC0-1.0' })
+      newBook.reprint.content.set('dummy content')
+      await newBook.reprint.save()
+    }
+
+    await books.loadBooks()
+  },
+
   page(name) {
     replace(name)
   },
