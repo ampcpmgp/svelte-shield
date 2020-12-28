@@ -212,20 +212,30 @@ export function isWeirdAtTheFront(item, lastItem) {
   )
 }
 
-export function hasStartedParentheses(item) {
+export function hasStartedParentheses(word) {
   return (
-    item.surface_form.indexOf('(') > -1 ||
-    item.surface_form.indexOf('（') > -1 ||
-    item.surface_form.indexOf('[') > -1
+    word.indexOf('(') > -1 || word.indexOf('（') > -1 || word.indexOf('[') > -1
   )
 }
 
-export function hasEndedParentheses(item) {
+export function hasEndedParentheses(word) {
   return (
-    item.surface_form.indexOf(')') > -1 ||
-    item.surface_form.indexOf('）') > -1 ||
-    item.surface_form.indexOf(']') > -1
+    word.indexOf(')') > -1 || word.indexOf('）') > -1 || word.indexOf(']') > -1
   )
+}
+
+export function getCountParentheses(item) {
+  return item.surface_form.split('').reduce((sum, word) => {
+    if (hasStartedParentheses(word)) {
+      return sum + 1
+    }
+
+    if (hasEndedParentheses(word)) {
+      return sum - 1
+    }
+
+    return sum
+  }, 0)
 }
 
 // 繰り上げ文字判定
@@ -254,13 +264,7 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
-    if (hasStartedParentheses(item)) {
-      ++parenthesesNum
-    }
-
-    if (hasEndedParentheses(item)) {
-      --parenthesesNum
-    }
+    parenthesesNum += getCountParentheses(item)
 
     // 括弧内にいる場合は、事前繰り上げ条件の判定に入れない
     if (parenthesesNum > 0) {
