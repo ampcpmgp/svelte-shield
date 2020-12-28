@@ -212,15 +212,19 @@ export function isWeirdAtTheFront(item, lastItem) {
   )
 }
 
-export function isStartedWithParentheses(item) {
+export function hasStartedParentheses(item) {
   return (
-    item.surface_form.indexOf('(') > -1 || item.surface_form.indexOf('（') > -1
+    item.surface_form.indexOf('(') > -1 ||
+    item.surface_form.indexOf('（') > -1 ||
+    item.surface_form.indexOf('[') > -1
   )
 }
 
-export function isEndedWithParentheses(item) {
+export function hasEndedParentheses(item) {
   return (
-    item.surface_form.indexOf(')') > -1 || item.surface_form.indexOf('）') > -1
+    item.surface_form.indexOf(')') > -1 ||
+    item.surface_form.indexOf('）') > -1 ||
+    item.surface_form.indexOf(']') > -1
   )
 }
 
@@ -250,11 +254,11 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
-    if (isStartedWithParentheses(item)) {
+    if (hasStartedParentheses(item)) {
       ++parenthesesNum
     }
 
-    if (isEndedWithParentheses(item)) {
+    if (hasEndedParentheses(item)) {
       --parenthesesNum
     }
 
