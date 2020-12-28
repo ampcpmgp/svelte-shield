@@ -126,7 +126,7 @@
         class:new-line={/\n/.test(item.word)}
         class:inactive={!$isPause}
         class:highlight={currentItem === item}
-        class:strong={item.info.isHeading}>
+        class:strong={false}>
         {item.word}
 
         {#if item.info.hasNewLine}<br />{/if}
