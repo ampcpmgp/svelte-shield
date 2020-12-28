@@ -212,6 +212,18 @@ export function isWeirdAtTheFront(item, lastItem) {
   )
 }
 
+export function isStartedWithParentheses(item) {
+  return (
+    item.surface_form.indexOf('(') > -1 || item.surface_form.indexOf('（') > -1
+  )
+}
+
+export function isEndedWithParentheses(item) {
+  return (
+    item.surface_form.indexOf(')') > -1 || item.surface_form.indexOf('）') > -1
+  )
+}
+
 // 繰り上げ文字判定
 export function isLastWord(item) {
   return isPunctuation(item) || /\n/.test(item.surface_form)
@@ -228,6 +240,8 @@ export function composite(path) {
   let currentIndex = 0
   const { judgeNum } = get(hiddenSettings)
 
+  let parenthesesNum = 0
+
   path.forEach((item, index) => {
     // 初期化
     initComposition(compositions, currentIndex)
@@ -236,8 +250,20 @@ export function composite(path) {
     const word = getWord(composition)
     const nextItem = path[index + 1]
 
+    if (isStartedWithParentheses(item)) {
+      ++parenthesesNum
+    }
+
+    if (isEndedWithParentheses(item)) {
+      --parenthesesNum
+    }
+
+    // 括弧内にいる場合は、事前繰り上げ条件の判定に入れない
+    if (parenthesesNum > 0) {
+      void 0
+    }
     // 改行は前後を繰り上げて、他の判定条件を受けない
-    if (/\n/.test(item.surface_form)) {
+    else if (/\n/.test(item.surface_form)) {
       ++currentIndex
       initComposition(compositions, currentIndex)
       composition = compositions[currentIndex]
@@ -259,8 +285,13 @@ export function composite(path) {
     }
 
     // 事前折り返し判定。
-    // 漢字が続けば折り返し判定を行わない。
-    if (
+
+    // 括弧が始まった場合は折り返ししない
+    if (parenthesesNum > 0) {
+      void 0
+
+      // 漢字が続けば折り返し判定を行わない。
+    } else if (
       currentCompositionLastItem &&
       isRelationalNoun(currentCompositionLastItem) &&
       isRelationalNoun(item)
