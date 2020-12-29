@@ -152,7 +152,8 @@ export function isPunctuation(item) {
   return (
     isJapanesePeriod(item) ||
     item.pos_detail_1 === '読点' ||
-    item.surface_form === '，'
+    item.surface_form === '，' ||
+    item.surface_form === ','
   )
 }
 
