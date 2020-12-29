@@ -47,6 +47,8 @@
 
   .modal-content {
     min-height: 90vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
   }
 
   .modal-body {
@@ -58,6 +60,9 @@
     grid-column-gap: 8px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto 1fr;
+
+    /* overwrite */
+    flex: initial;
   }
 
   textarea {
