@@ -149,12 +149,7 @@ export function initComposition(compositions, index) {
 }
 
 export function isPunctuation(item) {
-  return (
-    isJapanesePeriod(item) ||
-    item.pos_detail_1 === '読点' ||
-    item.surface_form === '，' ||
-    item.surface_form === ','
-  )
+  return isJapanesePeriod(item) || item.pos_detail_1 === '読点'
 }
 
 export function isJapanesePeriod(item) {
@@ -197,9 +192,11 @@ export function isWeirdAtTheLast(item) {
 }
 
 export function isWeirdAtTheFront(item, lastItem) {
-  // 今回の結果が数で、前回の結果が小数点だった場合は、先頭に来ないものとして扱う
+  // 今回の結果が数で、前回の結果が小数点記号などだった場合は、先頭に来ないものとして扱う
   const isConnectableNum =
-    item.pos_detail_1 === '数' && lastItem && lastItem.surface_form === '.'
+    item.pos_detail_1 === '数' &&
+    lastItem &&
+    (lastItem.surface_form === '.' || lastItem.surface_form === ',')
 
   return (
     isPunctuation(item) ||
