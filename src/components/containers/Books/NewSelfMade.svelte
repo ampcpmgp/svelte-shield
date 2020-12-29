@@ -31,13 +31,19 @@
     max-width: 800px;
   }
 
+  .modal-content {
+    min-height: 90vh;
+  }
+
   .modal-body {
     display: grid;
     grid-column-gap: 8px;
+    grid-template-rows: auto auto 1fr;
   }
 
   textarea {
     min-height: 240px;
+    height: 100%;
   }
 
   .add-source {

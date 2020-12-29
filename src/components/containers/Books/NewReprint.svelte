@@ -45,6 +45,10 @@
     max-width: 800px;
   }
 
+  .modal-content {
+    min-height: 90vh;
+  }
+
   .modal-body {
     display: grid;
     grid-template-areas:
@@ -53,10 +57,12 @@
       'content content';
     grid-column-gap: 8px;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
   }
 
   textarea {
     min-height: 240px;
+    height: 100%;
   }
 
   .title-wrapper {
