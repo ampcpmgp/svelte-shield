@@ -61,6 +61,7 @@
 
   .word {
     cursor: pointer;
+    margin: 0 2px;
   }
   .word.disabled {
     pointer-events: none;
@@ -127,10 +128,7 @@
         class:inactive={!$isPause}
         class:highlight={currentItem === item}
         class:strong={false}>
-        {item.word}
-
-        {#if item.info.hasNewLine}<br />{/if}
-      </span>
+        {item.word}</span>{#if item.info.hasNewLine}<br />{/if}
     {/each}
   </div>
 </div>
