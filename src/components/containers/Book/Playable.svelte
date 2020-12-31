@@ -112,6 +112,7 @@
     message={$word.trim()}
     isStrong={false}
     hasNewLine={$info.hasNewLine}
+    time={0}
     progress={$progress} />
 
   <div class="button-groups">

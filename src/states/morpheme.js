@@ -11,6 +11,7 @@ export const isLoading = writable(true)
 export const isPlay = writable(false)
 export const isPause = writable(false)
 export const currentIndex = writable(0)
+export const currentReadingTime = writable(0)
 export const errorMsg = writable('')
 export const rawText = writable('')
 export const compositions = writable([])
@@ -81,8 +82,7 @@ export async function resume() {
   const playingCompositions = get(compositions).slice(get(currentIndex))
 
   for (const composition of playingCompositions) {
-    word.set(composition.word)
-    info.set(composition.info)
+    setWordInfo()
 
     const sleepTime = getSleepTime(composition, intervalMsPerChar)
 
@@ -125,8 +125,14 @@ export function setWordInfo() {
   const composition = get(compositions)[get(currentIndex)]
 
   if (composition) {
+    const readingTime = getSleepTime(
+      composition,
+      localStorage.intervalMsPerChar
+    )
+
     word.set(composition.word)
     info.set(composition.info)
+    currentReadingTime.set(readingTime)
   }
 }
 
