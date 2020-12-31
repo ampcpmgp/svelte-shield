@@ -110,6 +110,8 @@ IPFS本詳細ページ:
     func: [page, /books/QmULjPTtPNk1hoQFnV27eh3Nz2B7dr1BBNxY49LBEHdpcU]
   太陽系外惑星 - Wikipedia:
     func: [page, /books/QmfMX8XdQcP8EZN2JRwqxgjxWDVqj97ytYm182pJ9MoZnt]
+  ウォルフ・ライエ星 - Wikipedia:
+    func: [page, /books/QmWSUQUoWo7UWd5xj67hr5cfCY7EaNozZD455zVt9n4JMd]
   不正なハッシュ:
     func: [page, /books/illegalHash]
   存在しないが有効なハッシュ:

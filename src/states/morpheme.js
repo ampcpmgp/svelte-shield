@@ -251,6 +251,20 @@ export function isOnlyKanji(surface_form) {
   )
 }
 
+export function isValidClosure({ parenthesesNum, path, index }) {
+  const maxIndex = index + 30
+  const maxLoopIndex = maxIndex < path.length ? maxIndex : path.length
+  for (index; index < maxLoopIndex; index++) {
+    const item = path[index]
+
+    parenthesesNum += getCountParentheses(item)
+
+    if (parenthesesNum < 1) return true
+  }
+
+  return false
+}
+
 export function composite(path) {
   const compositions = []
   let currentIndex = 0
@@ -264,12 +278,17 @@ export function composite(path) {
     let composition = compositions[currentIndex]
     let currentCompositionLastItem = composition[composition.length - 1]
     const word = getWord(composition)
-    const nextItem = path[index + 1]
+    const nextIndex = index + 1
+    const nextItem = path[nextIndex]
 
     parenthesesNum += getCountParentheses(item)
 
+    const isInClosure = parenthesesNum > 0
+    const isItemValidClosure =
+      isInClosure && isValidClosure({ parenthesesNum, path, index: nextIndex })
+
     // 括弧内にいる場合は、事前繰り上げ条件の判定に入れない
-    if (parenthesesNum > 0) {
+    if (isItemValidClosure) {
       void 0
     }
     // 改行は前後を繰り上げて、他の判定条件を受けない
@@ -297,7 +316,7 @@ export function composite(path) {
     // 事前折り返し判定。
 
     // 括弧が始まった場合は折り返ししない
-    if (parenthesesNum > 0) {
+    if (isItemValidClosure) {
       void 0
 
       // 漢字が続けば折り返し判定を行わない。
