@@ -197,7 +197,7 @@ export function isWeirdAtTheLast(item) {
   )
 }
 
-export function isWeirdAtTheFront(item, lastItem) {
+export function isWeirdAtTheFront(item, lastItem, nextItem) {
   // 今回の結果が数で、前回の結果が小数点記号などだった場合は、先頭に来ないものとして扱う
   const isConnectableNum =
     item.pos_detail_1 === '数' &&
@@ -216,6 +216,9 @@ export function isWeirdAtTheFront(item, lastItem) {
     item.surface_form === '！' ||
     item.surface_form === '・' ||
     item.surface_form === '：' ||
+    (item.pos_detail_1 === '空白' &&
+      nextItem &&
+      hasStartedParentheses(nextItem.surface_form)) ||
     isConnectableNum
   )
 }
@@ -336,7 +339,7 @@ export function composite(path) {
       // 先頭に来てしまうと表示がおかしく見えるもの（句読点・助詞など）は、折り返し判定を行わない。
     } else if (
       currentCompositionLastItem &&
-      isWeirdAtTheFront(item, currentCompositionLastItem)
+      isWeirdAtTheFront(item, currentCompositionLastItem, nextItem)
     ) {
       void 0
 
