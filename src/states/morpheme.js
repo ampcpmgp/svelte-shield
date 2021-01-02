@@ -186,6 +186,7 @@ export function isWeirdAtTheLast(item) {
   return (
     item.pos_detail_1 === '括弧開' ||
     item.pos_detail_1 === '数' ||
+    item.surface_form === '・' ||
     item.surface_form === '(' ||
     item.surface_form === '[' ||
     item.surface_form === '~' ||

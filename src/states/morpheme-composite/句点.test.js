@@ -10,9 +10,7 @@ test('composite/句点', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
-    '主に楕円型・',
-    '渦巻型（渦巻・棒渦巻）・',
-    'レンズ状を',
+    '主に楕円型・渦巻型（渦巻・棒渦巻）・レンズ状を',
     '含む不定形が',
     'ある[20]。',
     'ハッブル分類は',
