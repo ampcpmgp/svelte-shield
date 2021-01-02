@@ -5,6 +5,7 @@
     isPause,
     info,
     currentIndex,
+    currentReadingTime,
     tokenize,
     progress,
     resume,
@@ -48,6 +49,8 @@
       readingRatio: $progress,
     })
   }
+
+  $: progressTime = !$isPause && $word.length > 50 ? $currentReadingTime : 0
 </script>
 
 <style>
@@ -112,7 +115,7 @@
     message={$word.trim()}
     isStrong={false}
     hasNewLine={$info.hasNewLine}
-    time={0}
+    time={progressTime}
     progress={$progress} />
 
   <div class="button-groups">

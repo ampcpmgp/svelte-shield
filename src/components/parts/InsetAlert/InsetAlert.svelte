@@ -20,15 +20,9 @@
 
   let meterTopElm
 
-  // animation 再描画
-  beforeUpdate(() => {
-    if (meterTopElm) {
-      meterTopElm.classList.remove('animation')
-    }
-  })
-
   afterUpdate(() => {
     if (meterTopElm) {
+      meterTopElm.classList.remove('animation')
       meterTopElm.classList.add('animation')
     }
   })
@@ -78,6 +72,9 @@
     width: var(--width-percent);
     box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
   }
+  .meter.top {
+    margin: auto;
+  }
   .meter.top::before {
     width: 0;
     background-color: #555;
@@ -86,6 +83,11 @@
     animation-name: scaleX;
     animation-duration: var(--animation-duration);
     animation-timing-function: linear;
+  }
+  @media (prefers-color-scheme: dark) {
+    .meter.top::before {
+      background-color: #ccc;
+    }
   }
 
   @keyframes scaleX {

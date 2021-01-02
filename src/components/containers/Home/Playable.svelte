@@ -5,6 +5,7 @@
     isPause,
     rawText,
     info,
+    currentReadingTime,
     progress,
     play,
     resume,
@@ -16,6 +17,8 @@
   import ReadingCard from '../!Common/ReadingCard.svelte'
 
   let readingCardHeight = 0
+
+  $: progressTime = !$isPause && $word.length > 50 ? $currentReadingTime : 0
 </script>
 
 <style>
@@ -54,6 +57,7 @@
     message={$word.trim()}
     isStrong={false}
     hasNewLine={$info.hasNewLine}
+    time={progressTime}
     progress={$progress} />
 
   <div class="button-groups">
