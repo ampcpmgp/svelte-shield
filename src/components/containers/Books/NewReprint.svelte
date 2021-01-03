@@ -42,7 +42,7 @@
 <style>
   /* overwrite neumorphism ui */
   .modal-dialog {
-    margin: 12px;
+    margin: 12px auto;
     max-width: 1200px;
   }
 
