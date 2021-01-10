@@ -231,7 +231,8 @@ export function hasStartedParentheses(word) {
     word.indexOf('(') > -1 ||
     word.indexOf('（') > -1 ||
     word.indexOf('[') > -1 ||
-    word.indexOf('「') > -1
+    word.indexOf('「') > -1 ||
+    word.indexOf('『') > -1
   )
 }
 
@@ -240,7 +241,8 @@ export function hasEndedParentheses(word) {
     word.indexOf(')') > -1 ||
     word.indexOf('）') > -1 ||
     word.indexOf(']') > -1 ||
-    word.indexOf('」') > -1
+    word.indexOf('」') > -1 ||
+    word.indexOf('』') > -1
   )
 }
 
