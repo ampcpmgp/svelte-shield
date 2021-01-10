@@ -159,6 +159,8 @@ export function isPunctuation(item) {
 }
 
 export function isJapanesePeriod(item) {
+  if (!item) return false
+
   return item.pos_detail_1 === '句点' || /。/.test(item.surface_form)
 }
 
@@ -226,13 +228,19 @@ export function isWeirdAtTheFront(item, lastItem, nextItem) {
 
 export function hasStartedParentheses(word) {
   return (
-    word.indexOf('(') > -1 || word.indexOf('（') > -1 || word.indexOf('[') > -1
+    word.indexOf('(') > -1 ||
+    word.indexOf('（') > -1 ||
+    word.indexOf('[') > -1 ||
+    word.indexOf('「') > -1
   )
 }
 
 export function hasEndedParentheses(word) {
   return (
-    word.indexOf(')') > -1 || word.indexOf('）') > -1 || word.indexOf(']') > -1
+    word.indexOf(')') > -1 ||
+    word.indexOf('）') > -1 ||
+    word.indexOf(']') > -1 ||
+    word.indexOf('」') > -1
   )
 }
 
@@ -297,8 +305,18 @@ export function composite(path) {
     const isItemValidClosure =
       isInClosure && isValidClosure({ parenthesesNum, path, index: nextIndex })
 
-    // 括弧内にいる場合は、事前繰り上げ条件の判定に入れない
-    if (isItemValidClosure) {
+    // 閉じ括弧が先に来てしまう場合は0に戻す
+    if (parenthesesNum < 0) {
+      parenthesesNum = 0
+    }
+
+    // 有効ではないクロージャ内にいた場合、 parenthesesNum を 0 に戻す
+    if (!isItemValidClosure && parenthesesNum > 0) {
+      parenthesesNum = 0
+    }
+
+    // 括弧内にいて、前回が句点でない場合は、事前繰り上げ条件の判定に入れない
+    if (isItemValidClosure && !isJapanesePeriod(currentCompositionLastItem)) {
       void 0
     }
     // 改行は前後を繰り上げて、他の判定条件を受けない

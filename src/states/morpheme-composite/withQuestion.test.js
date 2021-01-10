@@ -6,12 +6,8 @@ test('composite/withQuestion', t => {
   const result = composite(json).map(item => item.word)
 
   t.deepEqual(result, [
-    '「なんで',
-    '結婚しないの？」',
-    '「ずっと',
-    '独身でいる',
-    'つもり？」',
-    '「早く安心させて',
-    'くれ」',
+    '「なんで結婚しないの？」',
+    '「ずっと独身でいるつもり？」',
+    '「早く安心させてくれ」',
   ])
 })
