@@ -330,10 +330,11 @@ export function composite(path) {
       ++currentIndex
 
       return
-      // 前回が句読点であれば繰り上げて他の判定条件を受けない
+      // 前回が句読点でかつ、今回が括弧閉じで無ければ、繰り上げて他の判定条件を受けない
     } else if (
       currentCompositionLastItem &&
-      isPunctuation(currentCompositionLastItem)
+      isPunctuation(currentCompositionLastItem) &&
+      !hasEndedParentheses(item.surface_form)
     ) {
       ++currentIndex
       initComposition(compositions, currentIndex)
