@@ -273,9 +273,11 @@ export function isOnlyKanji(surface_form) {
 
 export function isValidClosure({ parenthesesNum, path, index }) {
   const maxIndex = index + 30
-  const maxLoopIndex = maxIndex < path.length ? maxIndex : path.length
-  for (index; index < maxLoopIndex; index++) {
+
+  for (; index < maxIndex; index++) {
     const item = path[index]
+
+    if (!item) return false
 
     parenthesesNum += getCountParentheses(item)
 
@@ -301,11 +303,14 @@ export function composite(path) {
     const nextIndex = index + 1
     const nextItem = path[nextIndex]
 
+    const prevParenthesesNum = parenthesesNum
+
     parenthesesNum += getCountParentheses(item)
 
     const isInClosure = parenthesesNum > 0
     const isItemValidClosure =
       isInClosure && isValidClosure({ parenthesesNum, path, index: nextIndex })
+    const isFirstValidClosure = isItemValidClosure && prevParenthesesNum === 0
 
     // 閉じ括弧が先に来てしまう場合は0に戻す
     if (parenthesesNum < 0) {
@@ -317,8 +322,8 @@ export function composite(path) {
       parenthesesNum = 0
     }
 
-    // 括弧内にいて、前回が句点でない場合は、事前繰り上げ条件の判定に入れない
-    if (isItemValidClosure && !isJapanesePeriod(currentCompositionLastItem)) {
+    // 括弧内にいてかつ、最初のクロージャで無ければ、事前繰り上げ条件の判定に入れない
+    if (isItemValidClosure && !isFirstValidClosure) {
       void 0
     }
     // 改行は前後を繰り上げて、他の判定条件を受けない
