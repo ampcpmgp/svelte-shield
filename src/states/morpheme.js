@@ -28,6 +28,9 @@ export const ignoreReading = writable(false)
 export const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/
 export const カタカナ = /([ァ-ヶー]+)/
 
+// 括弧内や見出しなどをひとまとめに出来る最大インデックス数。
+const MAX_MERGABLE_INDEX = 30
+
 let tokenizer
 
 async function getTokenizer() {
@@ -272,7 +275,7 @@ export function isOnlyKanji(surface_form) {
 }
 
 export function isValidClosure({ parenthesesNum, path, index }) {
-  const maxIndex = index + 30
+  const maxIndex = index + MAX_MERGABLE_INDEX
 
   for (; index < maxIndex; index++) {
     const item = path[index]
@@ -455,11 +458,19 @@ export function composite(path) {
         },
         [[]]
       )
-      .map(blocks => {
+      .map(items => {
+        let blocks = items
+
         // 見出し判定は句点が存在するかどうか。
         const isHeading = blocks.every(blockItem =>
           blockItem.every(item => !isJapanesePeriod(item))
         )
+
+        const blockSum = blocks.reduce((sum, item) => sum + item.length - 1, 0)
+
+        if (isHeading && blockSum < MAX_MERGABLE_INDEX) {
+          blocks = [blocks.flat()]
+        }
 
         return blocks.map(item => ({
           item,
