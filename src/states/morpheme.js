@@ -533,10 +533,10 @@ export function composite(path) {
       // 前後の空白や改行を trim する。空白となったものは空文字にして、ひとつ前を改行表示とする。
       .map((item, index, results) => {
         const trimmed = item.word.trim()
-        const isNewLine = !trimmed
+        const startedNewLine = /^\n/.test(item.word)
         const prevItem = results[index - 1]
 
-        if (isNewLine && prevItem) {
+        if (startedNewLine && prevItem) {
           prevItem.info.hasNewLine = true
         }
 
