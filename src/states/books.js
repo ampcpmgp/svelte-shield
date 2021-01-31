@@ -14,7 +14,7 @@ export const hasSelectedBooks = derived(
 )
 
 // どこかで paging 対応をする
-const limit = 999
+const limit = 99999
 
 export function init() {
   loadedBooks.set([])
