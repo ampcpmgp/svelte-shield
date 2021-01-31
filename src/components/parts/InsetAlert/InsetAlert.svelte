@@ -60,6 +60,12 @@
     white-space: nowrap;
   }
 
+  .is-strong {
+    /* 強調表示についてどういった表示が良いか検討する。以下は border-bottom になる影をつける。 */
+    /* box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 1); */
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+  }
+
   .meter {
     margin: -1rem auto 0 auto;
     padding: 0 8px;
@@ -141,9 +147,10 @@
   {/if}
 
   <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
-    {#if isStrong}<strong>{displayMessage}</strong>{:else}{displayMessage}{/if}
-
-    {#if hasNewLine}⏎{/if}
+    <span class:is-strong={isStrong}>
+      {displayMessage}
+      {#if hasNewLine}⏎{/if}
+    </span>
   </div>
 
   <div class="meter" style="--width-percent: {progressPercent}" />

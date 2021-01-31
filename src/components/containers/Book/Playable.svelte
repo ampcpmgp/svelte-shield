@@ -113,7 +113,7 @@
   <InsetAlert
     type="alert-success"
     message={$word.trim()}
-    isStrong={false}
+    isStrong={$info.isHeading}
     hasNewLine={$info.hasNewLine}
     time={progressTime}
     progress={$progress} />
