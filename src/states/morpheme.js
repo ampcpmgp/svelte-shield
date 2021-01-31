@@ -481,14 +481,16 @@ export function composite(path) {
         }))
       })
       .flat()
-      .reduce((result, { item, info }, index) => {
+      .reduce((result, { item, info }, index, compositions) => {
         const word = getWord(item)
         const trimmedWord = word.trim()
         const currentCompositionFirstItem = item[0]
-        const prevComposition = compositions[index - 1]
+        const prevComposition =
+          compositions[index - 1] && compositions[index - 1].item
         const prevCompositionLastItem =
           prevComposition && prevComposition[prevComposition.length - 1]
-        const nextComposition = compositions[index + 1]
+        const nextComposition =
+          compositions[index + 1] && compositions[index + 1].item
 
         // 改行は判定条件に加えず直接格納する。
         if (/\n/.test(word)) {
@@ -509,7 +511,6 @@ export function composite(path) {
           !/\n/.test(getWord(nextComposition))
         ) {
           nextComposition.unshift(...item)
-
           return result
           // 前のアイテムが最終文字で無ければ、前の文字に結合させる。
         } else if (prevComposition && !isLastWord(prevCompositionLastItem)) {
@@ -546,3 +547,9 @@ export function composite(path) {
       .filter(item => item.word)
   )
 }
+
+function logCompositions(items) {
+  console.log(items.map(item => item.surface_form))
+}
+
+void logCompositions
