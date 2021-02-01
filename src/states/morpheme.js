@@ -73,7 +73,7 @@ export async function play() {
 
 export function getSleepTime(composition, intervalMsPerChar) {
   const wordTime = composition.word.length * intervalMsPerChar
-  const newLineTime = composition.info.hasNewLine ? intervalMsPerChar * 3 : 0
+  const newLineTime = composition.info.hasNewLine ? intervalMsPerChar : 0
 
   return wordTime + newLineTime
 }
