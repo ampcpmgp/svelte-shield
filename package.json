@@ -53,7 +53,7 @@
     "ipfs-core": "^0.5.4",
     "is_js": "^0.9.0",
     "jquery": "^3.5.1",
-    "kuromoji": "^0.1.2",
+    "kuromoji": "git+https://github.com/ampcpmgp/kuromoji.js.git#2083a3a25aa6d4cf7a0c1fa3d02163fc104d89b9",
     "modern-css-reset": "^1.1.0",
     "outdent": "^0.8.0",
     "popper.js": "^1.16.1",

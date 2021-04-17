@@ -1,4 +1,4 @@
-import kuromoji from "kuromoji/build/kuromoji";
+import kuromoji from "kuromoji";
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
 
