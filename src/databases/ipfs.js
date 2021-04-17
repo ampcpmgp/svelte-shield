@@ -1,10 +1,10 @@
-import { default as IPFS } from "ipfs/dist/index.min";
+import { default as IPFS } from "ipfs";
 
 // 3MB を超えるものファイルはエラー
 const MAX_FILE_SIZE = 1024 * 1024 * 3;
 
 /**
- * IPFS は現状問題の無い websocket のエラーが多発している。
+ * 本来は webrtc-star の使う必要がある
  * 参考記事: https://stackoverflow.com/questions/63563162/ipfs-js-cant-connect-to-ws-127-0-0-18081-p2p
  */
 const nodeP = getNode();
