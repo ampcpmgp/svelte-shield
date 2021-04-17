@@ -11,3 +11,6 @@ dist-no-minified/
 
 # storybook
 storybook-static/
+
+# tmp
+public/dict/
