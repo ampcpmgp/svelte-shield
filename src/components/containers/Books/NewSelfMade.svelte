@@ -8,10 +8,10 @@
     sources,
     save,
     removeSource,
-    addSource,
+    addSource
   } from "../../../states/newBook/selfMade";
 
-  $: isSaveable = $title && $content && $sources.every((item) => item.value);
+  $: isSaveable = $title && $content && $sources.every(item => item.value);
 
   async function handleSave() {
     try {
@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group add-source">
-          <label>引用元</label>
+          <label for="">引用元</label>
 
           {#each $sources as source, i}
             <div class="form-group sources">
