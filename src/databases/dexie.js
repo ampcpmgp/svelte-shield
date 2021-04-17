@@ -1,51 +1,45 @@
-import Dexie from 'dexie'
+import Dexie from "dexie";
 
-export const db = new Dexie('SvelteShieldApp')
+export const db = new Dexie("SvelteShieldApp");
 
 // Schema Syntax: https://dexie.org/docs/Version/Version.stores()#schema-syntax
 db.version(1).stores({
-  books: '&hash,readingRatio,insertedDate',
-})
+  books: "&hash,readingRatio,insertedDate",
+});
 
 export function putbook(book) {
   // https://dexie.org/docs/Table/Table.put()
-  return db.books.put(book)
+  return db.books.put(book);
 }
 
 export function updateBook(hash, changes) {
   // https://dexie.org/docs/Table/Table.update()
-  return db.books.update(hash, changes)
+  return db.books.update(hash, changes);
 }
 
 export async function existsBook(hash) {
-  const count = await db.books
-    .where('hash')
-    .equals(hash)
-    .count()
+  const count = await db.books.where("hash").equals(hash).count();
 
-  return count === 1
+  return count === 1;
 }
 
 export function deleteBook(hash) {
-  return db.books
-    .where('hash')
-    .equals(hash)
-    .delete()
+  return db.books.where("hash").equals(hash).delete();
 }
 
 export function getBook(hash) {
-  return db.books.get(hash)
+  return db.books.get(hash);
 }
 
 export function getBooks(offset = 0, limit = 10) {
   return db.books
-    .orderBy('insertedDate')
+    .orderBy("insertedDate")
     .reverse()
     .offset(offset)
     .limit(limit)
-    .toArray()
+    .toArray();
 }
 
 export function getBookCount() {
-  return db.books.count()
+  return db.books.count();
 }

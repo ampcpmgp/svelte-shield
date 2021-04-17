@@ -1,25 +1,25 @@
-import { get, writable } from 'svelte/store'
-import { encode } from '@msgpack/msgpack'
-import * as ipfs from '../../databases/ipfs'
-import * as dexie from '../../databases/dexie'
-import { default as BookType } from '../../const/BookType'
-import * as validate from '../../utils/validate'
+import { get, writable } from "svelte/store";
+import { encode } from "@msgpack/msgpack";
+import * as ipfs from "../../databases/ipfs";
+import * as dexie from "../../databases/dexie";
+import { default as BookType } from "../../const/BookType";
+import * as validate from "../../utils/validate";
 
-export const title = writable('')
-export const url = writable('')
+export const title = writable("");
+export const url = writable("");
 // { value: string } or undefined
-export const license = writable(undefined)
-export const content = writable('')
+export const license = writable(undefined);
+export const content = writable("");
 
 export function reset() {
-  title.set('')
-  url.set('')
-  license.set(undefined)
-  content.set('')
+  title.set("");
+  url.set("");
+  license.set(undefined);
+  content.set("");
 }
 
 export async function validateAll() {
-  validate.content(get(content))
+  validate.content(get(content));
 }
 
 export async function save() {
@@ -29,25 +29,25 @@ export async function save() {
     url: get(url),
     license: get(license).value,
     content: get(content),
-  }
+  };
 
-  const encodedData = encode(data)
-  const results = await ipfs.add(encodedData)
+  const encodedData = encode(data);
+  const results = await ipfs.add(encodedData);
 
-  const { path } = results
+  const { path } = results;
 
-  const isExistsInDb = await dexie.existsBook(path)
+  const isExistsInDb = await dexie.existsBook(path);
 
   if (!isExistsInDb) {
     await dexie.putbook({
       hash: path,
       readingRatio: 0,
       insertedDate: new Date(),
-    })
+    });
   }
 
-  reset()
-  ipfs.addPin(path)
+  reset();
+  ipfs.addPin(path);
 
-  return results
+  return results;
 }

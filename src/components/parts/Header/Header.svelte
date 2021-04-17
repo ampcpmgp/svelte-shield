@@ -1,13 +1,36 @@
 <script>
-  import { default as Modal } from '../../../const/modal'
-  import { getUrlForTweet } from '../../../utils/url'
-  import { default as Icon } from '../../parts/Icon/Icon.svelte'
+  import { default as Modal } from "../../../const/modal";
+  import { getUrlForTweet } from "../../../utils/url";
+  import { default as Icon } from "../../parts/Icon/Icon.svelte";
 
-  export let tweetText = ''
-  export let additionalHashTags = []
+  export let tweetText = "";
+  export let additionalHashTags = [];
 
-  $: hashTags = ['SvelteShield', ...additionalHashTags]
+  $: hashTags = ["SvelteShield", ...additionalHashTags];
 </script>
+
+<header>
+  <div data-toggle="modal" data-target={"#" + Modal.SETTINGS}>
+    <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
+  </div>
+
+  <i
+    class="fas fa-shield-alt"
+    data-toggle="modal"
+    data-target={"#" + Modal.MODE_CHANGE}
+  />
+
+  <a
+    class="btn btn-sm btn-primary twitter-button sp-hidden"
+    href={getUrlForTweet(tweetText, hashTags)}
+    target="_blank"
+  >
+    <span class="fab fa-twitter" />
+    <span class="">ツイートする</span>
+  </a>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+  </script>
+</header>
 
 <style>
   header {
@@ -52,24 +75,3 @@
     }
   }
 </style>
-
-<header>
-  <div data-toggle="modal" data-target={'#' + Modal.SETTINGS}>
-    <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
-  </div>
-
-  <i
-    class="fas fa-shield-alt"
-    data-toggle="modal"
-    data-target={'#' + Modal.MODE_CHANGE} />
-
-  <a
-    class="btn btn-sm btn-primary twitter-button sp-hidden"
-    href={getUrlForTweet(tweetText, hashTags)}
-    target="_blank">
-    <span class="fab fa-twitter" />
-    <span class="">ツイートする</span>
-  </a>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-  </script>
-</header>

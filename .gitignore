@@ -4,10 +4,10 @@ node_modules/
 # am-mocktimes
 .am-mocktimes-img/
 
-# parcel-bundler
+# vite
 .cache/
 dist/
-dist-no-minified/
+public/dict/
 
 # storybook
 storybook-static/

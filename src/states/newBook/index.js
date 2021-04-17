@@ -1,4 +1,4 @@
-import * as reprint from './reprint'
-import * as selfMade from './selfMade'
+import * as reprint from "./reprint";
+import * as selfMade from "./selfMade";
 
-export { reprint, selfMade }
+export { reprint, selfMade };

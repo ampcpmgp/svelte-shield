@@ -3,6 +3,6 @@ export function getUrlForTweet(title, hashTags) {
   return `https://twitter.com/share?ref_src=twsrc%5Etfw&text=${encodeURIComponent(
     title
   )}&hashtags=${encodeURIComponent(
-    hashTags.join(',')
-  )}&url=${encodeURIComponent(location.href)}`
+    hashTags.join(",")
+  )}&url=${encodeURIComponent(location.href)}`;
 }

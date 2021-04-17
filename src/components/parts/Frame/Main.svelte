@@ -1,3 +1,9 @@
+<div class="wrapper">
+  <slot name="header" />
+  <slot name="content" />
+  <slot name="footer" />
+</div>
+
 <style>
   .wrapper {
     display: grid;
@@ -6,9 +12,3 @@
     height: 100%;
   }
 </style>
-
-<div class="wrapper">
-  <slot name="header" />
-  <slot name="content" />
-  <slot name="footer" />
-</div>
