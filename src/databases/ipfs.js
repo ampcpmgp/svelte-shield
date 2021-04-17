@@ -1,4 +1,4 @@
-import { default as IPFS } from 'ipfs'
+import { default as IPFS } from 'ipfs/dist/index.min'
 
 // 3MB を超えるものファイルはエラー
 const MAX_FILE_SIZE = 1024 * 1024 * 3
