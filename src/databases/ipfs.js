@@ -1,4 +1,8 @@
+import { create } from "https://unpkg.com/ipfs-core@0.5.4/dist/index.min.js";
+// import * as IPFS from "https://unpkg.com/ipfs-core@0.5.4/src/index.js";
 import { default as IPFS } from "ipfs-core/dist/index.min";
+
+console.log(111, create);
 
 // 3MB を超えるものファイルはエラー
 const MAX_FILE_SIZE = 1024 * 1024 * 3;
