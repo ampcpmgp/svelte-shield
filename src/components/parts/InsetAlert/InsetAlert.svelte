@@ -1,32 +1,55 @@
 <script>
-  import { afterUpdate } from 'svelte'
+  import { afterUpdate } from "svelte";
 
-  import { textSize } from '../../../states/settings'
+  import { textSize } from "../../../states/settings";
 
   // alert-secondary, alert-success, alert-info, alert-danger
   // https://themesberg.com/docs/neumorphism-ui/components/alerts/
-  export let type = ''
-  export let message = ''
-  export let isStrong = false
-  export let hasNewLine = false
-  export let isOneLine = false
-  export let progress = 0.0
-  export let subMessage = ''
-  export let time = 0
+  export let type = "";
+  export let message = "";
+  export let isStrong = false;
+  export let hasNewLine = false;
+  export let isOneLine = false;
+  export let progress = 0.0;
+  export let subMessage = "";
+  export let time = 0;
 
-  $: displayMessage = message || '　'
-  $: progressPercent = `${progress * 100}%`
-  $: animationDuration = `${time}ms`
+  $: displayMessage = message || "　";
+  $: progressPercent = `${progress * 100}%`;
+  $: animationDuration = `${time}ms`;
 
-  let meterTopElm
+  let meterTopElm;
 
   afterUpdate(() => {
     if (meterTopElm) {
-      meterTopElm.classList.remove('animation')
-      meterTopElm.classList.add('animation')
+      meterTopElm.classList.remove("animation");
+      meterTopElm.classList.add("animation");
     }
-  })
+  });
 </script>
+
+<div class="wrapper" style="--text-size: {$textSize}px">
+  {#if time > 0}
+    <div
+      bind:this={meterTopElm}
+      class="meter top animation"
+      style="--animation-duration: {animationDuration}"
+    />
+  {/if}
+
+  <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
+    <span class:is-strong={isStrong}>
+      {displayMessage}
+      {#if hasNewLine}⏎{/if}
+    </span>
+  </div>
+
+  <div class="meter" style="--width-percent: {progressPercent}" />
+
+  {#if subMessage}
+    <div class="sub-message badge badge-md badge-secondary">{subMessage}</div>
+  {/if}
+</div>
 
 <style>
   .wrapper {
@@ -72,7 +95,7 @@
     display: grid;
   }
   .meter::before {
-    content: ' ';
+    content: " ";
     height: 1px;
     background-color: lime;
     width: var(--width-percent);
@@ -137,25 +160,3 @@
     }
   }
 </style>
-
-<div class="wrapper" style="--text-size: {$textSize}px">
-  {#if time > 0}
-    <div
-      bind:this={meterTopElm}
-      class="meter top animation"
-      style="--animation-duration: {animationDuration}" />
-  {/if}
-
-  <div class="alert {type} shadow-soft inset" class:one-line={isOneLine}>
-    <span class:is-strong={isStrong}>
-      {displayMessage}
-      {#if hasNewLine}⏎{/if}
-    </span>
-  </div>
-
-  <div class="meter" style="--width-percent: {progressPercent}" />
-
-  {#if subMessage}
-    <div class="sub-message badge badge-md badge-secondary">{subMessage}</div>
-  {/if}
-</div>

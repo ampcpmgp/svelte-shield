@@ -1,5 +1,5 @@
 <script>
-  import { default as Main } from './Main.svelte'
+  import { default as Main } from "./Main.svelte";
 </script>
 
 <Main>

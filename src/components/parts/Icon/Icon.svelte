@@ -1,8 +1,18 @@
 <script>
-  export let isBox = false
-  export let isDisabled = false
-  export let colorType = ''
+  export let isBox = false;
+  export let isDisabled = false;
+  export let colorType = "";
 </script>
+
+<div
+  class="wrapper"
+  class:light-yellow={colorType === "light-yellow"}
+  class:box={isBox}
+  class:disabled={isDisabled}
+  on:click
+>
+  <slot />
+</div>
 
 <style>
   .wrapper {
@@ -46,12 +56,3 @@
     }
   }
 </style>
-
-<div
-  class="wrapper"
-  class:light-yellow={colorType === 'light-yellow'}
-  class:box={isBox}
-  class:disabled={isDisabled}
-  on:click>
-  <slot />
-</div>

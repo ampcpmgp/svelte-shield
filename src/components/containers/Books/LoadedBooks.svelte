@@ -1,15 +1,47 @@
 <script>
-  import { link } from 'svelte-spa-router'
-  import dayjs from 'dayjs'
-  import { init, loadBooks, loadedBooks } from '../../../states/books'
+  import { link } from "svelte-spa-router";
+  import dayjs from "dayjs";
+  import { init, loadBooks, loadedBooks } from "../../../states/books";
 
-  init()
-  loadBooks(0)
+  init();
+  loadBooks(0);
 
   function getPercent(ratio) {
-    return Math.floor(ratio * 100)
+    return Math.floor(ratio * 100);
   }
 </script>
+
+<div class="wrapper">
+  {#each $loadedBooks as book}
+    <div class="book-wrapper">
+      <a
+        href={`/books/${book.hash}`}
+        class="book card bg-primary border-light shadow-soft"
+        title={`${book.title}\n${dayjs(book.insertedDate).format(
+          "YYYY/MM/DD HH:mm:ss"
+        )}\n\n進捗割合: ${getPercent(book.readingRatio)}%`}
+        use:link
+      >
+        <h3 class="title">{book.title}</h3>
+        <p class="date">{dayjs(book.insertedDate).format("YYYY/MM/DD")}</p>
+
+        <div
+          class="reading-ratio"
+          style="--height: {getPercent(book.readingRatio)}%"
+        />
+      </a>
+
+      <div class="square">
+        <input
+          type="checkbox"
+          id={`selected-${book.hash}`}
+          bind:checked={book.selected}
+        />
+        <label for={`selected-${book.hash}`} />
+      </div>
+    </div>
+  {/each}
+</div>
 
 <style>
   .wrapper {
@@ -108,7 +140,7 @@
     border-color: #999;
   }
   .square label::after {
-    content: '';
+    content: "";
     width: 20px;
     height: 20px;
     background-color: transparent;
@@ -119,30 +151,3 @@
     background-color: #00cc00;
   }
 </style>
-
-<div class="wrapper">
-  {#each $loadedBooks as book}
-    <div class="book-wrapper">
-      <a
-        href={`/books/${book.hash}`}
-        class="book card bg-primary border-light shadow-soft"
-        title={`${book.title}\n${dayjs(book.insertedDate).format('YYYY/MM/DD HH:mm:ss')}\n\n進捗割合: ${getPercent(book.readingRatio)}%`}
-        use:link>
-        <h3 class="title">{book.title}</h3>
-        <p class="date">{dayjs(book.insertedDate).format('YYYY/MM/DD')}</p>
-
-        <div
-          class="reading-ratio"
-          style="--height: {getPercent(book.readingRatio)}%" />
-      </a>
-
-      <div class="square">
-        <input
-          type="checkbox"
-          id={`selected-${book.hash}`}
-          bind:checked={book.selected} />
-        <label for={`selected-${book.hash}`} />
-      </div>
-    </div>
-  {/each}
-</div>

@@ -1,8 +1,10 @@
 <script>
-  import packageJson from '../../../../version.json'
+  import packageJson from "../../../../version.json";
 
-  const { value } = packageJson
+  const { value } = packageJson;
 </script>
+
+<small class="wrapper">Version: {value}</small>
 
 <style>
   .wrapper {
@@ -11,5 +13,3 @@
     margin-bottom: -10px;
   }
 </style>
-
-<small class="wrapper">Version: {value}</small>

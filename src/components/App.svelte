@@ -1,7 +1,15 @@
 <script>
-  import Router from 'svelte-spa-router'
-  import routes from './routes'
+  import Router from "svelte-spa-router";
+  import routes from "./routes";
 </script>
+
+<div id="root">
+  <div class="card shadow-soft border-light">
+    <div class="card-body">
+      <Router {routes} />
+    </div>
+  </div>
+</div>
 
 <style>
   #root {
@@ -22,11 +30,3 @@
     display: grid;
   }
 </style>
-
-<div id="root">
-  <div class="card shadow-soft border-light">
-    <div class="card-body">
-      <Router {routes} />
-    </div>
-  </div>
-</div>

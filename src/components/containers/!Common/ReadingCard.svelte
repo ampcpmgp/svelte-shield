@@ -7,7 +7,7 @@
     currentIndex,
     isPause,
     setWordInfo,
-    getSleepTime
+    getSleepTime,
   } from "../../../states/morpheme";
   import { intervalMsPerChar } from "../../../states/settings";
 

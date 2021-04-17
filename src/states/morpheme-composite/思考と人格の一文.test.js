@@ -1,6 +1,6 @@
-import test from 'ava'
-import json from './思考と人格の一文.json'
-import { composite } from '../morpheme'
+import test from "ava";
+import json from "./思考と人格の一文.json";
+import { composite } from "../morpheme";
 
 /* 原文
 
@@ -11,28 +11,28 @@ import { composite } from '../morpheme'
 
 */
 
-test('composite/思考と人格の一文', t => {
-  const result = composite(json).map(item => item.word)
+test("composite/思考と人格の一文", (t) => {
+  const result = composite(json).map((item) => item.word);
 
   t.deepEqual(result, [
-    '思考と人格',
-    'この時代に',
-    '明るみに',
-    'された、',
-    '心に関する',
-    'あらゆる美しい真理の',
-    '中で、',
-    '次のこと以上に',
-    '実りあるものは',
-    'ありません。',
-    '「人は、',
-    '思考の',
-    '支配者であり、',
-    '人格の作者であり、',
-    'そして、',
-    '状況や環境、',
-    '運命の',
-    '創造者であり、',
-    '決定者である。」',
-  ])
-})
+    "思考と人格",
+    "この時代に",
+    "明るみに",
+    "された、",
+    "心に関する",
+    "あらゆる美しい真理の",
+    "中で、",
+    "次のこと以上に",
+    "実りあるものは",
+    "ありません。",
+    "「人は、",
+    "思考の",
+    "支配者であり、",
+    "人格の作者であり、",
+    "そして、",
+    "状況や環境、",
+    "運命の",
+    "創造者であり、",
+    "決定者である。」",
+  ]);
+});

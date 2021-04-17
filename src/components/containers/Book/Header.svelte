@@ -1,13 +1,42 @@
 <script>
-  import { link } from 'svelte-spa-router'
-  import { default as Modal } from '../../../const/modal'
-  import { getUrlForTweet } from '../../../utils/url'
-  import { title } from '../../../states/book'
-  import { pause } from '../../../states/morpheme'
-  import { default as Icon } from '../../parts/Icon/Icon.svelte'
+  import { link } from "svelte-spa-router";
+  import { default as Modal } from "../../../const/modal";
+  import { getUrlForTweet } from "../../../utils/url";
+  import { title } from "../../../states/book";
+  import { pause } from "../../../states/morpheme";
+  import { default as Icon } from "../../parts/Icon/Icon.svelte";
 
-  const hashTags = ['SvelteShield', 'IPFS本']
+  const hashTags = ["SvelteShield", "IPFS本"];
 </script>
+
+<header>
+  <div
+    class="user-cog-wrapper"
+    data-toggle="modal"
+    data-target={"#" + Modal.SETTINGS}
+  >
+    <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
+  </div>
+
+  <div class="title-wrapper">
+    <a href="/books" use:link on:click={pause}>
+      <Icon><i class="fas fa-angle-left" /></Icon>
+    </a>
+
+    <div class="title" title={$title}>{$title}</div>
+  </div>
+
+  <a
+    class="btn btn-sm btn-primary twitter-button"
+    href={getUrlForTweet($title, hashTags)}
+    target="_blank"
+  >
+    <span class="fab fa-twitter" />
+    <span class="sp-hidden">ツイートする </span>
+  </a>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+  </script>
+</header>
 
 <style>
   header {
@@ -69,30 +98,3 @@
     }
   }
 </style>
-
-<header>
-  <div
-    class="user-cog-wrapper"
-    data-toggle="modal"
-    data-target={'#' + Modal.SETTINGS}>
-    <Icon isBox={true}><i class="fas fa-user-cog" /></Icon>
-  </div>
-
-  <div class="title-wrapper">
-    <a href="/books" use:link on:click={pause}>
-      <Icon><i class="fas fa-angle-left" /></Icon>
-    </a>
-
-    <div class="title" title={$title}>{$title}</div>
-  </div>
-
-  <a
-    class="btn btn-sm btn-primary twitter-button"
-    href={getUrlForTweet($title, hashTags)}
-    target="_blank">
-    <span class="fab fa-twitter" />
-    <span class="sp-hidden">ツイートする </span>
-  </a>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-  </script>
-</header>

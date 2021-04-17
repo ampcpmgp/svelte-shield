@@ -1,2 +1,2 @@
-import '../mock-config.js'
-import '../../src/main.js'
+import "../mock-config.js";
+import "../../src/main.js";
