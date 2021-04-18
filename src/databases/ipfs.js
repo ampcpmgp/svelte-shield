@@ -1,3 +1,6 @@
+/**
+ * @type {import("ipfs-core")}
+ */
 const IPFS = window.IpfsCore;
 
 // 3MB を超えるものファイルはエラー
