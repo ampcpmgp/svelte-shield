@@ -7,6 +7,7 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [svelte(), yaml()],
   build: {
+    target: "es2018",
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),

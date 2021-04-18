@@ -1,4 +1,7 @@
-import { default as IPFS } from "ipfs-core/dist/index.min";
+/**
+ * @type {import("ipfs-core")}
+ */
+const IPFS = window.IpfsCore;
 
 // 3MB を超えるものファイルはエラー
 const MAX_FILE_SIZE = 1024 * 1024 * 3;

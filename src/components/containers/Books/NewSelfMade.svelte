@@ -8,10 +8,10 @@
     sources,
     save,
     removeSource,
-    addSource
+    addSource,
   } from "../../../states/newBook/selfMade";
 
-  $: isSaveable = $title && $content && $sources.every(item => item.value);
+  $: isSaveable = $title && $content && $sources.every((item) => item.value);
 
   async function handleSave() {
     try {
