@@ -12,11 +12,11 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         patterns: resolve(__dirname, "mock/testbed/index.html"),
-        mock: resolve(__dirname, "mock/testbed/mock.html")
-      }
-    }
+        mock: resolve(__dirname, "mock/testbed/mock.html"),
+      },
+    },
   },
   server: {
-    open: "/mock/testbed/index.html"
-  }
+    open: "/mock/testbed/index.html",
+  },
 });
