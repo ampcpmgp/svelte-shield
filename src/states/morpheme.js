@@ -5,7 +5,7 @@ import sleep from "../utils/sleep";
 /**
  * @type {import("kuromoji")}
  */
-const kuromoji = window.kuromoji || kuromoji_no_compress;
+const kuromoji = globalThis.kuromoji || kuromoji_no_compress;
 
 export const word = writable("");
 export const info = writable({
