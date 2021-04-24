@@ -4,7 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "background": {
-    "service_worker": "svelte-shield.cjs.js"
+    "service_worker": "background.cjs.js"
   },
   "icons": {
     "16": "/favicon.png",

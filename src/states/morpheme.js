@@ -2,11 +2,6 @@ import kuromoji_no_compress from "kuromoji_no_compress";
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
 
-/**
- * @type {import("kuromoji")}
- */
-const kuromoji = globalThis.kuromoji || kuromoji_no_compress;
-
 export const word = writable("");
 export const info = writable({
   isHeading: false,
@@ -42,23 +37,26 @@ const dicPath = `${import.meta.env ? import.meta.env.BASE_URL : "./"}dict`;
 async function getTokenizer() {
   if (tokenizer) return tokenizer;
   return new Promise((resolve, reject) => {
-    (window.kuromoji || kuromoji)
-      .builder({ dicPath })
-      .build(function (err, tokenizer) {
-        if (get(ignoreReading)) {
-          return;
-        }
+    /**
+     * @type {import("kuromoji")}
+     */
+    const kuromoji = globalThis.kuromoji || kuromoji_no_compress;
 
-        if (err) {
-          isLoading.set(false);
-          errorMsg.set("辞書取得エラー");
-          reject();
-          return;
-        }
+    kuromoji.builder({ dicPath }).build(function (err, tokenizer) {
+      if (get(ignoreReading)) {
+        return;
+      }
 
+      if (err) {
         isLoading.set(false);
-        resolve(tokenizer);
-      });
+        errorMsg.set("辞書取得エラー");
+        reject();
+        return;
+      }
+
+      isLoading.set(false);
+      resolve(tokenizer);
+    });
   });
 }
 

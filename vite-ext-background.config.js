@@ -11,7 +11,8 @@ export default defineConfig({
     outDir: "chrome-extension/dist",
     lib: {
       formats: ["cjs"],
-      entry: resolve(__dirname, "chrome-extension/svelte-shield.js"),
+      entry: resolve(__dirname, "chrome-extension/background.js"),
+      fileName: "background",
     },
   },
 });
