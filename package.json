@@ -3,6 +3,8 @@
   "scripts": {
     "dev": "run-s copy-dict dev:vite",
     "dev:vite": "vite",
+    "dev-ext": "run-s copy-dict-ext dev-ext:*",
+    "dev-ext:vite": "vite build --config=vite-ext.config.js --watch",
     "build": "run-s copy-dict build:*",
     "build:clean": "rimraf build",
     "build:vite": "vite build --base=./",
@@ -45,7 +47,7 @@
     "rimraf": "^3.0.1",
     "svelte": "^3.37.0",
     "svelte-loader": "^3.1.1",
-    "vite": "^2.1.5"
+    "vite": "^2.2.1"
   },
   "dependencies": {
     "@msgpack/msgpack": "^2.3.0",
