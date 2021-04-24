@@ -24,6 +24,7 @@
     "@storybook/addon-links": "^6.0.28",
     "@storybook/svelte": "^6.0.28",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.6",
+    "@types/chrome": "0.0.135",
     "am-mocktimes": "^4.0.4",
     "am-mocktimes-addon-screenshot": "^0.1.2",
     "am-parts-cli": "^0.3.0",
