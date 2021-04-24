@@ -1,4 +1,4 @@
-import kuromoji_no_compress from "kuromoji";
+import kuromoji_no_compress from "kuromoji_no_compress";
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
 
@@ -22,7 +22,7 @@ export const rawText = writable("");
 export const compositions = writable([]);
 export const progress = derived(
   currentIndex,
-  $currentIndex => $currentIndex / get(compositions).length || 0,
+  ($currentIndex) => $currentIndex / get(compositions).length || 0,
 );
 export const hiddenSettings = writable({
   judgeNum: 3,
@@ -44,7 +44,7 @@ async function getTokenizer() {
   return new Promise((resolve, reject) => {
     (window.kuromoji || kuromoji)
       .builder({ dicPath })
-      .build(function(err, tokenizer) {
+      .build(function (err, tokenizer) {
         if (get(ignoreReading)) {
           return;
         }
@@ -109,7 +109,7 @@ export async function resume() {
       return;
     }
 
-    currentIndex.update($index => ++$index);
+    currentIndex.update(($index) => ++$index);
   }
 
   isPlay.set(false);
@@ -453,7 +453,7 @@ export function composite(path) {
       .reduce(
         (blocks, item) => {
           const existsNewLine = !item.every(
-            item => !/\n/.test(item.surface_form),
+            (item) => !/\n/.test(item.surface_form),
           );
 
           if (existsNewLine) {
@@ -466,12 +466,12 @@ export function composite(path) {
         },
         [[]],
       )
-      .map(items => {
+      .map((items) => {
         let blocks = items;
 
         // 見出し判定は句点が存在するかどうか。
-        const isHeading = blocks.every(blockItem =>
-          blockItem.every(item => !isJapanesePeriod(item)),
+        const isHeading = blocks.every((blockItem) =>
+          blockItem.every((item) => !isJapanesePeriod(item)),
         );
 
         const blockSum = blocks.reduce((sum, item) => sum + item.length - 1, 0);
@@ -480,7 +480,7 @@ export function composite(path) {
           blocks = [blocks.flat()];
         }
 
-        return blocks.map(item => ({
+        return blocks.map((item) => ({
           item,
           info: {
             isHeading,
@@ -538,7 +538,7 @@ export function composite(path) {
         }
       }, [])
       // 文字の再配置などで完全に空白になったものを除去
-      .filter(item => item.word)
+      .filter((item) => item.word)
       // 前後の空白や改行を trim する。空白となったものは空文字にして、ひとつ前を改行表示とする。
       .map((item, index, results) => {
         const trimmed = item.word.trim();
@@ -552,12 +552,12 @@ export function composite(path) {
         return { ...item, word: trimmed };
       })
       // 改行由来の空白文字も除去する
-      .filter(item => item.word)
+      .filter((item) => item.word)
   );
 }
 
 function logCompositions(items) {
-  console.log(items.map(item => item.surface_form));
+  console.log(items.map((item) => item.surface_form));
 }
 
 void logCompositions;
