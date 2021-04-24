@@ -8,7 +8,10 @@ node_modules/
 .cache/
 dist/
 public/dict/
+
+# chrome-extension
 chrome-extension/dist/
+chrome-extension/public/dict/
 
 # storybook
 storybook-static/
