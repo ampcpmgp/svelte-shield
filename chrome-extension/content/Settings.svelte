@@ -34,8 +34,9 @@
     <input
       type="number"
       class:SVELTESHIELD-success={intervalMsPerCharSaved}
+      step="20"
       bind:value={intervalMsPerChar}
-      on:blur={setIntervalMsPerChar}
+      on:change={setIntervalMsPerChar}
     />
     <span class="SVELTESHIELD-initial-value">初期値 80ms</span>
   </label>
@@ -45,8 +46,9 @@
     <input
       class:SVELTESHIELD-success={textSizeSaved}
       type="number"
+      step="2"
       bind:value={textSize}
-      on:blur={setTextSize}
+      on:change={setTextSize}
     />
     <span class="SVELTESHIELD-initial-value">初期値 16px</span>
   </label>
