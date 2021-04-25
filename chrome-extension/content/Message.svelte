@@ -9,7 +9,7 @@
 
   chrome.storage.onChanged.addListener(function (changes) {
     if (changes.textSize) {
-      fontSize = changes.textSize;
+      fontSize = changes.textSize.newValue || fontSize;
     }
   });
 </script>
