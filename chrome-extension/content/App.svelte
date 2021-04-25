@@ -7,22 +7,22 @@
   export let removeApp = () => {};
 </script>
 
-<div class="background" on:click={removeApp} />
+<div class="SVELTESHIELD-background" on:click={removeApp} />
 
-<div class="content">
-  <div class="settings-wrapper">
+<div class="SVELTESHIELD-content">
+  <div class="SVELTESHIELD-settings-wrapper">
     <Settings />
   </div>
 
-  <div class="message-wrapper">
+  <div class="SVELTESHIELD-message-wrapper">
     <Message />
   </div>
 
-  <div class="controls-wrapper">
+  <div class="SVELTESHIELD-controls-wrapper">
     <Controls />
   </div>
 
-  <div class="footer-wrapper">
+  <div class="SVELTESHIELD-footer-wrapper">
     <Footer />
   </div>
 </div>
@@ -40,7 +40,7 @@
     place-content: center;
   }
 
-  .background {
+  .SVELTESHIELD-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -49,7 +49,7 @@
     background-color: transparent;
   }
 
-  .content {
+  .SVELTESHIELD-content {
     position: relative;
     width: 80vw;
     max-width: 1280px;
@@ -57,15 +57,20 @@
     background-color: lightgoldenrodyellow;
     border-radius: 8px;
     display: grid;
+    grid-row-gap: 8px;
     grid-template-rows: auto auto auto 1fr;
     place-items: center;
     font-size: 16px;
     padding: 8px;
   }
 
-  .footer-wrapper {
-    align-self: end;
-    display: grid;
+  .SVELTESHIELD-content > * {
     width: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .SVELTESHIELD-footer-wrapper {
+    align-self: end;
   }
 </style>
