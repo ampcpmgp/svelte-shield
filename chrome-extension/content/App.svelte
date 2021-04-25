@@ -65,5 +65,7 @@
 
   .footer-wrapper {
     align-self: end;
+    display: grid;
+    width: 100%;
   }
 </style>
