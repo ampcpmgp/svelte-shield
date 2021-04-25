@@ -67,6 +67,7 @@
 
   label {
     display: grid;
+    font-size: 14px;
   }
 
   .SVELTESHIELD-initial-value {
