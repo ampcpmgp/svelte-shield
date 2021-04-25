@@ -22,6 +22,7 @@
   .SVELTESHIELD-wrapper {
     width: 640px;
     max-width: 100%;
+    padding: 8px;
     border: solid 1px red;
     display: grid;
     place-items: center;

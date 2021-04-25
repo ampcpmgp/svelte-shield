@@ -57,7 +57,7 @@
     background-color: lightgoldenrodyellow;
     border-radius: 8px;
     display: grid;
-    grid-row-gap: 8px;
+    grid-row-gap: 16px;
     grid-template-rows: auto auto auto 1fr;
     place-items: center;
     font-size: 16px;
