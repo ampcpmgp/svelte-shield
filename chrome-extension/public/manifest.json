@@ -4,8 +4,14 @@
   "version": "1.0",
   "manifest_version": 3,
   "background": {
-    "service_worker": "background.cjs.js"
+    "service_worker": "background.umd.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["content/style.css"]
+    }
+  ],
   "icons": {
     "16": "/favicon.png",
     "32": "/favicon.png",

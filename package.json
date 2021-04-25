@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "run-s copy-dict dev:vite",
     "dev:vite": "vite",
+    "dev-ext": "run-p dev-ext-background dev-ext-content",
     "dev-ext-background": "run-s copy-dict-ext dev-ext-background:vite",
     "dev-ext-background:vite": "vite build --config=vite-ext-background.config.js --watch",
     "dev-ext-content": "run-s copy-dict-ext build-ext-vite:background dev-ext-content:vite",

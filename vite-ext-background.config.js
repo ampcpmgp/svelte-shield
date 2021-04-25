@@ -10,8 +10,9 @@ export default defineConfig({
     target: "es2018",
     outDir: "chrome-extension/dist",
     lib: {
-      formats: ["cjs"],
+      formats: ["umd"],
       entry: resolve(__dirname, "chrome-extension/background.js"),
+      name: "svelteShield",
       fileName: "background",
     },
   },
