@@ -6,12 +6,6 @@
   "background": {
     "service_worker": "background.umd.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "css": ["content/style.css"]
-    }
-  ],
   "icons": {
     "16": "/favicon.png",
     "32": "/favicon.png",
