@@ -76,6 +76,15 @@ chrome.runtime.onMessage.addListener(async function (request) {
   control(request.controlType);
 });
 
+// chrome watch cache
+chrome.storage.onChanged.addListener(function (changes) {
+  if (changes.intervalMsPerChar) {
+    globalThis.localStorage.intervalMsPerChar =
+      changes.intervalMsPerChar.newValue ||
+      globalThis.localStorage.intervalMsPerChar;
+  }
+});
+
 function execute(tabId) {
   return new Promise((resolve) => {
     chrome.scripting.executeScript(
