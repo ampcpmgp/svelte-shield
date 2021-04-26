@@ -1,9 +1,17 @@
 <script>
+  import { onDestroy } from "svelte";
   import { isPlay, isPause } from "./state";
 
   $: playable = !$isPlay || $isPause;
 
+  onDestroy(() => {
+    window.removeEventListener("keydown", keyDown);
+  });
+
   function play() {
+    chrome.runtime.sendMessage({ controlType: "play" });
+  }
+  function resume() {
     chrome.runtime.sendMessage({ controlType: "resume" });
   }
   function pause() {
@@ -28,10 +36,12 @@
 <svelte:window on:keydown={keyDown} />
 
 <div class="SVELTESHIELD-wrapper">
-  {#if playable}
+  {#if !$isPlay}
     <button on:click={play}>再生(P)</button>
-  {:else}
+  {:else if !$isPause}
     <button on:click={pause}>一時停止(P)</button>
+  {:else}
+    <button on:click={resume}>再開(P)</button>
   {/if}
 </div>
 

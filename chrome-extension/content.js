@@ -1,5 +1,5 @@
 import { default as App } from "./content/App.svelte";
-import { item, isPlay, isPause, isNotReady } from "./content/state";
+import { item, isPlay, isPause, isNotReady, progress } from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
@@ -24,6 +24,10 @@ function onMessage(request) {
   if (typeof request.isPause === "boolean") {
     isPause.set(request.isPause);
   }
+
+  if (typeof request.progress === "number") {
+    progress.set(request.progress);
+  }
 }
 
 function mount() {
@@ -31,12 +35,13 @@ function mount() {
 
   const element = document.getElementById(APP_ID);
 
-  new App({
+  const app = new App({
     target: element,
     props: {
       removeApp() {
         chrome.runtime.sendMessage({ controlType: "stop" });
         chrome.runtime.onMessage.removeListener(onMessage);
+        app.$destroy();
         element.remove();
       },
     },

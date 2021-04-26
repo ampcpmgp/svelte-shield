@@ -12,6 +12,8 @@ import {
   compositions,
   isPause,
   isPlay,
+  progress,
+  currentReadingTime,
 } from "../src/states/morpheme";
 
 /** @type {string} */
@@ -49,6 +51,10 @@ currentIndex.subscribe(sendWordToTab);
 compositions.subscribe(sendWordToTab);
 isPlay.subscribe((isPlay) => sendDataToTab({ isPlay }));
 isPause.subscribe((isPause) => sendDataToTab({ isPause }));
+progress.subscribe((progress) => sendDataToTab({ progress }));
+currentReadingTime.subscribe((currentReadingTime) =>
+  sendDataToTab({ currentReadingTime }),
+);
 
 chrome.contextMenus.create({
   id: "open-svelte-shield",

@@ -1,5 +1,5 @@
 <script>
-  import { item, isNotReady, isPlay } from "./state";
+  import { item, isNotReady, isPlay, progress } from "./state";
 
   let fontSize = 16;
 
@@ -17,7 +17,7 @@
 <div class="SVELTESHIELD-wrapper" style="--font-size: {fontSize}px">
   {#if $isNotReady}
     loading...
-  {:else if !$isPlay}
+  {:else if !$isPlay && $progress === 0}
     ready!
   {:else}
     {$item.word}
