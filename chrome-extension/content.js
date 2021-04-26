@@ -1,5 +1,5 @@
 import { default as App } from "./content/App.svelte";
-import { item, isNotReady } from "./content/state";
+import { item, isPlay, isPause, isNotReady } from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
@@ -13,8 +13,16 @@ function onMessage(request) {
     item.set(request.item);
   }
 
-  if (typeof request.isReady === "boolean") {
-    isNotReady.set(!request.isReady);
+  if (typeof request.isNotReady === "boolean") {
+    isNotReady.set(request.isNotReady);
+  }
+
+  if (typeof request.isPlay === "boolean") {
+    isPlay.set(request.isPlay);
+  }
+
+  if (typeof request.isPause === "boolean") {
+    isPause.set(request.isPause);
   }
 }
 

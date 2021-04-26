@@ -5,6 +5,7 @@ import {
   rawText,
   tokenize,
   play,
+  resume,
   pause,
   stop,
   currentIndex,
@@ -60,13 +61,13 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === "open-svelte-shield") {
     tabId = tab.id;
 
-    sendDataToTab({ isReady: false });
+    sendDataToTab({ isNotReady: true });
     stop();
     await execute(tabId);
     rawText.set(info.selectionText);
     await init();
     await tokenize();
-    sendDataToTab({ isReady: true });
+    sendDataToTab({ isNotReady: false });
   }
 });
 
@@ -91,6 +92,8 @@ async function control(type) {
   switch (type) {
     case "play":
       return await play();
+    case "resume":
+      return await resume();
     case "pause":
       return pause();
     case "stop":
