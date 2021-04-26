@@ -41,42 +41,16 @@ globalThis.localStorage = {
   intervalMsPerChar: 80,
 };
 
+// svelte store subscribe
+currentIndex.subscribe(sendWordToTab);
+compositions.subscribe(sendWordToTab);
+
 chrome.contextMenus.create({
   id: "open-svelte-shield",
   title: "Svelte Shield で読む",
   type: "normal",
   contexts: ["selection"],
 });
-
-async function control(type) {
-  switch (type) {
-    case "play":
-      return await play();
-    case "pause":
-      return pause();
-    case "stop":
-      return stop();
-    default:
-      break;
-  }
-}
-
-// message event
-chrome.runtime.onMessage.addListener(async function (request) {
-  control(request.controlType);
-});
-
-// current word
-currentIndex.subscribe(sendWordToTab);
-compositions.subscribe(sendWordToTab);
-
-function sendWordToTab() {
-  const item = get(compositions)[get(currentIndex)];
-
-  if (item) {
-    chrome.tabs.sendMessage(tabId, { item });
-  }
-}
 
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === "open-svelte-shield") {
@@ -93,6 +67,11 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   }
 });
 
+// message event from content.js
+chrome.runtime.onMessage.addListener(async function (request) {
+  control(request.controlType);
+});
+
 function execute(tabId) {
   return new Promise((resolve) => {
     chrome.scripting.executeScript(
@@ -103,4 +82,25 @@ function execute(tabId) {
       resolve,
     );
   });
+}
+
+async function control(type) {
+  switch (type) {
+    case "play":
+      return await play();
+    case "pause":
+      return pause();
+    case "stop":
+      return stop();
+    default:
+      break;
+  }
+}
+
+function sendWordToTab() {
+  const item = get(compositions)[get(currentIndex)];
+
+  if (item) {
+    chrome.tabs.sendMessage(tabId, { item });
+  }
 }
