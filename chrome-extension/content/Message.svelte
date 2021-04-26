@@ -1,5 +1,5 @@
 <script>
-  import { item } from "./state";
+  import { item, isNotReady } from "./state";
 
   let fontSize = 16;
 
@@ -15,7 +15,11 @@
 </script>
 
 <div class="SVELTESHIELD-wrapper" style="--font-size: {fontSize}px">
-  {$item.word}
+  {#if $isNotReady}
+    loading...
+  {:else}
+    {$item.word}
+  {/if}
 </div>
 
 <style>

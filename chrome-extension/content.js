@@ -1,30 +1,34 @@
 import { default as App } from "./content/App.svelte";
-import { item } from "./content/state";
+import { item, isNotReady } from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
-var ELEMENT_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
+var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
 
 function init() {
-  chrome.runtime.onMessage.addListener(function (request) {
-    if (request.item) {
-      item.set(request.item);
-    }
-  });
+  chrome.runtime.onMessage.addListener(onMessage);
+}
+
+function onMessage(request) {
+  if (request.item) {
+    item.set(request.item);
+  }
+
+  if (typeof request.isReady === "boolean") {
+    isNotReady.set(!request.isReady);
+  }
 }
 
 function mount() {
-  document.body.insertAdjacentHTML(
-    "afterend",
-    `<div id="${ELEMENT_ID}"></div>`,
-  );
+  document.body.insertAdjacentHTML("afterend", `<div id="${APP_ID}"></div>`);
 
-  const element = document.getElementById(ELEMENT_ID);
+  const element = document.getElementById(APP_ID);
 
   new App({
     target: element,
     props: {
       removeApp() {
         chrome.runtime.sendMessage({ controlType: "stop" });
+        chrome.runtime.onMessage.removeListener(onMessage);
         element.remove();
       },
     },
@@ -32,12 +36,13 @@ function mount() {
 }
 
 async function start() {
-  const element = document.getElementById(ELEMENT_ID);
+  const elementApp = document.getElementById(APP_ID);
 
-  if (!element) {
+  init();
+
+  if (!elementApp) {
     mount();
   }
 }
 
-init();
 start();

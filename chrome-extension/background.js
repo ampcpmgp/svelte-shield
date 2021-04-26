@@ -9,6 +9,8 @@ import {
   stop,
   currentIndex,
   compositions,
+  isPause,
+  isPlay,
 } from "../src/states/morpheme";
 
 /** @type {string} */
@@ -44,6 +46,8 @@ globalThis.localStorage = {
 // svelte store subscribe
 currentIndex.subscribe(sendWordToTab);
 compositions.subscribe(sendWordToTab);
+isPlay.subscribe((isPlay) => sendDataToTab({ isPlay }));
+isPause.subscribe((isPause) => sendDataToTab({ isPause }));
 
 chrome.contextMenus.create({
   id: "open-svelte-shield",
@@ -56,14 +60,13 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === "open-svelte-shield") {
     tabId = tab.id;
 
+    sendDataToTab({ isReady: false });
+    stop();
     await execute(tabId);
-    chrome.tabs.sendMessage(tabId, { status: "reading dictionary" });
     rawText.set(info.selectionText);
-
     await init();
     await tokenize();
-    stop();
-    await play();
+    sendDataToTab({ isReady: true });
   }
 });
 
@@ -98,9 +101,17 @@ async function control(type) {
 }
 
 function sendWordToTab() {
-  const item = get(compositions)[get(currentIndex)];
+  const $compositions = get(compositions);
+  const $currentIndex = get(currentIndex);
+  const item = $compositions[$currentIndex];
 
   if (item) {
-    chrome.tabs.sendMessage(tabId, { item });
+    sendDataToTab({ item });
+  }
+}
+
+function sendDataToTab(data) {
+  if (tabId) {
+    chrome.tabs.sendMessage(tabId, data);
   }
 }
