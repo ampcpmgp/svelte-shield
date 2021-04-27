@@ -1,6 +1,7 @@
 {
   "globals": {
-    "globalThis": false
+    "globalThis": false,
+    "chrome": false
   },
   "env": {
     "browser": true,

@@ -9,6 +9,11 @@ node_modules/
 dist/
 public/dict/
 
+# chrome-extension
+chrome-extension/dist/
+chrome-extension/dist*.zip
+chrome-extension/public/dict/
+
 # storybook
 storybook-static/
 
