@@ -1,5 +1,6 @@
 <script>
   import sleep from "../../src/utils/sleep";
+  import { isPlay, isPause } from "./state";
 
   let intervalMsPerChar = 80;
   let textSize = 16;
@@ -28,7 +29,7 @@
   }
 </script>
 
-<div class="SVELTESHIELD-wrapper">
+<div class="SVELTESHIELD-wrapper" class:disabled={$isPlay && !$isPause}>
   <label>
     <span>１文字当たりの表示時間</span>
     <input
@@ -60,6 +61,10 @@
     grid-auto-flow: column;
     grid-column-gap: 20px;
     margin: auto;
+  }
+  .SVELTESHIELD-wrapper.disabled {
+    pointer-events: none;
+    opacity: 0.3;
   }
 
   .SVELTESHIELD-success {
