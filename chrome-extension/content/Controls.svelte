@@ -1,6 +1,6 @@
 <script>
   import { onDestroy } from "svelte";
-  import { isPlay, isPause } from "./state";
+  import { isNotReady, isPlay, isPause } from "./state";
 
   $: playable = !$isPlay || $isPause;
 
@@ -9,22 +9,27 @@
   });
 
   function play() {
+    if ($isNotReady) return;
     chrome.runtime.sendMessage({ controlType: "play" });
   }
   function resume() {
+    if ($isNotReady) return;
     chrome.runtime.sendMessage({ controlType: "resume" });
   }
   function pause() {
+    if ($isNotReady) return;
     chrome.runtime.sendMessage({ controlType: "pause" });
   }
 
   function keyDown(e) {
     switch (e.code) {
       case "KeyP":
-        if (playable) {
+        if (!$isPlay) {
           play();
-        } else {
+        } else if (!$isPause) {
           pause();
+        } else {
+          resume();
         }
         return;
       default:
@@ -37,11 +42,11 @@
 
 <div class="SVELTESHIELD-wrapper">
   {#if !$isPlay}
-    <button on:click={play}>再生(P)</button>
+    <button disabled={$isNotReady} on:click={play}>再生(P)</button>
   {:else if !$isPause}
-    <button on:click={pause}>一時停止(P)</button>
+    <button disabled={$isNotReady} on:click={pause}>一時停止(P)</button>
   {:else}
-    <button on:click={resume}>再開(P)</button>
+    <button disabled={$isNotReady} on:click={resume}>再開(P)</button>
   {/if}
 </div>
 

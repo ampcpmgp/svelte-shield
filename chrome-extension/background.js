@@ -45,6 +45,11 @@ globalThis.kuromoji = kuromoji;
 globalThis.localStorage = {
   intervalMsPerChar: 80,
 };
+chrome.storage.sync.get("intervalMsPerChar", (result) => {
+  if (result.intervalMsPerChar) {
+    globalThis.localStorage.intervalMsPerChar = result.intervalMsPerChar;
+  }
+});
 
 // svelte store subscribe
 currentIndex.subscribe(sendWordToTab);
