@@ -4,10 +4,10 @@
   import { default as Controls } from "./Controls.svelte";
   import { default as Footer } from "./Footer.svelte";
 
-  export let removeApp = () => {};
+  export let exit = () => {};
 </script>
 
-<div class="SVELTESHIELD-background" on:click={removeApp} />
+<div class="SVELTESHIELD-background" on:click={exit} />
 
 <div class="SVELTESHIELD-content">
   <div class="SVELTESHIELD-settings-wrapper">
@@ -19,7 +19,7 @@
   </div>
 
   <div class="SVELTESHIELD-controls-wrapper">
-    <Controls />
+    <Controls {exit} />
   </div>
 
   <div class="SVELTESHIELD-footer-wrapper">

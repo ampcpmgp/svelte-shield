@@ -2,6 +2,8 @@
   import { onDestroy } from "svelte";
   import { isNotReady, isPlay, isPause } from "./state";
 
+  export let exit = () => {};
+
   $: playable = !$isPlay || $isPause;
 
   onDestroy(() => {
@@ -31,6 +33,9 @@
         } else {
           resume();
         }
+        return;
+      case "Escape":
+        exit();
         return;
       default:
         break;

@@ -38,7 +38,7 @@ function mount() {
   const app = new App({
     target: element,
     props: {
-      removeApp() {
+      exit() {
         chrome.runtime.sendMessage({ controlType: "stop" });
         chrome.runtime.onMessage.removeListener(onMessage);
         app.$destroy();
