@@ -111,9 +111,11 @@ function execute(tabId) {
 async function control(type) {
   switch (type) {
     case "play":
-      return await play();
+      await play();
+      return;
     case "resume":
-      return await resume();
+      await resume();
+      return;
     case "pause":
       return pause();
     case "stop":
