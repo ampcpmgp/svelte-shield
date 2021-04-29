@@ -1,10 +1,21 @@
 <script>
-  import { item, isNotReady, isPlay, progress } from "./state";
+  import {
+    item,
+    isNotReady,
+    isPlay,
+    isPause,
+    progress,
+    currentReadingTime,
+  } from "./state";
 
   let fontSize = 16;
+  let meterTopElm;
+
+  $: readingTime =
+    !$isPause && $item.word.length > 50 ? $currentReadingTime : 0;
+  $: animationDuration = `${$currentReadingTime}ms`;
 
   $: progressPercent = `${$progress * 100}%`;
-
   chrome.storage.sync.get("textSize", (result) => {
     fontSize = result.textSize || fontSize;
   });
@@ -17,6 +28,14 @@
 </script>
 
 <div class="SVELTESHIELD-wrapper" style="--font-size: {fontSize}px">
+  {#if readingTime > 0}
+    <div
+      bind:this={meterTopElm}
+      class="SVELTESHIELD-meter SVELTESHIELD-top SVELTESHIELD-animation"
+      style="--animation-duration: {animationDuration}"
+    />
+  {/if}
+
   <div class="SVELTESHIELD-message">
     {#if $isNotReady}
       loading...
@@ -53,6 +72,26 @@
     width: var(--width-percent);
     border-bottom: 2px solid hotpink;
     opacity: 0.3;
-    height: 0px;
+  }
+  .SVELTESHIELD-meter.SVELTESHIELD-top {
+    width: 100%;
+  }
+  .SVELTESHIELD-meter.SVELTESHIELD-top::before {
+    content: " ";
+    border-bottom: 2px solid aqua;
+    opacity: 0.5;
+  }
+  .SVELTESHIELD-animation::before {
+    animation-name: scaleX;
+    animation-duration: var(--animation-duration);
+    animation-timing-function: linear;
+  }
+  @keyframes scaleX {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
   }
 </style>

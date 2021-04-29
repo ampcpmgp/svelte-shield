@@ -1,5 +1,12 @@
 import { default as App } from "./content/App.svelte";
-import { item, isPlay, isPause, isNotReady, progress } from "./content/state";
+import {
+  item,
+  isPlay,
+  isPause,
+  isNotReady,
+  progress,
+  currentReadingTime,
+} from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
@@ -27,6 +34,10 @@ function onMessage(request) {
 
   if (typeof request.progress === "number") {
     progress.set(request.progress);
+  }
+
+  if (typeof request.currentReadingTime === "number") {
+    currentReadingTime.set(request.currentReadingTime);
   }
 }
 
