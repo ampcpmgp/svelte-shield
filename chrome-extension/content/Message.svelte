@@ -6,6 +6,7 @@
     isPause,
     progress,
     currentReadingTime,
+    playingTimeMsStr,
   } from "./state";
 
   let fontSize = 16;
@@ -47,6 +48,12 @@
   </div>
 
   <div class="SVELTESHIELD-meter" style="--width-percent: {progressPercent}" />
+
+  {#if $playingTimeMsStr}
+    <div class="SVELTESHIELD-remaining-time-wrapper">
+      <div class="SVELTESHIELD-remaining-time">約{$playingTimeMsStr}</div>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -93,5 +100,19 @@
     to {
       width: 100%;
     }
+  }
+
+  .SVELTESHIELD-remaining-time-wrapper {
+    position: relative;
+  }
+
+  .SVELTESHIELD-remaining-time {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    font-size: 12px;
+    border: solid 1px red;
+    border-radius: 10px;
+    padding: 0 4px;
   }
 </style>

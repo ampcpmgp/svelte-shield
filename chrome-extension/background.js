@@ -14,7 +14,9 @@ import {
   isPlay,
   progress,
   currentReadingTime,
+  getSleepTime,
 } from "../src/states/morpheme";
+import { msToTime } from "../src/utils/time";
 
 /** @type {string} */
 var tabId = "";
@@ -129,9 +131,19 @@ function sendWordToTab() {
   const $compositions = get(compositions);
   const $currentIndex = get(currentIndex);
   const item = $compositions[$currentIndex];
+  const playingTimeMs = $compositions.reduce(
+    (ms, item) =>
+      ms + getSleepTime(item, globalThis.localStorage.intervalMsPerChar),
+    0,
+  );
 
   if (item) {
     sendDataToTab({ item });
+  }
+
+  if (playingTimeMs) {
+    const playingTimeMsStr = msToTime(playingTimeMs);
+    sendDataToTab({ playingTimeMsStr });
   }
 }
 

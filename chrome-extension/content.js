@@ -6,6 +6,7 @@ import {
   isNotReady,
   progress,
   currentReadingTime,
+  playingTimeMsStr,
 } from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
@@ -38,6 +39,10 @@ function onMessage(request) {
 
   if (typeof request.currentReadingTime === "number") {
     currentReadingTime.set(request.currentReadingTime);
+  }
+
+  if (request.playingTimeMsStr) {
+    playingTimeMsStr.set(request.playingTimeMsStr);
   }
 }
 
