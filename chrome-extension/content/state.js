@@ -8,6 +8,7 @@ export const item = writable({
 export const isPlay = writable(false);
 export const isPause = writable(false);
 export const isNotReady = writable(true);
+export const isSaving = writable(false);
 export const progress = writable(0);
 export const currentReadingTime = writable(0);
 export const playingTimeMsStr = writable("");

@@ -85,8 +85,12 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 });
 
 // message event from content.js
-chrome.runtime.onMessage.addListener(async function (request) {
+chrome.runtime.onMessage.addListener(async function (request, _, sendResponse) {
   control(request.controlType);
+
+  // https://blog.dand.work/article/381
+  sendResponse({});
+  return true;
 });
 
 // chrome watch cache

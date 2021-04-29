@@ -16,7 +16,7 @@ function init() {
   chrome.runtime.onMessage.addListener(onMessage);
 }
 
-function onMessage(request) {
+function onMessage(request, _, sendResponse) {
   if (request.item) {
     item.set(request.item);
   }
@@ -44,6 +44,12 @@ function onMessage(request) {
   if (request.playingTimeMsStr) {
     playingTimeMsStr.set(request.playingTimeMsStr);
   }
+
+  // 以下エラーの対策
+  // Unchecked runtime.lastError: The message port closed before a response was received.
+  // 参考: https://blog.dand.work/article/381
+  sendResponse({});
+  return true;
 }
 
 function mount() {
