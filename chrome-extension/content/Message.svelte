@@ -45,6 +45,9 @@
     {:else}
       {$item.word}
     {/if}
+
+    <!-- 現在 background.js の info.selectionText では改行文字が空文字扱いになる。 -->
+    {#if $item.info.hasNewLine}⏎{/if}
   </div>
 
   <div class="SVELTESHIELD-meter" style="--width-percent: {progressPercent}" />
