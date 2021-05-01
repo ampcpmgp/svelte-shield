@@ -77,6 +77,10 @@
     font-size: 14px;
   }
 
+  input {
+    background-color: white;
+  }
+
   .SVELTESHIELD-initial-value {
     justify-self: end;
     font-size: 12px;
