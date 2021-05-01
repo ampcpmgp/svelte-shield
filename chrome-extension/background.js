@@ -63,11 +63,16 @@ currentReadingTime.subscribe((currentReadingTime) =>
   sendDataToTab({ currentReadingTime }),
 );
 
-chrome.contextMenus.create({
-  id: "open-svelte-shield",
-  title: "Svelte Shield で読む",
-  type: "normal",
-  contexts: ["selection"],
+// 以下エラーの対策
+// Unchecked runtime.lastError: Cannot create item with duplicate id open-svelte-shield
+// https://stackoverflow.com/questions/37000136/check-if-item-is-already-in-the-context-menu
+chrome.contextMenus.removeAll(function () {
+  chrome.contextMenus.create({
+    id: "open-svelte-shield",
+    title: "Svelte Shield で読む",
+    type: "normal",
+    contexts: ["selection"],
+  });
 });
 
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {

@@ -81,15 +81,15 @@
     content: " ";
     width: var(--width-percent);
     border-bottom: 2px solid hotpink;
-    opacity: 0.3;
+    opacity: 0.4;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     content: " ";
-    border-bottom: 2px solid aqua;
-    opacity: 0.5;
+    border-bottom: 2px solid green;
+    opacity: 0.6;
   }
   .SVELTESHIELD-animation::before {
     animation-name: scaleX;
