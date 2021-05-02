@@ -1,22 +1,11 @@
-import { get } from "svelte/store";
 import kuromoji from "kuromoji/build/kuromoji";
 import {
   init,
   rawText,
   tokenize,
-  play,
-  resume,
-  pause,
   stop,
-  currentIndex,
   compositions,
-  isPause,
-  isPlay,
-  progress,
-  currentReadingTime,
-  getSleepTime,
 } from "../src/states/morpheme";
-import { msToTime } from "../src/utils/time";
 
 /** @type {string} */
 var tabId = "";
@@ -44,24 +33,9 @@ globalThis.XMLHttpRequest = function () {
 };
 
 globalThis.kuromoji = kuromoji;
-globalThis.localStorage = {
-  intervalMsPerChar: 80,
-};
-chrome.storage.sync.get("intervalMsPerChar", (result) => {
-  if (result.intervalMsPerChar) {
-    globalThis.localStorage.intervalMsPerChar = result.intervalMsPerChar;
-  }
-});
 
 // svelte store subscribe
-currentIndex.subscribe(sendWordToTab);
-compositions.subscribe(sendWordToTab);
-isPlay.subscribe((isPlay) => sendDataToTab({ isPlay }));
-isPause.subscribe((isPause) => sendDataToTab({ isPause }));
-progress.subscribe((progress) => sendDataToTab({ progress }));
-currentReadingTime.subscribe((currentReadingTime) =>
-  sendDataToTab({ currentReadingTime }),
-);
+compositions.subscribe((compositions) => sendDataToTab({ compositions }));
 
 // 以下エラーの対策
 // Unchecked runtime.lastError: Cannot create item with duplicate id open-svelte-shield
@@ -89,24 +63,6 @@ chrome.contextMenus.removeAll(function () {
   });
 });
 
-// message event from content.js
-chrome.runtime.onMessage.addListener(async function (request, _, sendResponse) {
-  control(request.controlType);
-
-  // https://blog.dand.work/article/381
-  sendResponse({});
-  return true;
-});
-
-// chrome watch cache
-chrome.storage.onChanged.addListener(function (changes) {
-  if (changes.intervalMsPerChar) {
-    globalThis.localStorage.intervalMsPerChar =
-      changes.intervalMsPerChar.newValue ||
-      globalThis.localStorage.intervalMsPerChar;
-  }
-});
-
 function execute(tabId) {
   return new Promise((resolve) => {
     chrome.scripting.executeScript(
@@ -117,43 +73,6 @@ function execute(tabId) {
       resolve,
     );
   });
-}
-
-async function control(type) {
-  switch (type) {
-    case "play":
-      await play();
-      return;
-    case "resume":
-      await resume();
-      return;
-    case "pause":
-      return pause();
-    case "stop":
-      return stop();
-    default:
-      break;
-  }
-}
-
-function sendWordToTab() {
-  const $compositions = get(compositions);
-  const $currentIndex = get(currentIndex);
-  const item = $compositions[$currentIndex];
-  const playingTimeMs = $compositions.reduce(
-    (ms, item) =>
-      ms + getSleepTime(item, globalThis.localStorage.intervalMsPerChar),
-    0,
-  );
-
-  if (item) {
-    sendDataToTab({ item });
-  }
-
-  if (playingTimeMs) {
-    const playingTimeMsStr = msToTime(playingTimeMs);
-    sendDataToTab({ playingTimeMsStr });
-  }
 }
 
 function sendDataToTab(data) {

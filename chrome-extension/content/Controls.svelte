@@ -1,6 +1,14 @@
 <script>
   import { onDestroy } from "svelte";
-  import { isNotReady, isPlay, isPause } from "./state";
+  import {
+    isNotReady,
+    isPlay,
+    isPause,
+    stepBackward,
+    pause,
+    resume,
+    intervalMsPerChar,
+  } from "./state";
 
   export let exit = () => {};
 
@@ -10,28 +18,29 @@
     window.removeEventListener("keydown", keyDown);
   });
 
-  function play() {
+  function playIfReady() {
     if ($isNotReady) return;
-    chrome.runtime.sendMessage({ controlType: "play" });
+    stepBackward();
+    resume($intervalMsPerChar);
   }
-  function resume() {
+  function resumeIfReady() {
     if ($isNotReady) return;
-    chrome.runtime.sendMessage({ controlType: "resume" });
+    resume($intervalMsPerChar);
   }
-  function pause() {
+  function pauseIfReady() {
     if ($isNotReady) return;
-    chrome.runtime.sendMessage({ controlType: "pause" });
+    pause();
   }
 
   function keyDown(e) {
     switch (e.code) {
       case "KeyQ":
         if (!$isPlay) {
-          play();
+          playIfReady();
         } else if (!$isPause) {
-          pause();
+          pauseIfReady();
         } else {
-          resume();
+          resumeIfReady();
         }
         return;
       case "Escape":
@@ -47,11 +56,11 @@
 
 <div class="SVELTESHIELD-wrapper">
   {#if !$isPlay}
-    <button disabled={$isNotReady} on:click={play}>再生(Q)</button>
+    <button disabled={$isNotReady} on:click={playIfReady}>再生(Q)</button>
   {:else if !$isPause}
-    <button disabled={$isNotReady} on:click={pause}>一時停止(Q)</button>
+    <button disabled={$isNotReady} on:click={pauseIfReady}>一時停止(Q)</button>
   {:else}
-    <button disabled={$isNotReady} on:click={resume}>再開(Q)</button>
+    <button disabled={$isNotReady} on:click={resumeIfReady}>再開(Q)</button>
   {/if}
 </div>
 
@@ -70,5 +79,6 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
   }
 </style>

@@ -1,29 +1,50 @@
 <script>
+  import { log } from "console";
+
   import {
-    item,
+    word,
+    info,
     isNotReady,
     isPlay,
     isPause,
     progress,
+    compositions,
     currentReadingTime,
-    playingTimeMsStr,
+    getPlayingTimeMsStr,
+    intervalMsPerChar,
   } from "./state";
 
   let fontSize = 16;
   let meterTopElm;
+  let playingTimeMsStr = "";
 
-  $: readingTime =
-    !$isPause && $item.word.length > 50 ? $currentReadingTime : 0;
+  $: readingTime = !$isPause && $info.length > 50 ? $currentReadingTime : 0;
   $: animationDuration = `${$currentReadingTime}ms`;
 
   $: progressPercent = `${$progress * 100}%`;
+
+  $: {
+    void $compositions;
+    playingTimeMsStr = getPlayingTimeMsStr($intervalMsPerChar);
+  }
+
   chrome.storage.sync.get("textSize", (result) => {
     fontSize = result.textSize || fontSize;
+  });
+
+  chrome.storage.sync.get("intervalMsPerChar", (result) => {
+    if (result.intervalMsPerChar) {
+      $intervalMsPerChar = result.intervalMsPerChar - 0;
+    }
   });
 
   chrome.storage.onChanged.addListener(function (changes) {
     if (changes.textSize) {
       fontSize = changes.textSize.newValue || fontSize;
+    }
+
+    if (changes.intervalMsPerChar) {
+      $intervalMsPerChar = changes.intervalMsPerChar.newValue;
     }
   });
 </script>
@@ -43,18 +64,18 @@
     {:else if !$isPlay && $progress === 0}
       ready!
     {:else}
-      {$item.word}
+      {$word}
     {/if}
 
     <!-- 現在 background.js の info.selectionText では改行文字が空文字扱いになる。 -->
-    {#if $item.info.hasNewLine}⏎{/if}
+    {#if $info.hasNewLine}⏎{/if}
   </div>
 
   <div class="SVELTESHIELD-meter" style="--width-percent: {progressPercent}" />
 
-  {#if $playingTimeMsStr}
+  {#if playingTimeMsStr}
     <div class="SVELTESHIELD-remaining-time-wrapper">
-      <div class="SVELTESHIELD-remaining-time">約{$playingTimeMsStr}</div>
+      <div class="SVELTESHIELD-remaining-time">約{playingTimeMsStr}</div>
     </div>
   {/if}
 </div>

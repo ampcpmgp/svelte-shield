@@ -1,6 +1,7 @@
 import kuromoji_no_compress from "kuromoji_no_compress";
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
+import { msToTime } from "../utils/time";
 
 export const word = writable("");
 export const info = writable({
@@ -71,10 +72,10 @@ export async function tokenize() {
   compositions.set(composite(path));
 }
 
-export async function play() {
+export async function play(intervalMsPerChar) {
   stop();
   await tokenize();
-  resume();
+  resume(intervalMsPerChar);
 }
 
 export function getSleepTime(composition, intervalMsPerChar) {
@@ -84,10 +85,32 @@ export function getSleepTime(composition, intervalMsPerChar) {
   return wordTime + newLineTime;
 }
 
-export async function resume() {
+export function getPlayingTimeMs(
+  intervalMsPerChar = localStorage.intervalMsPerChar,
+) {
+  const $compositions = get(compositions);
+  const playingTimeMs = $compositions.reduce(
+    (ms, item) => ms + getSleepTime(item, intervalMsPerChar),
+    0,
+  );
+
+  return playingTimeMs;
+}
+
+export function getPlayingTimeMsStr(
+  intervalMsPerChar = localStorage.intervalMsPerChar,
+) {
+  const playingTimeMs = getPlayingTimeMs(intervalMsPerChar);
+  const playingTimeMsStr = msToTime(playingTimeMs);
+
+  return playingTimeMsStr;
+}
+
+export async function resume(
+  intervalMsPerChar = localStorage.intervalMsPerChar,
+) {
   isPlay.set(true);
   isPause.set(false);
-  const intervalMsPerChar = localStorage.intervalMsPerChar;
   const playingCompositions = get(compositions).slice(get(currentIndex));
 
   for (const composition of playingCompositions) {
@@ -130,14 +153,13 @@ export function stepBackward() {
   setWordInfo();
 }
 
-export function setWordInfo() {
+export function setWordInfo(
+  intervalMsPerChar = localStorage.intervalMsPerChar,
+) {
   const composition = get(compositions)[get(currentIndex)];
 
   if (composition) {
-    const readingTime = getSleepTime(
-      composition,
-      localStorage.intervalMsPerChar,
-    );
+    const readingTime = getSleepTime(composition, intervalMsPerChar);
 
     word.set(composition.word);
     info.set(composition.info);
