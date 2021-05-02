@@ -25,7 +25,7 @@
 
   function keyDown(e) {
     switch (e.code) {
-      case "KeyP":
+      case "KeyQ":
         if (!$isPlay) {
           play();
         } else if (!$isPause) {
@@ -47,11 +47,11 @@
 
 <div class="SVELTESHIELD-wrapper">
   {#if !$isPlay}
-    <button disabled={$isNotReady} on:click={play}>再生(P)</button>
+    <button disabled={$isNotReady} on:click={play}>再生(Q)</button>
   {:else if !$isPause}
-    <button disabled={$isNotReady} on:click={pause}>一時停止(P)</button>
+    <button disabled={$isNotReady} on:click={pause}>一時停止(Q)</button>
   {:else}
-    <button disabled={$isNotReady} on:click={resume}>再開(P)</button>
+    <button disabled={$isNotReady} on:click={resume}>再開(Q)</button>
   {/if}
 </div>
 
