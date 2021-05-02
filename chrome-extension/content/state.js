@@ -15,6 +15,7 @@ import {
   stop,
   word,
   info,
+  setWordInfo,
 } from "../../src/states/morpheme";
 
 export const isNotReady = writable(true);
@@ -37,4 +38,5 @@ export {
   stepBackward,
   word,
   info,
+  setWordInfo,
 };
