@@ -72,7 +72,7 @@ export async function tokenize() {
   compositions.set(composite(path));
 }
 
-export async function play(intervalMsPerChar) {
+export async function play(intervalMsPerChar = localStorage.intervalMsPerChar) {
   stop();
   await tokenize();
   resume(intervalMsPerChar);
