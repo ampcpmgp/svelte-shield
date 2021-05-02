@@ -1,4 +1,5 @@
 <script>
+  import { default as Background } from "./Background.svelte";
   import { default as Settings } from "./Settings.svelte";
   import { default as Message } from "./Message.svelte";
   import { default as Controls } from "./Controls.svelte";
@@ -7,7 +8,7 @@
   export let exit = () => {};
 </script>
 
-<div class="SVELTESHIELD-background" on:click={exit} />
+<Background {exit} />
 
 <div class="SVELTESHIELD-content">
   <div class="SVELTESHIELD-settings-wrapper">
@@ -32,21 +33,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999999999999999999999999999;
+    z-index: 2147483647;
     width: 100%;
     height: 100%;
+    color: black;
     background-color: rgba(0, 0, 0, 0.5);
     display: grid;
     place-content: center;
-  }
-
-  .SVELTESHIELD-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
   }
 
   .SVELTESHIELD-content {

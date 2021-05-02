@@ -61,4 +61,14 @@
     grid-auto-flow: column;
     grid-gap: 8px;
   }
+
+  button {
+    background-color: white;
+    border: solid 1px black;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
 </style>
