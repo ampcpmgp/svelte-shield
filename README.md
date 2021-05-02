@@ -53,3 +53,11 @@ node test-tools/generate-test.js
 そうすると `src/states/morpheme-composite/` にテスト対象のファイルが生成されます。
 
 `test-tools/generate-test.js` をコミット差分には含まないようにしてください。
+
+## Chrome Extension
+
+以下を実行後、出力された dist ファイルを、 <chrome://extensions/> より取り込みます。
+
+```shell
+npm run build-ext
+```
