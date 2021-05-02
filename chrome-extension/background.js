@@ -47,20 +47,20 @@ chrome.contextMenus.removeAll(function () {
     type: "normal",
     contexts: ["selection"],
   });
+});
 
-  chrome.contextMenus.onClicked.addListener(async function (info, tab) {
-    if (info.menuItemId === "open-svelte-shield") {
-      tabId = tab.id;
+chrome.contextMenus.onClicked.addListener(async function (info, tab) {
+  if (info.menuItemId === "open-svelte-shield") {
+    tabId = tab.id;
 
-      sendDataToTab({ isNotReady: true });
-      stop();
-      await execute(tabId);
-      rawText.set(info.selectionText);
-      await init();
-      await tokenize();
-      sendDataToTab({ isNotReady: false });
-    }
-  });
+    sendDataToTab({ isNotReady: true });
+    stop();
+    await execute(tabId);
+    rawText.set(info.selectionText);
+    await init();
+    await tokenize();
+    sendDataToTab({ isNotReady: false });
+  }
 });
 
 function execute(tabId) {
