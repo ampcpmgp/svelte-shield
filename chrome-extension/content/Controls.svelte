@@ -113,6 +113,7 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+    color: black;
   }
 
   .SVELTESHIELD-arrow {
