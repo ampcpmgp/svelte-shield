@@ -25,6 +25,11 @@ settings:
     - [rustCoc]
     - [morpheme.tokenize]
     - [morpheme.play]
+  専門用語を含んだ文を再生:
+    - [sleep, 1000]
+    - [ips]
+    - [morpheme.tokenize]
+    - [morpheme.play]
   見出し強調機能:
     funcs:
       - [sleep, 1000]

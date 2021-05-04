@@ -26,7 +26,8 @@ export const hiddenSettings = writable({
 // モック用
 export const ignoreReading = writable(false);
 
-export const 漢字ひらがな漢字ひらがな = /^([\u30e0-\u9fcf]+)([\u3040-\u309f]+)([\u30e0-\u9fcf]+)([\u3040-\u309f]+)$/;
+export const 漢字 = /[\u4E00-\u9FFF]/;
+export const 漢字ひらがな漢字ひらがな = /^([\u4E00-\u9FFF]+)([\u3040-\u309f]+)([\u4E00-\u9FFF]+)([\u3040-\u309f]+)$/;
 export const カタカナ = /([ァ-ヶー]+)/;
 
 // 括弧内や見出しなどをひとまとめに出来る最大インデックス数。
@@ -79,8 +80,13 @@ export async function play(intervalMsPerChar = localStorage.intervalMsPerChar) {
 }
 
 export function getSleepTime(composition, intervalMsPerChar) {
-  const wordTime = composition.word.length * intervalMsPerChar;
-  const newLineTime = composition.info.hasNewLine ? intervalMsPerChar - 0.0 : 0;
+  const intervalMsPerCharNum = intervalMsPerChar - 0.0;
+  const wordTime = Array.from(composition.word).reduce((time, char) => {
+    const charTime = intervalMsPerCharNum * (漢字.test(char) ? 1.5 : 1);
+
+    return time + charTime;
+  }, 0);
+  const newLineTime = composition.info.hasNewLine ? intervalMsPerCharNum : 0;
 
   return wordTime + newLineTime;
 }
