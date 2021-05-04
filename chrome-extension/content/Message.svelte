@@ -1,6 +1,7 @@
 <script>
-  import { log } from "console";
-
+  import { afterUpdate } from "svelte";
+  import { LongWordThreshold } from "../../src/const/Time";
+  import { default as sleep } from "../../src/utils/sleep";
   import {
     word,
     info,
@@ -18,7 +19,8 @@
   let meterTopElm;
   let playingTimeMsStr = "";
 
-  $: readingTime = !$isPause && $info.length > 50 ? $currentReadingTime : 0;
+  $: readingTime =
+    !$isPause && $word.length > LongWordThreshold ? $currentReadingTime : 0;
   $: animationDuration = `${$currentReadingTime}ms`;
 
   $: progressPercent = `${$progress * 100}%`;
@@ -45,6 +47,14 @@
 
     if (changes.intervalMsPerChar) {
       $intervalMsPerChar = changes.intervalMsPerChar.newValue;
+    }
+  });
+
+  afterUpdate(async () => {
+    if (meterTopElm) {
+      meterTopElm.classList.remove("SVELTESHIELD-animation");
+      await sleep(0);
+      meterTopElm.classList.add("SVELTESHIELD-animation");
     }
   });
 </script>
@@ -109,8 +119,8 @@
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     content: " ";
-    border-bottom: 2px solid green;
-    opacity: 0.6;
+    border-bottom: 2px solid black;
+    opacity: 0.4;
   }
   .SVELTESHIELD-animation::before {
     animation-name: scaleX;

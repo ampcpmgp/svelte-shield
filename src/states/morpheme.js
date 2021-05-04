@@ -114,7 +114,7 @@ export async function resume(
   const playingCompositions = get(compositions).slice(get(currentIndex));
 
   for (const composition of playingCompositions) {
-    setWordInfo();
+    setWordInfo(intervalMsPerChar);
 
     const sleepTime = getSleepTime(composition, intervalMsPerChar);
 

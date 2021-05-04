@@ -12,13 +12,15 @@
     stop,
     pause,
   } from "../../../states/morpheme";
+  import { LongWordThreshold } from "../../../const/Time";
   import { default as Icon } from "../../parts/Icon/Icon.svelte";
   import InsetAlert from "../../parts/InsetAlert/InsetAlert.svelte";
   import ReadingCard from "../!Common/ReadingCard.svelte";
 
   let readingCardHeight = 0;
 
-  $: progressTime = !$isPause && $word.length > 50 ? $currentReadingTime : 0;
+  $: progressTime =
+    !$isPause && $word.length > LongWordThreshold ? $currentReadingTime : 0;
 </script>
 
 <div class="wrapper">

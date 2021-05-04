@@ -13,6 +13,7 @@
     pause,
     setReadingPosition,
   } from "../../../states/morpheme";
+  import { LongWordThreshold } from "../../../const/Time";
   import { hash, bookType } from "../../../states/book";
   import * as dexie from "../../../databases/dexie";
   import { default as BookType } from "../../../const/BookType";
@@ -50,7 +51,8 @@
     });
   }
 
-  $: progressTime = !$isPause && $word.length > 50 ? $currentReadingTime : 0;
+  $: progressTime =
+    !$isPause && $word.length > LongWordThreshold ? $currentReadingTime : 0;
 </script>
 
 <div class="wrapper">

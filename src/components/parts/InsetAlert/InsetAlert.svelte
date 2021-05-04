@@ -2,6 +2,7 @@
   import { afterUpdate } from "svelte";
 
   import { textSize } from "../../../states/settings";
+  import sleep from "../../../utils/sleep";
 
   // alert-secondary, alert-success, alert-info, alert-danger
   // https://themesberg.com/docs/neumorphism-ui/components/alerts/
@@ -20,9 +21,10 @@
 
   let meterTopElm;
 
-  afterUpdate(() => {
+  afterUpdate(async () => {
     if (meterTopElm) {
       meterTopElm.classList.remove("animation");
+      await sleep(0);
       meterTopElm.classList.add("animation");
     }
   });
