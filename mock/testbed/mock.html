@@ -18,6 +18,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/ipfs-core@0.5.4/dist/index.min.js"></script>
+    <!-- zlib を使わないようにしないと辞書取得エラーになる -->
+    <script src="/lib/kuromoji.js"></script>
     <script type="module" src="./mock.js"></script>
   </body>
 </html>

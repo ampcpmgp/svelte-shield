@@ -1,4 +1,3 @@
-import kuromoji_no_compress from "kuromoji_no_compress";
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
 import { msToTime } from "../utils/time";
@@ -42,7 +41,7 @@ async function getTokenizer() {
     /**
      * @type {import("kuromoji")}
      */
-    const kuromoji = globalThis.kuromoji || kuromoji_no_compress;
+    const kuromoji = globalThis.kuromoji;
 
     kuromoji.builder({ dicPath }).build(function (err, tokenizer) {
       if (get(ignoreReading)) {

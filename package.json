@@ -1,7 +1,7 @@
 {
   "name": "svelte-shield",
   "scripts": {
-    "dev": "run-s copy-dict dev:vite",
+    "dev": "run-s copy-dict copy-kuromoji dev:vite",
     "dev:vite": "vite",
     "build": "run-s copy-dict build:*",
     "build:clean": "rimraf build",
@@ -12,6 +12,7 @@
     "serve": "vite preview",
     "copy-dict": "cpy node_modules/kuromoji/dict/*.dat.gz public/dict/",
     "copy-dict-ext": "cpy node_modules/kuromoji/dict/*.dat.gz chrome-extension/public/dict/",
+    "copy-kuromoji": "cpy node_modules/kuromoji_no_compress/build/kuromoji.js public/lib/",
     "test": "ava",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint --ignore-path .gitignore **/*.{js,svelte}",
@@ -57,7 +58,7 @@
     "is_js": "^0.9.0",
     "jquery": "^3.5.1",
     "kuromoji": "^0.1.2",
-    "kuromoji_no_compress": "github:ampcpmgp/kuromoji.js",
+    "kuromoji_no_compress": "github:ampcpmgp/kuromoji.js#6e9b6f262d906c247cc18700c8502ca95c187b0f",
     "modern-css-reset": "^1.1.0",
     "outdent": "^0.8.0",
     "popper.js": "^1.16.1",
