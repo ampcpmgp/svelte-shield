@@ -255,6 +255,7 @@ export function isWeirdAtTheFront(item, lastItem, nextItem) {
     item.surface_form === "！" ||
     item.surface_form === "・" ||
     item.surface_form === "：" ||
+    item.surface_form === "," ||
     (item.pos_detail_1 === "空白" &&
       nextItem &&
       hasStartedParentheses(nextItem.surface_form)) ||
