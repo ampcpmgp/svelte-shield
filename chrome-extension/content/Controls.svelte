@@ -116,6 +116,10 @@
     color: black;
   }
 
+  button:disabled {
+    opacity: 0.3;
+  }
+
   .SVELTESHIELD-arrow {
     padding: 3px 4px;
     font-size: 13px;
