@@ -283,6 +283,12 @@ export function hasEndedParentheses(word) {
   );
 }
 
+export function hasQuotation(word) {
+  return (
+    word.indexOf("“") > -1 || word.indexOf('"') > -1 || word.indexOf("'") > -1
+  );
+}
+
 export function getCountParentheses(item) {
   return item.surface_form.split("").reduce((sum, word) => {
     if (hasStartedParentheses(word)) {
@@ -324,12 +330,36 @@ export function isValidClosure({ parenthesesNum, path, index }) {
   return false;
 }
 
+export function isValidQuotation({ path, index }) {
+  const firstItem = path[index];
+  if (!firstItem) return false;
+
+  const hasfirstItemQuotation = hasQuotation(firstItem.surface_form);
+
+  if (!hasfirstItemQuotation) return false;
+
+  const maxIndex = index + MAX_MERGABLE_INDEX;
+
+  for (; index < maxIndex; index++) {
+    const item = path[index];
+
+    if (!item) return false;
+
+    const hasCurrentItemQuotation = hasQuotation(item.surface_form);
+
+    if (hasCurrentItemQuotation) return true;
+  }
+
+  return false;
+}
+
 export function composite(path) {
   const compositions = [];
   let currentIndex = 0;
   const { judgeNum } = get(hiddenSettings);
 
   let parenthesesNum = 0;
+  let quotationChar = "";
 
   path.forEach((item, index) => {
     // 初期化
@@ -348,6 +378,16 @@ export function composite(path) {
     const isItemValidClosure =
       isInClosure && isValidClosure({ parenthesesNum, path, index: nextIndex });
     const isFirstValidClosure = isItemValidClosure && prevParenthesesNum === 0;
+
+    const isCurrentValidQuotation = isValidQuotation({
+      path,
+      index,
+    });
+
+    // 有効なクォーテーション内にいれば、フラグを立てる
+    if (isCurrentValidQuotation) {
+      quotationChar = item.surface_form;
+    }
 
     // 閉じ括弧が先に来てしまう場合は0に戻す
     if (parenthesesNum < 0) {
@@ -390,6 +430,12 @@ export function composite(path) {
 
     // 括弧が始まった場合は折り返ししない
     if (isItemValidClosure) {
+      void 0;
+
+      // クォーテーション内にいて、次のクォーテーションが出現したら折り返ししない
+    } else if (inQuotation && hasQuotation(item.surface_form)) {
+      inQuotation = false;
+
       void 0;
 
       // 漢字が続けば折り返し判定を行わない。
