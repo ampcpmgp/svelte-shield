@@ -53,10 +53,12 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === "open-svelte-shield") {
     tabId = tab.id;
 
+    const selectionText = await getText(tabId); // cannot get line by `info.selectionText`
+
     sendDataToTab({ isNotReady: true });
     stop();
     await execute(tabId);
-    rawText.set(info.selectionText);
+    rawText.set(selectionText);
     await init();
     await tokenize();
     sendDataToTab({ isNotReady: false });
@@ -71,6 +73,27 @@ function execute(tabId) {
         files: ["content/content.umd.js"],
       },
       resolve,
+    );
+  });
+}
+
+// 改行文字が入った文字列を取得する。 info.selectionText からは取得出来ない。
+function getText(tabId) {
+  return new Promise((resolve) => {
+    // 参考: https://bugs.chromium.org/p/chromium/issues/detail?id=116429#c11
+    chrome.scripting.executeScript(
+      {
+        target: { tabId },
+        function() {
+          return window.getSelection().toString();
+        },
+      },
+      function (selection) {
+        // selected contains text including line breaks
+        var selected = selection[0];
+
+        resolve(selected.result);
+      },
     );
   });
 }
