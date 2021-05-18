@@ -67,6 +67,11 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 
 function execute(tabId) {
   return new Promise((resolve) => {
+    chrome.scripting.insertCSS({
+      target: { tabId },
+      files: ["content/style.css"],
+    });
+
     chrome.scripting.executeScript(
       {
         target: { tabId },
