@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>logo maker</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      :root {
+        --colorMain: #c0c0c0;
+        --brShadow: -6px 6px 15px rgba(0, 0, 0, 0.5);
+        --tlShadow: 6px -6px 15px rgba(255, 255, 255, 0.8);
+      }
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+      }
+
+      .text {
+        color: var(--colorMain);
+        font-size: 8em;
+        font-weight: bold;
+        font-family: sans-serif;
+        text-shadow: var(--brShadow), var(--tlShadow);
+        position: relative;
+      }
+      .text::before,
+      .text::after {
+        position: absolute;
+        background: var(--colorMain);
+        content: "";
+        border-radius: 10%;
+      }
+
+      .text::before {
+        left: 0;
+        width: 100px;
+        height: 100px;
+        top: -150px;
+        z-index: 10;
+        box-shadow: inset var(--brShadow), inset var(--tlShadow);
+      }
+      .text::after {
+        left: -50px;
+        width: 200px;
+        height: 200px;
+        top: -200px;
+        box-shadow: var(--brShadow), var(--tlShadow);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="text">Svelte Shield</div> -->
+    <div class="text">SVELTE SHIELD</div>
+  </body>
+</html>

@@ -1,8 +1,11 @@
 # Svelte Shield
 
-様々な日本語文章を、目線移動無くサクサク読めるようにしたツール。
+様々な日本語文章を、目線移動無くサクサク読めるようにしたツールです。
 
-<https://ampcpmgp.github.io/svelte-shield/>
+* [Web版](https://ampcpmgp.github.io/svelte-shield/)
+* [Chrome 拡張機能版](https://chrome.google.com/webstore/detail/svelte-shield-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/ogdlcilfgiojgaoglhhilbhnghchnceo?hl=ja&authuser=0)
+
+![Svelte Shield](./src/images/svelte-shield.png)
 
 ## Setup
 
