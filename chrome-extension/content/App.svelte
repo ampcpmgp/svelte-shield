@@ -4,29 +4,35 @@
   import { default as Message } from "./Message.svelte";
   import { default as Controls } from "./Controls.svelte";
   import { default as Footer } from "./Footer.svelte";
+  import { default as ToggleButton } from "./ToggleButton.svelte";
+  import { appVisible } from "./state";
 
   export let exit = () => {};
 </script>
 
-<Background {exit} />
+{#if $appVisible}
+  <Background {exit} />
 
-<div class="SVELTESHIELD-content">
-  <div class="SVELTESHIELD-settings-wrapper">
-    <Settings />
-  </div>
+  <div class="SVELTESHIELD-content">
+    <div class="SVELTESHIELD-settings-wrapper">
+      <Settings />
+    </div>
 
-  <div class="SVELTESHIELD-message-wrapper">
-    <Message />
-  </div>
+    <div class="SVELTESHIELD-message-wrapper">
+      <Message />
+    </div>
 
-  <div class="SVELTESHIELD-controls-wrapper">
-    <Controls {exit} />
-  </div>
+    <div class="SVELTESHIELD-controls-wrapper">
+      <Controls {exit} />
+    </div>
 
-  <div class="SVELTESHIELD-footer-wrapper">
-    <Footer />
+    <div class="SVELTESHIELD-footer-wrapper">
+      <Footer />
+    </div>
   </div>
-</div>
+{/if}
+
+<ToggleButton />
 
 <style>
   :global(#svelte-shield-chrome-extension-app-1234567890abcde) {
@@ -40,6 +46,11 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: grid;
     place-content: center;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.hidden) {
+    width: 0;
+    height: 0;
   }
 
   .SVELTESHIELD-content {

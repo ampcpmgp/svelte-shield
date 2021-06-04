@@ -2,7 +2,7 @@
   export let exit = () => {};
 </script>
 
-<div class="SVELTESHIELD-background" on:click={exit}>
+<div class="SVELTESHIELD-background">
   <div class="SVELTESHIELD-button" on:click={exit}>閉じる(Esc)</div>
 </div>
 
@@ -13,7 +13,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: transparent;
   }
 
   .SVELTESHIELD-button {

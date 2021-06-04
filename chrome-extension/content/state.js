@@ -21,6 +21,7 @@ import {
 export const isNotReady = writable(true);
 export const isSaving = writable(false);
 export const intervalMsPerChar = writable(80);
+export const appVisible = writable(true);
 
 export {
   isPlay,
