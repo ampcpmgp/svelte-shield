@@ -252,7 +252,9 @@ export function isWeirdAtTheFront(item, lastItem, nextItem) {
     item.surface_form === ")" ||
     item.surface_form === "]" ||
     item.surface_form === "？" ||
+    item.surface_form === "?" ||
     item.surface_form === "！" ||
+    item.surface_form === "!" ||
     item.surface_form === "・" ||
     item.surface_form === "：" ||
     item.surface_form === "," ||
