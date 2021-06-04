@@ -1,5 +1,10 @@
 import { default as App } from "./content/App.svelte";
-import { isNotReady, compositions } from "./content/state";
+import {
+  isNotReady,
+  compositions,
+  stepBackward,
+  appVisible,
+} from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
@@ -15,6 +20,8 @@ function onMessage(request, _, sendResponse) {
 
   if (request.compositions) {
     compositions.set(request.compositions);
+    stepBackward();
+    appVisible.set(true);
   }
 
   // 以下エラーの対策
