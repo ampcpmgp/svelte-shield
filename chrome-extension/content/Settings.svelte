@@ -57,10 +57,10 @@
 
 <style>
   .SVELTESHIELD-wrapper {
-    display: inline-grid;
-    grid-auto-flow: column;
-    grid-column-gap: 20px;
-    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    column-gap: 20px;
   }
   .SVELTESHIELD-wrapper.disabled {
     pointer-events: none;

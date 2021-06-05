@@ -93,16 +93,18 @@
 <style>
   .SVELTESHIELD-wrapper {
     display: grid;
+    width: 100%;
+    max-width: 640px;
   }
 
   .SVELTESHIELD-message {
-    width: 640px;
-    max-width: 100%;
+    width: 100%;
     padding: 8px;
     border: solid 1px red;
     display: grid;
     place-items: center;
     font-size: var(--font-size);
+    box-sizing: border-box;
   }
 
   .SVELTESHIELD-meter {
