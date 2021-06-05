@@ -9,27 +9,17 @@ import {
 /** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
 
-function init() {
-  chrome.runtime.onMessage.addListener(onMessage);
-}
-
-function onMessage(request, _, sendResponse) {
-  if (typeof request.isNotReady === "boolean") {
-    isNotReady.set(request.isNotReady);
+chrome.storage.onChanged.addListener(function (changes) {
+  if (changes.isNotReady) {
+    isNotReady.set(changes.isNotReady.newValue);
   }
 
-  if (request.compositions) {
-    compositions.set(request.compositions);
+  if (changes.compositions) {
+    compositions.set(changes.compositions.newValue);
     stepBackward();
     appVisible.set(true);
   }
-
-  // 以下エラーの対策
-  // Unchecked runtime.lastError: The message port closed before a response was received.
-  // 参考: https://blog.dand.work/article/381
-  sendResponse({});
-  return true;
-}
+});
 
 function mount() {
   document.body.insertAdjacentHTML("afterend", `<div id="${APP_ID}"></div>`);
@@ -40,8 +30,6 @@ function mount() {
     target: element,
     props: {
       exit() {
-        chrome.runtime.sendMessage({ controlType: "stop" });
-        chrome.runtime.onMessage.removeListener(onMessage);
         app.$destroy();
         element.remove();
       },
@@ -51,8 +39,6 @@ function mount() {
 
 async function start() {
   const elementApp = document.getElementById(APP_ID);
-
-  init();
 
   if (!elementApp) {
     mount();

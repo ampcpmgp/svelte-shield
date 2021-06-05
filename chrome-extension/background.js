@@ -7,9 +7,6 @@ import {
   compositions,
 } from "../src/states/morpheme";
 
-/** @type {string} */
-var tabId = "";
-
 /** @type {import("@types/chrome")} */
 chrome;
 
@@ -35,7 +32,9 @@ globalThis.XMLHttpRequest = function () {
 globalThis.kuromoji = kuromoji;
 
 // svelte store subscribe
-compositions.subscribe((compositions) => sendDataToTab({ compositions }));
+compositions.subscribe((compositions) =>
+  chrome.storage.local.set({ compositions }),
+);
 
 // 以下エラーの対策
 // Unchecked runtime.lastError: Cannot create item with duplicate id open-svelte-shield
@@ -51,17 +50,15 @@ chrome.contextMenus.removeAll(function () {
 
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === "open-svelte-shield") {
-    tabId = tab.id;
+    const selectionText = await getText(tab.id); // cannot get line by `info.selectionText`
 
-    const selectionText = await getText(tabId); // cannot get line by `info.selectionText`
-
-    sendDataToTab({ isNotReady: true });
+    chrome.storage.local.set({ isNotReady: true });
     stop();
-    await execute(tabId);
+    await execute(tab.id);
     rawText.set(selectionText);
     await init();
     await tokenize();
-    sendDataToTab({ isNotReady: false });
+    chrome.storage.local.set({ isNotReady: false });
   }
 });
 
@@ -101,10 +98,4 @@ function getText(tabId) {
       },
     );
   });
-}
-
-function sendDataToTab(data) {
-  if (tabId) {
-    chrome.tabs.sendMessage(tabId, data);
-  }
 }
