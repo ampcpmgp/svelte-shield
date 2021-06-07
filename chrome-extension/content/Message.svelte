@@ -104,6 +104,7 @@
     display: grid;
     place-items: center;
     font-size: var(--font-size);
+    min-height: calc(var(--font-size) + 8px);
     box-sizing: border-box;
   }
 
