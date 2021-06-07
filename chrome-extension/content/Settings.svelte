@@ -71,6 +71,11 @@
     border-color: lightgreen;
     background-color: lightgreen;
   }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-success {
+      background-color: #666;
+    }
+  }
 
   label {
     display: grid;
@@ -78,7 +83,14 @@
   }
 
   input {
+    color: black;
     background-color: white;
+  }
+  @media (prefers-color-scheme: dark) {
+    input {
+      background-color: #666;
+      color: white;
+    }
   }
 
   .SVELTESHIELD-initial-value {

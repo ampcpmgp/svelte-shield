@@ -115,10 +115,14 @@
     cursor: pointer;
     color: black;
   }
-
   button:hover {
-    color: black;
     opacity: 0.9;
+  }
+  @media (prefers-color-scheme: dark) {
+    button {
+      background-color: #666;
+      color: white;
+    }
   }
 
   button:disabled {
