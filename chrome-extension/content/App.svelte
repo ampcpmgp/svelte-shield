@@ -68,6 +68,13 @@
     padding: 8px;
   }
 
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-content {
+      color: #e4e4e4;
+      background-color: #313131;
+    }
+  }
+
   .SVELTESHIELD-content > * {
     width: 100%;
     display: grid;

@@ -107,6 +107,11 @@
     min-height: calc(var(--font-size) + 8px);
     box-sizing: border-box;
   }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-message {
+      border-color: #a7a700;
+    }
+  }
 
   .SVELTESHIELD-meter {
     display: grid;
@@ -117,6 +122,11 @@
     border-bottom: 2px solid hotpink;
     opacity: 0.4;
   }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-meter::before {
+      border-color: #00ff45;
+    }
+  }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
   }
@@ -124,6 +134,11 @@
     content: " ";
     border-bottom: 2px solid black;
     opacity: 0.4;
+  }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-meter.SVELTESHIELD-top::before {
+      border-color: white;
+    }
   }
   .SVELTESHIELD-animation::before {
     animation-name: scaleX;
@@ -151,5 +166,10 @@
     border: solid 1px red;
     border-radius: 10px;
     padding: 0 4px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-remaining-time {
+      border-color: #a7a700;
+    }
   }
 </style>
