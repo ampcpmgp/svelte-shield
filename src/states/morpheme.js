@@ -191,7 +191,11 @@ export function initComposition(compositions, index) {
 }
 
 export function isPunctuation(item) {
-  return isJapanesePeriod(item) || item.pos_detail_1 === "読点";
+  return isJapanesePeriod(item) || isJapaneseComma(item);
+}
+
+export function isJapaneseComma(item) {
+  return item.pos_detail_1 === "読点" || /、/.test(item.surface_form);
 }
 
 export function isJapanesePeriod(item) {
