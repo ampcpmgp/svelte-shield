@@ -109,7 +109,7 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-message {
-      border-color: #a7a700;
+      border-color: #ff660033;
     }
   }
 
@@ -124,7 +124,8 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter::before {
-      border-color: #00ff45;
+      border-color: #ff660033;
+      transform: translateY(3px);
     }
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
@@ -169,7 +170,7 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-remaining-time {
-      border-color: #a7a700;
+      border-color: #ff660033;
     }
   }
 </style>

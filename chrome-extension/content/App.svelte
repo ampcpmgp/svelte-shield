@@ -70,8 +70,8 @@
 
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-content {
-      color: #e4e4e4;
-      background-color: #313131;
+      color: #eee;
+      background-color: #222;
     }
   }
 
