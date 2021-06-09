@@ -126,6 +126,7 @@
     .SVELTESHIELD-meter::before {
       border-color: #ff660033;
       transform: translateY(3px);
+      margin-bottom: 4px;
     }
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
