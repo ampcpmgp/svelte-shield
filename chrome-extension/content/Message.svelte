@@ -81,7 +81,10 @@
     {#if $info.hasNewLine}⏎{/if}
   </div>
 
-  <div class="SVELTESHIELD-meter" style="--width-percent: {progressPercent}" />
+  <div
+    class="SVELTESHIELD-meter SVELTESHIELD-bottom"
+    style="--width-percent: {progressPercent}"
+  />
 
   {#if playingTimeMsStr}
     <div class="SVELTESHIELD-remaining-time-wrapper">
@@ -124,13 +127,13 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter::before {
-      border-color: #ff660033;
-      transform: translateY(3px);
-      margin-bottom: 4px;
+      border-color: #ff660025;
     }
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
+    /* border の太さ分を引く */
+    margin-top: -2px;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     content: " ";
@@ -142,7 +145,14 @@
       border-color: white;
     }
   }
+  @media (prefers-color-scheme: dark) {
+    .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
+      border-style: solid;
+    }
+  }
+
   .SVELTESHIELD-animation::before {
+    animation-fill-mode: backwards;
     animation-name: scaleX;
     animation-duration: var(--animation-duration);
     animation-timing-function: linear;
