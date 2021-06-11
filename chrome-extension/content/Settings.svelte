@@ -83,13 +83,13 @@
   }
 
   input {
-    color: black;
-    background-color: white;
+    color: black !important;
+    background-color: white !important;
   }
   @media (prefers-color-scheme: dark) {
     input {
-      background-color: #666;
-      color: white;
+      background-color: #666 !important;
+      color: white !important;
     }
   }
 
