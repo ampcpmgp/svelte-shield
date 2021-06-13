@@ -124,10 +124,11 @@
     width: var(--width-percent);
     border-bottom: 2px solid hotpink;
     opacity: 0.4;
+    box-sizing: border-box;
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter::before {
-      border-color: rgb(133 255 0 / 26%);
+      border-color: rgb(133 255 0 / 36%);
     }
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
@@ -139,6 +140,7 @@
     content: " ";
     border-bottom: 2px solid black;
     opacity: 0.4;
+    box-sizing: border-box;
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter.SVELTESHIELD-top::before {

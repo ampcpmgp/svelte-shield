@@ -71,7 +71,7 @@
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-content {
       color: #eee;
-      background-color: #222;
+      background-color: rgb(49 49 49);
     }
   }
 
