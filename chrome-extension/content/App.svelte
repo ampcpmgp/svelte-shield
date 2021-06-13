@@ -42,10 +42,20 @@
     z-index: 2147483647;
     width: 100%;
     height: 100%;
-    color: black;
+    color: black !important;
     background-color: rgba(0, 0, 0, 0.5);
     display: grid;
     place-content: center;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde label) {
+    color: inherit;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(#svelte-shield-chrome-extension-app-1234567890abcde) {
+      color: #eee !important;
+    }
   }
 
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.hidden) {
@@ -58,7 +68,7 @@
     width: 80vw;
     max-width: 1280px;
     height: 80vh;
-    background-color: lightgoldenrodyellow;
+    background-color: lightgoldenrodyellow !important;
     border-radius: 8px;
     display: grid;
     grid-row-gap: 16px;
@@ -70,8 +80,7 @@
 
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-content {
-      color: #eee;
-      background-color: rgb(49 49 49);
+      background-color: rgb(49 49 49) !important;
     }
   }
 

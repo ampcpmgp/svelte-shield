@@ -128,7 +128,8 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter::before {
-      border-color: rgb(133 255 0 / 36%);
+      border-bottom-color: rgb(133 255 0 / 36%);
+      border-bottom-width: 3px;
     }
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
@@ -144,12 +145,12 @@
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter.SVELTESHIELD-top::before {
-      border-color: white;
+      border-bottom-color: white;
     }
   }
   @media (prefers-color-scheme: dark) {
     .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
-      border-style: solid;
+      border-bottom-style: solid;
     }
   }
 
