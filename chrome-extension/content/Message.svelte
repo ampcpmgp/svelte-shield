@@ -110,10 +110,9 @@
     min-height: calc(var(--font-size) + 8px);
     box-sizing: border-box;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-message {
-      border-color: rgb(133 255 0 / 39%);
-    }
+    border-color: rgb(133 255 0 / 39%);
   }
 
   .SVELTESHIELD-meter {
@@ -126,11 +125,10 @@
     opacity: 0.4;
     box-sizing: border-box;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-meter::before {
-      border-bottom-color: rgb(133 255 0 / 36%);
-      border-bottom-width: 3px;
-    }
+    border-bottom-color: rgb(133 255 0 / 36%);
+    border-bottom-width: 3px;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
@@ -143,15 +141,13 @@
     opacity: 0.4;
     box-sizing: border-box;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-meter.SVELTESHIELD-top::before {
-      border-bottom-color: white;
-    }
+    border-bottom-color: white;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
-      border-bottom-style: solid;
-    }
+    border-bottom-style: solid;
   }
 
   .SVELTESHIELD-animation::before {
@@ -182,9 +178,8 @@
     border-radius: 10px;
     padding: 0 4px;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-remaining-time {
-      border-color: rgb(133 255 0 / 39%);
-    }
+    border-color: rgb(133 255 0 / 39%);
   }
 </style>

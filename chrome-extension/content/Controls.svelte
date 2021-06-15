@@ -118,11 +118,10 @@
   button:hover {
     opacity: 0.9;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     button {
-      background-color: #666;
-      color: white;
-    }
+    background-color: #666;
+    color: white;
   }
 
   button:disabled {

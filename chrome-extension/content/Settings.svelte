@@ -71,10 +71,9 @@
     border-color: lightgreen;
     background-color: lightgreen;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-success {
-      background-color: #666;
-    }
+    background-color: #666;
   }
 
   label {
@@ -86,11 +85,10 @@
     color: black !important;
     background-color: white !important;
   }
-  @media (prefers-color-scheme: dark) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     input {
-      background-color: #666 !important;
-      color: white !important;
-    }
+    background-color: #666 !important;
+    color: white !important;
   }
 
   .SVELTESHIELD-initial-value {
