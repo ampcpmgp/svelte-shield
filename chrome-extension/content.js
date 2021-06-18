@@ -22,7 +22,10 @@ chrome.storage.onChanged.addListener(function (changes) {
 });
 
 function mount() {
-  document.body.insertAdjacentHTML("afterend", `<div id="${APP_ID}"></div>`);
+  document.body.insertAdjacentHTML(
+    "afterend",
+    `<div id="${APP_ID}" translate="no"></div>`,
+  );
 
   const element = document.getElementById(APP_ID);
 
