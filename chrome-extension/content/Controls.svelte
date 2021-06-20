@@ -13,8 +13,7 @@
   } from "./state";
 
   export let exit = () => {};
-
-  $: playable = !$isPlay || $isPause;
+  let state = { isStop: false };
 
   onDestroy(() => {
     window.removeEventListener("keydown", keyDown);
@@ -23,14 +22,17 @@
   function playIfReady() {
     if ($isNotReady) return;
     stepBackward();
-    resume($intervalMsPerChar);
+    state = { isStop: false };
+    resume($intervalMsPerChar, state);
   }
   function resumeIfReady() {
     if ($isNotReady) return;
-    resume($intervalMsPerChar);
+    state = { isStop: false };
+    resume($intervalMsPerChar, state);
   }
   function pauseIfReady() {
     if ($isNotReady) return;
+    state.isStop = true;
     pause();
   }
 

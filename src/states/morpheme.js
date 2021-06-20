@@ -72,10 +72,13 @@ export async function tokenize() {
   compositions.set(composite(path));
 }
 
-export async function play(intervalMsPerChar = localStorage.intervalMsPerChar) {
+export async function play(
+  intervalMsPerChar = localStorage.intervalMsPerChar,
+  state = { isStop: false },
+) {
   stop();
   await tokenize();
-  resume(intervalMsPerChar);
+  resume(intervalMsPerChar, state);
 }
 
 export function getSleepTime(composition, intervalMsPerChar) {
@@ -113,6 +116,7 @@ export function getPlayingTimeMsStr(
 
 export async function resume(
   intervalMsPerChar = localStorage.intervalMsPerChar,
+  state = { isStop: false },
 ) {
   isPlay.set(true);
   isPause.set(false);
@@ -131,7 +135,7 @@ export async function resume(
       return;
     }
 
-    if (get(isPause)) {
+    if (get(isPause) || state.isStop) {
       return;
     }
 

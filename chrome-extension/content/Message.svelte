@@ -107,7 +107,7 @@
     display: grid;
     place-items: center;
     font-size: var(--font-size);
-    min-height: calc(var(--font-size) + 8px);
+    line-height: calc(var(--font-size) * 1.5);
     box-sizing: border-box;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
