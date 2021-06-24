@@ -1,5 +1,5 @@
 <script>
-  import { appVisible } from "./state";
+  import { appVisible, objectState, pause } from "./state";
 
   const rootElm = document.querySelector(
     "#svelte-shield-chrome-extension-app-1234567890abcde",
@@ -11,6 +11,11 @@
 
   $: {
     rootElm.classList.toggle("hidden", !$appVisible);
+
+    if (!$appVisible) {
+      objectState.executionState.isStop = false;
+      pause();
+    }
   }
 
   function keyDown(e) {

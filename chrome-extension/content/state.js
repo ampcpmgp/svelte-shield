@@ -23,6 +23,8 @@ export const isSaving = writable(false);
 export const intervalMsPerChar = writable(80);
 export const appVisible = writable(true);
 
+export const objectState = { executionState: { isStop: false } };
+
 export {
   isPlay,
   isPause,

@@ -11,10 +11,10 @@
     currentIndex,
     setWordInfo,
     compositions,
+    objectState,
   } from "./state";
 
   export let exit = () => {};
-  let state = { isStop: false };
 
   onDestroy(() => {
     window.removeEventListener("keydown", keyDown);
@@ -23,17 +23,17 @@
   function playIfReady() {
     if ($isNotReady) return;
     stepBackward();
-    state = { isStop: false };
-    resume($intervalMsPerChar, state);
+    objectState.executionState = { isStop: false };
+    resume($intervalMsPerChar, objectState.executionState);
   }
   function resumeIfReady() {
     if ($isNotReady) return;
-    state = { isStop: false };
-    resume($intervalMsPerChar, state);
+    objectState.executionState = { isStop: false };
+    resume($intervalMsPerChar, objectState.executionState);
   }
   function pauseIfReady() {
     if ($isNotReady) return;
-    state.isStop = true;
+    objectState.executionState.isStop = true;
     pause();
   }
 
