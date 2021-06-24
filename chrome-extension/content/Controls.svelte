@@ -10,6 +10,7 @@
     intervalMsPerChar,
     currentIndex,
     setWordInfo,
+    compositions,
   } from "./state";
 
   export let exit = () => {};
@@ -38,11 +39,13 @@
 
   function back() {
     if ($isNotReady || !$isPause) return;
+    if ($currentIndex === 0) return;
     --$currentIndex;
     setWordInfo();
   }
   function next() {
     if ($isNotReady || !$isPause) return;
+    if ($currentIndex === $compositions.length) return;
     ++$currentIndex;
     setWordInfo();
 
