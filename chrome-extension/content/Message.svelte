@@ -52,9 +52,9 @@
 
   afterUpdate(async () => {
     if (meterTopElm) {
-      meterTopElm.classList.remove("SVELTESHIELD-animation");
+      meterTopElm.classList.remove("SVELTESHIELD-active");
       await sleep(0);
-      meterTopElm.classList.add("SVELTESHIELD-animation");
+      meterTopElm.classList.add("SVELTESHIELD-active");
     }
   });
 </script>
@@ -63,7 +63,7 @@
   {#if readingTime > 0}
     <div
       bind:this={meterTopElm}
-      class="SVELTESHIELD-meter SVELTESHIELD-top SVELTESHIELD-animation"
+      class="SVELTESHIELD-meter SVELTESHIELD-top SVELTESHIELD-animation SVELTESHIELD-active"
       style="--animation-duration: {animationDuration}"
     />
   {/if}
@@ -112,7 +112,7 @@
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-message {
-    border-color: rgb(133 255 0 / 39%);
+    border-color: rgb(153 153 153);
   }
 
   .SVELTESHIELD-meter {
@@ -127,13 +127,14 @@
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-meter::before {
-    border-bottom-color: rgb(133 255 0 / 36%);
+    border-bottom-color: rgb(153 153 153);
     border-bottom-width: 3px;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
     /* border の太さ分を引く */
     margin-top: -2px;
+    height: 0;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     content: " ";
@@ -151,6 +152,10 @@
   }
 
   .SVELTESHIELD-animation::before {
+    width: 0;
+  }
+
+  .SVELTESHIELD-animation.SVELTESHIELD-active::before {
     animation-fill-mode: backwards;
     animation-name: scaleX;
     animation-duration: var(--animation-duration);
@@ -180,6 +185,6 @@
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
     .SVELTESHIELD-remaining-time {
-    border-color: rgb(133 255 0 / 39%);
+    border-color: rgb(153 153 153);
   }
 </style>
