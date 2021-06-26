@@ -248,8 +248,7 @@ export function isWeirdAtTheFront(item, lastItem, nextItem) {
   // 今回の結果が数で、前回の結果が小数点記号などだった場合は、先頭に来ないものとして扱う
   const isConnectableNum =
     item.pos_detail_1 === "数" &&
-    lastItem &&
-    (lastItem.surface_form === "." || lastItem.surface_form === ",");
+    (lastItem?.surface_form === "." || lastItem?.surface_form === ",");
 
   return (
     isPunctuation(item) ||
@@ -268,8 +267,7 @@ export function isWeirdAtTheFront(item, lastItem, nextItem) {
     item.surface_form === "," ||
     hasEndedParentheses(item.surface_form) ||
     (item.pos_detail_1 === "空白" &&
-      nextItem &&
-      hasStartedParentheses(nextItem.surface_form)) ||
+      hasStartedParentheses(nextItem?.surface_form)) ||
     isConnectableNum
   );
 }
@@ -420,9 +418,8 @@ export function composite(path) {
 
       // 「～～なの」、と続くものは、「な」は助動詞、「の」は名詞と判定され先頭に回るとおかしく表示されるため、折り返し判定を行わない。
     } else if (
-      currentCompositionLastItem &&
-      currentCompositionLastItem.pos === "助動詞" &&
-      currentCompositionLastItem.surface_form === "な" &&
+      currentCompositionLastItem?.pos === "助動詞" &&
+      currentCompositionLastItem?.surface_form === "な" &&
       item.surface_form === "の" &&
       item.pos === "名詞"
     ) {
@@ -439,16 +436,14 @@ export function composite(path) {
       // 今回が動詞で、一つ前が名詞だった場合、折り返し判定を行わない。
     } else if (
       item.pos === "動詞" &&
-      currentCompositionLastItem &&
-      currentCompositionLastItem.pos === "名詞"
+      currentCompositionLastItem?.pos === "名詞"
     ) {
       void 0;
 
       // 今回が小数点でかつ、前回が数であった場合、折り返し判定を行わない。
     } else if (
       item.surface_form === "." &&
-      currentCompositionLastItem &&
-      currentCompositionLastItem.pos_detail_1 === "数"
+      currentCompositionLastItem?.pos_detail_1 === "数"
     ) {
       void 0;
 
@@ -468,8 +463,7 @@ export function composite(path) {
       currentCompositionLastItem &&
       !isRelationalNoun(currentCompositionLastItem) &&
       item.pos === "名詞" &&
-      nextItem &&
-      nextItem.pos === "名詞"
+      nextItem?.pos === "名詞"
     ) {
       ++currentIndex;
     }
@@ -530,12 +524,10 @@ export function composite(path) {
         const word = getWord(item);
         const trimmedWord = word.trim();
         const currentCompositionFirstItem = item[0];
-        const prevComposition =
-          compositions[index - 1] && compositions[index - 1].item;
+        const prevComposition = compositions[index - 1]?.item;
         const prevCompositionLastItem =
-          prevComposition && prevComposition[prevComposition.length - 1];
-        const nextComposition =
-          compositions[index + 1] && compositions[index + 1].item;
+          prevComposition?.[prevComposition.length - 1];
+        const nextComposition = compositions[index + 1]?.item;
 
         // 改行は判定条件に加えず直接格納する。
         if (/\n/.test(word)) {
