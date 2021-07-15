@@ -81,7 +81,7 @@
     background-color: rgb(49 49 49) !important;
   }
 
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-☁️)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
     .SVELTESHIELD-content {
     background-color: rgb(230, 231, 238) !important;
   }

@@ -4,7 +4,7 @@
   let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "🌙"
     : "🌞";
-  const brightnesses = ["🌞", "☁️", "🌙"];
+  const brightnesses = ["🌞", "🌥️", "🌙"];
 
   chrome.storage.sync.get("brightness", (result) => {
     // brightnesses[i]
@@ -18,7 +18,7 @@
       "#svelte-shield-chrome-extension-app-1234567890abcde",
     );
     $lement.classList.toggle(`svelte-shield-🌙`, brightness === "🌙");
-    $lement.classList.toggle(`svelte-shield-☁️`, brightness === "☁️");
+    $lement.classList.toggle(`svelte-shield-🌥️`, brightness === "🌥️");
   }
 
   function toggleDarkMode() {

@@ -103,7 +103,7 @@
   .SVELTESHIELD-message {
     width: 100%;
     padding: 8px;
-    border: solid 1px red;
+    border: solid 1px #ff00005e;
     display: grid;
     place-items: center;
     font-size: var(--font-size);
@@ -113,6 +113,10 @@
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-message {
     border-color: rgb(153 153 153);
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
+    .SVELTESHIELD-message {
+    border-color: #20212478;
   }
 
   .SVELTESHIELD-meter {
@@ -128,6 +132,11 @@
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-meter::before {
     border-bottom-color: rgb(153 153 153);
+    border-bottom-width: 3px;
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
+    .SVELTESHIELD-meter::before {
+    border-color: #20212478;
     border-bottom-width: 3px;
   }
   .SVELTESHIELD-meter.SVELTESHIELD-top {
@@ -147,6 +156,14 @@
     border-bottom-color: white;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+    .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
+    border-bottom-style: solid;
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
+    .SVELTESHIELD-meter.SVELTESHIELD-top::before {
+    border-bottom-color: #202124;
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
     .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
     border-bottom-style: solid;
   }
@@ -179,12 +196,16 @@
     top: 2px;
     right: 0;
     font-size: 12px;
-    border: solid 1px red;
+    border: solid 1px #ff00005e;
     border-radius: 10px;
     padding: 0 4px;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-remaining-time {
     border-color: rgb(153 153 153);
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
+    .SVELTESHIELD-remaining-time {
+    border-color: #20212478;
   }
 </style>
