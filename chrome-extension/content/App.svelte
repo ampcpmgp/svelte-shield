@@ -52,7 +52,7 @@
     color: inherit;
   }
 
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield) {
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙) {
     color: #eee !important;
   }
 
@@ -76,9 +76,14 @@
     padding: 8px;
   }
 
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-content {
     background-color: rgb(49 49 49) !important;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-☁️)
+    .SVELTESHIELD-content {
+    background-color: rgb(230, 231, 238) !important;
   }
 
   .SVELTESHIELD-content > * {

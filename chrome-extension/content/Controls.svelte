@@ -123,7 +123,7 @@
   button:hover {
     opacity: 0.9;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     button {
     background-color: #666;
     color: white;

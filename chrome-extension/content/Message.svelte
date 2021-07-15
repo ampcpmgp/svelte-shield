@@ -110,7 +110,7 @@
     line-height: calc(var(--font-size) * 1.5);
     box-sizing: border-box;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-message {
     border-color: rgb(153 153 153);
   }
@@ -125,7 +125,7 @@
     opacity: 0.4;
     box-sizing: border-box;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-meter::before {
     border-bottom-color: rgb(153 153 153);
     border-bottom-width: 3px;
@@ -142,11 +142,11 @@
     opacity: 0.4;
     box-sizing: border-box;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     border-bottom-color: white;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
     border-bottom-style: solid;
   }
@@ -183,7 +183,7 @@
     border-radius: 10px;
     padding: 0 4px;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.dark-mode-svelte-shield)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-remaining-time {
     border-color: rgb(153 153 153);
   }

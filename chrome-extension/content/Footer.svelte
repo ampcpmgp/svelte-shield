@@ -1,23 +1,31 @@
 <script>
   import { default as WebStorePng } from "./webstore.png";
 
-  let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "🌙"
+    : "🌞";
+  const brightnesses = ["🌞", "☁️", "🌙"];
 
-  chrome.storage.sync.get("darkMode", (result) => {
-    darkMode = result.darkMode ?? darkMode;
+  chrome.storage.sync.get("brightness", (result) => {
+    // brightnesses[i]
+    brightness = result.brightness ?? brightness;
 
     reflectClass();
   });
 
   function reflectClass() {
-    document
-      .querySelector("#svelte-shield-chrome-extension-app-1234567890abcde")
-      .classList.toggle("dark-mode-svelte-shield", darkMode);
+    const $lement = document.querySelector(
+      "#svelte-shield-chrome-extension-app-1234567890abcde",
+    );
+    $lement.classList.toggle(`svelte-shield-🌙`, brightness === "🌙");
+    $lement.classList.toggle(`svelte-shield-☁️`, brightness === "☁️");
   }
 
   function toggleDarkMode() {
-    darkMode = !darkMode;
-    chrome.storage.sync.set({ darkMode });
+    const currentIndex = brightnesses.indexOf(brightness);
+    const nextIndex = (currentIndex + 1) % brightnesses.length;
+    brightness = brightnesses[nextIndex];
+    chrome.storage.sync.set({ brightness });
     reflectClass();
   }
 </script>
@@ -25,7 +33,7 @@
 <div class="SVELTESHIELD-wrapper">
   <div class="SVELTESHIELD-dark-mode-wrapper">
     <div class="SVELTESHIELD-dark-mode" on:click={toggleDarkMode}>
-      {darkMode ? "🌙" : "🌞"}
+      {brightness}
     </div>
   </div>
 
