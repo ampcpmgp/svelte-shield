@@ -30,7 +30,11 @@
   });
 </script>
 
-<div class="wrapper" style="--text-size: {$textSize}px">
+<div
+  class="wrapper"
+  class:full={$textSize > 40}
+  style="--text-size: {$textSize}px"
+>
   {#if time > 0}
     <div
       bind:this={meterTopElm}
@@ -59,6 +63,9 @@
     width: 100%;
     max-width: 640px;
     position: relative;
+  }
+  .wrapper.full {
+    max-width: initial;
   }
 
   .alert {
