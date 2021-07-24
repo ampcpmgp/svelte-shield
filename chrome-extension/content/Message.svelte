@@ -59,7 +59,11 @@
   });
 </script>
 
-<div class="SVELTESHIELD-wrapper" style="--font-size: {fontSize}px">
+<div
+  class="SVELTESHIELD-wrapper"
+  class:SVELTESHIELD-full-width={fontSize > 40}
+  style="--font-size: {fontSize}px"
+>
   {#if readingTime > 0}
     <div
       bind:this={meterTopElm}
@@ -99,6 +103,9 @@
     width: 100%;
     max-width: 640px;
   }
+  .SVELTESHIELD-wrapper.SVELTESHIELD-full-width {
+    max-width: initial;
+  }
 
   .SVELTESHIELD-message {
     width: 100%;
@@ -109,6 +116,7 @@
     font-size: var(--font-size);
     line-height: calc(var(--font-size) * 1.5);
     box-sizing: border-box;
+    text-align: center;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-message {
