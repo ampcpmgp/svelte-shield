@@ -24,33 +24,51 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body wrapper">
-        <!--
-          実際のページ遷移処理が動いているのは on:click
-          use:link は href のリンク遷移先を変えて、カーソルを当てたときの
-          ページ遷移先を決めている。
-          on:click が無いと、 data-dismiss の影響により、ページ遷移処理が走らない。
-        -->
-        <a
-          href="/"
-          class="card bg-primary border-light shadow-soft mode"
-          data-dismiss="modal"
-          on:click={() => push("/")}
-          use:link
-        >
-          <i class="fas fa-edit" />
-          通常モード
-        </a>
-        <a
-          href="/books"
-          class="card bg-primary border-light shadow-soft mode"
-          data-dismiss="modal"
-          on:click={() => push("/books")}
-          use:link
-        >
-          <i class="fas fa-book" />
-          IPFS本モード
-        </a>
+
+      <div class="modal-body">
+        <div class="wrapper">
+          <!--
+            実際のページ遷移処理が動いているのは on:click
+            use:link は href のリンク遷移先を変えて、カーソルを当てたときの
+            ページ遷移先を決めている。
+            on:click が無いと、 data-dismiss の影響により、ページ遷移処理が走らない。
+          -->
+          <a
+            href="/"
+            class="card bg-primary border-light shadow-soft mode"
+            data-dismiss="modal"
+            on:click={() => push("/")}
+            use:link
+          >
+            <i class="fas fa-edit" />
+            通常モード
+          </a>
+          <a
+            href="/"
+            class="card bg-primary border-light shadow-soft mode"
+            data-dismiss="modal"
+            on:click={() => push("/speak")}
+            use:link
+          >
+            <i class="fas fa-volume-up" />
+            読み上げモード
+          </a>
+        </div>
+
+        <h3 class="h6 modal-title mb-0">🧪実験的機能🧪</h3>
+
+        <div class="wrapper">
+          <a
+            href="/books"
+            class="card bg-primary border-light shadow-soft mode"
+            data-dismiss="modal"
+            on:click={() => push("/books")}
+            use:link
+          >
+            <i class="fas fa-book" />
+            IPFS本モード
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -78,6 +96,11 @@
     .wrapper {
       grid-template-columns: repeat(auto-fill, 100px);
     }
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 0.9rem;
   }
 
   .mode {

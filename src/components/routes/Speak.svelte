@@ -4,7 +4,7 @@
   import Home from "../containers/Home/Home.svelte";
 
   onMount(() => {
-    mode.set("normal");
+    mode.set("speak");
   });
 </script>
 

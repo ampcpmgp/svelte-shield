@@ -47,6 +47,13 @@ settings:
     - [morpheme.tokenize]
     - [morpheme.isPlay.set, true]
     - [morpheme.isPause.set, true]
+読み上げモード:
+  func: [page, /speak]
+  夏目漱石の文を再生:
+    - [sleep, 1000]
+    - [kokoro]
+    - [morpheme.tokenize]
+    - [morpheme.play]
 IPFS本ページ:
   func: [page, /books]
   本レイアウト:

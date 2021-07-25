@@ -1,6 +1,7 @@
 import { get, writable, derived } from "svelte/store";
 import sleep from "../utils/sleep";
 import { msToTime } from "../utils/time";
+import { speak } from "../utils/speech";
 
 export const word = writable("");
 export const info = writable({
@@ -24,6 +25,8 @@ export const hiddenSettings = writable({
 });
 // モック用
 export const ignoreReading = writable(false);
+/** "normal" | "speak" */
+export const mode = writable("normal");
 
 export const 漢字 = /[\u4E00-\u9FFF]/;
 export const 漢字ひらがな漢字ひらがな = /^([\u4E00-\u9FFF]+)([\u3040-\u309f]+)([\u4E00-\u9FFF]+)([\u3040-\u309f]+)$/;
@@ -125,9 +128,15 @@ export async function resume(
   for (const composition of playingCompositions) {
     setWordInfo(intervalMsPerChar);
 
-    const sleepTime = getSleepTime(composition, intervalMsPerChar);
+    const $mode = get(mode);
 
-    await sleep(sleepTime);
+    if ($mode === "normal") {
+      const sleepTime = getSleepTime(composition, intervalMsPerChar);
+
+      await sleep(sleepTime);
+    } else if ($mode === "speak") {
+      await speak({ msg: composition.word });
+    }
 
     if (!get(isPlay)) {
       word.set("");
