@@ -2,24 +2,34 @@
   import {
     intervalMsPerChar,
     textSize,
+    speechRate,
     saveIntervalMsPerChar,
     saveTextSize,
+    saveSpeechRate,
   } from "../../../states/settings";
   import { default as Modal } from "../../../const/modal";
+
+  /**
+   * "normal" | "speak"
+   */
+  export let mode = "normal";
 
   const formData = {
     intervalMsPerChar: $intervalMsPerChar,
     textSize: $textSize,
+    speechRate: $speechRate,
   };
 
   function save() {
     saveIntervalMsPerChar(formData.intervalMsPerChar);
     saveTextSize(formData.textSize);
+    saveSpeechRate(formData.speechRate);
   }
 
   function cancel() {
     formData.intervalMsPerChar = $intervalMsPerChar;
     formData.textSize = $textSize;
+    formData.speechRate = $speechRate;
   }
 </script>
 
@@ -45,19 +55,33 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label for="validationServer01"
-            >１文字当たりの表示時間（ミリ秒）</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            id="validationServer01"
-            bind:value={formData.intervalMsPerChar}
-            step="20"
-          />
-          <small class="default">初期値 80ms</small>
-        </div>
+        {#if mode === "normal"}
+          <div class="form-group">
+            <label for="validationServer01"
+              >１文字当たりの表示時間（ミリ秒）</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="validationServer01"
+              bind:value={formData.intervalMsPerChar}
+              step="20"
+            />
+            <small class="default">初期値 80ms</small>
+          </div>
+        {:else if mode === "speak"}
+          <div class="form-group">
+            <label for="validationServer01">読み上げスピード（～倍）</label>
+            <input
+              type="number"
+              class="form-control"
+              id="validationServer01"
+              bind:value={formData.speechRate}
+              step="0.2"
+            />
+            <small class="default">初期値 1.0</small>
+          </div>
+        {/if}
 
         <div class="form-group">
           <label for="validationServer01">文字の大きさ（ピクセル）</label>

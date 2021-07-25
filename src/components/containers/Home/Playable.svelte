@@ -11,6 +11,7 @@
     resume,
     stop,
     pause,
+    mode,
   } from "../../../states/morpheme";
   import { LongWordThreshold } from "../../../const/Time";
   import { default as Icon } from "../../parts/Icon/Icon.svelte";
@@ -55,17 +56,29 @@
     {#if !$isPlay}
       <!-- 再生 -->
       <Icon isBox={true} on:click={() => handlePlay()}
-        ><i class="fas fa-play" /></Icon
+        ><i
+          class="fas"
+          class:fa-play={$mode === "normal"}
+          class:fa-volume-up={$mode === "speak"}
+        /></Icon
       >
     {:else if !$isPause}
       <!-- 一時停止 -->
       <Icon isBox={true} on:click={() => handlePause()}
-        ><i class="fas fa-pause" /></Icon
+        ><i
+          class="fas"
+          class:fa-pause={$mode === "normal"}
+          class:fa-volume-mute={$mode === "speak"}
+        /></Icon
       >
     {:else}
       <!-- 再開 -->
       <Icon isBox={true} on:click={() => handleResume()}
-        ><i class="fas fa-play" /></Icon
+        ><i
+          class="fas"
+          class:fa-play={$mode === "normal"}
+          class:fa-volume-up={$mode === "speak"}
+        /></Icon
       >
     {/if}
   </div>
@@ -82,7 +95,10 @@
     <!-- ReadingCard がこの高さを超えて突き破ってしまうため、 absolute 配置で高さを調整 -->
     <div class="reading-card-wrapper">
       <div class="reading-card-inner" bind:clientHeight={readingCardHeight}>
-        <ReadingCard disabled={!$isPause} height={readingCardHeight} />
+        <ReadingCard
+          disabled={!$isPause && $mode === "normal"}
+          height={readingCardHeight}
+        />
       </div>
     </div>
   {/if}

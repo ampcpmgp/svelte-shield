@@ -9,6 +9,8 @@
   import Content from "./Content.svelte";
   import { onDestroy } from "svelte";
 
+  const { mode } = morpheme;
+
   /**
    * 開発時はモックがURLを変更するタイミングを待たせて、辞書データの初期化を止める。
    * メインページのこのページだけ必要。
@@ -51,5 +53,5 @@
 </Frame>
 
 <!-- 各モーダル -->
-<Settings />
+<Settings mode={$mode} />
 <Mode />

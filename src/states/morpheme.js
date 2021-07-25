@@ -135,7 +135,7 @@ export async function resume(
 
       await sleep(sleepTime);
     } else if ($mode === "speak") {
-      await speak({ msg: composition.word });
+      await speak({ msg: composition.word, rate: localStorage.speechRate });
     }
 
     if (!get(isPlay)) {
