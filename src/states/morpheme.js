@@ -77,11 +77,12 @@ export async function tokenize() {
 
 export async function play(
   intervalMsPerChar = localStorage.intervalMsPerChar,
+  speechRate = localStorage.speechRate,
   state = { isStop: false },
 ) {
   stop();
   await tokenize();
-  resume(intervalMsPerChar, state);
+  resume(intervalMsPerChar, speechRate, state);
 }
 
 export function getSleepTime(composition, intervalMsPerChar) {
@@ -119,6 +120,7 @@ export function getPlayingTimeMsStr(
 
 export async function resume(
   intervalMsPerChar = localStorage.intervalMsPerChar,
+  speechRate = localStorage.speechRate,
   state = { isStop: false },
 ) {
   isPlay.set(true);
@@ -135,7 +137,7 @@ export async function resume(
 
       await sleep(sleepTime);
     } else if ($mode === "speak") {
-      await speak({ msg: composition.word, rate: localStorage.speechRate });
+      await speak({ msg: composition.word, rate: speechRate });
     }
 
     if (!get(isPlay)) {

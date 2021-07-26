@@ -1,14 +1,18 @@
 <script>
   import sleep from "../../src/utils/sleep";
-  import { isPlay, isPause } from "./state";
+  import { isPlay, isPause, playingMode, readingSpeed } from "./state";
 
   let intervalMsPerChar = 80;
   let textSize = 16;
   let intervalMsPerCharSaved = false;
+  let readingSpeedSaved = false;
   let textSizeSaved = false;
 
   chrome.storage.sync.get("intervalMsPerChar", (result) => {
     intervalMsPerChar = result.intervalMsPerChar || intervalMsPerChar;
+  });
+  chrome.storage.sync.get("readingSpeed", (result) => {
+    $readingSpeed = (result.readingSpeed || $readingSpeed) - 0.0;
   });
   chrome.storage.sync.get("textSize", (result) => {
     textSize = result.textSize || textSize;
@@ -21,6 +25,13 @@
     intervalMsPerCharSaved = false;
   }
 
+  async function setReadingSpeed() {
+    chrome.storage.sync.set({ readingSpeed: $readingSpeed });
+    readingSpeedSaved = true;
+    await sleep(1000);
+    readingSpeedSaved = false;
+  }
+
   async function setTextSize() {
     chrome.storage.sync.set({ textSize });
     textSizeSaved = true;
@@ -30,17 +41,31 @@
 </script>
 
 <div class="SVELTESHIELD-wrapper" class:disabled={$isPlay && !$isPause}>
-  <label>
-    <span>１文字当たりの表示時間</span>
-    <input
-      type="number"
-      class:SVELTESHIELD-success={intervalMsPerCharSaved}
-      step="20"
-      bind:value={intervalMsPerChar}
-      on:change={setIntervalMsPerChar}
-    />
-    <span class="SVELTESHIELD-initial-value">初期値 80ms</span>
-  </label>
+  {#if $playingMode === "📝"}
+    <label>
+      <span>１文字当たりの表示時間</span>
+      <input
+        type="number"
+        class:SVELTESHIELD-success={intervalMsPerCharSaved}
+        step="20"
+        bind:value={intervalMsPerChar}
+        on:change={setIntervalMsPerChar}
+      />
+      <span class="SVELTESHIELD-initial-value">初期値 80ms</span>
+    </label>
+  {:else if $playingMode === "🔊"}
+    <label>
+      <span>読み上げスピード</span>
+      <input
+        type="number"
+        class:SVELTESHIELD-success={readingSpeedSaved}
+        step="0.2"
+        bind:value={$readingSpeed}
+        on:change={setReadingSpeed}
+      />
+      <span class="SVELTESHIELD-initial-value">初期値 1.0倍</span>
+    </label>
+  {/if}
 
   <label>
     <span>文字の大きさ</span>

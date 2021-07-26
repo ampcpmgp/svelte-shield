@@ -1,16 +1,23 @@
 <script>
   import { default as WebStorePng } from "./webstore.png";
+  import { playingMode } from "./state";
 
   let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "🌙"
     : "🌞";
   const brightnesses = ["🌞", "🌥️", "🌙"];
+  const playingModes = ["📝", "🔊"];
 
   chrome.storage.sync.get("brightness", (result) => {
     // brightnesses[i]
     brightness = result.brightness ?? brightness;
 
     reflectClass();
+  });
+
+  chrome.storage.sync.get("playingMode", (result) => {
+    // playingModes[i]
+    $playingMode = result.playingMode ?? $playingMode;
   });
 
   function reflectClass() {
@@ -21,19 +28,31 @@
     $lement.classList.toggle(`svelte-shield-🌥️`, brightness === "🌥️");
   }
 
-  function toggleDarkMode() {
+  function changeBrightMode() {
     const currentIndex = brightnesses.indexOf(brightness);
     const nextIndex = (currentIndex + 1) % brightnesses.length;
     brightness = brightnesses[nextIndex];
     chrome.storage.sync.set({ brightness });
     reflectClass();
   }
+
+  function changePlayingMode() {
+    const currentIndex = playingModes.indexOf($playingMode);
+    const nextIndex = (currentIndex + 1) % playingModes.length;
+    $playingMode = playingModes[nextIndex];
+    chrome.storage.sync.set({ playingMode: $playingMode });
+
+    console.log(1, $playingMode);
+  }
 </script>
 
 <div class="SVELTESHIELD-wrapper">
-  <div class="SVELTESHIELD-dark-mode-wrapper">
-    <div class="SVELTESHIELD-dark-mode" on:click={toggleDarkMode}>
+  <div class="SVELTESHIELD-mode-wrapper">
+    <div class="SVELTESHIELD-mode" on:click={changeBrightMode}>
       {brightness}
+    </div>
+    <div class="SVELTESHIELD-mode" on:click={changePlayingMode}>
+      {$playingMode}
     </div>
   </div>
 
@@ -53,12 +72,12 @@
     justify-content: space-between;
   }
 
-  .SVELTESHIELD-dark-mode-wrapper {
+  .SVELTESHIELD-mode-wrapper {
     display: flex;
     place-items: center;
   }
 
-  .SVELTESHIELD-dark-mode {
+  .SVELTESHIELD-mode {
     font-size: 28px;
     padding: 8px;
     cursor: pointer;

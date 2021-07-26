@@ -26,7 +26,7 @@
 
   function handlePlay() {
     state = { isStop: false };
-    play(localStorage.intervalMsPerChar, state);
+    play(localStorage.intervalMsPerChar, localStorage.speechRate, state);
   }
   function handlePause() {
     state.isStop = true;
@@ -34,7 +34,7 @@
   }
   function handleResume() {
     state = { isStop: false };
-    resume(localStorage.intervalMsPerChar, state);
+    resume(localStorage.intervalMsPerChar, localStorage.speechRate, state);
   }
 </script>
 

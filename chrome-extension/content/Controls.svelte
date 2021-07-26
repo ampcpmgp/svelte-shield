@@ -12,7 +12,18 @@
     setWordInfo,
     compositions,
     objectState,
+    mode,
+    playingMode,
+    readingSpeed,
   } from "./state";
+
+  $: {
+    if ($playingMode === "📝") {
+      mode.set("normal");
+    } else if ($playingMode === "🔊") {
+      mode.set("speak");
+    }
+  }
 
   export let exit = () => {};
 
@@ -24,12 +35,12 @@
     if ($isNotReady) return;
     stepBackward();
     objectState.executionState = { isStop: false };
-    resume($intervalMsPerChar, objectState.executionState);
+    resume($intervalMsPerChar, $readingSpeed, objectState.executionState);
   }
   function resumeIfReady() {
     if ($isNotReady) return;
     objectState.executionState = { isStop: false };
-    resume($intervalMsPerChar, objectState.executionState);
+    resume($intervalMsPerChar, $readingSpeed, objectState.executionState);
   }
   function pauseIfReady() {
     if ($isNotReady) return;
@@ -86,15 +97,24 @@
 
 <div class="SVELTESHIELD-wrapper">
   {#if !$isPlay}
-    <button disabled={$isNotReady} on:click={playIfReady}>再生(Q)</button>
+    <button disabled={$isNotReady} on:click={playIfReady}
+      >再生(Q)<br />
+      {$playingMode}
+    </button>
   {:else if !$isPause}
-    <button disabled={$isNotReady} on:click={pauseIfReady}>一時停止(Q)</button>
+    <button disabled={$isNotReady} on:click={pauseIfReady}
+      >一時停止(Q)<br />
+      {$playingMode}</button
+    >
   {:else}
     <button disabled={$isNotReady} class="SVELTESHIELD-arrow" on:click={back}
       >←</button
     >
 
-    <button disabled={$isNotReady} on:click={resumeIfReady}>再開(Q)</button>
+    <button disabled={$isNotReady} on:click={resumeIfReady}
+      >再開(Q)<br />
+      {$playingMode}
+    </button>
 
     <button disabled={$isNotReady} class="SVELTESHIELD-arrow" on:click={next}
       >→</button
