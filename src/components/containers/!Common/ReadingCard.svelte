@@ -50,7 +50,7 @@
 </script>
 
 <div class="wrapper card bg-primary shadow-soft border-light">
-  {#if mode === "normal"}
+  {#if $mode === "normal"}
     <div class="playing-time badge badge-md badge-info">
       <div>約{msToTime(playingTimeMs)}</div>
     </div>

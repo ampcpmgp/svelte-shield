@@ -22,7 +22,7 @@
   let state = { isStop: false };
 
   $: progressTime =
-    mode === "normal" && !$isPause && $word.length > LongWordThreshold
+    $mode === "normal" && !$isPause && $word.length > LongWordThreshold
       ? $currentReadingTime
       : 0;
 
