@@ -8,6 +8,7 @@
     isPause,
     setWordInfo,
     getSleepTime,
+    mode,
   } from "../../../states/morpheme";
   import { intervalMsPerChar } from "../../../states/settings";
 
@@ -20,7 +21,7 @@
   $: currentItem = $compositions[$currentIndex];
   $: playingTimeMs = $compositions.reduce(
     (ms, item) => ms + getSleepTime(item, $intervalMsPerChar),
-    0
+    0,
   );
 
   // 読み込み中カードの位置がウインドウの高さを超えているときは自動スクロール可能とする
@@ -49,9 +50,11 @@
 </script>
 
 <div class="wrapper card bg-primary shadow-soft border-light">
-  <div class="playing-time badge badge-md badge-info">
-    <div>約{msToTime(playingTimeMs)}</div>
-  </div>
+  {#if mode === "normal"}
+    <div class="playing-time badge badge-md badge-info">
+      <div>約{msToTime(playingTimeMs)}</div>
+    </div>
+  {/if}
 
   <div
     bind:this={elmCardBody}

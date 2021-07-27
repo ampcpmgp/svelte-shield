@@ -22,7 +22,9 @@
   let state = { isStop: false };
 
   $: progressTime =
-    !$isPause && $word.length > LongWordThreshold ? $currentReadingTime : 0;
+    mode === "normal" && !$isPause && $word.length > LongWordThreshold
+      ? $currentReadingTime
+      : 0;
 
   function handlePlay() {
     state = { isStop: false };
