@@ -13,6 +13,7 @@
     currentReadingTime,
     getPlayingTimeMsStr,
     intervalMsPerChar,
+    mode,
   } from "./state";
 
   let fontSize = 16;
@@ -20,7 +21,9 @@
   let playingTimeMsStr = "";
 
   $: readingTime =
-    !$isPause && $word.length > LongWordThreshold ? $currentReadingTime : 0;
+    $mode === "normal" && !$isPause && $word.length > LongWordThreshold
+      ? $currentReadingTime
+      : 0;
   $: animationDuration = `${$currentReadingTime}ms`;
 
   $: progressPercent = `${$progress * 100}%`;
@@ -90,7 +93,7 @@
     style="--width-percent: {progressPercent}"
   />
 
-  {#if playingTimeMsStr}
+  {#if playingTimeMsStr && $mode === "normal"}
     <div class="SVELTESHIELD-remaining-time-wrapper">
       <div class="SVELTESHIELD-remaining-time">約{playingTimeMsStr}</div>
     </div>
