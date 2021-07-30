@@ -4,6 +4,8 @@ import {
   compositions,
   stepBackward,
   appVisible,
+  stop,
+  objectState,
 } from "./content/state";
 
 /** @type {import("svelte").SvelteComponent} */
@@ -33,6 +35,8 @@ function mount() {
     target: element,
     props: {
       exit() {
+        objectState.executionState = { isStop: false };
+        stop();
         app.$destroy();
         element.remove();
       },
