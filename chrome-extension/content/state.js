@@ -17,6 +17,7 @@ export {
   info,
   setWordInfo,
   mode,
+  hiddenSettings,
 } from "../../src/states/morpheme";
 
 export const isNotReady = writable(true);

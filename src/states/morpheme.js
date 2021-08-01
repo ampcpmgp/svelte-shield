@@ -21,7 +21,8 @@ export const progress = derived(
   ($currentIndex) => $currentIndex / get(compositions).length || 0,
 );
 export const hiddenSettings = writable({
-  judgeNum: 3,
+  // 最低連結文字数
+  judgeNum: 4,
 });
 // モック用
 export const ignoreReading = writable(false);
@@ -466,11 +467,11 @@ export function composite(path) {
       void 0;
 
       // 設定した判定数未満ならば、折り返さない。
-    } else if (word.length <= judgeNum) {
+    } else if (word.length < judgeNum) {
       void 0;
 
       // 設定した判定数を超えたら、繰り上げる。
-    } else if (word.length > judgeNum) {
+    } else if (word.length >= judgeNum) {
       ++currentIndex;
 
       // 名詞関連以外（前回）＋名詞（今回）＋名詞（次回）の場合、名詞＋名詞を結合させるため、繰り上げる。

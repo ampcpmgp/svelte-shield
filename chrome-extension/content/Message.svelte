@@ -6,7 +6,6 @@
     word,
     info,
     isNotReady,
-    isPlay,
     isPause,
     progress,
     compositions,
@@ -78,8 +77,6 @@
   <div class="SVELTESHIELD-message">
     {#if $isNotReady}
       loading...
-    {:else if !$isPlay && $progress === 0}
-      ready!
     {:else}
       {$word}
     {/if}

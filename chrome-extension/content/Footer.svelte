@@ -1,12 +1,13 @@
 <script>
   import { default as WebStorePng } from "./webstore.png";
-  import { playingMode } from "./state";
+  import { playingMode, hiddenSettings, objectState } from "./state";
 
   let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "🌙"
     : "🌞";
   const brightnesses = ["🌞", "🌥️", "🌙"];
   const playingModes = ["📝", "🔊"];
+  let judgeNum = 0;
 
   chrome.storage.sync.get("brightness", (result) => {
     // brightnesses[i]
@@ -18,6 +19,10 @@
   chrome.storage.sync.get("playingMode", (result) => {
     // playingModes[i]
     $playingMode = result.playingMode ?? $playingMode;
+  });
+
+  chrome.storage.sync.get("judgeNum", (result) => {
+    judgeNum = result.judgeNum ?? $hiddenSettings.judgeNum;
   });
 
   function reflectClass() {
@@ -41,8 +46,11 @@
     const nextIndex = (currentIndex + 1) % playingModes.length;
     $playingMode = playingModes[nextIndex];
     chrome.storage.sync.set({ playingMode: $playingMode });
+  }
 
-    console.log(1, $playingMode);
+  function updateJudgeNum() {
+    objectState.executionState = { isStop: false };
+    chrome.storage.sync.set({ judgeNum });
   }
 </script>
 
@@ -51,9 +59,18 @@
     <div class="SVELTESHIELD-mode" on:click={changeBrightMode}>
       {brightness}
     </div>
+
     <div class="SVELTESHIELD-mode" on:click={changePlayingMode}>
       {$playingMode}
     </div>
+
+    <label class="SVELTESHIELD-judgeNum">
+      <span style="font-weight: bold;">高度な設定</span>
+      <span>最低連結文字数</span>
+      <input type="number" bind:value={judgeNum} />
+      <span style="font-size: 0.6em;">初期値 4</span>
+      <button on:click={updateJudgeNum}>再実行</button>
+    </label>
   </div>
 
   <a
@@ -81,5 +98,21 @@
     font-size: 28px;
     padding: 8px;
     cursor: pointer;
+  }
+
+  .SVELTESHIELD-judgeNum {
+    margin-left: 20px;
+    display: grid;
+    place-items: center;
+    border: solid 1px #333;
+    padding: 0px 4px;
+  }
+
+  .SVELTESHIELD-judgeNum span {
+    font-size: 0.8em;
+  }
+
+  .SVELTESHIELD-judgeNum input[type="number"] {
+    width: 60px;
   }
 </style>

@@ -1,10 +1,12 @@
 import kuromoji from "kuromoji/build/kuromoji";
+import { get } from "svelte/store";
 import {
   init,
   rawText,
   tokenize,
   stop,
   compositions,
+  hiddenSettings,
 } from "../src/states/morpheme";
 
 /** @type {import("@types/chrome")} */
@@ -13,7 +15,7 @@ chrome;
 // kuromoji.js の XMLHttpRequest が background では使えないため、ハック的に解決
 // https://github.com/takuyaa/kuromoji.js/blob/71ea8473bd119546977f22c61e4d52da28ac30a6/src/loader/BrowserDictionaryLoader.js
 globalThis.XMLHttpRequest = function () {
-  this.open = (method, url) => {
+  this.open = (_, url) => {
     this.url = url;
   };
   this.send = async () => {
@@ -32,9 +34,9 @@ globalThis.XMLHttpRequest = function () {
 globalThis.kuromoji = kuromoji;
 
 // svelte store subscribe
-compositions.subscribe((compositions) =>
-  chrome.storage.local.set({ compositions }),
-);
+compositions.subscribe((compositions) => {
+  chrome.storage.local.set({ compositions });
+});
 
 // 以下エラーの対策
 // Unchecked runtime.lastError: Cannot create item with duplicate id open-svelte-shield
@@ -56,9 +58,30 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
     stop();
     await execute(tab.id);
     rawText.set(selectionText);
-    await init();
-    await tokenize();
-    chrome.storage.local.set({ isNotReady: false });
+    chrome.storage.local.set({ selectionText });
+
+    chrome.storage.sync.get("judgeNum", async (result) => {
+      hiddenSettings.set({
+        judgeNum: result.judgeNum || get(hiddenSettings).judgeNum,
+      });
+      await init();
+      await tokenize();
+      chrome.storage.local.set({ isNotReady: false });
+    });
+  }
+});
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.judgeNum) {
+    chrome.storage.local.set({ isNotReady: true });
+    hiddenSettings.set({ judgeNum: changes.judgeNum.newValue });
+
+    chrome.storage.local.get("selectionText", async (result) => {
+      rawText.set(result.selectionText);
+      await init();
+      await tokenize();
+      chrome.storage.local.set({ isNotReady: false });
+    });
   }
 });
 
