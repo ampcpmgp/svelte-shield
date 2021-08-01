@@ -108,6 +108,11 @@
     padding: 0px 4px;
   }
 
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+    .SVELTESHIELD-judgeNum {
+    border-color: rgb(230, 231, 238);
+  }
+
   .SVELTESHIELD-judgeNum span {
     font-size: 0.8em;
   }
