@@ -36,7 +36,7 @@ export const カタカナ = /([ァ-ヶー]+)/;
 const MAX_MERGABLE_INDEX = 30;
 
 let tokenizer;
-const dicPath = `${import.meta.env ? import.meta.env.BASE_URL : "./"}dict`;
+const dicPath = `${import.meta.env?.BASE_URL ?? "./"}dict`;
 
 async function getTokenizer() {
   if (tokenizer) return tokenizer;
@@ -463,6 +463,10 @@ export function composite(path) {
       currentCompositionLastItem &&
       isWeirdAtTheLast(currentCompositionLastItem)
     ) {
+      void 0;
+
+      // 設定した判定数未満ならば、折り返さない。
+    } else if (word.length <= judgeNum) {
       void 0;
 
       // 設定した判定数を超えたら、繰り上げる。

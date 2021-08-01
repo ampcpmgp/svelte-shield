@@ -10,8 +10,7 @@ test("composite/B細胞", (t) => {
   const result = composite(json).map((item) => item.word);
 
   t.deepEqual(result, [
-    "1個の",
-    "B細胞は",
+    "1個のB細胞は",
     "表面上の",
     "抗体が特定の",
     "外来抗原に",
