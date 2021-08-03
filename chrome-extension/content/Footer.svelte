@@ -66,7 +66,7 @@
 
     <label class="SVELTESHIELD-judgeNum">
       <span style="font-weight: bold;">高度な設定</span>
-      <span>最低連結文字数</span>
+      <span>連結可能文字数</span>
       <input type="number" bind:value={judgeNum} />
       <span style="font-size: 0.6em;">初期値 4</span>
       <button on:click={updateJudgeNum}>再実行</button>
@@ -105,6 +105,7 @@
     display: grid;
     place-items: center;
     border: solid 1px #333;
+    gap: 2px;
     padding: 0px 4px;
   }
 
@@ -126,6 +127,8 @@
     border: solid 1px black;
     cursor: pointer;
     color: black;
+    padding: 2px;
+    font-size: 0.8em;
   }
   button:hover {
     opacity: 0.9;
