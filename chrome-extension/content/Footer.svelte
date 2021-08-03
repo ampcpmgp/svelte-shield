@@ -120,4 +120,31 @@
   .SVELTESHIELD-judgeNum input[type="number"] {
     width: 60px;
   }
+
+  button {
+    background-color: white;
+    border: solid 1px black;
+    cursor: pointer;
+    color: black;
+  }
+  button:hover {
+    opacity: 0.9;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+    button {
+    background-color: #666;
+    color: white;
+  }
+
+  input {
+    color: black !important;
+    background-color: white !important;
+  }
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+    input {
+    background-color: #666 !important;
+    color: white !important;
+  }
+
 </style>

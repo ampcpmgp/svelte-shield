@@ -1,7 +1,7 @@
 {
   "name": "Svelte Shield 拡張機能",
   "description": "様々な日本語文章を、目線移動無くサクサク読めるようにしたツール。",
-  "version": "1.18",
+  "version": "1.19",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.umd.js"
