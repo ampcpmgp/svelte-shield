@@ -17,6 +17,14 @@
   <div class="right-size">
     <a
       class="external-link"
+      href="https://chrome.google.com/webstore/detail/svelte-shield-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD/ogdlcilfgiojgaoglhhilbhnghchnceo"
+      target="_blank"
+      rel="noopener"
+    >
+      <Icon><i class="fab fa-chrome" /></Icon>
+    </a>
+    <a
+      class="external-link"
       href="https://github.com/ampcpmgp/svelte-shield"
       target="_blank"
       rel="noopener"
