@@ -25,7 +25,11 @@ export const isSaving = writable(false);
 export const intervalMsPerChar = writable(80);
 export const readingSpeed = writable(1.0);
 export const appVisible = writable(true);
-/** 📝 | 🔊 */
+/** 📝 🔊 */
 export const playingMode = writable("📝");
+/** 🌞 🌥️ 🌙 */
+export const brightness = writable(
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "🌙" : "🌞",
+);
 
 export const objectState = { executionState: { isStop: false } };

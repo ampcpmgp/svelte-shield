@@ -1,19 +1,18 @@
 <script>
   import { default as WebStorePng } from "./webstore.png";
-  import { playingMode, hiddenSettings, objectState } from "./state";
+  import {
+    playingMode,
+    hiddenSettings,
+    objectState,
+    brightness,
+  } from "./state";
 
-  let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "🌙"
-    : "🌞";
   const brightnesses = ["🌞", "🌥️", "🌙"];
   const playingModes = ["📝", "🔊"];
   let judgeNum = 0;
 
   chrome.storage.sync.get("brightness", (result) => {
-    // brightnesses[i]
-    brightness = result.brightness ?? brightness;
-
-    reflectClass();
+    $brightness = result.brightness ?? $brightness;
   });
 
   chrome.storage.sync.get("playingMode", (result) => {
@@ -25,20 +24,11 @@
     judgeNum = result.judgeNum ?? $hiddenSettings.judgeNum;
   });
 
-  function reflectClass() {
-    const $lement = document.querySelector(
-      "#svelte-shield-chrome-extension-app-1234567890abcde",
-    );
-    $lement.classList.toggle(`svelte-shield-🌙`, brightness === "🌙");
-    $lement.classList.toggle(`svelte-shield-🌥️`, brightness === "🌥️");
-  }
-
   function changeBrightMode() {
-    const currentIndex = brightnesses.indexOf(brightness);
+    const currentIndex = brightnesses.indexOf($brightness);
     const nextIndex = (currentIndex + 1) % brightnesses.length;
-    brightness = brightnesses[nextIndex];
-    chrome.storage.sync.set({ brightness });
-    reflectClass();
+    $brightness = brightnesses[nextIndex];
+    chrome.storage.sync.set({ brightness: $brightness });
   }
 
   function changePlayingMode() {
@@ -57,7 +47,7 @@
 <div class="SVELTESHIELD-wrapper">
   <div class="SVELTESHIELD-mode-wrapper">
     <div class="SVELTESHIELD-mode" on:click={changeBrightMode}>
-      {brightness}
+      {$brightness}
     </div>
 
     <div class="SVELTESHIELD-mode" on:click={changePlayingMode}>
@@ -149,5 +139,4 @@
     background-color: #666 !important;
     color: white !important;
   }
-
 </style>

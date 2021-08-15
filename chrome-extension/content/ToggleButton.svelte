@@ -1,17 +1,11 @@
 <script>
   import { appVisible, objectState, pause } from "./state";
 
-  const rootElm = document.querySelector(
-    "#svelte-shield-chrome-extension-app-1234567890abcde",
-  );
-
   function toggle() {
     $appVisible = !$appVisible;
   }
 
   $: {
-    rootElm.classList.toggle("hidden", !$appVisible);
-
     if (!$appVisible) {
       objectState.executionState.isStop = false;
       pause();

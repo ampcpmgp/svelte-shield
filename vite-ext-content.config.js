@@ -6,6 +6,7 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [
     svelte({
+      emitCss: false,
       compilerOptions: {
         css: true,
       },

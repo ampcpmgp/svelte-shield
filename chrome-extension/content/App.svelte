@@ -10,32 +10,34 @@
   export let exit = () => {};
 </script>
 
-{#if $appVisible}
-  <Background {exit} />
+<main class:hidden={!appVisible}>
+  {#if $appVisible}
+    <Background {exit} />
 
-  <div class="SVELTESHIELD-content">
-    <div class="SVELTESHIELD-settings-wrapper">
-      <Settings />
+    <div class="SVELTESHIELD-content">
+      <div class="SVELTESHIELD-settings-wrapper">
+        <Settings />
+      </div>
+
+      <div class="SVELTESHIELD-message-wrapper">
+        <Message />
+      </div>
+
+      <div class="SVELTESHIELD-controls-wrapper">
+        <Controls {exit} />
+      </div>
+
+      <div class="SVELTESHIELD-footer-wrapper">
+        <Footer />
+      </div>
     </div>
+  {/if}
 
-    <div class="SVELTESHIELD-message-wrapper">
-      <Message />
-    </div>
-
-    <div class="SVELTESHIELD-controls-wrapper">
-      <Controls {exit} />
-    </div>
-
-    <div class="SVELTESHIELD-footer-wrapper">
-      <Footer />
-    </div>
-  </div>
-{/if}
-
-<ToggleButton />
+  <ToggleButton />
+</main>
 
 <style>
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde) {
+  main {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,18 +49,13 @@
     display: grid;
     place-content: center;
   }
-
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde label) {
-    color: inherit;
+  :main.hidden {
+    width: 0;
+    height: 0;
   }
 
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙) {
     color: #eee !important;
-  }
-
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.hidden) {
-    width: 0;
-    height: 0;
   }
 
   .SVELTESHIELD-content {
