@@ -4,7 +4,13 @@ import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [
+    svelte({
+      compilerOptions: {
+        css: true,
+      },
+    }),
+  ],
   publicDir: "no-public-dir",
   build: {
     target: "es2018",

@@ -24,24 +24,24 @@ chrome.storage.onChanged.addListener(function (changes) {
 });
 
 function mount() {
-  document.body.insertAdjacentHTML(
-    "afterend",
-    `<div id="${APP_ID}" translate="no"></div>`,
-  );
-
-  const element = document.getElementById(APP_ID);
+  const target = document.createElement("div");
+  target.id = APP_ID;
+  target.setAttribute("translate", "no");
+  const root = target.attachShadow({ mode: "open" });
 
   const app = new App({
-    target: element,
+    target: root,
     props: {
       exit() {
         objectState.executionState = { isStop: false };
         stop();
         app.$destroy();
-        element.remove();
+        target.remove();
       },
     },
   });
+
+  document.body.append(target);
 }
 
 async function start() {
