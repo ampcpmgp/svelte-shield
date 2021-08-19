@@ -8,7 +8,6 @@ import {
   objectState,
 } from "./content/state";
 
-/** @type {import("svelte").SvelteComponent} */
 var APP_ID = "svelte-shield-chrome-extension-app-1234567890abcde";
 
 chrome.storage.onChanged.addListener(function (changes) {
