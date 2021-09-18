@@ -16,7 +16,7 @@ chrome.storage.onChanged.addListener(function (changes) {
     isNotReady.set(changes.isNotReady.newValue);
   }
 
-  if (changes.compositions) {
+  if (changes.compositions?.newValue?.length > 0) {
     compositions.set(changes.compositions.newValue);
     stepBackward();
     appVisible.set(true);

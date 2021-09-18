@@ -89,6 +89,10 @@
     justify-content: space-between;
   }
 
+  .SVELTESHIELD-wrapper a {
+    margin-top: auto;
+  }
+
   .SVELTESHIELD-mode-wrapper {
     display: flex;
     place-items: center;
@@ -149,5 +153,4 @@
     background-color: #666 !important;
     color: white !important;
   }
-
 </style>
