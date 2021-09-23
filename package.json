@@ -1,5 +1,8 @@
 {
   "name": "svelte-shield",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "dev": "run-s copy-dict copy-kuromoji dev:vite",
     "dev:vite": "vite",
