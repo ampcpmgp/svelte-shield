@@ -5,7 +5,7 @@
   let brightness = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "🌙"
     : "🌞";
-  const brightnesses = ["🌞", "🌥️", "🌙"];
+  const brightnesses = ["🌞", "🏞️", "🌳", "🌥️", "🌙"];
   const playingModes = ["📝", "🔊"];
   let judgeNum = 0;
 
@@ -26,11 +26,14 @@
   });
 
   function reflectClass() {
-    const $lement = document.querySelector(
+    const $element = document.querySelector(
       "#svelte-shield-chrome-extension-app-1234567890abcde",
     );
-    $lement.classList.toggle(`svelte-shield-🌙`, brightness === "🌙");
-    $lement.classList.toggle(`svelte-shield-🌥️`, brightness === "🌥️");
+    $element.classList.toggle(`svelte-shield-🌞`, brightness === "🌞");
+    $element.classList.toggle(`svelte-shield-🏞️`, brightness === "🏞️");
+    $element.classList.toggle(`svelte-shield-🌳`, brightness === "🌳");
+    $element.classList.toggle(`svelte-shield-🌥️`, brightness === "🌥️");
+    $element.classList.toggle(`svelte-shield-🌙`, brightness === "🌙");
   }
 
   function changeBrightMode() {

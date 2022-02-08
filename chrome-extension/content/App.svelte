@@ -66,7 +66,6 @@
     width: 80vw;
     max-width: 1280px;
     height: 80vh;
-    background-color: lightgoldenrodyellow !important;
     border-radius: 8px;
     display: grid;
     grid-row-gap: 16px;
@@ -76,16 +75,30 @@
     padding: 8px;
   }
 
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌞)
     .SVELTESHIELD-content {
-    background-color: rgb(49 49 49) !important;
+    background-color: #ffddbc !important;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🏞️)
+    .SVELTESHIELD-content {
+    background-color: #bcddff !important;
+  }
+
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌳)
+    .SVELTESHIELD-content {
+    background-color: #ddffbc !important;
   }
 
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
     .SVELTESHIELD-content {
-    background-color: rgb(230, 231, 238) !important;
+    background-color: rgb(209, 207, 207) !important;
   }
 
+  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
+    .SVELTESHIELD-content {
+    background-color: rgb(73, 73, 73) !important;
+  }
   .SVELTESHIELD-content > * {
     width: 100%;
     display: grid;

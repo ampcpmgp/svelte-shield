@@ -110,7 +110,7 @@
   .SVELTESHIELD-message {
     width: 100%;
     padding: 8px;
-    border: solid 1px #ff00005e;
+    border: solid 1px #20212478;
     display: grid;
     place-items: center;
     font-size: var(--font-size);
@@ -118,13 +118,10 @@
     box-sizing: border-box;
     text-align: center;
   }
+
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-message {
     border-color: rgb(153 153 153);
-  }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
-    .SVELTESHIELD-message {
-    border-color: #20212478;
   }
 
   .SVELTESHIELD-meter {
@@ -133,20 +130,15 @@
   .SVELTESHIELD-meter::before {
     content: " ";
     width: var(--width-percent);
-    border-bottom: 2px solid hotpink;
+    border-bottom: 3px solid #20212478;
     opacity: 0.4;
     box-sizing: border-box;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-meter::before {
     border-bottom-color: rgb(153 153 153);
-    border-bottom-width: 3px;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
-    .SVELTESHIELD-meter::before {
-    border-color: #20212478;
-    border-bottom-width: 3px;
-  }
+
   .SVELTESHIELD-meter.SVELTESHIELD-top {
     width: 100%;
     /* border の太さ分を引く */
@@ -163,19 +155,6 @@
     .SVELTESHIELD-meter.SVELTESHIELD-top::before {
     border-bottom-color: white;
   }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
-    .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
-    border-bottom-style: solid;
-  }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
-    .SVELTESHIELD-meter.SVELTESHIELD-top::before {
-    border-bottom-color: #202124;
-  }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
-    .SVELTESHIELD-meter.SVELTESHIELD-bottom::before {
-    border-bottom-style: solid;
-  }
-
   .SVELTESHIELD-animation::before {
     width: 0;
   }
@@ -204,16 +183,12 @@
     top: 2px;
     right: 0;
     font-size: 12px;
-    border: solid 1px #ff00005e;
+    border: solid 1px #20212478;
     border-radius: 10px;
     padding: 0 4px;
   }
   :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌙)
     .SVELTESHIELD-remaining-time {
     border-color: rgb(153 153 153);
-  }
-  :global(#svelte-shield-chrome-extension-app-1234567890abcde.svelte-shield-🌥️)
-    .SVELTESHIELD-remaining-time {
-    border-color: #20212478;
   }
 </style>
