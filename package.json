@@ -64,7 +64,7 @@
     "modern-css-reset": "^1.1.0",
     "outdent": "^0.8.0",
     "popper.js": "^1.16.1",
-    "svelte": "^3.41.0",
+    "svelte": "^3.49.0",
     "svelte-select": "^3.14.1",
     "svelte-spa-router": "^2.0.0"
   },
